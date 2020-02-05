@@ -43,12 +43,8 @@ public class User {
         for (UserInterest ui : interestList) userInterestDTOList.add(ui.toDTO());
         user.setInterestDTOList(userInterestDTOList);
 
-        List<StudyDTO> ledStudyDTOList = new ArrayList<>();
-        for (Study s : ledStudyList) ledStudyDTOList.add(s.toDTO());
-        user.setLedStudyList(ledStudyDTOList);
-
         List<StudyMemberDTO> joinedStudyDTOList = new ArrayList<>();
-        for (StudyMember sm : joinedStudyList) joinedStudyDTOList.add(sm.toStudiesDTO());
+        for (StudyMember sm : joinedStudyList) if(sm.state==1) joinedStudyDTOList.add(sm.toStudiesDTO());
         user.setJoinedStudyList(joinedStudyDTOList);
 
         return user;
@@ -63,4 +59,32 @@ public class User {
         return user;
     }
 
+    public UserDTO myPageDTO() {
+        UserDTO user = new UserDTO(id, null, email, phoneNum, nickname, gender, introduction, city, town,
+                evaluation, profilePhotoDir, null, null, null, null);
+
+        List<UserInterestDTO> userInterestDTOList = new ArrayList<>();
+        for (UserInterest ui : interestList) userInterestDTOList.add(ui.toDTO());
+        user.setInterestDTOList(userInterestDTOList);
+
+        for (Study s : ledStudyList) {
+            int studyId = s.getId();
+            for (StudyMember sm : joinedStudyList) {
+                if (sm.getStudy().getId() == studyId) {
+                    joinedStudyList.remove(sm);
+                    break;
+                }
+            }
+        }
+
+        List<StudyDTO> ledStudyDTOList = new ArrayList<>();
+        for (Study s : ledStudyList) ledStudyDTOList.add(s.myPageDTO());
+        user.setLedStudyList(ledStudyDTOList);
+
+        List<StudyMemberDTO> joinedStudyDTOList = new ArrayList<>();
+        for (StudyMember sm : joinedStudyList) joinedStudyDTOList.add(sm.myPageDTO());
+        user.setJoinedStudyList(joinedStudyDTOList);
+
+        return user;
+    }
 }

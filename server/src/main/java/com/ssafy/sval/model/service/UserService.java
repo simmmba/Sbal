@@ -1,5 +1,7 @@
 package com.ssafy.sval.model.service;
 
+import com.ssafy.sval.model.entity.Study;
+import com.ssafy.sval.model.entity.StudyMember;
 import com.ssafy.sval.model.entity.User;
 import com.ssafy.sval.model.entity.UserInterest;
 import com.ssafy.sval.model.repository.UserInterestRepository;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -29,6 +32,9 @@ public class UserService {
         user.setInterestList(null);
 
         user.setPw(passwordEncoder.encode(user.getPw()));
+        user.setEvaluation(100.0);
+        user.setProfilePhotoDir("/profile_images/default.jpg");
+        user.setSocialLogin(null);
         user = uRepo.save(user);
 
         for (UserInterest ui : userInterestList) ui.setUser(user);
@@ -50,10 +56,6 @@ public class UserService {
         User user = uRepo.findUserByEmail(email);
         if (passwordEncoder.matches(pw, user.getPw())) return user;
         return null;
-    }
-
-    public List<User> findAll() {
-        return uRepo.findAll();
     }
 
     @Transactional

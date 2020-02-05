@@ -52,10 +52,28 @@ public class Study {
     public StudyDTO toDTO() {
         StudyDTO studyDTO = new StudyDTO(id, title, contents, new UserDTO(leader.getId(), leader.getNickname()), lCategory, sCategory,
                 city, town, state, maxParticipants, hits, isOnline, monthOrWeek, frequency,
-                weekdayOrWeekend, timeslot, evaluationLimit, enrollDate, startDate, endDate, null);
+                weekdayOrWeekend, timeslot, evaluationLimit, enrollDate, startDate, endDate, null, null);
+
         List<StudyMemberDTO> memberDTOList = new ArrayList<>();
         for (StudyMember sm : memberList) memberDTOList.add(sm.toMemberDTO());
         studyDTO.setStudyMemberDTOList(memberDTOList);
+
+        return studyDTO;
+    }
+
+    public StudyDTO mainPageDTO() {
+        StudyDTO studyDTO = new StudyDTO(id, title, null, new UserDTO(leader.getId(), leader.getNickname()), lCategory, sCategory,
+                null, null, null, maxParticipants, hits, isOnline, null, null,
+                null, null, null, null, null, null, null, null);
+
+        return studyDTO;
+    }
+
+    public StudyDTO myPageDTO() {
+        StudyDTO studyDTO = new StudyDTO(id, title, null, null, null, null,
+                null, null, state, maxParticipants, null, isOnline, null, null,
+                null, null, null, null, startDate, endDate, null, null);
+
         return studyDTO;
     }
 }

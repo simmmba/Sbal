@@ -30,7 +30,7 @@ public class StudyDTO {
     private String enrollDate;
     private String startDate;
     private String endDate;
-
+    private Integer joinedMemberCount;
     private List<StudyMemberDTO> studyMemberDTOList;
 
     public Study insertOrUpdateEntity(int leaderId) {

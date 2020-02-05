@@ -25,4 +25,7 @@ public class StudyMember {
     public StudyMemberDTO toMemberDTO() {
         return new StudyMemberDTO(new UserDTO(user.getId(), user.getNickname()), state);
     }
+    public StudyMemberDTO myPageDTO() {
+        return new StudyMemberDTO(study.myPageDTO(), state);
+    }
 }

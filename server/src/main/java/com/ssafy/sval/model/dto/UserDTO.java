@@ -17,7 +17,7 @@ public class UserDTO {
     private String email;
     private String phoneNum;
     private String nickname;
-    private int gender;
+    private Integer gender;
     private String introduction;
     private String city;
     private String town;
@@ -39,7 +39,7 @@ public class UserDTO {
                 city, town, evaluation, profilePhotoDir, socialLogin, null, null, null);
         List<UserInterest> interestEntityList = new ArrayList<>();
         for(UserInterestDTO uiDTO : interestDTOList)
-            interestEntityList.add(new UserInterest(updatedUser, uiDTO.getL_category(), uiDTO.getS_category()));
+            interestEntityList.add(new UserInterest(updatedUser, uiDTO.getLCategory(), uiDTO.getSCategory()));
         updatedUser.setInterestList(interestEntityList);
         return updatedUser;
     }

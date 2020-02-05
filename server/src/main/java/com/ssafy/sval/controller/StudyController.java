@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -58,27 +59,27 @@ public class StudyController {
     // 스터디 생성
     @PostMapping
     @ApiOperation(value = "새로운 스터디를 생성한다.", response = Study.class)
-    public ResponseEntity<Object> insert(@RequestBody StudyDTO study, HttpServletRequest request) {
+    public ResponseEntity<CommonResponse> enrollNewStudy(@RequestBody StudyDTO study, HttpServletRequest request) {
         try {
             int leaderId = jwtService.getLoginUserId(request);
             Study createdStudy = study.insertOrUpdateEntity(leaderId);
             createdStudy = studyService.insert(createdStudy);
             log.info("createdStudyDTO : {}", createdStudy.toDTO());
-            return new ResponseEntity<Object>(createdStudy.toDTO(), HttpStatus.OK);
+            return new ResponseEntity<>(new CommonResponse(createdStudy.toDTO(), "enrollNewStudy", "SUCCESS", "스터디가 등록되었습니다."), HttpStatus.OK);
         } catch (RuntimeException e) {
-            throw new RuntimeException("insert");
+            throw new RuntimeException("enrollNewStudy");
         }
     }
 
     // 스터디 수정
     @PutMapping
     @ApiOperation(value = "스터디를 수정한다.", response = Study.class)
-    public ResponseEntity<Object> update(@RequestBody StudyDTO study, HttpServletRequest request) {
+    public ResponseEntity<CommonResponse> update(@RequestBody StudyDTO study, HttpServletRequest request) {
         try {
             int leaderId = jwtService.getLoginUserId(request);
             Study updatedStudy = study.insertOrUpdateEntity(leaderId);
             updatedStudy = studyService.update(updatedStudy);
-            return new ResponseEntity<Object>(updatedStudy.toDTO(), HttpStatus.OK);
+            return new ResponseEntity<>(new CommonResponse(updatedStudy.toDTO(), "update", "SUCCESS", "스터디가 수정되었습니다."), HttpStatus.OK);
         } catch (RuntimeException e) {
             throw new RuntimeException("update");
         }
@@ -88,22 +89,39 @@ public class StudyController {
     @DeleteMapping("/{id}")
     @ApiOperation(value = "스터디를 삭제한다.", response = CommonResponse.class)
     public ResponseEntity<Object> delete(@PathVariable Integer id) {
-        studyService.delete(id);
-        return new ResponseEntity<Object>(new CommonResponse("delete", "true", "SUCCESS"), HttpStatus.OK);
+        try {
+            studyService.delete(id);
+            return new ResponseEntity<Object>(new CommonResponse("delete", "SUCCESS", "스터디가 삭제되었습니다."), HttpStatus.OK);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("delete");
+        }
     }
 
     // 스터디 상세 조회
     @GetMapping("/{id}")
     @ApiOperation(value = "스터디의 상세 정보를 가져온다.", response = StudyDTO.class)
-    public ResponseEntity<Object> selectOne(@PathVariable Integer id) {
-        return new ResponseEntity<Object>(studyService.getStudyDetail(id).toDTO(), HttpStatus.OK);
+    public ResponseEntity<CommonResponse> details(@PathVariable Integer id) {
+        try {
+            // 가입된 유저인가 아닌가를 구분해서 동작할 수 있게 해주는 처리를 해야함.
+            return new ResponseEntity<>(new CommonResponse(studyService.getStudyDetail(id).toDTO(), "details", "SUCCESS", "조회 성공"), HttpStatus.OK);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("details");
+        }
     }
 
     // 스터디 리스트 전체 조회
     @GetMapping("/list")
     @ApiOperation(value = "스터디 전체 목록을 가져온다.", response = List.class)
-    public ResponseEntity<Object> selectAll() {
-        return new ResponseEntity<Object>(studyService.getAllStudy(), HttpStatus.OK);
+    public ResponseEntity<CommonResponse> getAllStudyList() {
+        try {
+            List<Study> studyList = studyService.getAllStudy();
+            List<StudyDTO> studyDTOList = new ArrayList<>();
+            for (Study s : studyList) studyDTOList.add(s.toDTO());
+            // 현재 가입한 사람과 수용 인원 표시해줄 list page용 DTO 만들기
+            return new ResponseEntity<>(new CommonResponse(studyDTOList, "getAllStudyList", "SUCCESS", "조회 성공"), HttpStatus.OK);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("getAllStudyList");
+        }
     }
 
     // 스터디 참여 요청               --> study_member에 로우를 삽입한다.

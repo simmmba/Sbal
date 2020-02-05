@@ -6,6 +6,6 @@ import lombok.NoArgsConstructor;
 
 @Data @AllArgsConstructor @NoArgsConstructor
 public class UserInterestDTO {
-    private String l_category;
-    private String s_category;
+    private String lCategory;
+    private String sCategory;
 }
