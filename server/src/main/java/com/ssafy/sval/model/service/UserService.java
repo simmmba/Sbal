@@ -1,7 +1,5 @@
 package com.ssafy.sval.model.service;
 
-import com.ssafy.sval.model.entity.Study;
-import com.ssafy.sval.model.entity.StudyMember;
 import com.ssafy.sval.model.entity.User;
 import com.ssafy.sval.model.entity.UserInterest;
 import com.ssafy.sval.model.repository.UserInterestRepository;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -37,8 +34,10 @@ public class UserService {
         user.setSocialLogin(null);
         user = uRepo.save(user);
 
-        for (UserInterest ui : userInterestList) ui.setUser(user);
-        interestRepo.saveAll(userInterestList);
+        if(userInterestList!=null) {
+            for (UserInterest ui : userInterestList) ui.setUser(user);
+            interestRepo.saveAll(userInterestList);
+        }
         user.setInterestList(userInterestList);
         return user;
     }

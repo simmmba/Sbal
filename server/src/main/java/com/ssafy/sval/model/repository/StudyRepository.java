@@ -9,4 +9,5 @@ public interface StudyRepository extends JpaRepository<Study, Integer> {
     boolean deleteStudyById(Integer id);
     List<Study> findTop5ByStateOrderByEnrollDateDesc(Integer state);
     List<Study> findTop5ByStateOrderByHitsDesc(Integer state);
+    List<Study> findStudiesByStateOrderByEnrollDateDesc(Integer state);
 }
