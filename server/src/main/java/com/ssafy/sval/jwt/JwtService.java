@@ -40,7 +40,9 @@ public class JwtService {
     public int getLoginUserId(final HttpServletRequest request) {
         int loginUserId = 0;
         try {
-            Map jwtPayload = Jwts.parser().setSigningKey(salt.getBytes()).parseClaimsJws(request.getHeader("jwt-auth-token")).getBody();
+            final String jwt = request.getHeader("jwt-auth-token");
+            if(jwt==null || jwt.length() <= 0) return -1;
+            Map jwtPayload = Jwts.parser().setSigningKey(salt.getBytes()).parseClaimsJws(jwt).getBody();
             loginUserId = (int) jwtPayload.get("loginUser");
         } catch (RuntimeException e) {
             throw new RuntimeException("JWT_getLoginUserId");

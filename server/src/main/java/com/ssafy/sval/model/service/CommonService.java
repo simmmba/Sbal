@@ -37,11 +37,25 @@ public class CommonService {
         }
         return user;
     }
+
     @Transactional
     public Map<String, Object> manufactureMain(UserDTO user) {
-        log.info("user : {}", user);
-        Map<String, Object> mainInfo = new HashMap<>();
+        Map<String, Object> mainInfo = this.manufactureMain();
+        List<StudyMemberDTO> joinedStudyList = user.getJoinedStudyList();
+        if(joinedStudyList != null) {
+            for (StudyMemberDTO sm : joinedStudyList) {
+                StudyDTO s = sm.getStudy();
+                s.setJoinedMemberCount(studyMemberRepository.countStudyMemberByStudyIdAndState(s.getId(), 1));
+            }
+        }
         mainInfo.put("loginUser", user);
+
+        return mainInfo;
+    }
+
+    @Transactional
+    public Map<String, Object> manufactureMain() {
+        Map<String, Object> mainInfo = new HashMap<>();
 
         List<Study> recentlyEnrolledStudies = studyRepository.findTop5ByStateOrderByEnrollDateDesc(0);
         List<StudyDTO> recentlyEnrolled = new ArrayList<>();

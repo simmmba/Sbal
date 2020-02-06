@@ -39,14 +39,20 @@ public class StudyService {
 
     public Study getStudyDetail(Integer id) {
         Study study = sRepo.findById(id).get();
+        study.setHits(study.getHits()+1);
+        study = sRepo.save(study);
         return study;
     }
 
-    public List<Study> getAllStudy() {
-        return sRepo.findAll();
+    public List<Study> getStudiesInRecruitment() {
+        return sRepo.findStudiesByStateOrderByEnrollDateDesc(0);
     }
 
     public void delete(Integer id) {
         sRepo.deleteById(id);
+    }
+
+    public Study findById(Integer id) {
+        return sRepo.findById(id).get();
     }
 }

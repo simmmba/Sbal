@@ -70,8 +70,8 @@ public class UserController {
             User user = userService.signUp(signUpUser.insertOrUpdateEntity(signUpUser.getPw()));
             if (user != null) {
                 response.setHeader("jwt-auth-token", jwtService.create(user.getId()));
-                Map<String, Object> mainInfo = commonService.manufactureMain(user.mainPageDTO());
-                return new ResponseEntity<>(new CommonResponse(mainInfo, "signUp", "SUCCESS", "회원 가입에 성공했습니다."), HttpStatus.OK);
+                signUpUser = new UserDTO(user.getId(), user.getNickname());
+                return new ResponseEntity<>(new CommonResponse(signUpUser, "signUp", "SUCCESS", "회원 가입에 성공했습니다."), HttpStatus.OK);
             } else return new ResponseEntity<>(new CommonResponse("signUp", "FAIL", "회원 가입에 실패했습니다."), HttpStatus.OK);
         } catch (RuntimeException e) {
             e.printStackTrace();
@@ -86,8 +86,8 @@ public class UserController {
             User loginUser = userService.signIn(user.getEmail(), user.getPw());
             if (user != null) {
                 response.setHeader("jwt-auth-token", jwtService.create(loginUser.getId()));
-                Map<String, Object> mainInfo = commonService.manufactureMain(loginUser.mainPageDTO());
-                return new ResponseEntity<>(new CommonResponse(mainInfo,"signIn", "SUCCESS", "로그인에 성공했습니다."), HttpStatus.OK);
+                user = new UserDTO(user.getId(), user.getNickname());
+                return new ResponseEntity<>(new CommonResponse(user,"signIn", "SUCCESS", "로그인에 성공했습니다."), HttpStatus.OK);
             } else return new ResponseEntity<>(new CommonResponse("signIn", "FAIL", "로그인 정보를 확인해주세요."), HttpStatus.OK);
         } catch (RuntimeException e) {
             throw new RuntimeException("signIn");
@@ -129,6 +129,7 @@ public class UserController {
             response.setHeader("jwt-auth-token", jwtService.create(updatedUser.getId()));
             return new ResponseEntity<>(new CommonResponse("update", "SUCCESS", "정보 수정이 완료되었습니다."), HttpStatus.OK);
         } catch (RuntimeException e) {
+            e.printStackTrace();
             throw new RuntimeException("update");
         }
     }
