@@ -38,11 +38,11 @@ public class UserController {
     @Autowired
     private UserProfileService profileService;
 
-    private SnsValue naverSns;
-    private SnsValue kakaoSns;
+    private SnsValue naverSns = new SnsValue("naver", "ZaZ22Ro1uzKMK_w_pbkX", "QDpGVk3dcT", "http://70.12.247.32:8080/user/auth/naver/callback");
+    private SnsValue kakaoSns = new SnsValue("kakao", "65c8c65086b415b91d2decea051f2765", null, "http://70.12.247.32:8080/user/auth/kakao/callback");
 
 
-    @ExceptionHandler
+ /*   @ExceptionHandler
     @ApiOperation(value = "모든 INTERNAL SERVER ERROR 상태를 처리한다. message를 화면에 출력하고 작성한 ERROR PAGE로 이동시킨다.")
     public ResponseEntity<CommonResponse> errorHandler(RuntimeException e) {
         // Slack 으로 개발자에게 로그 보내는 기능 추가
@@ -61,7 +61,7 @@ public class UserController {
     public ResponseEntity<CommonResponse> errorHandler(JwtException e) {
         return new ResponseEntity<>(new CommonResponse("JWT_FALSIFIED", "ERROR",
                 "변조된 인증 정보입니다. 다시 로그인 해주세요."), HttpStatus.OK);
-    }
+    }*/
 
     @PostMapping
     @ApiOperation(value = "회원가입을 처리하고 성공 시 res.data.state에 SUCCESS, 실패 시 FAIL, 에러 발생 시 ERROR를 리턴한다.", response = CommonResponse.class)
@@ -179,23 +179,10 @@ public class UserController {
         return user;
     }
 
-    @GetMapping("/loginForm")
-    public Map<String, String> loginForm() {
 
-        naverSns = new SnsValue("naver", "ZaZ22Ro1uzKMK_w_pbkX", "QDpGVk3dcT", "http://localhost:8080/user/auth/naver/callback");
-        SnsLogin sl = new SnsLogin(naverSns);
-        String naverUrl = sl.getSnsAuthURL();
-        kakaoSns = new SnsValue("kakao", "65c8c65086b415b91d2decea051f2765", null, "http://localhost:8080/user/auth/kakao/callback");
-        String kakaoUrl = "https://kauth.kakao.com/oauth/authorize?" + "client_id=" + kakaoSns.getClientId() + "&redirect_uri=" + kakaoSns.getRedirectUrl() + "&response_type=code";
-        Map<String, String> map = new HashMap<>();
-        map.put("naverUrl", naverUrl);
-        map.put("kakaoUrl", kakaoUrl);
-
-        return map;
-    }
 
     @RequestMapping(value = "/auth/{service}/callback", method = {RequestMethod.GET, RequestMethod.POST})
-    public User snsLoginCallBack(@PathVariable String service, @RequestParam String code) throws Exception {
+    public ResponseEntity<CommonResponse> snsLoginCallBack(HttpServletResponse response, @PathVariable String service, @RequestParam String code) throws Exception {
         SnsValue sns = null;
         SnsLogin sl = null;
         User user = null;
@@ -209,13 +196,17 @@ public class UserController {
             user = sl.getKakaoProfile(sns, code);
         }
         // DB에서 email 확인
-        if (userService.isExistEmail(user.getEmail())) {
-            //  true : exist
-            //로그인 처리
+        UserDTO userDTO = new UserDTO();
+        if (userService.isExistSocialLogin(user.getSocialLogin())) {
+            user = userService.findBySocialLogin(user.getSocialLogin());
+            userDTO.setEmail(user.getEmail());
+            userDTO.setPw(user.getPw());
+            return signIn(userDTO, response);
         } else {
-            // false : not exist
-            //
+            userDTO.setEmail(user.getEmail());
+            userDTO.setNickname(user.getNickname());
+            userDTO.setSocialLogin(user.getSocialLogin());
+            return new ResponseEntity<>(new CommonResponse(userDTO,"SocialLogin", "FAIL", "필수 정보가 필요합니다."),HttpStatus.OK);
         }
-        return user;
     }
 }
