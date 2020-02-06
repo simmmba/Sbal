@@ -71,7 +71,7 @@ public class UserController {
             if (user != null) {
                 response.setHeader("jwt-auth-token", jwtService.create(user.getId()));
                 Map<String, Object> mainInfo = commonService.manufactureMain(user.mainPageDTO());
-                return new ResponseEntity<>(new CommonResponse(mainInfo,"signUp", "SUCCESS", "회원 가입에 성공했습니다."), HttpStatus.OK);
+                return new ResponseEntity<>(new CommonResponse(mainInfo, "signUp", "SUCCESS", "회원 가입에 성공했습니다."), HttpStatus.OK);
             } else return new ResponseEntity<>(new CommonResponse("signUp", "FAIL", "회원 가입에 실패했습니다."), HttpStatus.OK);
         } catch (RuntimeException e) {
             e.printStackTrace();

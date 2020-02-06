@@ -32,6 +32,7 @@ public class StudyService {
         createdStudy.getMemberList().add(leader);
         return createdStudy;
     }
+
     public Study update(Study study) {
         return sRepo.save(study);
     }
@@ -40,9 +41,11 @@ public class StudyService {
         Study study = sRepo.findById(id).get();
         return study;
     }
+
     public List<Study> getAllStudy() {
         return sRepo.findAll();
     }
+
     public void delete(Integer id) {
         sRepo.deleteById(id);
     }

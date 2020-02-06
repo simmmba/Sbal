@@ -24,9 +24,11 @@ public class SvalApplication implements WebMvcConfigurer {
     @Autowired
     JwtInterceptor jwtInterceptor;
 
+    // /user/auth/{email}
+    //addPathPatterns("/user/auth/**))
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(jwtInterceptor).addPathPatterns(Arrays.asList("/user/auth/**"));
+        registry.addInterceptor(jwtInterceptor).addPathPatterns("/user/auth/**", "/study");
 //                .excludePathPatterns(Arrays.asList("/user", "/user/signIn"));
     }
 

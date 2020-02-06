@@ -58,7 +58,7 @@ public class StudyController {
 
     // 스터디 생성
     @PostMapping
-    @ApiOperation(value = "새로운 스터디를 생성한다.", response = Study.class)
+    @ApiOperation(value = "새로운 스터디를 생성한다.", response = CommonResponse.class)
     public ResponseEntity<CommonResponse> enrollNewStudy(@RequestBody StudyDTO study, HttpServletRequest request) {
         try {
             int leaderId = jwtService.getLoginUserId(request);
@@ -73,7 +73,7 @@ public class StudyController {
 
     // 스터디 수정
     @PutMapping
-    @ApiOperation(value = "스터디를 수정한다.", response = Study.class)
+    @ApiOperation(value = "스터디를 수정한다.", response = CommonResponse.class)
     public ResponseEntity<CommonResponse> update(@RequestBody StudyDTO study, HttpServletRequest request) {
         try {
             int leaderId = jwtService.getLoginUserId(request);
@@ -88,8 +88,9 @@ public class StudyController {
     // 스터디 삭제
     @DeleteMapping("/{id}")
     @ApiOperation(value = "스터디를 삭제한다.", response = CommonResponse.class)
-    public ResponseEntity<Object> delete(@PathVariable Integer id) {
+    public ResponseEntity<Object> delete(@PathVariable Integer id, HttpServletRequest request) {
         try {
+            int loginUserId = jwtService.getLoginUserId(request);
             studyService.delete(id);
             return new ResponseEntity<Object>(new CommonResponse("delete", "SUCCESS", "스터디가 삭제되었습니다."), HttpStatus.OK);
         } catch (RuntimeException e) {
@@ -100,10 +101,10 @@ public class StudyController {
     // 스터디 상세 조회
     @GetMapping("/{id}")
     @ApiOperation(value = "스터디의 상세 정보를 가져온다.", response = StudyDTO.class)
-    public ResponseEntity<CommonResponse> details(@PathVariable Integer id) {
+    public ResponseEntity<CommonResponse> details(@PathVariable Integer studyId, HttpServletRequest request) {
         try {
-            // 가입된 유저인가 아닌가를 구분해서 동작할 수 있게 해주는 처리를 해야함.
-            return new ResponseEntity<>(new CommonResponse(studyService.getStudyDetail(id).toDTO(), "details", "SUCCESS", "조회 성공"), HttpStatus.OK);
+//            Study study = studyService.
+            return new ResponseEntity<>(new CommonResponse(studyService.getStudyDetail(studyId).toDTO(), "details", "SUCCESS", "조회 성공"), HttpStatus.OK);
         } catch (RuntimeException e) {
             throw new RuntimeException("details");
         }

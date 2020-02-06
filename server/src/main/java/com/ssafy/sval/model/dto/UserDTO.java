@@ -37,9 +37,12 @@ public class UserDTO {
     public User insertOrUpdateEntity(String password) {
         User updatedUser = new User(id, password, email, phoneNum, nickname, gender, introduction,
                 city, town, evaluation, profilePhotoDir, socialLogin, null, null, null);
-        List<UserInterest> interestEntityList = new ArrayList<>();
-        for(UserInterestDTO uiDTO : interestDTOList)
-            interestEntityList.add(new UserInterest(updatedUser, uiDTO.getLCategory(), uiDTO.getSCategory()));
+        List<UserInterest> interestEntityList = null;
+        if(interestDTOList != null) {
+            interestEntityList = new ArrayList<>();
+            for(UserInterestDTO uiDTO : interestDTOList)
+                interestEntityList.add(new UserInterest(updatedUser, uiDTO.getLCategory(), uiDTO.getSCategory()));
+        }
         updatedUser.setInterestList(interestEntityList);
         return updatedUser;
     }
