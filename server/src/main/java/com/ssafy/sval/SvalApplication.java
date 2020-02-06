@@ -10,7 +10,6 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
-import java.util.Arrays;
 
 
 @SpringBootApplication
@@ -24,12 +23,10 @@ public class SvalApplication implements WebMvcConfigurer {
     @Autowired
     JwtInterceptor jwtInterceptor;
 
-    // /user/auth/{email}
-    //addPathPatterns("/user/auth/**))
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(jwtInterceptor).addPathPatterns("/study");
-//                .excludePathPatterns(Arrays.asList("/user", "/user/signIn"));
+        registry.addInterceptor(jwtInterceptor).addPathPatterns("/study/**")
+                .excludePathPatterns("/study/list");
     }
 
     @Override
