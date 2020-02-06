@@ -46,19 +46,34 @@ public class SnsLogin {
         JsonParser parser = new JsonParser();
         JsonObject jsonObject = (JsonObject) parser.parse(result);
         JsonObject userinfo = (JsonObject) jsonObject.get("response");
-        String tempid = userinfo.get("id").toString().substring(1, userinfo.get("id").toString().length() - 1);
+        String tempid = null;
+        if(userinfo.get("id") != null ){
+            tempid = userinfo.get("id").toString().substring(1, userinfo.get("id").toString().length() - 1);
+        }
         String social_login = "naver@".concat(tempid);
-        int gender = userinfo.get("gender").toString().charAt(1) == 'M' ? 0 : 1;
-        String email = userinfo.get("email").toString().substring(1, userinfo.get("email").toString().length() - 1);
-        String name = userinfo.get("name").toString().substring(1, userinfo.get("name").toString().length() - 1);
-        try {
-            name = new String(name.getBytes("UTF-8"), "utf-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+        int gender = 2;
+        if(userinfo.get("gender") != null){
+            gender = userinfo.get("gender").toString().charAt(1) == 'M' ? 0 : 1;
+        }
+        String email = null;
+        if(userinfo.get("email") != null) {
+            userinfo.get("email").toString().substring(1, userinfo.get("email").toString().length() - 1);
+        }
+        String name = null;
+        if(userinfo.get("name") != null){
+            name = userinfo.get("name").toString().substring(1, userinfo.get("name").toString().length() - 1);
+            try {
+                name = new String(name.getBytes("UTF-8"), "utf-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
         }
 
-//        User user = new User(0, null, email, null, name, gender, null, null, null, null, null, social_login,null);
+        //User user = new User(0, null, email, null, name, gender, null, null, null, null, null, social_login,null);
         User user = new User();
+        user.setNickname(name);
+        user.setSocialLogin(social_login);
+        user.setEmail(email);
         return user;
 
     }
@@ -99,21 +114,35 @@ public class SnsLogin {
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Authorization", "Bearer " + token);
         BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        String userInfo = br.readLine();
+        String readUser = br.readLine();
         JsonParser parser = new JsonParser();
-        JsonObject jsonObject = (JsonObject) parser.parse(userInfo);
-        String id = "kakao@".concat(jsonObject.get("id").toString());
-        System.out.println(id);
+        JsonObject jsonObject = (JsonObject) parser.parse(readUser);
+
+        String id = null;
+        if(jsonObject.get("id") != null){
+            id = "kakao@".concat(jsonObject.get("id").toString());
+        }
         JsonObject userinfo = (JsonObject) jsonObject.get("kakao_account");
-        String email = userinfo.get("email").toString().substring(1, userinfo.get("email").toString().length() - 1);
-        System.out.println(email);
-        JsonObject nickname = (JsonObject) (userinfo.get("profile"));
-        String name = nickname.get("nickname").toString().substring(1, nickname.get("nickname").toString().length() - 1);
-        System.out.println(name);
-        //id, null, email,null, name, 0, null, null, 100.0, null
-        //User user = new User(0, null, email, null, name, 0, null, null, null, null, null, id, null,null);
-//        User user = new User(0, null, email, null, name, 0, null, null, null, null, null, id, null);
+
+        String email = null;
+        if(userinfo.get("email") != null){
+            email = userinfo.get("email").toString().substring(1, userinfo.get("email").toString().length() - 1);
+        }
+        JsonObject nickname = null;
+        String name = null;
+        if(userinfo.get("profile")!=null) {
+            nickname = (JsonObject) (userinfo.get("profile"));
+            if(nickname.get("nickname") != null){
+                name = nickname.get("nickname").toString().substring(1, nickname.get("nickname").toString().length() - 1);
+            }
+        }
+        // id, null, email,null, name, 0, null, null, 100.0, null
+        // User user = new User(0, null, email, null, name, 0, null, null, null, null, null, id, null,null);
+        // User user = new User(0, null, email, null, name, 0, null, null, null, null, null, id, null);
         User user = new User();
+        user.setEmail(email);
+        user.setNickname(name);
+        user.setSocialLogin(id);
         return user;
     }
 

@@ -50,6 +50,10 @@ public class UserService {
         return !uRepo.existsUserByNickname(nickname);
     }
 
+    public boolean isExistSocialLogin(String socialLogin){
+        return uRepo.existsUserBySocialLogin(socialLogin);
+    }
+
     public User signIn(String email, String pw) {
         if (!uRepo.existsUserByEmail(email)) return null;
         User user = uRepo.findUserByEmail(email);
@@ -68,6 +72,9 @@ public class UserService {
     public User findById(Integer id) {
         return uRepo.findById(id).get();
     }
+
+    public User findBySocialLogin(String socialLogin){
+        return uRepo.findUserBySocialLogin(socialLogin); }
 
     public void delete(Integer userId) {
         uRepo.deleteById(userId);
