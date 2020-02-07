@@ -84,7 +84,7 @@ public class UserController {
     public ResponseEntity<CommonResponse> signIn(@RequestBody UserDTO user, HttpServletResponse response) {
         try {
             User loginUser = userService.signIn(user.getEmail(), user.getPw());
-            if (user != null) {
+            if (loginUser != null) {
                 response.setHeader("jwt-auth-token", jwtService.create(loginUser.getId()));
                 user = new UserDTO(user.getId(), user.getNickname());
                 return new ResponseEntity<>(new CommonResponse(user,"signIn", "SUCCESS", "로그인에 성공했습니다."), HttpStatus.OK);

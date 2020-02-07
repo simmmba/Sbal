@@ -44,6 +44,10 @@ public class StudyService {
         return study;
     }
 
+    public Study getStudy(Integer id) {
+        return sRepo.findById(id).get();
+    }
+
     public List<Study> getStudiesInRecruitment() {
         return sRepo.findStudiesByStateOrderByEnrollDateDesc(0);
     }

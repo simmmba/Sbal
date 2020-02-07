@@ -32,13 +32,14 @@ public class StudyDTO {
     private String endDate;
     private Integer joinedMemberCount;
     private List<StudyMemberDTO> studyMemberDTOList;
+    private List<StudyScheduleDTO> studyScheduleDTOList;
 
     public Study insertOrUpdateEntity(int leaderId) {
         User leaderEntity = new User();
         leaderEntity.setId(leaderId);
         Study study = new Study(id, title, contents, leaderEntity, lCategory, sCategory, city, town, state,
                 maxParticipants, hits, isOnline, monthOrWeek, frequency, weekdayOrWeekend,
-                timeslot, evaluationLimit, enrollDate, startDate, endDate, null);
+                timeslot, evaluationLimit, enrollDate, startDate, endDate, null, null);
         return study;
     }
 }
