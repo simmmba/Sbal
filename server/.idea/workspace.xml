@@ -76,8 +76,8 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/ssafy/sval/model/service" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
@@ -87,11 +87,18 @@
     <key name="CreateTestDialog.RecentsKey">
       <recent name="com.ssafy.sval.model.entity" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.ssafy.sval.config" />
+    </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.ssafy.sval.config" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\ssafy\work_project\s02p13a306\server\src\main\java\com\ssafy\sval\model\service" />
+      <recent name="C:\ssafy\work_project\s02p13a306\server\src\main\java\com\ssafy\sval\model\repository" />
+      <recent name="C:\ssafy\work_project\s02p13a306\server\src\main\java\com\ssafy\sval\model\entity" />
+      <recent name="C:\ssafy\work_project\s02p13a306\server\src\main\java\com\ssafy\sval\model\dto" />
+      <recent name="C:\ssafy\work_project\s02p13a306\server\src\main\java\com\ssafy\sval\controller" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.SvalApplication">
@@ -168,6 +175,9 @@
       <workItem from="1580952023526" duration="65000" />
       <workItem from="1580952103751" duration="12865000" />
       <workItem from="1580947888164" duration="20516000" />
+      <workItem from="1581034173615" duration="4282000" />
+      <workItem from="1581038523226" duration="17606000" />
+      <workItem from="1581293471231" duration="921000" />
     </task>
     <servers />
   </component>
@@ -175,14 +185,14 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="361" y="71" key="#Assign_Data_Sources" timestamp="1580695717984">
+    <state x="361" y="71" key="#Assign_Data_Sources" timestamp="1581035200182">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="71" key="#Assign_Data_Sources/0.0.1536.824@0.0.1536.824" timestamp="1580695717984" />
-    <state x="361" y="71" key="#Project_Structure" timestamp="1580169554739">
+    <state x="361" y="71" key="#Assign_Data_Sources/0.0.1536.824@0.0.1536.824" timestamp="1581035200182" />
+    <state x="361" y="71" key="#Project_Structure" timestamp="1581049988105">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="71" key="#Project_Structure/0.0.1536.824@0.0.1536.824" timestamp="1580169554739" />
+    <state x="361" y="71" key="#Project_Structure/0.0.1536.824@0.0.1536.824" timestamp="1581049988105" />
     <state x="361" y="71" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1580694718930">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -203,10 +213,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="438" y="338" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1536.824@0.0.1536.824" timestamp="1580799033617" />
-    <state x="560" y="271" width="415" height="291" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1580697504423">
+    <state x="560" y="271" width="440" height="291" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1581038114277">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="560" y="271" width="415" height="291" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824@0.0.1536.824" timestamp="1580697504423" />
+    <state x="560" y="271" width="440" height="291" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824@0.0.1536.824" timestamp="1581038114277" />
     <state x="162" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1579744007186">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -219,72 +229,38 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1580948490458" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1580972162271" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1580966268899">
+    <state width="1024" height="210" key="GridCell.Tab.0.bottom" timestamp="1581293790751">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580966268899" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1580966268899">
+    <state width="1024" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1581293790751" />
+    <state width="1024" height="210" key="GridCell.Tab.0.center" timestamp="1581293790751">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1580966268899" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1580966268899">
+    <state width="1024" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1581293790751" />
+    <state width="1024" height="210" key="GridCell.Tab.0.left" timestamp="1581293790751">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1580966268899" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1580966268899">
+    <state width="1024" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1581293790751" />
+    <state width="1024" height="210" key="GridCell.Tab.0.right" timestamp="1581293790751">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1580966268899" />
-    <state width="1493" height="210" key="GridCell.Tab.1.bottom" timestamp="1580966268899">
+    <state width="1024" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1581293790751" />
+    <state width="1493" height="216" key="GridCell.Tab.1.bottom" timestamp="1581066008454">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580966268899" />
-    <state width="1493" height="210" key="GridCell.Tab.1.center" timestamp="1580966268899">
+    <state width="1493" height="216" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1581066008454" />
+    <state width="1493" height="216" key="GridCell.Tab.1.center" timestamp="1581066008454">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1580966268899" />
-    <state width="1493" height="210" key="GridCell.Tab.1.left" timestamp="1580966268899">
+    <state width="1493" height="216" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1581066008454" />
+    <state width="1493" height="216" key="GridCell.Tab.1.left" timestamp="1581066008454">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1580966268899" />
-    <state width="1493" height="210" key="GridCell.Tab.1.right" timestamp="1580966268899">
+    <state width="1493" height="216" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1581066008454" />
+    <state width="1493" height="216" key="GridCell.Tab.1.right" timestamp="1581066008454">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1580966268899" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1580971065438">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580972162271" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1580972162271">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1580972162271" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1580972162271">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1580972162271" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1580972162271">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1580972162271" />
-    <state width="1493" height="210" key="GridCell.Tab.1.bottom" timestamp="1580972162271">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="210" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580972162271" />
-    <state width="1493" height="210" key="GridCell.Tab.1.center" timestamp="1580972162271">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="210" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1580972162271" />
-    <state width="1493" height="210" key="GridCell.Tab.1.left" timestamp="1580972162271">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="210" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1580972162271" />
-    <state width="1493" height="210" key="GridCell.Tab.1.right" timestamp="1580972162271">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1493" height="210" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1580972162271" />
-    <state width="1493" height="210" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1580971065438" />
+    <state width="1493" height="216" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1581066008454" />
     <state width="1493" height="261" key="GridCell.Tab.2.bottom" timestamp="1580288106434">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -313,10 +289,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="218" key="com.intellij.database.dbimport.ImportUtil.MyDialog/0.0.1536.824@0.0.1536.824" timestamp="1580970461840" />
-    <state x="459" y="237" key="com.intellij.ide.util.TipDialog" timestamp="1580774454509">
+    <state x="459" y="237" key="com.intellij.ide.util.TipDialog" timestamp="1581293470911">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="459" y="237" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1580774454509" />
+    <state x="459" y="237" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1581293470911" />
     <state x="533" y="131" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1580696668797">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

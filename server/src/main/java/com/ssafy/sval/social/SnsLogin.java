@@ -68,7 +68,6 @@ public class SnsLogin {
                 e.printStackTrace();
             }
         }
-
         //User user = new User(0, null, email, null, name, gender, null, null, null, null, null, social_login,null);
         User user = new User();
         user.setNickname(name);
