@@ -1,0 +1,52 @@
+/* :global .studyList {
+  display: flex;
+  justify-content: space-around;
+  background-color: rgb(236, 236, 236);
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+:global .listBox {
+  border: 1px solid red;
+  background-color: white;
+  padding: 15px 15px 20px 15px;
+  width: 330px;
+  border: 10px solid rgb(236, 236, 236);
+}
+
+:global .listTitle {
+  font-size: 15px;
+  font-weight: 900;
+  color: rgba(92, 0, 179, 0.74);
+  margin-bottom: 10px;
+}
+
+:global .listContent {
+  display: flex;
+  padding: 5px;
+}
+
+:global .listContent:hover {
+  background: rgb(236, 236, 236);
+}
+
+:global .listLank {
+  margin: 5px 20px 5px 10px;
+  color: grey;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+:global .listName {
+  margin: 5px 5px 0px 5px;
+  font-weight: 750;
+}
+
+:global .listType {
+  margin: 0px 5px 5px 5px;
+  font-size: small;
+}
+
+:global .listContainer {
+  vertical-align: middle;
+} */
