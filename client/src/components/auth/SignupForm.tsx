@@ -23,7 +23,8 @@ import {
 } from './AuthTypes'
 import { RouteComponentProps, withRouter } from 'react-router'
 import qs from 'qs'
-import { getSocialData } from '../../lib/api/auth'
+import { getSocialData, validateEmail, validateNickname } from '../../lib/api/auth'
+import apiClient from "../../lib/api/client";
 
 function ListItem({
   interest,
@@ -177,6 +178,21 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
           type="text"
           onChange={state.onChange}
         />
+        <StyledButton width={30} onClick={() => {
+          validateNickname(state.nickname)
+              .then(res => {
+                const responseState = res.data.state;
+                if(responseState==='SUCCESS') {
+                  alert(res.data.message);
+                } else if(responseState==='FAIL') {
+                  alert(res.data.message);
+                } else if(responseState==='ERROR') {
+                  alert(res.data.message);
+                }
+              }).catch(e => {
+                alert(e);
+          })
+        }}>중복 확인</StyledButton>
         <StyledLabel htmlFor="password">
           <Guide color="red">* </Guide>비밀번호
         </StyledLabel>

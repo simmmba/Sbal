@@ -149,8 +149,8 @@ export const NaverIcon = () => {
   )
 }
 
-export const StyledButton = styled.button`
-  width: 100%;
+export const StyledButton = styled.button<{width?:number | undefined}>`
+  width: ${props => props.width?props.width:100}%;
   outline: none;
   border: none;
   border-radius: 4px;

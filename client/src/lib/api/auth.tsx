@@ -29,3 +29,11 @@ export const getSocialData = (code: string, service: string) => {
   }
   return apiClient.post('/user/auth', { code, service })
 }
+
+export const validateEmail = (email : string) => {
+  return apiClient.get('/user/validateEmail/' + email);
+}
+
+export const validateNickname = (nickName : string) => {
+  return apiClient.get('/user/validateNickname/' + nickName);
+}
