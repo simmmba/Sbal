@@ -60,7 +60,7 @@ function SignupForm({type, location}: RouteComponentProps & AuthFormProps) {
         취업: ['면접', '인적성']
     }
 
-    const state = useLocalStore<SignupState>(() => ({
+    const state:SignupState = useLocalStore(() => ({
         email: '',
         emailState: false,
         emailDupMessage: '',
@@ -80,17 +80,26 @@ function SignupForm({type, location}: RouteComponentProps & AuthFormProps) {
         lcategory: Object.keys(interests)[0],
         scategory: interests[Object.keys(interests)[0]][0],
         interestList: [],
+        equalsOfPasswords: '',
         onChange(e: React.ChangeEvent<HTMLInputElement>) {
             state[e.target.name] = e.target.value
+            if(e.target.name==='password' || e.target.name==='password2') {
+                state.isEqualPassword = this.password===this.password2;
+                if(this.isEqualPassword) {
+                    state.equalsOfPasswords = "비밀번호가 일치합니다.";
+                } else {
+                    state.equalsOfPasswords = "비밀번호가 일치하지 않습니다.";
+                }
+            }
+            if(e.target.name==="email") {
+                state.isCheckedEmail=false;
+            }
         },
         onChangeTextarea(e: React.ChangeEvent<HTMLTextAreaElement>) {
             state[e.target.name] = e.target.value
         },
         onChangeSelect(e: React.ChangeEvent<HTMLSelectElement>) {
             state[e.target.name] = e.target.value
-        },
-        onChangePassword() {
-            return this.password === this.password2
         }
     }))
 
@@ -175,13 +184,20 @@ function SignupForm({type, location}: RouteComponentProps & AuthFormProps) {
                         autoComplete="email"
                         name="email"
                         value={state.email}
-                        type="email"
                         onChange={state.onChange}
                         width={60}
                     />
                     <StyledButton width={30} marginLeft={5} onClick={() => {
                         if(state.email.length===0) {
-                            alert("이메일을 입력해주세요.");
+                            state.isCheckedEmail=true;
+                            state.emailDupMessage='이메일을 입력해주세요.';
+                            return;
+                        }
+                        const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+                        if(state.email.match(regExp)==null) {
+                            state.isCheckedEmail=true;
+                            state.emailState=false;
+                            state.emailDupMessage=`올바르지 않은 이메일 양식입니다. (abc@def.com)`;
                             return;
                         }
                         validateEmail(state.email)
@@ -211,7 +227,8 @@ function SignupForm({type, location}: RouteComponentProps & AuthFormProps) {
                 />
                 <StyledButton width={30} marginLeft={5} onClick={() => {
                     if(state.nickname.length===0) {
-                        alert("닉네임을 입력해주세요.");
+                        state.isCheckedNickname=true;
+                        state.nicknameDupMessage="닉네임을 입력해주세요."
                         return;
                     }
                     validateNickname(state.nickname)
@@ -248,7 +265,7 @@ function SignupForm({type, location}: RouteComponentProps & AuthFormProps) {
                     type="password"
                     onChange={state.onChange}
                 />
-                <div hidden={state.onChangePassword()}>asdf</div>
+                <div><Guide color={state.isEqualPassword?"green":"red"}>{state.equalsOfPasswords}</Guide></div>
                 <Guide marginTop="20px">* 아래는 추가 입력사항입니다</Guide>
                 <StyledLabel htmlFor="email">연락처</StyledLabel>
                 <StyledInput

@@ -19,7 +19,6 @@ export type SignupState = {
   nicknameDupMessage: string
   password: string
   password2: string
-  isEqualPassword: boolean
   phoneNumber: string
   introduction: string
   city: string
@@ -28,10 +27,12 @@ export type SignupState = {
   scategory: string
   gender: number
   interestList: Interest[]
+  equalsOfPasswords: string
+  isEqualPassword: boolean
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   onChangeTextarea: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
   onChangeSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void
-  onChangePassword: () => boolean
+  // onChangePassword: () => void
   [key: string]:
     | string
     | number
