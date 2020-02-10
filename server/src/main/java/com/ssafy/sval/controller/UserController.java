@@ -81,6 +81,7 @@ public class UserController {
     @PostMapping("/signIn")
     @ApiOperation(value = "로그인 성공 시 main page를 구성할 데이터와 JWT 전송 실패 시 CommonResponse 확인", response = CommonResponse.class)
     public ResponseEntity<CommonResponse> signIn(@RequestBody UserDTO user, HttpServletResponse response) {
+        //System.out.println(user.getEmail());
         try {
             //System.out.println(user.getEmail()+" "+user.getPw());
             User loginUser = userService.signIn(user.getEmail(), user.getPw());
@@ -100,6 +101,8 @@ public class UserController {
     public ResponseEntity<CommonResponse> getMyInfo(HttpServletRequest request) {
         try {
             int loginUserId = jwtService.getLoginUserId(request);
+            System.out.println(loginUserId);
+            System.out.println(loginUserId);
             UserDTO loginUser = userService.findById(loginUserId).myPageDTO();
             loginUser = commonService.manufactureMyInfo(loginUser);
             return new ResponseEntity<>(new CommonResponse(loginUser, "getMyInfo", "SUCCESS", "조회 성공"), HttpStatus.OK);

@@ -1,6 +1,5 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-
 import NavBar from './components/NavBar'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
@@ -8,6 +7,7 @@ import SignupPage from './pages/SignupPage'
 import StudyListPage from './pages/StudyListPage'
 import StudyPage from './pages/StudyPage'
 import StudyDetailPage from './pages/StudyDetailPage'
+import MyInfoPage from './pages/MyInfoPage'
 
 import './App.css'
 
@@ -21,6 +21,8 @@ const App: React.FC = () => {
         <Route path="/signup" component={LoginPage} exact></Route>
         <Route path="/signup/form" component={SignupPage}></Route>
         <Route path="/login" component={LoginPage}></Route>
+        {/* 마이페이지 */}
+        <Route path="/mypage" component={MyInfoPage}></Route>
         {/* 스터디 리스트 페이지 */}
         <Route path="/study" component={StudyListPage} exact></Route>
         {/* 참여한 스터디 페이지 */}
