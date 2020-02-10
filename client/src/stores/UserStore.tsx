@@ -1,8 +1,13 @@
 import { observable } from 'mobx'
 import * as userAPI from '../lib/api/auth'
-import { LoginData, SignupData } from '../components/auth/AuthTypes'
 
-const UserStore = observable({
+import {
+  LoginData,
+  SignupData,
+  UserStoreType
+} from '../components/auth/AuthTypes'
+
+const UserStore = observable<UserStoreType>({
   isLoggingIn: false,
   token: null,
   data: null,
@@ -25,7 +30,8 @@ const UserStore = observable({
     this.isLoggingIn = true
     try {
       const res = await userAPI.login(data)
-      const token = res.headers.token
+      console.log(res)
+      const token = res.headers['jwt-auth-token']
       sessionStorage.setItem('token', token)
       this.token = token
       this.isLoggingIn = false
@@ -38,7 +44,11 @@ const UserStore = observable({
   logout() {
     sessionStorage.removeItem('token')
     this.token = null
-  }
+  },
+
+  edit() {},
+
+  signout() {}
 })
 
 export default UserStore

@@ -1,20 +1,16 @@
-import React from 'react'
-/**@jsx jsx */
-import { css, jsx } from '@emotion/core'
+import React, { useEffect } from 'react'
+/***@jsx jsx */
+import { jsx } from '@emotion/core'
+import MainStudylist from '../components/main/MainStudyList'
 import Slider from 'infinite-react-carousel'
-import MyStudy from '../components/mainStudyRank/MyStudy'
-import RecentStudy from '../components/mainStudyRank/RecentStudy'
-import FamousStudy from '../components/mainStudyRank/FamousStudy'
-
-const studyRank = css`
-  display: flex;
-  justify-content: space-around;
-  background-color: rgb(236, 236, 236);
-  padding: 20px;
-  flex-wrap: wrap;
-`
+import authCheck from '../utils/authCheck'
+import { useHistory } from 'react-router'
 
 const HomePage = () => {
+  const history = useHistory()
+  useEffect(() => {
+    authCheck(history)
+  })
   return (
     <>
       <Slider autoplay autoplaySpeed={3000}>
@@ -74,11 +70,7 @@ const HomePage = () => {
         </div>
       </Slider>
 
-      <div css={studyRank}>
-        <MyStudy />
-        <RecentStudy />
-        <FamousStudy />
-      </div>
+      <MainStudylist />
     </>
   )
 }

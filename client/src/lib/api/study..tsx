@@ -8,7 +8,20 @@ const setAuthToken = (AUTH_TOKEN: string | void) => {
   }
 }
 
-export const mainStudyList = () => {
+export const getMainStudyList = () => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token)
+  }
+  return apiClient.get('/')
+}
+
+export const getStudyList = () => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token)
+  }
+  return apiClient.get('/')
+}
+export const getStudyDetail = () => {
   if (localStorage.token) {
     setAuthToken(localStorage.token)
   }

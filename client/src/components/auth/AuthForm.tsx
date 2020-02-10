@@ -29,6 +29,7 @@ function AuthForm({ type, history }: RouteComponentProps & AuthFormProps) {
   const state: LoginState = useLocalStore(() => ({
     email: '',
     password: '',
+
     onChange(e: React.ChangeEvent<HTMLInputElement>) {
       state[e.target.name] = e.target.value
     }
