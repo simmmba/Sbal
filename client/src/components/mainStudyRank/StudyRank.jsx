@@ -1,6 +1,7 @@
 // import React from 'react'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
+import { NavLink } from 'react-router-dom'
 
 const listContent = css`
   display: flex;
@@ -11,7 +12,7 @@ const listContent = css`
   }
 `
 
-const listLank = css`
+const listRank = css`
   margin: 5px 20px 5px 15px;
   /* border: 1px solid orange; */
   color: grey;
@@ -41,17 +42,19 @@ const StudyRank = props => {
     <div>
       {props.list.length > 0 ? (
         props.list.map(list => (
-          <div css={listContent}>
-            <div css={listLank}>
-              <p>{list.lno}</p>
+          <NavLink to={`study/details/${list.id}`}>
+            <div css={listContent}>
+              <div css={listRank}>
+                <p>{list.rank}</p>
+              </div>
+              <div css={listContainer}>
+                <p>
+                  <div css={listName}>{list.title}</div>
+                  <div css={listType}>{list.type}</div>
+                </p>
+              </div>
             </div>
-            <div css={listContainer}>
-              <p>
-                <div css={listName}>{list.lname}</div>
-                <div css={listType}>{list.ltype}</div>
-              </p>
-            </div>
-          </div>
+          </NavLink>
         ))
       ) : (
         <div>스터디 없음</div>

@@ -23,24 +23,28 @@ const listTitle = css`
 const MyStudy = () => {
   const myList = [
     {
-      lno: 1,
-      ltype: '면접',
-      lname: '요기요 2차 면접 스터디'
+      rank: 1,
+      id: 10,
+      type: '면접',
+      title: '요기요 2차 면접 스터디'
     },
     {
-      lno: 2,
-      ltype: '인적성',
-      lname: 'GSAT 스터디'
+      rank: 2,
+      id: 20,
+      type: '인적성',
+      title: 'GSAT 스터디'
     },
     {
-      lno: 3,
-      ltype: '면접',
-      lname: '삼성전자 DS 원데이'
+      rank: 3,
+      id: 30,
+      type: '면접',
+      title: '삼성전자 DS 원데이'
     },
     {
-      lno: 4,
-      ltype: '면접',
-      lname: 'SK C&C 임원 면접 대비'
+      rank: 4,
+      id: 40,
+      type: '면접',
+      title: 'SK C&C 임원 면접 대비'
     }
   ]
 

@@ -23,29 +23,34 @@ const listTitle = css`
 const RecentStudy = () => {
   const recentList = [
     {
-      lno: 1,
-      ltype: '자소서',
-      lname: 'SK그룹 자소서 미리 작성'
+      rank: 1,
+      id: 11,
+      type: '자소서',
+      title: 'SK그룹 자소서 미리 작성'
     },
     {
-      lno: 2,
-      ltype: '자소서',
-      lname: '삼성전자 자소서 뽀개기'
+      rank: 2,
+      id: 21,
+      type: '자소서',
+      title: '삼성전자 자소서 뽀개기'
     },
     {
-      lno: 3,
-      ltype: '자소서',
-      lname: '블라인드 자소서 스킬'
+      rank: 3,
+      id: 31,
+      type: '자소서',
+      title: '블라인드 자소서 스킬'
     },
     {
-      lno: 4,
-      ltype: '자소서',
-      lname: '한번에 붙는 자소서 쓰기'
+      rank: 4,
+      id: 41,
+      type: '자소서',
+      title: '한번에 붙는 자소서 쓰기'
     },
     {
-      lno: 5,
-      ltype: '자소서',
-      lname: '떨어진 자소서 다시보기'
+      rank: 5,
+      id: 51,
+      type: '자소서',
+      title: '떨어진 자소서 다시보기'
     }
   ]
 
