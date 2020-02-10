@@ -23,11 +23,11 @@ import java.util.Map;
 @Slf4j
 public class CommonController {
     @Autowired
-    CommonService commonService;
-    @Autowired
     JwtService jwtService;
     @Autowired
     UserService userService;
+    @Autowired
+    CommonService commonService;
 
     @ExceptionHandler
     @ApiOperation(value = "모든 INTERNAL SERVER ERROR 상태를 처리한다. message를 화면에 출력하고 작성한 ERROR PAGE로 이동시킨다.")

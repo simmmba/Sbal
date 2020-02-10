@@ -1,5 +1,6 @@
 package com.ssafy.sval.model.service;
 
+import com.ssafy.sval.model.dto.StudyMemberDTO;
 import com.ssafy.sval.model.entity.Study;
 import com.ssafy.sval.model.entity.StudyMember;
 import com.ssafy.sval.model.entity.StudyMemberId;
@@ -35,12 +36,14 @@ public class StudyMemberService {
     }
 
     @Transactional
-    public boolean update(Integer studyId, Integer userId, Integer state, Integer loginUserId) {
+    public boolean update(StudyMemberDTO studyMemberDTO, Integer loginUserId) {
+        int studyId = studyMemberDTO.getStudy().getId();
+        int userId = studyMemberDTO.getUser().getId();
         StudyMember studyMember = studyMemberRepository.findById(new StudyMemberId(studyId, userId)).get();
         if(studyMember.getStudy().getLeader().getId()!= loginUserId) {
             return false;
         } else {
-            studyMember.setState(state);
+            studyMember.setState(studyMemberDTO.getState());
             studyMemberRepository.save(studyMember);
             return true;
         }

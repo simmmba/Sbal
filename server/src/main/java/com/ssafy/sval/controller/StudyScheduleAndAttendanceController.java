@@ -3,8 +3,6 @@ package com.ssafy.sval.controller;
 import com.ssafy.sval.jwt.JwtService;
 import com.ssafy.sval.model.dto.AttendacneDTO;
 import com.ssafy.sval.model.dto.StudyScheduleDTO;
-import com.ssafy.sval.model.entity.Attendance;
-import com.ssafy.sval.model.entity.AttendanceId;
 import com.ssafy.sval.model.entity.StudySchedule;
 import com.ssafy.sval.model.service.AttendanceService;
 import com.ssafy.sval.model.service.StudyScheduleService;
@@ -92,9 +90,9 @@ public class StudyScheduleAndAttendanceController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping
     @ApiOperation(value = "일정을 삭제한다.", response = CommonResponse.class)
-    public ResponseEntity<CommonResponse> deleteStudySchedule(@PathVariable Integer id, HttpServletRequest request) {
+    public ResponseEntity<CommonResponse> deleteStudySchedule(@RequestBody Integer id, HttpServletRequest request) {
         try {
             int loginUserId = jwtService.getLoginUserId(request);
             StudySchedule schedule = studyScheduleService.find(id);

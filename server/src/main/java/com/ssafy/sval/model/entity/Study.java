@@ -59,9 +59,11 @@ public class Study {
                 frequency, weekdayOrWeekend, timeslot, evaluationLimit, enrollDate, startDate, endDate,
                 null, null, null);
 
-        List<StudyMemberDTO> memberDTOList = new ArrayList<>();
-        for (StudyMember sm : memberList) memberDTOList.add(sm.toMemberDTO());
-        studyDTO.setStudyMemberDTOList(memberDTOList);
+        if(memberList != null) {
+            List<StudyMemberDTO> memberDTOList = new ArrayList<>();
+            for (StudyMember sm : memberList) memberDTOList.add(sm.toMemberDTO());
+            studyDTO.setStudyMemberDTOList(memberDTOList);
+        }
 
         if(scheduleList!=null) {
             List<StudyScheduleDTO> scheduleDTOList = new ArrayList<>();
