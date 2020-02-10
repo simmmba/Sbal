@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 @RestController
 @RequestMapping("/user")
 @CrossOrigin({"*"})
@@ -137,7 +136,7 @@ public class UserController {
     }
 
     @DeleteMapping
-    @ApiOperation(value = "회원 탈퇴 성공시 BoolResult true, 실패시 false 반환", response = CommonResponse.class)
+    @ApiOperation(value = "회원 탈퇴 성공시 state에 SUCCESS, 실패시 FAIL 반환", response = CommonResponse.class)
     public ResponseEntity<CommonResponse> delete(HttpServletRequest request) {
         try {
             int loginUserId = jwtService.getLoginUserId(request);
@@ -151,22 +150,22 @@ public class UserController {
     @GetMapping("/validateEmail/{email}")
     @ApiOperation(value = "이메일 중복확인 사용 가능할 때 res.data.state에 SUCCESS 문자열을 리턴하고" +
             "이미 가입된 이메일이라면 FAIL 문자열을 리턴한다.", response = CommonResponse.class)
-    public ResponseEntity<Object> validateEmail(@PathVariable String email) {
+    public ResponseEntity<CommonResponse> validateEmail(@PathVariable String email) {
         if (userService.isExistEmail(email)) {
-            return new ResponseEntity<Object>(new CommonResponse("validateEmail", "SUCCESS", "사용할 수 있는 이메일입니다."), HttpStatus.OK);
+            return new ResponseEntity<>(new CommonResponse("validateEmail", "SUCCESS", "사용할 수 있는 이메일입니다."), HttpStatus.OK);
         } else {
-            return new ResponseEntity<Object>(new CommonResponse("validateEmail", "FAIL", "사용할 수 없는 이메일입니다."), HttpStatus.OK);
+            return new ResponseEntity<>(new CommonResponse("validateEmail", "FAIL", "사용할 수 없는 이메일입니다."), HttpStatus.OK);
         }
     }
 
     @GetMapping("/validateNickname/{nickname}")
     @ApiOperation(value = "닉네임 중복확인 사용 가능할 때 res.data.state에 SUCCESS 문자열을 리턴하고" +
             "이미 가입된 닉네임이라면 FAIL 문자열을 리턴한다.", response = CommonResponse.class)
-    public ResponseEntity<Object> validateNickname(@PathVariable String nickname) {
+    public ResponseEntity<CommonResponse> validateNickname(@PathVariable String nickname) {
         if (userService.isExistNickname(nickname)) {
-            return new ResponseEntity<Object>(new CommonResponse("validateNickname", "SUCCESS", "사용할 수 있는 닉네임입니다."), HttpStatus.OK);
+            return new ResponseEntity<>(new CommonResponse("validateNickname", "SUCCESS", "사용할 수 있는 닉네임입니다."), HttpStatus.OK);
         } else {
-            return new ResponseEntity<Object>(new CommonResponse("validateNickname", "FAIL", "사용할 수 없는 닉네임입니다."), HttpStatus.OK);
+            return new ResponseEntity<>(new CommonResponse("validateNickname", "FAIL", "사용할 수 없는 닉네임입니다."), HttpStatus.OK);
         }
     }
 
@@ -182,12 +181,12 @@ public class UserController {
         return user;
     }
 
-    //@RequestMapping(value = "/auth/{service}/callback", method = {RequestMethod.GET, RequestMethod.POST})
     @PostMapping(value ="/auth")
     public ResponseEntity<CommonResponse> snsLoginCallBack(HttpServletResponse response, @RequestBody SocialParam param) throws Exception {
         String code = param.getCode();
         System.out.println(code);
         String service = param.getService();
+
         SnsValue sns = null;
         SnsLogin sl = null;
         User user = null;

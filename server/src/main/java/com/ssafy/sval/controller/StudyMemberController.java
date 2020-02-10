@@ -1,6 +1,7 @@
 package com.ssafy.sval.controller;
 
 import com.ssafy.sval.jwt.JwtService;
+import com.ssafy.sval.model.dto.StudyMemberDTO;
 import com.ssafy.sval.model.service.StudyMemberService;
 import com.ssafy.sval.responseType.CommonResponse;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -47,7 +48,7 @@ public class StudyMemberController {
 
     @PostMapping
     @ApiOperation(value = "개설된 스터디에 참가 요청 한다.", response = CommonResponse.class)
-    public ResponseEntity<Object> insertMember(Integer studyId, HttpServletRequest request) {
+    public ResponseEntity<Object> insertMember(@RequestBody Integer studyId, HttpServletRequest request) {
         try {
             int loginUserId = jwtService.getLoginUserId(request);
             if (studyMemberService.insert(studyId, loginUserId))
@@ -61,20 +62,21 @@ public class StudyMemberController {
 
     @PutMapping
     @ApiOperation(value = "참가 신청자의 상태를 변경한다.", response = CommonResponse.class)
-    public ResponseEntity<Object> updateMemberState(Integer studyId, Integer userId, Integer state, HttpServletRequest request) {
+    public ResponseEntity<Object> updateMemberState(@RequestBody StudyMemberDTO studyMemberDTO, HttpServletRequest request) {
         try {
             int loginUserId = jwtService.getLoginUserId(request);
-            if (studyMemberService.update(studyId, userId, state, loginUserId))
+            if (studyMemberService.update(studyMemberDTO, loginUserId))
                 return new ResponseEntity<>(new CommonResponse("updateMemberState", "SUCCESS", "상태 변경 성공"), HttpStatus.OK);
-            else return new ResponseEntity<>(new CommonResponse("updateMemberState", "FAIL", "상태 변경 실패"), HttpStatus.OK);
+            else
+                return new ResponseEntity<>(new CommonResponse("updateMemberState", "FAIL", "가입 요청은 리더만 변경할 수 있습니다."), HttpStatus.OK);
         } catch (RuntimeException e) {
             throw new RuntimeException("updateMemberState");
         }
     }
 
-    @DeleteMapping("/{studyId}")
+    @DeleteMapping
     @ApiOperation(value = "스터디 참가 신청을 했던 사용자가 요청을 삭제한다.", response = CommonResponse.class)
-    public ResponseEntity<Object> deleteMember(@PathVariable Integer studyId, HttpServletRequest request) {
+    public ResponseEntity<Object> deleteMember(@RequestBody Integer studyId, HttpServletRequest request) {
         try {
             int loginUserId = jwtService.getLoginUserId(request);
             studyMemberService.delete(studyId, loginUserId);

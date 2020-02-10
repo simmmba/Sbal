@@ -65,7 +65,6 @@ public class StudyController {
             int leaderId = jwtService.getLoginUserId(request);
             Study createdStudy = study.insertOrUpdateEntity(leaderId);
             createdStudy = studyService.insert(createdStudy);
-            log.info("createdStudyDTO : {}", createdStudy.toDTO());
             return new ResponseEntity<>(new CommonResponse(createdStudy.toDTO(), "enrollNewStudy", "SUCCESS", "스터디가 등록되었습니다."), HttpStatus.OK);
         } catch (RuntimeException e) {
             e.printStackTrace();
@@ -79,9 +78,13 @@ public class StudyController {
     public ResponseEntity<CommonResponse> update(@RequestBody StudyDTO study, HttpServletRequest request) {
         try {
             int leaderId = jwtService.getLoginUserId(request);
-            Study updatedStudy = study.insertOrUpdateEntity(leaderId);
-            updatedStudy = studyService.update(updatedStudy);
-            return new ResponseEntity<>(new CommonResponse(updatedStudy.toDTO(), "update", "SUCCESS", "스터디가 수정되었습니다."), HttpStatus.OK);
+            if(study.getLeader().getId()!=leaderId)
+                return new ResponseEntity<>(new CommonResponse("update", "FAIL", "스터디가 수정은 리더만 가능합니다."), HttpStatus.OK);
+            else {
+                Study updatedStudy = study.insertOrUpdateEntity(leaderId);
+                updatedStudy = studyService.update(updatedStudy);
+                return new ResponseEntity<>(new CommonResponse(updatedStudy.toDTO(), "update", "SUCCESS", "스터디가 수정되었습니다."), HttpStatus.OK);
+            }
         } catch (RuntimeException e) {
             e.printStackTrace();
             throw new RuntimeException("update");
@@ -89,16 +92,16 @@ public class StudyController {
     }
 
     // 스터디 삭제
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{studyId}")
     @ApiOperation(value = "스터디를 삭제한다.", response = CommonResponse.class)
-    public ResponseEntity<Object> delete(@PathVariable Integer id, HttpServletRequest request) {
+    public ResponseEntity<Object> delete(@PathVariable Integer studyId, HttpServletRequest request) {
         try {
             int loginUserId = jwtService.getLoginUserId(request);
-            Study study = studyService.getStudy(id);
+            Study study = studyService.getStudy(studyId);
             if(study.getLeader().getId()!=loginUserId) {
-                return new ResponseEntity<>(new CommonResponse("delete", "FAIL", "올바르지 않은 접근입니다."), HttpStatus.OK);
+                return new ResponseEntity<>(new CommonResponse("delete", "FAIL", "스터디 삭제는 리더만 가능합니다."), HttpStatus.OK);
             } else {
-                studyService.delete(id);
+                studyService.delete(studyId);
                 return new ResponseEntity<>(new CommonResponse("delete", "SUCCESS", "스터디가 삭제되었습니다."), HttpStatus.OK);
             }
         } catch (RuntimeException e) {
@@ -108,12 +111,12 @@ public class StudyController {
     }
 
     // 스터디 상세 조회
-    @GetMapping("/{id}")
+    @GetMapping("/{studyId}")
     @ApiOperation(value = "스터디의 상세 정보를 가져온다.", response = CommonResponse.class)
-    public ResponseEntity<CommonResponse> details(@PathVariable Integer id, HttpServletRequest request) {
+    public ResponseEntity<CommonResponse> details(@PathVariable Integer studyId, HttpServletRequest request) {
         try {
             int loginUserId = jwtService.getLoginUserId(request);
-            StudyDTO studyDTO = studyService.getStudyDetail(id).toDTO();
+            StudyDTO studyDTO = studyService.getStudyDetail(studyId).toDTO();
             studyDTO.setJoinedMemberCount(studyMemberService.getjoinedMemeberCount(studyDTO.getId()));
 
             List<StudyMemberDTO> smList = studyDTO.getStudyMemberDTOList();
