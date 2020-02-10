@@ -2,7 +2,6 @@ package com.ssafy.sval.controller;
 
 import com.ssafy.sval.jwt.JwtService;
 import com.ssafy.sval.model.dto.UserDTO;
-import com.ssafy.sval.model.entity.User;
 import com.ssafy.sval.model.service.CommonService;
 import com.ssafy.sval.model.service.UserService;
 import com.ssafy.sval.responseType.CommonResponse;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.ws.Response;
 import java.util.Map;
 
 @RestController
@@ -40,9 +38,10 @@ public class CommonController {
                 "현재 서버 상태가 불안정하여 정상적인 서비스 이용이 불가합니다. 잠시 후 다시 시도해주세요."), HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping(value = "/")
     public ResponseEntity<CommonResponse> manufactureMain(HttpServletRequest request) {
         Map<String, Object> mainInfo = null;
+        log.info("request for main");
         try {
             int loginUserId = jwtService.getLoginUserId(request);
             if (loginUserId > 0) {

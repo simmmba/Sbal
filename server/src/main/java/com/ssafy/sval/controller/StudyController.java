@@ -3,9 +3,8 @@ package com.ssafy.sval.controller;
 import com.ssafy.sval.jwt.JwtService;
 import com.ssafy.sval.model.dto.StudyDTO;
 import com.ssafy.sval.model.dto.StudyMemberDTO;
+import com.ssafy.sval.model.dto.StudyScheduleDTO;
 import com.ssafy.sval.model.entity.Study;
-import com.ssafy.sval.model.entity.StudyMember;
-import com.ssafy.sval.model.entity.User;
 import com.ssafy.sval.model.service.StudyMemberService;
 import com.ssafy.sval.model.service.StudyService;
 import com.ssafy.sval.model.service.UserService;
@@ -95,7 +94,7 @@ public class StudyController {
     public ResponseEntity<Object> delete(@PathVariable Integer id, HttpServletRequest request) {
         try {
             int loginUserId = jwtService.getLoginUserId(request);
-            Study study = studyService.getStudyDetail(id);
+            Study study = studyService.getStudy(id);
             if(study.getLeader().getId()!=loginUserId) {
                 return new ResponseEntity<>(new CommonResponse("delete", "FAIL", "올바르지 않은 접근입니다."), HttpStatus.OK);
             } else {
@@ -116,17 +115,25 @@ public class StudyController {
             int loginUserId = jwtService.getLoginUserId(request);
             StudyDTO studyDTO = studyService.getStudyDetail(id).toDTO();
             studyDTO.setJoinedMemberCount(studyMemberService.getjoinedMemeberCount(studyDTO.getId()));
+
             List<StudyMemberDTO> smList = studyDTO.getStudyMemberDTOList();
             studyDTO.setStudyMemberDTOList(null);
+
+            List<StudyScheduleDTO> ssList = studyDTO.getStudyScheduleDTOList();
+            studyDTO.setStudyScheduleDTOList(null);
+
             for (StudyMemberDTO sm : smList) {
                 if(sm.getUser().getId()==loginUserId && sm.getState()==1) {
+                    studyDTO.setStudyScheduleDTOList(ssList);
                     if(loginUserId!=studyDTO.getLeader().getId())
                         for (int i=0; i<smList.size(); i++) if(smList.get(i).getState()!=1) smList.remove(i--);
                     studyDTO.setStudyMemberDTOList(smList);
                     break;
                 }
             }
+
             return new ResponseEntity<>(new CommonResponse(studyDTO, "details", "SUCCESS", "조회 성공"), HttpStatus.OK);
+
         } catch (RuntimeException e) {
             e.printStackTrace();
             throw new RuntimeException("details");

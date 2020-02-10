@@ -5,18 +5,18 @@ import com.ssafy.sval.model.dto.UserDTO;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity @Table(name = "STUDY_MEMBER")
 @IdClass(StudyMemberId.class)
 @NoArgsConstructor @AllArgsConstructor @Getter @Setter
 public class StudyMember {
-
-
     @Id @ManyToOne @JoinColumn(name="study_id")
     Study study;
-    @Id
-    @ManyToOne @JoinColumn(name = "user_id")
+
+    @Id @ManyToOne @JoinColumn(name = "user_id")
     User user;
+
     Integer state;
 
     public StudyMemberDTO toStudiesDTO() {
