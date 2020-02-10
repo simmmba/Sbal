@@ -27,19 +27,17 @@ import javax.servlet.http.HttpServletRequest;
 @Slf4j
 public class StudyScheduleAndAttendanceController {
     @Autowired
-    StudyScheduleService studyScheduleService;
-    @Autowired
     JwtService jwtService;
     @Autowired
     StudyService studyService;
     @Autowired
     AttendanceService attendanceService;
+    @Autowired
+    StudyScheduleService studyScheduleService;
 
     @ExceptionHandler
     @ApiOperation(value = "모든 INTERNAL SERVER ERROR 상태를 처리한다. message를 화면에 출력하고 작성한 ERROR PAGE로 이동시킨다.")
     public ResponseEntity<CommonResponse> errorHandler(Exception e) {
-        // Slack 으로 개발자에게 로그 보내는 기능 추가
-        // e.printStackTrace();
         return new ResponseEntity<>(new CommonResponse(e.getMessage(), "ERROR",
                 "현재 서버 상태가 불안정하여 정상적인 서비스 이용이 불가합니다. 잠시 후 다시 시도해주세요."), HttpStatus.OK);
     }
