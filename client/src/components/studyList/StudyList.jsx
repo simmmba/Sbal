@@ -7,12 +7,10 @@ import { NavLink, Link } from 'react-router-dom'
 
 const t = css`
   border-collapse: collapse;
-  /* border-top: 2px solid grey; */
-  /* border-bottom: 1px solid #ddd; */
 `
 
 const h = css`
-  padding: 10px;
+  padding: 12px;
   border-top: 2px solid grey;
   border-bottom: 2px solid #ddd;
   color: grey;
@@ -22,31 +20,27 @@ const d = css`
   padding: 5px;
   border-bottom: 2px solid #ddd;
   color: #5d5d5d;
+  font-size: 14px;
 `
 
 const choose = css`
-  /* display: flex; */
-  /* border: 1px solid yellow; */
-  /* padding: 0px 0px 3px 0px; */
   &:hover {
     background: rgb(236, 236, 236);
   }
 `
 
 const title = css`
-  /* padding: 5px; */
-  /* text-indent: 1em; */
   text-align: left;
   font-weight: bold;
-  padding: 5px;
+  padding: 8px;
   border-bottom: 2px solid #ddd;
-  color: #353535;
+  color: #5d5d5d;
+  font-size: 15px;
 `
 
 const upper = css`
   font-size: 15px;
   height: 40px;
-  /* background-color: rgb(236, 236, 236); */
 `
 
 const StudyList = () => {
@@ -97,7 +91,7 @@ const StudyList = () => {
               <Th width="10%" css={h}>
                 주제
               </Th>
-              <Th width="32%" css={h}>
+              <Th width="30%" css={h}>
                 스터디명
               </Th>
               <Th width="20%" css={h}>
@@ -115,7 +109,7 @@ const StudyList = () => {
               <Th width="5%" css={h}>
                 시간
               </Th>
-              <Th width="5%" css={h}>
+              <Th width="7%" css={h}>
                 인원
               </Th>
             </Tr>
@@ -129,7 +123,7 @@ const StudyList = () => {
                     <Td css={title}>
                       <NavLink
                         activeStyle={activeStyle}
-                        to={`study/${list.id}`}
+                        to={`study/details/${list.id}`}
                         active
                       >
                         {list.title}

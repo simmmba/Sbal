@@ -70,7 +70,7 @@ const NavBar = () => {
             </h3>
           </Logo>
           <StyledLink to="/register">스터디 개설</StyledLink>
-          <StyledLink to="/list">스터디 목록</StyledLink>
+          <StyledLink to="/study">스터디 목록</StyledLink>
           <StyledLink to="/register">나와 가까운 장소</StyledLink>
           {!UserStore.token ? (
             <div>

@@ -23,29 +23,34 @@ const listTitle = css`
 const FamousStudy = () => {
   const famousList = [
     {
-      lno: 1,
-      ltype: '면접',
-      lname: '요기요 2차 면접 스터디'
+      rank: 1,
+      id: 12,
+      type: '면접',
+      title: '요기요 2차 면접 스터디'
     },
     {
-      lno: 2,
-      ltype: '기업분석',
-      lname: '엔테크 인턴 스터디'
+      rank: 2,
+      id: 22,
+      type: '기업분석',
+      title: '엔테크 인턴 스터디'
     },
     {
-      lno: 3,
-      ltype: '면접',
-      lname: '삼성전자 DS 원데이'
+      rank: 3,
+      id: 32,
+      type: '면접',
+      title: '삼성전자 DS 원데이'
     },
     {
-      lno: 4,
-      ltype: '면접',
-      lname: 'SK C&C 임원 면접 대비'
+      rank: 4,
+      id: 42,
+      type: '면접',
+      title: 'SK C&C 임원 면접 대비'
     },
     {
-      lno: 5,
-      ltype: '어학',
-      lname: '오픽 스터디'
+      rank: 5,
+      id: 52,
+      type: '어학',
+      title: '오픽 스터디'
     }
   ]
 
