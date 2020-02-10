@@ -32,7 +32,6 @@ public class SnsValue implements SnsUrls {
         this.api20 = api20;
     }
 
-
     public String getService() {
         return service;
     }
