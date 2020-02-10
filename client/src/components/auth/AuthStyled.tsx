@@ -45,14 +45,14 @@ export const StyledLabel = styled.label`
   display: block;
   margin-top: 5px;
 `
-export const StyledInput = styled.input`
+export const StyledInput = styled.input<{width?:number | undefined}>`
   font-size: 1rem;
   border: none;
   border-bottom: 1px solid ${palette.yellow[7]};
   margin: 5px 0px 8px 0px;
   padding: 0.5rem;
   outline: none;
-  width: 90%;
+  width: ${props => props.width?props.width:90}%;
   &:focus {
     color: oc-teal-7;
     border-bottom: 1px solid ${palette.yellow[7]};
@@ -149,7 +149,7 @@ export const NaverIcon = () => {
   )
 }
 
-export const StyledButton = styled.button<{width?:number | undefined}>`
+export const StyledButton = styled.button<{width?:number | undefined; marginTop?:number|undefined; marginLeft?:number|undefined;}>`
   width: ${props => props.width?props.width:100}%;
   outline: none;
   border: none;
@@ -157,11 +157,12 @@ export const StyledButton = styled.button<{width?:number | undefined}>`
   font-size: 0.9rem;
   font-weight: bold;
   padding: 0.5rem 1rem;
-  margin-top: 15px;
+  margin-top: ${props => props.marginTop?props.marginTop:0}px;
+  margin-left: ${props => props.marginLeft?props.marginLeft:0}%;
   color: white;
   outline: none;
   cursor: pointer;
-
+  
   background: ${palette.yellow[7]};
   &:hover {
     background: ${palette.yellow[3]};

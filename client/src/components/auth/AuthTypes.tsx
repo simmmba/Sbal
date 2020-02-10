@@ -1,3 +1,5 @@
+import {observable} from "mobx";
+
 export type AuthTemplateProps = {
   children: React.ReactNode
 }
@@ -8,9 +10,16 @@ export type AuthFormProps = {
 
 export type SignupState = {
   email: string
+  emailState: boolean
+  isCheckedEmail: boolean
+  emailDupMessage: string
   nickname: string
+  nicknameState: boolean
+  isCheckedNickname: boolean
+  nicknameDupMessage: string
   password: string
   password2: string
+  isEqualPassword: boolean
   phoneNumber: string
   introduction: string
   city: string
@@ -22,9 +31,11 @@ export type SignupState = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   onChangeTextarea: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
   onChangeSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void
+  onChangePassword: () => boolean
   [key: string]:
     | string
     | number
+    | boolean
     | Interest[]
     | ((e: React.ChangeEvent<HTMLInputElement>) => void)
     | ((e: React.ChangeEvent<HTMLTextAreaElement>) => void)
