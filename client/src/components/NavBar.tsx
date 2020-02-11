@@ -2,6 +2,7 @@ import React, { useCallback } from 'react'
 import styled from '@emotion/styled'
 import Button from './common/Button'
 import { Link, NavLink } from 'react-router-dom'
+import { useObserver } from 'mobx-react'
 import UserStore from '../stores/UserStore'
 
 const Spacer = styled.div`
@@ -60,7 +61,7 @@ const NavBar = () => {
     UserStore.logout()
   }, [])
 
-  return (
+  return useObserver(() => (
     <>
       <NavFixBlock>
         <Navbar>
@@ -89,7 +90,7 @@ const NavBar = () => {
       </NavFixBlock>
       <Spacer />
     </>
-  )
+  ))
 }
 
 export default NavBar
