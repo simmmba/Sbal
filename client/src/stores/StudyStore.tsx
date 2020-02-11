@@ -13,7 +13,6 @@ const StudyStore = observable({
     try {
       const res = await studyAPI.getMainStudyList()
 
-      console.log(res)
       if (res.data.value.loginUser) {
         const {
           loginUser: { joinedStudyList }

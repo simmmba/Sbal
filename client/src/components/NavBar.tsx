@@ -22,6 +22,7 @@ const NavFixBlock = styled.div`
   position: fixed;
   background: white;
   width: 100%;
+  z-index: 10;
 
   top: 0;
   left: 0;
@@ -70,7 +71,7 @@ const NavBar = () => {
               스<small>터디의</small> 발<small>견</small>
             </h3>
           </Logo>
-          <StyledLink to="/register">스터디 개설</StyledLink>
+          <StyledLink to="/study/create">스터디 개설</StyledLink>
           <StyledLink to="/study">스터디 목록</StyledLink>
           <StyledLink to="/register">나와 가까운 장소</StyledLink>
           {!UserStore.token ? (

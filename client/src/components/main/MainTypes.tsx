@@ -4,7 +4,7 @@ export type Study = {
   id: number
   title: string
   contents?: string
-  leader: Leader
+  leader?: Leader
   city: string
   town: string
   state: 0

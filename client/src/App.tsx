@@ -8,6 +8,7 @@ import SignupPage from './pages/SignupPage'
 import StudyListPage from './pages/StudyListPage'
 import StudyPage from './pages/StudyPage'
 import StudyDetailPage from './pages/StudyDetailPage'
+import CreatePage from './pages/CreatePage'
 
 import './App.css'
 
@@ -24,6 +25,7 @@ const App: React.FC = () => {
         {/* 스터디 리스트 페이지 */}
         <Route path="/study" component={StudyListPage} exact></Route>
         {/* 참여한 스터디 페이지 */}
+        <Route path="/study/create" component={CreatePage} exact></Route>
         <Route path="/study/:id" component={StudyPage} exact></Route>
         {/* 스터디 상세정보 페이지 */}
         <Route path="/study/details/:id" component={StudyDetailPage}></Route>
