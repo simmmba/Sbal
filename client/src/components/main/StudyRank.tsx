@@ -50,7 +50,10 @@ const listType = css`
 `
 
 const listContainer = css`
-  vertical-align: middle;
+  display: flex;
+  flex-direction: table-column;
+  justify-content: flex-end;
+  /* vertical-align: middle; */
   /* border: 1px solid brown; */
   height: 0px;
 `
@@ -67,16 +70,16 @@ const StudyRank = ({ title, list }: StudyRankprops) => {
       <div css={listTitle}>{titleMap[title]}</div>
       {list.length > 0 ? (
         list.map((study: Study, index: number) => (
-          <NavLink to={`study/details/${study.id}`}>
+          <NavLink to={`study/details/${study.id}`} key={index}>
             <div css={listContent}>
               <div css={listRank}>
                 <p>{index + 1}</p>
               </div>
               <div css={listContainer}>
-                <p>
+                <div>
                   <div css={listName}>{study.title}</div>
                   <div css={listType}>{study.lcategory}</div>
-                </p>
+                </div>
               </div>
             </div>
           </NavLink>

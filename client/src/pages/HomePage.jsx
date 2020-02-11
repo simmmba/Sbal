@@ -10,7 +10,7 @@ const HomePage = () => {
   const history = useHistory()
   useEffect(() => {
     authCheck(history)
-  })
+  }, [])
   return (
     <>
       <Slider autoplay autoplaySpeed={3000}>
