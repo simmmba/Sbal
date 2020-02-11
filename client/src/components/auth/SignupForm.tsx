@@ -192,8 +192,9 @@ function SignupForm({type, location}: RouteComponentProps & AuthFormProps) {
                     />
                     <StyledButton width={30} marginLeft={5} onClick={() => {
                         if(state.email.length===0) {
-                            state.isCheckedEmail=true;
-                            state.emailDupMessage='이메일을 입력해주세요.';
+                            state.isCheckedEmail = true;
+                            state.emailState = false;
+                            state.emailDupMessage = '이메일을 입력해주세요.';
                             return;
                         }
                         const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
@@ -231,6 +232,7 @@ function SignupForm({type, location}: RouteComponentProps & AuthFormProps) {
                 <StyledButton width={30} marginLeft={5} onClick={() => {
                     if(state.nickname.length===0) {
                         state.isCheckedNickname=true;
+                        state.nicknameState = false;
                         state.nicknameDupMessage="닉네임을 입력해주세요."
                         return;
                     }
