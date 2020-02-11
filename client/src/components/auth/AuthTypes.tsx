@@ -1,3 +1,5 @@
+import { Study } from '../main/MainTypes'
+
 export type AuthTemplateProps = {
   children: React.ReactNode
 }
@@ -88,4 +90,34 @@ export type SignupData = {
   scategory: string
   gender: number
   interestList: Interest[]
+}
+
+export type Leader = {
+  id: number
+  email?: string
+  pw?: string
+  nickname: string
+  phoneNumber?: string
+  introduction?: string
+  city?: string
+  town?: string
+  gender?: number
+  interestList?: Interest[]
+  evaluation?: string
+  profilePhotoDir?: string
+  socialLogin?: string
+  interestDTOList?: Interest[]
+  ledStudyList?: Study[]
+  joinedStudyList?: Study[]
+}
+
+export type UserStoreType = {
+  isLoggingIn: boolean
+  token: string | null
+  data: null
+  signup: (data: SignupData) => void
+  login: (data: LoginData) => void
+  logout: () => void
+  edit: () => void
+  signout: () => void
 }
