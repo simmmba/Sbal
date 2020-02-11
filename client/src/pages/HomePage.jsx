@@ -16,61 +16,49 @@ const studyRank = css`
 
 const HomePage = () => {
   return (
-    <>
+    <div css={css``}>
       <Slider autoplay autoplaySpeed={3000}>
-        <div>
-          <center>
-            <img
-              src="images/1080_360_1.jpeg"
-              alt="img1"
-              style={{ width: '100%' }}
-            ></img>
-          </center>
+        <div style="text-align: center;">
+          <img
+            src="images/1080_360_1.jpeg"
+            alt="img1"
+            style={{ width: '100%' }}
+          />
         </div>
-        <div>
-          <center>
-            <img
-              src="images/1080_360_2.jpg"
-              alt="img2"
-              style={{ width: '100%' }}
-            ></img>
-          </center>
+        <div style="text-align: center;">
+          <img
+            src="images/1080_360_2.jpg"
+            alt="img2"
+            style={{ width: '100%' }}
+          />
         </div>
-        <div>
-          <center>
-            <img
-              src="images/1080_360_3.jpg"
-              alt="img3"
-              style={{ width: '100%' }}
-            ></img>
-          </center>
+        <div style="text-align: center;">
+          <img
+            src="images/1080_360_3.jpg"
+            alt="img3"
+            style={{ width: '100%' }}
+          />
         </div>
-        <div>
-          <center>
-            <img
-              src="images/1080_360_4.jpg"
-              alt="img4"
-              style={{ width: '100%' }}
-            ></img>
-          </center>
+        <div style="text-align: center;">
+          <img
+            src="images/1080_360_4.jpg"
+            alt="img4"
+            style={{ width: '100%' }}
+          />
         </div>
-        <div>
-          <center>
-            <img
-              src="images/1080_360_5.jpg"
-              alt="img5"
-              style={{ width: '100%' }}
-            ></img>
-          </center>
+        <div style="text-align: center;">
+          <img
+            src="images/1080_360_5.jpg"
+            alt="img5"
+            style={{ width: '100%' }}
+          />
         </div>
-        <div>
-          <center>
-            <img
-              src="images/1080_360_6.jpg"
-              alt="img6"
-              style={{ width: '100%' }}
-            ></img>
-          </center>
+        <div style="text-align: center;">
+          <img
+            src="images/1080_360_6.jpg"
+            alt="img6"
+            style={{ width: '100%' }}
+          />
         </div>
       </Slider>
 
@@ -79,7 +67,7 @@ const HomePage = () => {
         <RecentStudy />
         <FamousStudy />
       </div>
-    </>
+    </div>
   )
 }
 

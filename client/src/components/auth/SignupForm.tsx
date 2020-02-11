@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import {useLocalStore, useObserver} from 'mobx-react'
 import {css, jsx} from '@emotion/core'
+import UserStore from '../../stores/UserStore'
 import {
     AuthFormBlock,
     StyledInput,
@@ -51,14 +52,8 @@ function ListItem({
 }
 
 function SignupForm({type, location}: RouteComponentProps & AuthFormProps) {
-    const cityToTowns: CityAndTowns = {
-        서울시: ['강북구', '성북구'],
-        강원도: ['강릉시', '원주시']
-    }
-    const interests: Interests = {
-        어학: ['TOEIC', 'TOEIC SPEAKING'],
-        취업: ['면접', '인적성']
-    }
+    const cityToTowns: CityAndTowns = UserStore.cityAndTowns
+    const interests: Interests = UserStore.interests;
 
     const state:SignupState = useLocalStore(() => ({
         email: '',
