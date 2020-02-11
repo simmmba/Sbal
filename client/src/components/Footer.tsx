@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
 
 const Spacer = styled.div`
@@ -28,7 +28,7 @@ const Footer = () => {
         <div>
             <Spacer/>
             <WrapperDiv>
-                <small>Samsung Software Academy For Youth.<br/>멀티캠퍼스 서울 특별시 강남구 언주로 508(역삼동, 서울상록빌딩)</small><br/>
+                <small>Samsung Software Academy For Youth 2nd.<br/>멀티캠퍼스 서울 특별시 강남구 언주로 508(역삼동, 서울상록빌딩)</small><br/>
                 <NormalP><small>Copyright by 서울 A306 6:00NotFound Team. All rights reserved.</small></NormalP>
                 <small>
                     <StressedSpan>박준성</StressedSpan>
@@ -37,7 +37,7 @@ const Footer = () => {
                     <StressedSpan>조서원</StressedSpan>
                 </small>
                 <NormalP>
-                    <small>문의 사항 : 010-2990-5719<br/>평일 문의 가능 시간 : 09:00 ~ 18:00</small>
+                    <small>문의 사항 : 010-2990-5719<br/>평일 문의 가능 시간 : 09:00~18:00</small>
                 </NormalP>
             </WrapperDiv>
         </div>
