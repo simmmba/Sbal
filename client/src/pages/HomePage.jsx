@@ -3,15 +3,15 @@ import React, { useEffect } from 'react'
 import { jsx } from '@emotion/core'
 import MainStudylist from '../components/main/MainStudyList'
 import Slider from 'infinite-react-carousel'
-import authCheck from '../utils/authCheck'
-import { useHistory } from 'react-router'
+import { loadToken } from '../utils/authCheck'
+import { useObserver } from 'mobx-react'
 
 const HomePage = () => {
-  const history = useHistory()
   useEffect(() => {
-    authCheck(history)
+    loadToken()
   }, [])
-  return (
+
+  return useObserver(() => (
     <>
       <Slider autoplay autoplaySpeed={3000}>
         <div>
@@ -72,7 +72,7 @@ const HomePage = () => {
 
       <MainStudylist />
     </>
-  )
+  ))
 }
 
 export default HomePage

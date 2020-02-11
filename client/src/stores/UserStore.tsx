@@ -30,7 +30,6 @@ const UserStore = observable<UserStoreType>({
     this.isLoggingIn = true
     try {
       const res = await userAPI.login(data)
-      console.log(res)
       const token = res.headers['jwt-auth-token']
       sessionStorage.setItem('token', token)
       this.token = token
