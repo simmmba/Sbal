@@ -3,12 +3,17 @@ import StudyMember from './StudyMember'
 import StudyRequest from './StudyRequest'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
+// import styled from '@emotion/styled'
+import { Display } from '../Display'
+import { FaEye } from 'react-icons/fa'
+
+import { Descriptions } from 'antd'
 
 const StudyDetails = props => {
   const study = [
     {
       title: 'React 스터디',
-      contents: 'Front-end 구축 스터디',
+      contents: 'Front-end 구축 스터디입니다.',
       leader: 'seongho',
       lCategory: 'IT',
       sCategory: '프론트엔드',
@@ -25,40 +30,18 @@ const StudyDetails = props => {
       timeSlot: 0,
       evaluationLimit: 70,
       startDate: '2020-02-10',
-      endDate: '2020-03-01'
+      endDate: '2020-03-01',
+      openDate: '2020-02-01'
     }
   ]
-
-  const table = css`
-    border-collapse: collapse;
-    float: left;
-  `
-
-  const tr = css``
-
-  const td = css`
-    padding: 5px 15px 5px 15px;
-  `
-
-  const th = css`
-    text-align: right;
-    padding: 5px 15px 5px 15px;
-    width: 5em;
-    font-weight: bold;
-  `
-
-  const all = css`
-    width: 80%;
-    border: 1px solid black;
-    /* padding: 0px 10px 0px 10px; */
-  `
 
   const top = css`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     /* margin-left: 100px; */
+    /* width: 60%; */
   `
 
   const content = css`
@@ -68,151 +51,186 @@ const StudyDetails = props => {
     flex-wrap: wrap;
   `
 
+  const main = css`
+    /* font-weight: bold; */
+    /* font-size: 30px; */
+    /* border: 1px solid black; */
+    display: flex;
+  `
+
   const title = css`
+    /* width: 100%; */
     font-weight: bold;
     font-size: 30px;
-    border: 1px solid black;
+    color: #113000;
+    text-align: left;
+    /* border: 1px solid black; */
+    margin-left: 10px;
   `
 
   const hit = css`
-    border: 1px solid black;
+    background: #f6f6f6;
+    font-size: 14px;
+    border-radius: 100%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px solid black; */
     text-align: left;
+    font-size: 13px;
+    color: gray;
+    /* padding: 0 0 5px 5px; */
   `
 
   const btn = css`
-    border: 1px solid black;
-  `
-
-  const req = css`
-    border: 1px solid black;
-  `
-  const mem = css`
-    border: 1px solid black;
-  `
-
-  const left = css`
-    border: 1px solid black;
-    width: 450px;
-  `
-
-  const right = css`
+    color: #4c4c4c;
+    background: #e4f7ba;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 4px;
+    padding: 5px 15px 5px 15px;
+    margin: 0px 0px 0px 2px;
+    width: 100px;
+    height: 30px;
+    border: none;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    border: 1px solid black;
-    width: 300px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #cef279;
+    }
   `
+
+  const btnBox = css`
+    /* border: 1px solid black; */
+    /* width: 350px; */
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  `
+
+  const middle = css`
+    /* border: 1px solid black; */
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+  `
+
+  const bottom = css`
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-between;
+    flex-wrap: wrap;
+    /* border: 1px solid black; */
+    width: 100%;
+  `
+
+  const all = css``
 
   return (
     <center>
-      {/* <div css={all}>
-        {study.map(s => (
-          <div>
-            <br />
-            <br />
-     
-            <div css={top}>
+      <div css={all}>
+        <Display>
+          <center>
+            {study.map(s => (
               <div>
-                <div css={title}>{s.title}</div>
-                <div css={hit}>조회수: {s.hits}</div>
-              </div>
-              <div css={btn}>
-                <p>
-                  <button
-                    disabled={s.state === 0}
-                    onClick={() => alert('신청되었습니다.')}
-                  >
-                    {s.state === 0 ? '마감' : '신청'}
-                  </button>
-                </p>
-              </div>
-            </div>
-     
+                <br />
+                <br />
 
-            <br />
-            <div css={content}>
-              <div css={left}>
-                <table border="1" css={table}>
-                  <tr>
-                    <td css={th}>리더</td>
-                    <td>{s.leader}</td>
-                  </tr>
-                  <tr>
-                    <td css={th}>분야</td>
-                    <td>
-                      {s.lCategory} / {s.sCategory}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td css={th}>현재 인원</td>
-                    <td>
-                      {s.currentPeople} / {s.maxPeople}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td css={th}>방식</td>
-                    <td>{s.isOnline === 0 ? '오프라인' : '온라인'}</td>
-                  </tr>
-                  <tr>
-                    <td css={th}>지역</td>
-                    <td>
-                      {s.city} {s.town}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td css={th}>내용</td>
-                    <td>{s.contents}</td>
-                  </tr>
-                  <tr>
-                    <td css={th}>기간</td>
-                    <td>
-                      {s.startDate} ~ {s.endDate}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td css={th}>횟수</td>
-                    <td>
-                      {s.monthOrWeek === 1 ? '월' : '주'} {s.frequency}회
-                    </td>
-                  </tr>
-                  <tr>
-                    <td css={th}>요일</td>
-                    <td>
-                      {s.weekOrWeekend === 0
-                        ? '평일'
-                        : s.weekOrWeekend === 1
-                        ? '주말'
-                        : s.weekOrWeekend === 2
-                        ? '평일 & 주말'
-                        : '협의'}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td css={th}>시간</td>
-                    <td>
-                      {s.timeSlot === 0
-                        ? '오전'
-                        : s.timeSlot === 1
-                        ? '오후'
-                        : s.timeSlot === 2
-                        ? '저녁'
-                        : '협의'}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td css={th}>성실도</td>
-                    <td>{s.evaluationLimit} 이상</td>
-                  </tr>
-                </table>
+                <div css={top}>
+                  <div css={main}>
+                    <div css={hit}>
+                      <FaEye size="18" color="#747474" />
+                      {s.hits}
+                    </div>
+                    <div css={title}>{s.title}</div>
+                  </div>
+                  <div>
+                    <div css={btnBox}>
+                      <button
+                        css={btn}
+                        disabled={s.state === 0}
+                        onClick={() => alert('신청되었습니다.')}
+                      >
+                        {s.state === 0 ? '마감' : '신청'}
+                      </button>
+                      <button css={btn}>개설자버튼</button>
+                      <button css={btn}>탈퇴버튼</button>
+                    </div>
+                  </div>
+                </div>
+
+                <br />
+                <div css={content}>
+                  <div css={middle}>
+                    <Descriptions
+                      // title="Responsive Descriptions"
+                      bordered
+                      column={{ xxl: 4, xl: 4, lg: 3, md: 3, sm: 2, xs: 1 }}
+                    >
+                      <Descriptions.Item label="인원">
+                        {s.currentPeople} / {s.maxPeople}
+                      </Descriptions.Item>
+                      <Descriptions.Item label="리더">
+                        {s.leader}
+                      </Descriptions.Item>
+                      <Descriptions.Item label="분야">
+                        {s.lCategory} / {s.sCategory}
+                      </Descriptions.Item>
+                      <Descriptions.Item label="지역"></Descriptions.Item>
+                      <Descriptions.Item label="기간">
+                        {s.startDate} ~ {s.endDate}
+                      </Descriptions.Item>
+                      <Descriptions.Item label="장소">
+                        {s.isOnline === 0 ? s.city + ' ' + s.town : '온라인'}
+                      </Descriptions.Item>
+                      <Descriptions.Item label="횟수">
+                        {s.monthOrWeek === 1 ? '월' : '주'} {s.frequency}회
+                      </Descriptions.Item>
+                      <Descriptions.Item label="진행 시간">
+                        {s.weekOrWeekend === 0
+                          ? '평일'
+                          : s.weekOrWeekend === 1
+                          ? '주말'
+                          : s.weekOrWeekend === 2
+                          ? '평일 & 주말'
+                          : '협의'}
+                        ,{' '}
+                        {s.timeSlot === 0
+                          ? '오전'
+                          : s.timeSlot === 1
+                          ? '오후'
+                          : s.timeSlot === 2
+                          ? '저녁'
+                          : '협의'}
+                      </Descriptions.Item>
+                      <Descriptions.Item label="시간"></Descriptions.Item>
+                      <Descriptions.Item label="성실도">
+                        {s.evaluationLimit} 이상
+                      </Descriptions.Item>
+                      <Descriptions.Item label="내용">
+                        {s.contents}
+                      </Descriptions.Item>
+                    </Descriptions>
+                  </div>
+                  <div css={bottom}>
+                    <StudyMember />
+                    <StudyRequest />
+                  </div>
+                </div>
               </div>
-              <div css={right}>
-                <StudyRequest />
-                <StudyMember />
-              </div>
-            </div>
-          </div>
-        ))}
-      </div> */}
+            ))}
+          </center>
+        </Display>
+      </div>
     </center>
   )
 }

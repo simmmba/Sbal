@@ -6,7 +6,7 @@ import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
 import StudyListPage from './pages/StudyListPage'
-import StudyPage from './pages/StudyPage'
+import StudyGroupPage from './pages/StudyGroupPage'
 import StudyDetailPage from './pages/StudyDetailPage'
 import CreatePage from './pages/CreatePage'
 import MyInfoPage from './pages/MyInfoPage'
@@ -36,8 +36,10 @@ const App: React.FC = () => {
         <Route path="/study" component={StudyListPage} exact></Route>
         {/* 스터디 개설 페이지 */}
         <Route path="/study/create" component={CreatePage} exact></Route>
-        {/* 참여한 스터디 페이지 */}
-        <Route path="/study/:id" component={StudyPage} exact></Route>
+        {/* 참여한 스터디 페이지
+        <Route path="/study/:id" component={StudyPage} exact></Route> */}
+        {/* 스터디 그룹 페이지 */}
+        <Route path="/study/:id" component={StudyGroupPage} exact></Route>
         {/* 스터디 상세정보 페이지 */}
         <Route path="/study/details/:id" component={StudyDetailPage}></Route>
         {/* ??? */}
