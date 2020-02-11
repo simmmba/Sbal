@@ -88,11 +88,12 @@ export type LoginData = {
 }
 
 export type SignupData = {
+  id : string
   email: string
   nickname: string
   password: string
   password2: string
-  phoneNumber: string
+  phoneNum: string
   introduction: string
   city: string
   town: string

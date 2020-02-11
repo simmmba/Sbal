@@ -16,7 +16,7 @@ function LoginPage({ location }: RouteComponentProps) {
           css={css`
             height: 50px;
           `}
-        ></div>
+        />
         <Footer />
       </AuthTemplate>
     </div>

@@ -38,6 +38,15 @@ const UserStore = observable({
   logout() {
     sessionStorage.removeItem('token')
     this.token = null
+  },
+
+  async getMyInfoDetails() {
+    try {
+      const res = await userAPI.getMyInfoDetailsForModify();
+
+    } catch (e) {
+      alert('정보 조회에 실패했습니다.');
+    }
   }
 })
 

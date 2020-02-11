@@ -171,11 +171,10 @@ function SignupForm({type, location}: RouteComponentProps & AuthFormProps) {
     }
     return useObserver(() => (
         <AuthFormBlock>
-            {type === 'signup/oauth' ? (
-                <h3>최초 로그인을 위한 추가정보 입력</h3>
-            ) : (
-                <h3>회원가입 {state.isEqualPassword}</h3>
-            )}
+            {type === 'signup/oauth'?
+                (<h3>최초 로그인을 위한 추가정보 입력</h3>)
+                : type==='myInfo/update'?(<h3>회원 정보 수정</h3>)
+                    : (<h3>회원가입</h3>)}
             <Guide color="red">* 아래는 필수 입력사항입니다</Guide>
             <form onSubmit={handleSubmit}>
                 <div>
