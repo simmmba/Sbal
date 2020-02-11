@@ -35,31 +35,6 @@ const StudyDetails = props => {
     }
   ]
 
-  const table = css`
-    border-collapse: collapse;
-    float: left;
-    /* background-color: #f6f6f6; */
-  `
-
-  const tr = css``
-
-  const td = css`
-    padding-right: 5px;
-  `
-
-  const th = css`
-    text-align: right;
-    padding: 10px 15px 10px 10px;
-    width: 5em;
-    font-weight: bold;
-  `
-
-  const all = css`
-    /* width: 95%; */
-    /* border: 1px solid black; */
-    /* padding: 0px 10px 0px 10px; */
-  `
-
   const top = css`
     display: flex;
     flex-wrap: wrap;
@@ -109,13 +84,6 @@ const StudyDetails = props => {
     color: gray;
     /* padding: 0 0 5px 5px; */
   `
-  // const openDate = css`
-  //   /* border: 1px solid black; */
-  //   text-align: left;
-  //   font-size: 13px;
-  //   color: gray;
-  //   padding: 0 0 5px 5px;
-  // `
 
   const btn = css`
     color: #4c4c4c;
@@ -146,13 +114,6 @@ const StudyDetails = props => {
     margin-top: 20px;
   `
 
-  const req = css`
-    /* border: 1px solid black; */
-  `
-  const mem = css`
-    /* border: 1px solid black; */
-  `
-
   const middle = css`
     /* border: 1px solid black; */
     width: 100%;
@@ -172,146 +133,96 @@ const StudyDetails = props => {
     width: 100%;
   `
 
-  // const top_right = css`
-  //   display: flex;
-  //   justify-content: space-between;
-  // `
-
-  const list_left = css`
-    width: 100%;
-    border: 1px solid black;
-  `
-
-  const list_right = css`
-    width: 100%;
-    border: 1px solid black;
-  `
-
-  // const Dl = styled.dl`
-  //   width: 100%;
-  //   overflow: hidden;
-  //   /* background: #ff0; */
-  //   padding: 0;
-  //   margin: 0;
-  // `
-  // const Dt = styled.dt`
-  //   float: left;
-  //   width: 20%;
-  //   /* adjust the width; make sure the total of both is 100% */
-  //   background: #cc0;
-  //   padding: 0;
-  //   margin: 0;
-  // `
-  // const Dd = styled.dd`
-  //   float: left;
-  //   width: 70%;
-  //   /* adjust the width; make sure the total of both is 100% */
-  //   background: #dd0;
-  //   padding: 0;
-  //   margin: 0;
-  // `
-
   return (
     <Display>
       <center>
-        <div css={all}>
-          {study.map(s => (
-            <div>
-              <br />
-              <br />
-              {/* <center> */}
-              <div css={top}>
-                <div css={main}>
-                  <div css={hit}>
-                    <FaEye size="18" color="#747474" />
-                    {s.hits}
-                  </div>
-                  <div css={title}>{s.title}</div>
+        {study.map(s => (
+          <div>
+            <br />
+            <br />
+            <div css={top}>
+              <div css={main}>
+                <div css={hit}>
+                  <FaEye size="18" color="#747474" />
+                  {s.hits}
                 </div>
-                <div>
-                  {/* <div css={top_right}>
-                    <div css={openDate}>개설일: {s.openDate}</div>
-                  </div> */}
-                  <div css={btnBox}>
-                    {/* <p> */}
-                    <button
-                      css={btn}
-                      disabled={s.state === 0}
-                      onClick={() => alert('신청되었습니다.')}
-                    >
-                      {s.state === 0 ? '마감' : '신청'}
-                    </button>
-                    {/* </p> */}
-                    <button css={btn}>개설자버튼</button>
-                    <button css={btn}>탈퇴버튼</button>
-                  </div>
-                </div>
+                <div css={title}>{s.title}</div>
               </div>
-              {/* </center> */}
-
-              <br />
-              <div css={content}>
-                <div css={middle}>
-                  <Descriptions
-                    // title="Responsive Descriptions"
-                    bordered
-                    column={{ xxl: 4, xl: 4, lg: 3, md: 3, sm: 2, xs: 1 }}
+              <div>
+                <div css={btnBox}>
+                  <button
+                    css={btn}
+                    disabled={s.state === 0}
+                    onClick={() => alert('신청되었습니다.')}
                   >
-                    <Descriptions.Item label="인원">
-                      {s.currentPeople} / {s.maxPeople}
-                    </Descriptions.Item>
-                    <Descriptions.Item label="리더">
-                      {s.leader}
-                    </Descriptions.Item>
-                    <Descriptions.Item label="분야">
-                      {s.lCategory} / {s.sCategory}
-                    </Descriptions.Item>
-                    <Descriptions.Item label="방식">
-                      {s.isOnline === 0 ? '오프라인' : '온라인'}
-                    </Descriptions.Item>
-                    <Descriptions.Item label="지역">
-                      {s.city} {s.town}
-                    </Descriptions.Item>
-                    <Descriptions.Item label="기간">
-                      {s.startDate} ~ {s.endDate}
-                    </Descriptions.Item>
-                    <Descriptions.Item label="횟수">
-                      {s.monthOrWeek === 1 ? '월' : '주'} {s.frequency}회
-                    </Descriptions.Item>
-                    <Descriptions.Item label="요일">
-                      {s.weekOrWeekend === 0
-                        ? '평일'
-                        : s.weekOrWeekend === 1
-                        ? '주말'
-                        : s.weekOrWeekend === 2
-                        ? '평일 & 주말'
-                        : '협의'}
-                    </Descriptions.Item>
-                    <Descriptions.Item label="시간">
-                      {s.timeSlot === 0
-                        ? '오전'
-                        : s.timeSlot === 1
-                        ? '오후'
-                        : s.timeSlot === 2
-                        ? '저녁'
-                        : '협의'}
-                    </Descriptions.Item>
-                    <Descriptions.Item label="성실도">
-                      {s.evaluationLimit} 이상
-                    </Descriptions.Item>
-                    <Descriptions.Item label="내용">
-                      {s.contents}
-                    </Descriptions.Item>
-                  </Descriptions>
-                </div>
-                <div css={bottom}>
-                  <StudyMember />
-                  <StudyRequest />
+                    {s.state === 0 ? '마감' : '신청'}
+                  </button>
+                  <button css={btn}>개설자버튼</button>
+                  <button css={btn}>탈퇴버튼</button>
                 </div>
               </div>
             </div>
-          ))}
-        </div>
+
+            <br />
+            <div css={content}>
+              <div css={middle}>
+                <Descriptions
+                  // title="Responsive Descriptions"
+                  bordered
+                  column={{ xxl: 4, xl: 4, lg: 3, md: 3, sm: 2, xs: 1 }}
+                >
+                  <Descriptions.Item label="인원">
+                    {s.currentPeople} / {s.maxPeople}
+                  </Descriptions.Item>
+                  <Descriptions.Item label="리더">{s.leader}</Descriptions.Item>
+                  <Descriptions.Item label="분야">
+                    {s.lCategory} / {s.sCategory}
+                  </Descriptions.Item>
+                  <Descriptions.Item label="방식">
+                    {s.isOnline === 0 ? '오프라인' : '온라인'}
+                  </Descriptions.Item>
+                  <Descriptions.Item label="지역">
+                    {s.city} {s.town}
+                  </Descriptions.Item>
+                  <Descriptions.Item label="기간">
+                    {s.startDate} ~ {s.endDate}
+                  </Descriptions.Item>
+                  <Descriptions.Item label="횟수">
+                    {s.monthOrWeek === 1 ? '월' : '주'} {s.frequency}회
+                  </Descriptions.Item>
+                  <Descriptions.Item label="요일">
+                    {s.weekOrWeekend === 0
+                      ? '평일'
+                      : s.weekOrWeekend === 1
+                      ? '주말'
+                      : s.weekOrWeekend === 2
+                      ? '평일 & 주말'
+                      : '협의'}
+                  </Descriptions.Item>
+                  <Descriptions.Item label="시간">
+                    {s.timeSlot === 0
+                      ? '오전'
+                      : s.timeSlot === 1
+                      ? '오후'
+                      : s.timeSlot === 2
+                      ? '저녁'
+                      : '협의'}
+                  </Descriptions.Item>
+                  <Descriptions.Item label="성실도">
+                    {s.evaluationLimit} 이상
+                  </Descriptions.Item>
+                  <Descriptions.Item label="내용">
+                    {s.contents}
+                  </Descriptions.Item>
+                </Descriptions>
+              </div>
+              <div css={bottom}>
+                <StudyMember />
+                <StudyRequest />
+              </div>
+            </div>
+          </div>
+        ))}
       </center>
     </Display>
   )

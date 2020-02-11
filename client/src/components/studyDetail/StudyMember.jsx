@@ -49,7 +49,6 @@ const StudyMember = () => {
     color: #5d5d5d;
   `
 
-  const tr = css``
   const th = css`
     border-top: 4px solid #ddd;
     border-bottom: 2px solid #ddd;
@@ -57,6 +56,7 @@ const StudyMember = () => {
     padding: 7px;
     text-align: center;
   `
+
   const td = css`
     text-align: center;
     border-top: 2px solid #ddd;
@@ -64,6 +64,7 @@ const StudyMember = () => {
     color: #5d5d5d;
     padding: 5px;
   `
+
   const nickname = css`
     padding-left: 30px;
     border-top: 2px solid grey;

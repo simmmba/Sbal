@@ -81,7 +81,6 @@ const StudyRequest = () => {
     color: #5d5d5d;
   `
 
-  const tr = css``
   const th = css`
     border-top: 4px solid #ddd;
     border-bottom: 2px solid #ddd;
@@ -89,6 +88,7 @@ const StudyRequest = () => {
     padding: 7px;
     text-align: center;
   `
+
   const td = css`
     text-align: center;
     border-top: 2px solid #ddd;
