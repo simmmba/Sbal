@@ -94,6 +94,9 @@ function SignupForm({type, location}: RouteComponentProps & AuthFormProps) {
             if(e.target.name==="email") {
                 state.isCheckedEmail=false;
             }
+            if(e.target.name==="nickname") {
+                state.isCheckedNickname=false;
+            }
         },
         onChangeTextarea(e: React.ChangeEvent<HTMLTextAreaElement>) {
             state[e.target.name] = e.target.value
