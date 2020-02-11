@@ -13,7 +13,7 @@ const StudyDetails = props => {
   const study = [
     {
       title: 'React 스터디',
-      contents: 'Front-end 구축 스터디입니다. 많이 지원해주세요!',
+      contents: 'Front-end 구축 스터디입니다.',
       leader: 'seongho',
       lCategory: 'IT',
       sCategory: '프론트엔드',
@@ -178,19 +178,17 @@ const StudyDetails = props => {
                   <Descriptions.Item label="분야">
                     {s.lCategory} / {s.sCategory}
                   </Descriptions.Item>
-                  <Descriptions.Item label="방식">
-                    {s.isOnline === 0 ? '오프라인' : '온라인'}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="지역">
-                    {s.city} {s.town}
-                  </Descriptions.Item>
+                  {/* <Descriptions.Item label="지역"></Descriptions.Item> */}
                   <Descriptions.Item label="기간">
                     {s.startDate} ~ {s.endDate}
+                  </Descriptions.Item>
+                  <Descriptions.Item label="장소">
+                    {s.isOnline === 0 ? s.city + ' ' + s.town : '온라인'}
                   </Descriptions.Item>
                   <Descriptions.Item label="횟수">
                     {s.monthOrWeek === 1 ? '월' : '주'} {s.frequency}회
                   </Descriptions.Item>
-                  <Descriptions.Item label="요일">
+                  <Descriptions.Item label="진행 시간">
                     {s.weekOrWeekend === 0
                       ? '평일'
                       : s.weekOrWeekend === 1
@@ -198,8 +196,7 @@ const StudyDetails = props => {
                       : s.weekOrWeekend === 2
                       ? '평일 & 주말'
                       : '협의'}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="시간">
+                    ,{' '}
                     {s.timeSlot === 0
                       ? '오전'
                       : s.timeSlot === 1
@@ -208,6 +205,7 @@ const StudyDetails = props => {
                       ? '저녁'
                       : '협의'}
                   </Descriptions.Item>
+                  {/* <Descriptions.Item label="시간"></Descriptions.Item> */}
                   <Descriptions.Item label="성실도">
                     {s.evaluationLimit} 이상
                   </Descriptions.Item>
