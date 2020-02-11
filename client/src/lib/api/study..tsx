@@ -1,12 +1,5 @@
 import apiClient from './client'
-
-const setAuthToken = (AUTH_TOKEN: string | null) => {
-  if (AUTH_TOKEN) {
-    apiClient.defaults.headers.common['jwt-auth-token'] = AUTH_TOKEN
-  } else {
-    delete apiClient.defaults.headers.common['jwt-auth-token']
-  }
-}
+import setAuthToken from '../../utils/setAuthToken'
 
 export const getMainStudyList = () => {
   if (sessionStorage.token) {
@@ -26,4 +19,11 @@ export const getStudyDetail = () => {
     setAuthToken(localStorage.token)
   }
   return apiClient.get('/')
+}
+
+export const getStudyDetails = (studyId: number) => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token)
+  }
+  return apiClient.get('/study/' + studyId)
 }

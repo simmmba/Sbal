@@ -161,4 +161,21 @@ public class StudyController {
             throw new RuntimeException("getStudiesInRecruitment");
         }
     }
+
+    @GetMapping("/renew/{studyId}")
+    @ApiOperation(value = "등록된 스터디의 등록 시간을 현재로 갱신한다.", response = CommonResponse.class)
+    public ResponseEntity<CommonResponse> renewStudy(@PathVariable Integer studyId, HttpServletRequest request) {
+        try {
+            int loginUserId = jwtService.getLoginUserId(request);
+            Study study = studyService.findById(studyId);
+            if(study.getLeader().getId()!=loginUserId) {
+                return new ResponseEntity<>(new CommonResponse("renewStudy", "FAIL", "스터디 갱신은 리더만 가능합니다."), HttpStatus.OK);
+            } else {
+//                studyService.renew(studyId);
+                return new ResponseEntity<>(new CommonResponse("renewStudy", "SUCCESS", "스터디가 갱신되었습니다."), HttpStatus.OK);
+            }
+        } catch(RuntimeException e) {
+            throw new RuntimeException("renewStudy");
+        }
+    }
 }

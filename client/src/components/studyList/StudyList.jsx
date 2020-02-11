@@ -1,4 +1,5 @@
 /**@jsx jsx */
+import React from 'react'
 import { css, jsx } from '@emotion/core'
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
 import '../../css/SuperResponsiveTableStyle.css'

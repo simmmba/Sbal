@@ -9,7 +9,7 @@ import UserStore from '../stores/UserStore'
 
 import AuthTemplate from '../components/auth/AuthTemplate'
 import AuthForm from '../components/auth/AuthForm'
-import Footer from '../components/auth/Footer'
+import AuthFooter from '../components/auth/AuthFooter'
 
 function LoginPage({ location }: RouteComponentProps) {
   const history = useHistory()
@@ -33,7 +33,7 @@ function LoginPage({ location }: RouteComponentProps) {
                 height: 50px;
               `}
             ></div>
-            <Footer />)
+            <AuthFooter />)
           </div>
         )}
       </AuthTemplate>

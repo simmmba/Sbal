@@ -3,7 +3,7 @@ import { SocialButton, FbIcon, KakaoIcon, NaverIcon } from './AuthStyled'
 import dotenv from 'dotenv'
 dotenv.config()
 
-function Footer() {
+function AuthFooter() {
   const openWindow = (url: string) => {
     window.open(url, 'newwindow', 'width=490,height=560')
   }
@@ -47,4 +47,4 @@ function Footer() {
   )
 }
 
-export default Footer
+export default AuthFooter

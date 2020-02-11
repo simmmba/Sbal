@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { useLocalStore, useObserver } from 'mobx-react'
 import { css, jsx } from '@emotion/core'
+import UserStore from '../../stores/UserStore'
 import {
   AuthFormBlock,
   StyledInput,
@@ -23,7 +24,12 @@ import {
 } from './AuthTypes'
 import { RouteComponentProps, withRouter } from 'react-router'
 import qs from 'qs'
-import { getSocialData } from '../../lib/api/auth'
+import {
+  getSocialData,
+  validateEmail,
+  validateNickname
+} from '../../lib/api/auth'
+import apiClient from '../../lib/api/client'
 
 function ListItem({
   interest,
@@ -50,36 +56,91 @@ function ListItem({
 }
 
 function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
-  const cityToTowns: CityAndTowns = {
-    서울시: ['강북구', '성북구'],
-    강원도: ['강릉시', '원주시']
-  }
-  const interests: Interests = {
-    어학: ['TOEIC', 'TOEIC SPEAKING'],
-    취업: ['면접', '인적성']
-  }
+  const cityToTowns: CityAndTowns = UserStore.cityAndTowns
+  const interests: Interests = UserStore.interests
 
-  const state: SignupState = useLocalStore(() => ({
+  const state = useLocalStore<SignupState>(() => ({
     email: '',
+    emailState: false,
+    emailDupMessage: '',
+    isCheckedEmail: false,
     nickname: '',
+    nicknameState: false,
+    nicknameDupMessage: '',
+    isCheckedNickname: false,
     password: '',
     password2: '',
     phoneNumber: '',
     introduction: '',
+    isEqualPassword: false,
     city: Object.keys(cityToTowns)[0],
     town: cityToTowns[Object.keys(cityToTowns)[0]][0],
     gender: 0,
     lcategory: Object.keys(interests)[0],
     scategory: interests[Object.keys(interests)[0]][0],
     interestList: [],
+    equalsOfPasswords: '',
     onChange(e: React.ChangeEvent<HTMLInputElement>) {
       state[e.target.name] = e.target.value
+      if (e.target.name === 'password' || e.target.name === 'password2') {
+        state.isEqualPassword = this.password === this.password2
+        if (this.isEqualPassword) {
+          state.equalsOfPasswords = '비밀번호가 일치합니다.'
+        } else {
+          state.equalsOfPasswords = '비밀번호가 일치하지 않습니다.'
+        }
+      }
+      if (e.target.name === 'email') {
+        state.isCheckedEmail = false
+      }
+      if (e.target.name === 'nickname') {
+        state.isCheckedNickname = false
+      }
     },
     onChangeTextarea(e: React.ChangeEvent<HTMLTextAreaElement>) {
       state[e.target.name] = e.target.value
     },
     onChangeSelect(e: React.ChangeEvent<HTMLSelectElement>) {
       state[e.target.name] = e.target.value
+    },
+    async validateUserEmail() {
+      if (this.email.length === 0) {
+        this.isCheckedEmail = true
+        this.emailState = false
+        this.emailDupMessage = '이메일을 입력해주세요.'
+        return
+      }
+      const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i
+      if (this.email.match(regExp) == null) {
+        this.isCheckedEmail = true
+        this.emailState = false
+        this.emailDupMessage = `올바르지 않은 이메일 양식입니다. (abc@def.com)`
+        return
+      }
+      try {
+        const res = await validateEmail(state.email)
+        this.isCheckedEmail = true
+        this.emailState = res.data.state === 'SUCCESS' ? true : false
+        this.emailDupMessage = res.data.message
+      } catch (error) {
+        alert(error)
+      }
+    },
+    async validateUserNickname() {
+      if (this.nickname.length === 0) {
+        this.isCheckedNickname = true
+        this.nicknameState = false
+        this.nicknameDupMessage = '닉네임을 입력해주세요.'
+        return
+      }
+      try {
+        const res = await validateNickname(this.nickname)
+        this.isCheckedNickname = true
+        this.nicknameState = res.data.state === 'SUCCESS' ? true : false
+        this.nicknameDupMessage = res.data.message
+      } catch (error) {
+        alert(error)
+      }
     }
   }))
 
@@ -101,12 +162,6 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
     fetchSocialData()
   }
 
-  // const onChangeInterest = (e: React.ChangeEvent<HTMLSelectElement>) => {
-  //   e.persist()
-  //   if (e.target !== null) {
-
-  //   }
-  // }
   const appendInterest = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
@@ -150,22 +205,40 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
     <AuthFormBlock>
       {type === 'signup/oauth' ? (
         <h3>최초 로그인을 위한 추가정보 입력</h3>
+      ) : type === 'myInfo/update' ? (
+        <h3>회원 정보 수정</h3>
       ) : (
         <h3>회원가입</h3>
       )}
       <Guide color="red">* 아래는 필수 입력사항입니다</Guide>
       <form onSubmit={handleSubmit}>
-        <StyledLabel htmlFor="email">
-          <Guide color="red">* </Guide>이메일 아이디
-        </StyledLabel>
-        <StyledInput
-          placeholder="이메일 아이디를 입력하세요"
-          autoComplete="email"
-          name="email"
-          value={state.email}
-          type="email"
-          onChange={state.onChange}
-        />
+        <div>
+          <StyledLabel htmlFor="email">
+            <Guide color="red">* </Guide>이메일 아이디
+          </StyledLabel>
+          <StyledInput
+            placeholder="이메일 아이디를 입력하세요"
+            autoComplete="email"
+            name="email"
+            value={state.email}
+            onChange={state.onChange}
+            width={60}
+          />
+          <StyledButton
+            width={30}
+            marginLeft={5}
+            onClick={() => {
+              state.validateUserEmail()
+            }}
+          >
+            중복 확인
+          </StyledButton>
+          <div hidden={!state.isCheckedEmail}>
+            <Guide color={state.emailState ? 'green' : 'red'}>
+              {state.emailDupMessage}
+            </Guide>
+          </div>
+        </div>
         <StyledLabel htmlFor="nickname">
           <Guide color="red">* </Guide>닉네임
         </StyledLabel>
@@ -176,7 +249,22 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
           value={state.nickname}
           type="text"
           onChange={state.onChange}
+          width={60}
         />
+        <StyledButton
+          width={30}
+          marginLeft={5}
+          onClick={() => {
+            state.validateUserNickname()
+          }}
+        >
+          중복 확인
+        </StyledButton>
+        <div hidden={!state.isCheckedNickname}>
+          <Guide color={state.nicknameState ? 'green' : 'red'}>
+            {state.nicknameDupMessage}
+          </Guide>
+        </div>
         <StyledLabel htmlFor="password">
           <Guide color="red">* </Guide>비밀번호
         </StyledLabel>
@@ -199,6 +287,11 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
           type="password"
           onChange={state.onChange}
         />
+        <div>
+          <Guide color={state.isEqualPassword ? 'green' : 'red'}>
+            {state.equalsOfPasswords}
+          </Guide>
+        </div>
         <Guide marginTop="20px">* 아래는 추가 입력사항입니다</Guide>
         <StyledLabel htmlFor="email">연락처</StyledLabel>
         <StyledInput
@@ -297,7 +390,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
           </div>
           <PlusButton onClick={appendInterest} />
         </FlexBetween>
-        <StyledButton>가입</StyledButton>
+        <StyledButton marginTop={15}>가입</StyledButton>
       </form>
     </AuthFormBlock>
   ))
