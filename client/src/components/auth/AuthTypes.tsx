@@ -9,10 +9,10 @@ export type AuthFormProps = {
 }
 
 export type SignupState = {
-  email: string
-  nickname: string
-  password: string
-  password2: string
+  email      : string
+  nickname   : string
+  password   : string
+  password2  : string
   phoneNumber: string
   introduction: string
   city: string
@@ -21,9 +21,9 @@ export type SignupState = {
   scategory: string
   gender: number
   interestList: Interest[]
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChange:         (e: React.ChangeEvent<HTMLInputElement>) => void
   onChangeTextarea: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
-  onChangeSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void
+  onChangeSelect:   (e: React.ChangeEvent<HTMLSelectElement>) => void
   [key: string]:
     | string
     | number
@@ -61,13 +61,13 @@ export type Interest = {
 }
 
 export type ButtonProps = {
-  children?: React.ReactNode
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
+  children  ?  : React.ReactNode
+  onClick   ?  : (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 export type RadioProps = {
-  name: string
-  value: string
+  name    : string
+  value   : string
   children: React.ReactNode
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }

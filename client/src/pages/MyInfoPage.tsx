@@ -1,21 +1,19 @@
 import React, { useEffect } from 'react'
+import UserDetail from '../components/userDetail/UserDetailView'
 import { useHistory } from 'react-router'
-import { authCheck, loadToken } from '../utils/authCheck'
-import FilterForm from '../components/studyList/FilterForm'
+import { loadToken, authCheck } from '../utils/authCheck'
 
-const CreatePage = () => {
+const MyInfoPage = () => {
   const history = useHistory()
   useEffect(() => {
     loadToken()
     authCheck(history)
   }, [history])
-
   return (
     <>
-      11111
-      <FilterForm />
+      <UserDetail />
     </>
   )
 }
 
-export default CreatePage
+export default MyInfoPage

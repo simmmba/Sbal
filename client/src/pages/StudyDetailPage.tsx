@@ -8,7 +8,7 @@ const StudyDetailPage = () => {
   useEffect(() => {
     loadToken()
     authCheck(history)
-  }, [])
+  }, [history])
   return (
     <>
       <StudyDetails />

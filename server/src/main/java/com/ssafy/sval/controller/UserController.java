@@ -1,6 +1,7 @@
 package com.ssafy.sval.controller;
 
 import com.ssafy.sval.jwt.JwtService;
+import com.ssafy.sval.model.dto.SocialParam;
 import com.ssafy.sval.model.dto.UserDTO;
 import com.ssafy.sval.model.entity.User;
 import com.ssafy.sval.model.service.CommonService;
@@ -37,14 +38,13 @@ public class UserController {
     private UserProfileService profileService;
 
     private SnsValue naverSns = new SnsValue("naver", "ZaZ22Ro1uzKMK_w_pbkX", "QDpGVk3dcT", "http://70.12.247.32:8080/user/auth/naver/callback");
-    private SnsValue kakaoSns = new SnsValue("kakao", "65c8c65086b415b91d2decea051f2765", null, "http://70.12.247.32:8080/user/auth/kakao/callback");
+    private SnsValue kakaoSns = new SnsValue("kakao", "ce49043bfba892ce8fbe1dc2de3e6761", null, "http://70.12.247.80:3000/signup/oauth");
 
-
- /*   @ExceptionHandler
+    @ExceptionHandler
     @ApiOperation(value = "모든 INTERNAL SERVER ERROR 상태를 처리한다. message를 화면에 출력하고 작성한 ERROR PAGE로 이동시킨다.")
     public ResponseEntity<CommonResponse> errorHandler(RuntimeException e) {
         // Slack 으로 개발자에게 로그 보내는 기능 추가
-        // e.printStackTrace();
+        e.printStackTrace();
         return new ResponseEntity<>(new CommonResponse(e.getMessage(), "ERROR",
                 "현재 서버 상태가 불안정하여 정상적인 서비스 이용이 불가합니다. 잠시 후 다시 시도해주세요."), HttpStatus.OK);
     }
@@ -59,12 +59,13 @@ public class UserController {
     public ResponseEntity<CommonResponse> errorHandler(JwtException e) {
         return new ResponseEntity<>(new CommonResponse("JWT_FALSIFIED", "ERROR",
                 "변조된 인증 정보입니다. 다시 로그인 해주세요."), HttpStatus.OK);
-    }*/
+    }
 
     @PostMapping
     @ApiOperation(value = "회원가입을 처리하고 성공 시 res.data.state에 SUCCESS, 실패 시 FAIL, 에러 발생 시 ERROR를 리턴한다.", response = CommonResponse.class)
     public ResponseEntity<CommonResponse> signUp(@RequestBody UserDTO signUpUser, HttpServletResponse response) {
         try {
+            System.out.println(signUpUser.getSocialLogin());
             User user = userService.signUp(signUpUser.insertOrUpdateEntity(signUpUser.getPw()));
             if (user != null) {
                 response.setHeader("jwt-auth-token", jwtService.create(user.getId()));
@@ -80,14 +81,17 @@ public class UserController {
     @PostMapping("/signIn")
     @ApiOperation(value = "로그인 성공 시 main page를 구성할 데이터와 JWT 전송 실패 시 CommonResponse 확인", response = CommonResponse.class)
     public ResponseEntity<CommonResponse> signIn(@RequestBody UserDTO user, HttpServletResponse response) {
+        //System.out.println(user.getEmail());
         try {
+            //System.out.println(user.getEmail()+" "+user.getPw());
             User loginUser = userService.signIn(user.getEmail(), user.getPw());
             if (loginUser != null) {
                 response.setHeader("jwt-auth-token", jwtService.create(loginUser.getId()));
-                user = new UserDTO(user.getId(), user.getNickname());
+                user = new UserDTO(loginUser.getId(), loginUser.getNickname());
                 return new ResponseEntity<>(new CommonResponse(user,"signIn", "SUCCESS", "로그인에 성공했습니다."), HttpStatus.OK);
             } else return new ResponseEntity<>(new CommonResponse("signIn", "FAIL", "로그인 정보를 확인해주세요."), HttpStatus.OK);
         } catch (RuntimeException e) {
+            e.printStackTrace();
             throw new RuntimeException("signIn");
         }
     }
@@ -97,6 +101,8 @@ public class UserController {
     public ResponseEntity<CommonResponse> getMyInfo(HttpServletRequest request) {
         try {
             int loginUserId = jwtService.getLoginUserId(request);
+            System.out.println(loginUserId);
+            System.out.println(loginUserId);
             UserDTO loginUser = userService.findById(loginUserId).myPageDTO();
             loginUser = commonService.manufactureMyInfo(loginUser);
             return new ResponseEntity<>(new CommonResponse(loginUser, "getMyInfo", "SUCCESS", "조회 성공"), HttpStatus.OK);
@@ -178,8 +184,12 @@ public class UserController {
         return user;
     }
 
-    @RequestMapping(value = "/auth/{service}/callback", method = {RequestMethod.GET, RequestMethod.POST})
-    public ResponseEntity<CommonResponse> snsLoginCallBack(HttpServletResponse response, @PathVariable String service, @RequestParam String code) throws Exception {
+    @PostMapping(value ="/auth")
+    public ResponseEntity<CommonResponse> snsLoginCallBack(HttpServletResponse response, @RequestBody SocialParam param) throws Exception {
+        String code = param.getCode();
+        System.out.println(code);
+        String service = param.getService();
+
         SnsValue sns = null;
         SnsLogin sl = null;
         User user = null;
@@ -196,9 +206,15 @@ public class UserController {
         UserDTO userDTO = new UserDTO();
         if (userService.isExistSocialLogin(user.getSocialLogin())) {
             user = userService.findBySocialLogin(user.getSocialLogin());
-            userDTO.setEmail(user.getEmail());
-            userDTO.setPw(user.getPw());
-            return signIn(userDTO, response);
+            try{
+                response.setHeader("jwt-auth-token", jwtService.create(user.getId()));
+                userDTO.setId(user.getId());
+                userDTO.setNickname(user.getNickname());
+                return new ResponseEntity<>(new CommonResponse(userDTO, "signIn", "SUCCESS", "회원 가입에 성공했습니다."), HttpStatus.OK);
+            } catch (RuntimeException e) {
+                e.printStackTrace();
+                throw new RuntimeException("signIn");
+            }
         } else {
             userDTO.setEmail(user.getEmail());
             userDTO.setNickname(user.getNickname());

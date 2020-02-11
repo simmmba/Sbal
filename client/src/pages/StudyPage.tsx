@@ -7,7 +7,7 @@ const StudyPage = () => {
   useEffect(() => {
     loadToken()
     authCheck(history)
-  }, [])
+  }, [history])
   return <></>
 }
 

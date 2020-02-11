@@ -31,7 +31,7 @@ public class UserService {
         user.setPw(passwordEncoder.encode(user.getPw()));
         user.setEvaluation(100.0);
         user.setProfilePhotoDir("/profile_images/default.jpg");
-        user.setSocialLogin(null);
+        //user.setSocialLogin(null);
         user = uRepo.save(user);
 
         if(userInterestList!=null) {
@@ -60,6 +60,7 @@ public class UserService {
         if (passwordEncoder.matches(pw, user.getPw())) return user;
         return null;
     }
+
 
     @Transactional
     public User update(User user) {

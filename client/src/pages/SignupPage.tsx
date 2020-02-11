@@ -9,7 +9,7 @@ function RegisterPage({ location }: RouteComponentProps) {
   const history = useHistory()
   useEffect(() => {
     loggedIn(history)
-  }, [])
+  }, [history])
 
   const path = location.pathname.substring(1)
 

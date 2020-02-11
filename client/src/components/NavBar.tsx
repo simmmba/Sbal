@@ -83,7 +83,7 @@ const NavBar = () => {
             </div>
           ) : (
             <div>
-              <StyledLinkPhone to="/signup">내 정보</StyledLinkPhone>
+              <StyledLinkPhone to="/mypage" >내 정보</StyledLinkPhone>
               <StyledButton onClick={logout}>로그아웃</StyledButton>
             </div>
           )}

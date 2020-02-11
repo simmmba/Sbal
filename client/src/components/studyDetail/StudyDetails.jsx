@@ -105,12 +105,12 @@ const StudyDetails = props => {
 
   return (
     <center>
-      <div css={all}>
+      {/* <div css={all}>
         {study.map(s => (
           <div>
             <br />
             <br />
-            {/* <center> */}
+     
             <div css={top}>
               <div>
                 <div css={title}>{s.title}</div>
@@ -127,7 +127,7 @@ const StudyDetails = props => {
                 </p>
               </div>
             </div>
-            {/* </center> */}
+     
 
             <br />
             <div css={content}>
@@ -212,7 +212,7 @@ const StudyDetails = props => {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
     </center>
   )
 }
