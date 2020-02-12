@@ -31,6 +31,33 @@ const StudyGroupMain = () => {
           멤버 정보
         </Menu.Item>
       </Menu>
+
+      <Menu
+        onClick={this.handleClick}
+        style={{ width: 256 }}
+        defaultSelectedKeys={['1']}
+        defaultOpenKeys={['sub1']}
+        mode="inline"
+      >
+        <SubMenu
+          key="sub1"
+          title={
+            <span>
+              <Icon type="mail" />
+              <span>Navigation One</span>
+            </span>
+          }
+        ></SubMenu>
+        <SubMenu
+          key="sub2"
+          title={
+            <span>
+              <Icon type="appstore" />
+              <span>Navigation Two</span>
+            </span>
+          }
+        ></SubMenu>
+      </Menu>
     </Display>
   )
 }
