@@ -12,6 +12,7 @@ const StudyStore = observable({
   async fetchMainStudyList() {
     try {
       const res = await studyAPI.getMainStudyList()
+      console.log(res)
 
       if (res.data.value.loginUser) {
         const {

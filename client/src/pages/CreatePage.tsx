@@ -12,7 +12,6 @@ const CreatePage = () => {
 
   return (
     <>
-      11111
       <FilterForm />
     </>
   )

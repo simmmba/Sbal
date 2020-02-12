@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { useLocalStore, useObserver } from 'mobx-react'
 import { css, jsx } from '@emotion/core'
-import UserStore from '../../stores/UserStore'
+import { cityAndTowns, interests } from '../../stores/UserStore'
 import {
   AuthFormBlock,
   StyledInput,
@@ -29,7 +29,6 @@ import {
   validateEmail,
   validateNickname
 } from '../../lib/api/auth'
-import apiClient from '../../lib/api/client'
 
 function ListItem({
   interest,
@@ -56,9 +55,6 @@ function ListItem({
 }
 
 function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
-  const cityToTowns: CityAndTowns = UserStore.cityAndTowns
-  const interests: Interests = UserStore.interests
-
   const state = useLocalStore<SignupState>(() => ({
     email: '',
     emailState: false,
@@ -73,8 +69,8 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
     phoneNumber: '',
     introduction: '',
     isEqualPassword: false,
-    city: Object.keys(cityToTowns)[0],
-    town: cityToTowns[Object.keys(cityToTowns)[0]][0],
+    city: Object.keys(cityAndTowns)[0],
+    town: cityAndTowns[Object.keys(cityAndTowns)[0]][0],
     gender: 0,
     lcategory: Object.keys(interests)[0],
     scategory: interests[Object.keys(interests)[0]][0],
@@ -336,7 +332,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
               onChange={state.onChangeSelect}
               value={state.city}
             >
-              {Object.keys(cityToTowns).map((city: string, index: number) => {
+              {Object.keys(cityAndTowns).map((city: string, index: number) => {
                 return <option key={index}>{city}</option>
               })}
             </StyledSelect>
@@ -345,7 +341,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
               onChange={state.onChangeSelect}
               value={state.town}
             >
-              {cityToTowns[state.city].map((town: string, index: number) => {
+              {cityAndTowns[state.city].map((town: string, index: number) => {
                 return <option key={index}>{town}</option>
               })}
             </StyledSelect>
