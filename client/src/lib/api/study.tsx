@@ -21,3 +21,7 @@ export const getStudyDetails = (studyId : number) => {
   }
   return apiClient.get('/study/' + studyId)
 }
+
+export const getStudyList = () => {
+  return apiClient.get('/study/list');
+}
