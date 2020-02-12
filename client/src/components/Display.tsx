@@ -6,6 +6,7 @@ import styled from '@emotion/styled'
 export const Display = styled.div`
   width: 65%;
   /* display: inline-block; */
+  /* border: 1px solid black; */
   margin: 0 auto;
 
   @media screen and (max-width: 500px) {
