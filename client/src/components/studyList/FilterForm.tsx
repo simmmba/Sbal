@@ -11,7 +11,8 @@ import {
   Button,
   Icon,
   Select,
-  Slider
+  Slider,
+  DatePicker
 } from 'antd'
 import { cityAndTowns, interests } from '../../stores/UserStore'
 import { FormComponentProps } from 'antd/lib/form/Form'
@@ -19,21 +20,40 @@ import { FormComponentProps } from 'antd/lib/form/Form'
 function FilterForm({ form }: FormComponentProps) {
   const { Option } = Select
   const { getFieldDecorator } = form
+  const { RangePicker } = DatePicker
 
   const state = useLocalStore(() => ({
+    title: '',
     lCategory: '',
     sCategort: '',
     city: '서울',
     town: '',
-    maxParticipants: 0
+    maxParticipants: 0,
+    contents: '',
+    frequency: 0,
+    monthOrWeek: 0,
+    weekdayOrWeekend: 0,
+    startDate: '',
+    endDate: '',
+    enrollDate: '',
+    evaluationLimit: '',
+    idOnline: '',
+    timeslot: 0
   }))
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    form.validateFieldsAndScroll((error, values) => {
+      console.log(values)
+    })
+  }
 
   const isOnline = [
     { value: 1, label: '온라인' },
     { value: 0, label: '오프라인' }
   ]
   const monthorWeek = [
-    { value: 1, label: '' },
+    { value: 1, label: '추후 협의' },
     { value: 2, label: '오프라인' },
     { value: 0, label: '온라인' }
   ]
@@ -57,22 +77,37 @@ function FilterForm({ form }: FormComponentProps) {
       css={css`
         background-color: yellow;
       `}
+      onSubmit={handleSubmit}
     >
       <Col>
         <Row>
+          <Form.Item label={'스터디 이름'}>
+            {getFieldDecorator('title', {
+              rules: [
+                {
+                  required: true,
+                  message: '스터디 이름을 입력해주세요!'
+                }
+              ]
+            })(<Input />)}
+          </Form.Item>
+        </Row>
+        <Row>
           <Form.Item label={'분야'}>
-            <Radio.Group defaultValue={interests['어학']} buttonStyle="solid">
-              {Object.keys(interests).map((lc: string, index: number) => (
-                <Radio.Button value={lc} key={index}>
-                  {lc}
-                </Radio.Button>
-              ))}
-            </Radio.Group>
+            {getFieldDecorator('lcategory')(
+              <Radio.Group defaultValue={interests['어학']} buttonStyle="solid">
+                {Object.keys(interests).map((lc: string, index: number) => (
+                  <Radio.Button value={lc} key={index}>
+                    {lc}
+                  </Radio.Button>
+                ))}
+              </Radio.Group>
+            )}
           </Form.Item>
         </Row>
         <Form.Item label={'방식'}>
           {' '}
-          <Radio.Group defaultValue={interests['어학']} buttonStyle="solid">
+          <Radio.Group defaultValue={0} buttonStyle="solid">
             {isOnline.map(
               (iO: { value: number; label: string }, index: number) => (
                 <Radio.Button value={iO.value} key={index}>
@@ -83,11 +118,16 @@ function FilterForm({ form }: FormComponentProps) {
           </Radio.Group>
         </Form.Item>
         <Form.Item label="인원수">
-          {getFieldDecorator('slider')(
+          {getFieldDecorator('maxParticipants')(
             <Slider marks={sliderMarks} min={1} max={30} />
           )}
         </Form.Item>
-        <Form.Item label={'기간'}></Form.Item>
+        <Form.Item label={'시작일'}>
+          {getFieldDecorator('startDate')(<DatePicker />)}
+        </Form.Item>
+        <Form.Item label={'완료일'}>
+          {getFieldDecorator('endDate')(<DatePicker />)}
+        </Form.Item>
         <Form.Item label={'횟수'}></Form.Item>
 
         <Form.Item label={'요일'}></Form.Item>
@@ -126,6 +166,9 @@ function FilterForm({ form }: FormComponentProps) {
         </Form.Item>
 
         <Form.Item label={'성실도'}></Form.Item>
+        <Button type="primary" htmlType="submit">
+          스터디 생성
+        </Button>
       </Col>
     </Form>
   ))
