@@ -21,17 +21,16 @@ const HomePage = () => {
   ]
   return useObserver(() => (
     <div>
-      <Carousel autoplay autoplaySpeed={3000}>
+      <Carousel autoplay={true} autoplaySpeed={2000}>
         {images.map((imageURL: string, index: number) => (
-          <div>
+          <div key={index}>
             <img
               src={imageURL}
               alt={`people studying ${index}`}
-              key={index}
               css={css`
                 width: 100%;
               `}
-            ></img>
+            />
           </div>
         ))}
       </Carousel>

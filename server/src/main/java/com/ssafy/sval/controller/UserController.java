@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin({"*"})
+@CrossOrigin(value = {"*"})
 @Slf4j
 public class UserController {
 

@@ -8,12 +8,6 @@ export const getMainStudyList = () => {
   return apiClient.get('/')
 }
 
-export const getStudyList = () => {
-  if (localStorage.token) {
-    setAuthToken(localStorage.token)
-  }
-  return apiClient.get('/')
-}
 export const getStudyDetail = () => {
   if (localStorage.token) {
     setAuthToken(localStorage.token)
@@ -26,4 +20,8 @@ export const getStudyDetails = (studyId: number) => {
     setAuthToken(localStorage.token)
   }
   return apiClient.get('/study/' + studyId)
+}
+
+export const getStudyList = () => {
+  return apiClient.get('/study/list');
 }

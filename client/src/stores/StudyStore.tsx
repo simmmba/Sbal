@@ -1,5 +1,5 @@
 import { observable } from 'mobx'
-import * as studyAPI from '../lib/api/study.'
+import * as studyAPI from '../lib/api/study'
 
 const StudyStore = observable({
   recentStudy: [],
@@ -29,8 +29,17 @@ const StudyStore = observable({
     }
   },
 
-  fetchStudyList() {},
+  async getStudyList() {
+    await studyAPI.getStudyList().then(res => {
+        this.studyList = res.data.value;
+        // console.log(this.studyList);
+    }).catch(e => {
+        alert(e);
+    })
+},
+
   fetchStudyDetail() {}
+
 })
 
 export default StudyStore

@@ -44,43 +44,43 @@ const upper = css`
 `
 
 const StudyList = () => {
-  const studyList = [
-    {
-      id: 1,
-      state: 0,
-      title: '백엔드 구축 스터디',
-      startDate: '2020-01-02',
-      endDate: '2020-01-31',
-      currentMember: 0,
-      maxMember: 5,
-      city: '서울시',
-      town: '강남구',
-      category: 'IT',
-      frequency: 2,
-      time: '오전',
-      isOnline: true
-    },
-    {
-      id: 2,
-      state: 0,
-      title: 'GSAT 인적성',
-      startDate: '2020-02-02',
-      endDate: '2020-02-15',
-      currentMember: 2,
-      maxMember: 4,
-      city: '서울시',
-      town: '용산구',
-      category: '취업',
-      frequency: 3,
-      time: '오후',
-      isOnline: false
-    }
-  ]
+    const studyList = [
+        {
+            id: 1,
+            state: 0,
+            title: '백엔드 구축 스터디',
+            startDate: '2020-01-02',
+            endDate: '2020-01-31',
+            currentMember: 0,
+            maxMember: 5,
+            city: '서울시',
+            town: '강남구',
+            category: 'IT',
+            frequency: 2,
+            time: '오전',
+            isOnline: true
+        },
+        {
+            id: 2,
+            state: 0,
+            title: 'GSAT 인적성',
+            startDate: '2020-02-02',
+            endDate: '2020-02-15',
+            currentMember: 2,
+            maxMember: 4,
+            city: '서울시',
+            town: '용산구',
+            category: '취업',
+            frequency: 3,
+            time: '오후',
+            isOnline: false
+        }
+    ]
 
-  const activeStyle = {
-    color: 'red',
-    background: 'black'
-  }
+    const activeStyle = {
+        color: 'red',
+        background: 'black'
+    }
 
   return (
     <div>
