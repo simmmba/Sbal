@@ -21,7 +21,6 @@ import java.util.List;
 @Entity
 @Table(name = "STUDY")
 public class Study {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
