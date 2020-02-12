@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
-import StudyDetails from '../components/studyDetail/StudyDetails'
+import UserDetail from '../components/userDetail/UserDetailView'
 import { useHistory } from 'react-router'
 import { loadToken, authCheck } from '../utils/authCheck'
 
-const StudyDetailPage = () => {
+const MyInfoPage = () => {
   const history = useHistory()
   useEffect(() => {
     loadToken()
@@ -11,9 +11,9 @@ const StudyDetailPage = () => {
   }, [history])
   return (
     <>
-      <StudyDetails />
+      <UserDetail />
     </>
   )
 }
 
-export default StudyDetailPage
+export default MyInfoPage

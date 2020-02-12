@@ -29,6 +29,7 @@ function AuthForm({ type, history }: RouteComponentProps & AuthFormProps) {
   const state: LoginState = useLocalStore(() => ({
     email: '',
     password: '',
+
     onChange(e: React.ChangeEvent<HTMLInputElement>) {
       state[e.target.name] = e.target.value
     }
@@ -48,6 +49,7 @@ function AuthForm({ type, history }: RouteComponentProps & AuthFormProps) {
     }
     UserStore.login(dataToSend)
     e.preventDefault()
+    history.push('/mypage')
   }, [])
 
   const headerText = textMapForHeader[type]
@@ -64,7 +66,7 @@ function AuthForm({ type, history }: RouteComponentProps & AuthFormProps) {
             autoComplete="email"
             name="email"
             value={state.email}
-            type="email"
+            //type="email"
             onChange={state.onChange}
           />
           <StyledLabel htmlFor="password">비밀번호</StyledLabel>
@@ -103,7 +105,7 @@ function AuthForm({ type, history }: RouteComponentProps & AuthFormProps) {
         </form>
       )}
       {type === 'signup' && (
-        <StyledButton onClick={onClickToSignupForm}>{footerText}</StyledButton>
+        <StyledButton marginTop={15} onClick={onClickToSignupForm}>{footerText}</StyledButton>
       )}
     </AuthFormBlock>
   ))

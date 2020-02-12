@@ -133,96 +133,105 @@ const StudyDetails = props => {
     width: 100%;
   `
 
-  return (
-    <Display>
-      <center>
-        {study.map(s => (
-          <div>
-            <br />
-            <br />
-            <div css={top}>
-              <div css={main}>
-                <div css={hit}>
-                  <FaEye size="18" color="#747474" />
-                  {s.hits}
-                </div>
-                <div css={title}>{s.title}</div>
-              </div>
-              <div>
-                <div css={btnBox}>
-                  <button
-                    css={btn}
-                    disabled={s.state === 0}
-                    onClick={() => alert('신청되었습니다.')}
-                  >
-                    {s.state === 0 ? '마감' : '신청'}
-                  </button>
-                  <button css={btn}>개설자버튼</button>
-                  <button css={btn}>탈퇴버튼</button>
-                </div>
-              </div>
-            </div>
+  const all = css``
 
-            <br />
-            <div css={content}>
-              <div css={middle}>
-                <Descriptions
-                  // title="Responsive Descriptions"
-                  bordered
-                  column={{ xxl: 4, xl: 4, lg: 3, md: 3, sm: 2, xs: 1 }}
-                >
-                  <Descriptions.Item label="인원">
-                    {s.currentPeople} / {s.maxPeople}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="리더">{s.leader}</Descriptions.Item>
-                  <Descriptions.Item label="분야">
-                    {s.lCategory} / {s.sCategory}
-                  </Descriptions.Item>
-                  {/* <Descriptions.Item label="지역"></Descriptions.Item> */}
-                  <Descriptions.Item label="기간">
-                    {s.startDate} ~ {s.endDate}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="장소">
-                    {s.isOnline === 0 ? s.city + ' ' + s.town : '온라인'}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="횟수">
-                    {s.monthOrWeek === 1 ? '월' : '주'} {s.frequency}회
-                  </Descriptions.Item>
-                  <Descriptions.Item label="진행 시간">
-                    {s.weekOrWeekend === 0
-                      ? '평일'
-                      : s.weekOrWeekend === 1
-                      ? '주말'
-                      : s.weekOrWeekend === 2
-                      ? '평일 & 주말'
-                      : '협의'}
-                    ,{' '}
-                    {s.timeSlot === 0
-                      ? '오전'
-                      : s.timeSlot === 1
-                      ? '오후'
-                      : s.timeSlot === 2
-                      ? '저녁'
-                      : '협의'}
-                  </Descriptions.Item>
-                  {/* <Descriptions.Item label="시간"></Descriptions.Item> */}
-                  <Descriptions.Item label="성실도">
-                    {s.evaluationLimit} 이상
-                  </Descriptions.Item>
-                  <Descriptions.Item label="내용">
-                    {s.contents}
-                  </Descriptions.Item>
-                </Descriptions>
+  return (
+    <center>
+      <div css={all}>
+        <Display>
+          <center>
+            {study.map(s => (
+              <div>
+                <br />
+                <br />
+
+                <div css={top}>
+                  <div css={main}>
+                    <div css={hit}>
+                      <FaEye size="18" color="#747474" />
+                      {s.hits}
+                    </div>
+                    <div css={title}>{s.title}</div>
+                  </div>
+                  <div>
+                    <div css={btnBox}>
+                      <button
+                        css={btn}
+                        disabled={s.state === 0}
+                        onClick={() => alert('신청되었습니다.')}
+                      >
+                        {s.state === 0 ? '마감' : '신청'}
+                      </button>
+                      <button css={btn}>개설자버튼</button>
+                      <button css={btn}>탈퇴버튼</button>
+                    </div>
+                  </div>
+                </div>
+
+                <br />
+                <div css={content}>
+                  <div css={middle}>
+                    <Descriptions
+                      // title="Responsive Descriptions"
+                      bordered
+                      column={{ xxl: 4, xl: 4, lg: 3, md: 3, sm: 2, xs: 1 }}
+                    >
+                      <Descriptions.Item label="인원">
+                        {s.currentPeople} / {s.maxPeople}
+                      </Descriptions.Item>
+                      <Descriptions.Item label="리더">
+                        {s.leader}
+                      </Descriptions.Item>
+                      <Descriptions.Item label="분야">
+                        {s.lCategory} / {s.sCategory}
+                      </Descriptions.Item>
+                      <Descriptions.Item label="지역"></Descriptions.Item>
+                      <Descriptions.Item label="기간">
+                        {s.startDate} ~ {s.endDate}
+                      </Descriptions.Item>
+                      <Descriptions.Item label="장소">
+                        {s.isOnline === 0 ? s.city + ' ' + s.town : '온라인'}
+                      </Descriptions.Item>
+                      <Descriptions.Item label="횟수">
+                        {s.monthOrWeek === 1 ? '월' : '주'} {s.frequency}회
+                      </Descriptions.Item>
+                      <Descriptions.Item label="진행 시간">
+                        {s.weekOrWeekend === 0
+                          ? '평일'
+                          : s.weekOrWeekend === 1
+                          ? '주말'
+                          : s.weekOrWeekend === 2
+                          ? '평일 & 주말'
+                          : '협의'}
+                        ,{' '}
+                        {s.timeSlot === 0
+                          ? '오전'
+                          : s.timeSlot === 1
+                          ? '오후'
+                          : s.timeSlot === 2
+                          ? '저녁'
+                          : '협의'}
+                      </Descriptions.Item>
+                      <Descriptions.Item label="시간"></Descriptions.Item>
+                      <Descriptions.Item label="성실도">
+                        {s.evaluationLimit} 이상
+                      </Descriptions.Item>
+                      <Descriptions.Item label="내용">
+                        {s.contents}
+                      </Descriptions.Item>
+                    </Descriptions>
+                  </div>
+                  <div css={bottom}>
+                    <StudyMember />
+                    <StudyRequest />
+                  </div>
+                </div>
               </div>
-              <div css={bottom}>
-                <StudyMember />
-                <StudyRequest />
-              </div>
-            </div>
-          </div>
-        ))}
-      </center>
-    </Display>
+            ))}
+          </center>
+        </Display>
+      </div>
+    </center>
   )
 }
 

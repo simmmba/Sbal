@@ -46,6 +46,8 @@ build/
 # production
 /client/build
 
+/node-modules/
+
 # misc
 .DS_Store
 .env.local
