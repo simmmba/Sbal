@@ -1,5 +1,8 @@
 import { observable } from 'mobx'
 import * as studyAPI from '../lib/api/study.'
+import { Study } from '../components/main/MainTypes'
+import * as H from 'history'
+import { message } from 'antd'
 
 const StudyStore = observable({
   recentStudy: [],
@@ -12,7 +15,6 @@ const StudyStore = observable({
   async fetchMainStudyList() {
     try {
       const res = await studyAPI.getMainStudyList()
-      console.log(res)
 
       if (res.data.value.loginUser) {
         const {
@@ -31,7 +33,17 @@ const StudyStore = observable({
   },
 
   fetchStudyList() {},
-  fetchStudyDetail() {}
+  fetchStudyDetail() {},
+
+  async createStudy(studyData: Study, history: H.History) {
+    try {
+      const res = await studyAPI.createStudy(studyData)
+      console.log(res)
+      // history.push('/study')
+    } catch (error) {
+      message.error(error)
+    }
+  }
 })
 
 export default StudyStore

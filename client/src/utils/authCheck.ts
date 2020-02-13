@@ -10,9 +10,9 @@ export const authCheck = (history: any) => {
 }
 
 export const loggedIn = (history: any) => {
-  if (!sessionStorage.token) {
-    history.push('/login')
-  }
+  // if (!sessionStorage.token) {
+  //   history.push('/login')
+  // }
   if (UserStore.token) {
     history.push('/')
   }

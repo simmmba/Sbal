@@ -1,27 +1,27 @@
 import { Leader } from '../auth/AuthTypes'
 
 export type Study = {
-  id: number
+  id?: number
   title: string
   contents?: string
   leader?: Leader
   city: string
   town: string
-  state: 0
+  state?: 0
   maxParticipants: number
-  hits: number
+  hits?: number
   isOnline: boolean
-  monthOrWeek: null
-  frequency: null
-  weekdayOrWeekend: null
-  timeslot: null
-  evaluationLimit: null
-  enrollDate: string
+  monthOrWeek: number
+  frequency: number
+  weekdayOrWeekend: number
+  timeslot: number
+  evaluationLimit: number
+  enrollDate?: string
   startDate: string
   endDate: string
-  joinedMemberCount: number
-  studyMemberDTOList: null
-  studyScheduleDTOList: null
+  joinedMemberCount?: number
+  studyMemberDTOList?: null
+  studyScheduleDTOList?: null
   scategory: string
   lcategory: string
 }
