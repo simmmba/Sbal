@@ -402,6 +402,7 @@ const UserStore = observable<UserStoreType>({
       sessionStorage.setItem('token', token)
       this.token = token
       this.isLoggingIn = false;
+      alert("회원 정보가 수정되었습니다.")
     } catch (e) {
       alert('정보 수정 실패');
       this.isLoggingIn = false;

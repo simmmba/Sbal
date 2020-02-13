@@ -1,3 +1,4 @@
+import React from 'react'
 /** @jsx jsx */
 import {useLocalStore, useObserver} from 'mobx-react'
 import {css, jsx} from '@emotion/core'
@@ -262,8 +263,9 @@ function SignupForm({type, location}: RouteComponentProps & AuthFormProps) {
                     <StyledButton
                         width={30}
                         marginLeft={5}
-                        onClick={() => {
+                        onClick={(e) => {
                             state.validateUserEmail()
+                            e.preventDefault();
                         }}
                     >
                         중복 확인
@@ -289,8 +291,9 @@ function SignupForm({type, location}: RouteComponentProps & AuthFormProps) {
                 <StyledButton
                     width={30}
                     marginLeft={5}
-                    onClick={() => {
+                    onClick={(e) => {
                         state.validateUserNickname()
+                        e.preventDefault();
                     }}
                 >
                     중복 확인
