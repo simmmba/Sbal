@@ -74,6 +74,10 @@ public class UserService {
         return uRepo.findById(id).get();
     }
 
+    public User findByNickname(String nickname) {
+        return uRepo.findUserByNickname(nickname);
+    }
+
     public User findBySocialLogin(String socialLogin){
         return uRepo.findUserBySocialLogin(socialLogin); }
 
