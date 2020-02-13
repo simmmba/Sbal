@@ -2,9 +2,8 @@ import React from 'react'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
 import { Icon } from 'antd'
-import { NavLink } from 'react-router-dom'
 
-const StudyGroupBoard = () => {
+const StudyGroupBoardDetail = () => {
   const board = [
     {
       id: 1,
@@ -13,78 +12,15 @@ const StudyGroupBoard = () => {
       hits: 15,
       date: '2020-02-01',
       comment: 2
-    },
+    }
+  ]
+
+  const reply = [
     {
       id: 1,
-      title: '공지사항 테스트2',
-      writer: 'jspark',
-      hits: 15,
-      date: '2020-02-01',
-      comment: 0
-    },
-    {
-      id: 1,
-      title: '공지사항 테스트3',
-      writer: 'jspark',
-      hits: 15,
-      date: '2020-02-01',
-      comment: 2
-    },
-    {
-      id: 1,
-      title: '공지사항 테스트4',
-      writer: 'jspark',
-      hits: 15,
-      date: '2020-02-01',
-      comment: 2
-    },
-    {
-      id: 1,
-      title: '공지사항 테스트5',
-      writer: 'jspark',
-      hits: 15,
-      date: '2020-02-01',
-      comment: 2
-    },
-    {
-      id: 1,
-      title: '공지사항 테스트6',
-      writer: 'jspark',
-      hits: 15,
-      date: '2020-02-01',
-      comment: 2
-    },
-    {
-      id: 1,
-      title: '공지사항 테스트7',
-      writer: 'jspark',
-      hits: 15,
-      date: '2020-02-01',
-      comment: 2
-    },
-    {
-      id: 1,
-      title: '공지사항 테스트8',
-      writer: 'jspark',
-      hits: 15,
-      date: '2020-02-01',
-      comment: 2
-    },
-    {
-      id: 1,
-      title: '공지사항 테스트9',
-      writer: 'jspark',
-      hits: 15,
-      date: '2020-02-01',
-      comment: 2
-    },
-    {
-      id: 1,
-      title: '공지사항 테스트10',
-      writer: 'jspark',
-      hits: 15,
-      date: '2020-02-01',
-      comment: 2
+      content: '',
+      writer: '',
+      date: ''
     }
   ]
 
@@ -115,19 +51,6 @@ const StudyGroupBoard = () => {
     background: #f4fcff;
     border-radius: 10px;
     margin-bottom: 2px;
-
-    &:hover {
-      background-color: #e6f7ff;
-    }
-  `
-
-  const num = css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 20px 10px 20px;
-    border-right: 2px dashed #fff;
-    width: 50px;
   `
 
   const btitle = css`
@@ -189,21 +112,10 @@ const StudyGroupBoard = () => {
     border-radius: 7px;
     width: 100px;
     height: 30px;
-
-    &:hover {
-      background-color: #b2ccff;
-    }
   `
 
   const link = css`
     color: #353535;
-  `
-
-  const comment = css`
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    color: #ff5e00;
   `
 
   return (
@@ -217,30 +129,12 @@ const StudyGroupBoard = () => {
             theme="twoTone"
             twoToneColor="navy"
           />
-          &nbsp;스터디 게시판
+          &nbsp;게시글 읽기
         </div>
-        <button css={btn}>
-          글쓰기&nbsp;&nbsp;
-          <Icon
-            css={icon}
-            type="edit"
-            style={{ fontSize: 20 }}
-            theme="twoTone"
-            twoToneColor="navy"
-          />
-        </button>
       </div>
-      {board.reverse().map((b, index) => (
+      {board.map(b => (
         <div css={content}>
-          <div css={num}>{board.length - index}</div>
-          <div css={btitle}>
-            <NavLink css={link} to={`board/${index + 1}`}>
-              {b.title}
-            </NavLink>
-            {b.comment > 0 && (
-              <div css={comment}>&nbsp;&nbsp;&nbsp;[ {b.comment} ]</div>
-            )}
-          </div>
+          <div css={btitle}>{b.title}</div>
           <div css={writer}>{b.writer}</div>
           <div css={date}>{b.date}</div>
           <div css={hit}>{b.hits}</div>
@@ -250,4 +144,4 @@ const StudyGroupBoard = () => {
   )
 }
 
-export default StudyGroupBoard
+export default StudyGroupBoardDetail

@@ -26,9 +26,9 @@ const style = css`
   max-height: 40px;
   margin: 13px 0 15px 0;
 
-  background: ${palette.yellow[1]};
+  background: ${palette.teal[1]};
   &:hover {
-    background: ${palette.yellow[1]};
+    background: ${palette.teal[2]};
   }
 `
 

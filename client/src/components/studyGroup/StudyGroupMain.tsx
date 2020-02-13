@@ -3,6 +3,7 @@ import { Display } from '../Display'
 import { Menu, Icon } from 'antd'
 import { NavLink, Route, Switch } from 'react-router-dom'
 import StudyGroupBoard from './StudyGroupBoard'
+import StudyGroupBoardDetail from './StudyGroupBoardDetail'
 import StudyGroupMember from './StudyGroupMember'
 import StudyGroupSchedule from './StudyGroupSchedule'
 /**@jsx jsx */
@@ -16,12 +17,19 @@ const StudyGroupMain = () => {
     }
   ]
 
+  const bid = 1
+
   const title = css`
-    padding: 15px 10px 15px 23px;
+    padding: 15px 10px 10px 23px;
     /* border: 1px solid black; */
     font-size: 30px;
     font-weight: bold;
-    color: #0061b9;
+    /* color: #0061b9; */
+    color: navy;
+
+    &:hover {
+      color: navy;
+    }
   `
 
   // const title = css`
@@ -41,12 +49,18 @@ const StudyGroupMain = () => {
   const top = css`
     display: flex;
     align-items: center;
+    justify-content: center;
   `
 
   const content = css`
-    border: 1px solid black;
+    /* border: 1px solid black; */
     width: 100%;
-    margin-left: 10px;
+    margin-left: 25px;
+    min-height: 360px;
+  `
+
+  const menu = css`
+    margin-top: 50px;
   `
 
   return (
@@ -54,10 +68,12 @@ const StudyGroupMain = () => {
       {study.map(s => (
         <div>
           <div css={top}>
-            <div css={title}>{s.name}</div>
+            <NavLink css={title} to={`/study/${s.id}`}>
+              {s.name}
+            </NavLink>
           </div>
           <div css={total}>
-            <div>
+            <div css={menu}>
               <Menu
                 style={{ width: 145 }}
                 // defaultSelectedKeys={['schedule']}
@@ -126,6 +142,11 @@ const StudyGroupMain = () => {
                 <Route
                   path={`/study/${s.id}/board`}
                   component={StudyGroupBoard}
+                  exact
+                />
+                <Route
+                  path={`/study/${s.id}/board/${bid}`}
+                  component={StudyGroupBoardDetail}
                 />
               </Switch>
             </div>
