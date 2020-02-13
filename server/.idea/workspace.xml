@@ -1,25 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="703f5862-ffa2-4945-9468-12af9d573c3c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../client/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/auth/AuthForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/auth/AuthForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/auth/AuthTypes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/auth/AuthTypes.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/auth/SignupForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/auth/SignupForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/studyList/StudyList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/studyList/StudyList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/studyList/StudyListComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/studyList/StudyListComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/studyList/StudyStyled.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/studyList/StudyStyled.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/studyList/StudyTypes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/studyList/StudyTypes.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/userDetail/UserDetailView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/userDetail/UserDetailView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/lib/api/auth.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/lib/api/auth.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/lib/api/client.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/lib/api/client.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/LoginPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/LoginPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/SignupPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/SignupPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/StudyListPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/StudyListPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/stores/StudyStore.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/stores/StudyStore.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/stores/UserDetailStore.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/stores/UserDetailStore.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/stores/UserStore.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/stores/UserStore.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="703f5862-ffa2-4945-9468-12af9d573c3c" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -106,7 +88,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../client" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -181,12 +163,12 @@
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="root:AWS" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@79b368fb" type="9fbbdea:ServiceModel$ServiceNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@24512785" type="9fbbdea:ServiceModel$ServiceNode" />
               </path>
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="root:AWS" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@4398b802" type="9fbbdea:ServiceModel$ServiceNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@98472ee" type="9fbbdea:ServiceModel$ServiceNode" />
               </path>
             </expand>
             <select />
@@ -242,6 +224,7 @@
       <workItem from="1581405508047" duration="931000" />
       <workItem from="1581323006288" duration="880000" />
       <workItem from="1581552499357" duration="3702000" />
+      <workItem from="1581576495204" duration="1605000" />
     </task>
     <servers />
   </component>
