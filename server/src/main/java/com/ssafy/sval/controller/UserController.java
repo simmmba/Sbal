@@ -129,7 +129,15 @@ public class UserController {
     public ResponseEntity<CommonResponse> update(@RequestBody UserDTO user, HttpServletRequest request, HttpServletResponse response) {
         try {
             int loginUserId = jwtService.getLoginUserId(request);
-            User updatedUser = userService.update(user.insertOrUpdateEntity(userService.findById(loginUserId).getPw()));
+            User origin = userService.findById(loginUserId);
+
+            user.setId(origin.getId());
+            user.setGender(origin.getGender());
+            user.setEvaluation(origin.getEvaluation());
+            user.setSocialLogin(origin.getSocialLogin());
+            user.setProfilePhotoDir(origin.getProfilePhotoDir());
+
+            User updatedUser = userService.update(user.insertOrUpdateEntity(origin.getPw()));
             response.setHeader("jwt-auth-token", jwtService.create(updatedUser.getId()));
             return new ResponseEntity<>(new CommonResponse("update", "SUCCESS", "정보 수정이 완료되었습니다."), HttpStatus.OK);
         } catch (RuntimeException e) {
