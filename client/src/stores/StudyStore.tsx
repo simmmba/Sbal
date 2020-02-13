@@ -39,11 +39,13 @@ const StudyStore = observable({
     try {
       const res = await studyAPI.createStudy(studyData)
       console.log(res)
-      // history.push('/study')
+      history.push('/study')
     } catch (error) {
       message.error(error)
     }
-  }
+  },
+
+  async UpdateStudy() {}
 })
 
 export default StudyStore

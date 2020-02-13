@@ -64,7 +64,6 @@ function FilterForm({ form }: FormComponentProps) {
         }
 
         StudyStore.createStudy(dataToSend, history)
-        console.log(dataToSend)
       } else {
         message.error('스터디 정보를 확인해주세요')
       }
