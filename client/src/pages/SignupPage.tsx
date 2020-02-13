@@ -7,9 +7,9 @@ import { loggedIn } from '../utils/authCheck'
 
 function RegisterPage({ location }: RouteComponentProps) {
   const history = useHistory()
-  useEffect(() => {
-    loggedIn(history)
-  }, [history])
+  // useEffect(() => {
+  //   loggedIn(history)
+  // }, [history])
 
   const path = location.pathname.substring(1)
 

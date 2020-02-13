@@ -35,7 +35,6 @@ export type SignupState = {
   onChangeSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void
   validateUserEmail: () => void
   validateUserNickname: () => void
-  // onChangePassword: () => void
   [key: string]:
     | string
     | number
@@ -106,6 +105,16 @@ export type SignupData = {
   interestList: Interest[]
 }
 
+export type UpdateData = {
+  email: string,
+  nickname: string,
+  phoneNum: string,
+  introduction: string,
+  city: string,
+  town: string,
+  interestDTOList: Interest[]
+}
+
 export type Leader = {
   id: number
   email?: string
@@ -134,7 +143,7 @@ export type UserStoreType = {
   signup: (data: SignupData) => void
   login: (data: LoginData) => void
   logout: () => void
-  edit: () => void
+  edit: (data: UpdateData) => void
   signout: () => void
   getMyInfoDetails: () => void
 }

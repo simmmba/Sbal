@@ -2,10 +2,8 @@ import { observable } from 'mobx'
 import * as userDetail from '../lib/api/userDetail'
 import {UserDetailStoreType, UserInfoType} from '../components/userDetail/UserDetailTypes'
 
-
 const UserDetailStore : UserDetailStoreType = observable(  {
-    // isLoggingIn : false, 
-    
+    // isLoggingIn : false,
     data: {
         id : 0,
         email : '',
@@ -21,8 +19,8 @@ const UserDetailStore : UserDetailStoreType = observable(  {
          ledStudyList : [],
          joinedStudyList : []
     }, 
-    //{id, pw, email, phoneNum, nickname, gender, introduction, 
-    //city, town, evaluation, profilePhotoDir, socialLogin, interestDTOList, ledStudyList, joinedStudyList}
+    // {id, pw, email, phoneNum, nickname, gender, introduction,
+    // city, town, evaluation, profilePhotoDir, socialLogin, interestDTOList, ledStudyList, joinedStudyList}
 
     async mypage(){
         

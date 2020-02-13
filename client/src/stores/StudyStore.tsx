@@ -25,14 +25,13 @@ const StudyStore = observable({
       this.recentStudy = recentlyEnrolled
       this.famousStudy = mostHits
     } catch (error) {
-      alert('데이터를 로드하는 중 요류가 발생했습니다')
+      alert('데이터를 로드하는 중 오류가 발생했습니다')
     }
   },
 
-  async getStudyList() {
-    await studyAPI.getStudyList().then(res => {
+  getStudyList() {
+    studyAPI.getStudyList().then(res => {
         this.studyList = res.data.value;
-        // console.log(this.studyList);
     }).catch(e => {
         alert(e);
     })

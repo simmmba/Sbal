@@ -1,6 +1,6 @@
 import setAuthToken from '../../utils/setAuthToken'
 import apiClient from './client'
-import { LoginData, SignupData } from '../../components/auth/AuthTypes'
+import {LoginData, SignupData, UpdateData} from '../../components/auth/AuthTypes'
 
 export const login = (loginData: LoginData) => {
   if (localStorage.token) {
@@ -36,4 +36,11 @@ export const getMyInfoDetailsForModify = () => {
     setAuthToken(localStorage.token)
   }
   return apiClient.get('/user/modifyProfile')
+}
+
+export const update = (updateUser: UpdateData) => {
+  if(localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
+  return apiClient.put('/user', updateUser);
 }

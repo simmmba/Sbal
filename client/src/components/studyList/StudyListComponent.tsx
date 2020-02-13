@@ -2,10 +2,10 @@ import React from 'react';
 import {Study} from './StudyTypes'
 import {WrapperDiv} from "./StudyStyled";
 
-function studyListComponent(studyFromParent: Study, index: number) {
+function studyListComponent({study}: {study: Study}) {
     return (
         <WrapperDiv>
-            <div>{studyFromParent.id}</div>
+            <div>{study.id}</div>
         </WrapperDiv>
     )
 }
