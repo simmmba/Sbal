@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import styled from '@emotion/styled'
 import { useHistory } from 'react-router'
 import { authCheck, loadToken } from '../utils/authCheck'
-import FilterForm from '../components/studyList/FilterForm'
+import CreateForm from '../components/studyList/CreateForm'
 
 const StyledContainer = styled.div`
   background: black;
@@ -22,7 +22,7 @@ const CreatePage = () => {
   return (
     <>
       <StyledContainer>
-        <FilterForm />
+        <CreateForm />
       </StyledContainer>
     </>
   )
