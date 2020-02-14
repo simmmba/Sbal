@@ -1,23 +1,12 @@
 import React from 'react'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
+import {studyMember} from '../studyDetail/StudyDetailTypes'
+import StudyDetailStore from '../../stores/StudyDetailStore'
+import {useObserver} from 'mobx-react'
 
 const StudyRequest = () => {
-  const req = [
-    {
-      nickname: 'SH_BAE',
-      score: 80
-    },
-    {
-      nickname: 'lala_la',
-      score: 70
-    },
-    {
-      nickname: 'sswww',
-      score: 65
-    }
-  ]
-
+ 
   const approveBtn = css`
     color: #5d5d5d;
     background: #d9e5ff;
@@ -107,38 +96,69 @@ const StudyRequest = () => {
     padding-bottom: 20px;
   `
 
-  return (
+  const w45 = css`
+  border-top: 4px solid #ddd;
+  border-bottom: 2px solid #ddd;
+  color: grey;
+  padding: 7px;
+  text-align: center;
+  width : 45%;
+  `
+  const w30 = css`
+  border-top: 4px solid #ddd;
+  border-bottom: 2px solid #ddd;
+  color: grey;
+  padding: 7px;
+  text-align: center;
+  width : 30%;
+  `
+  const w25 = css`
+  border-top: 4px solid #ddd;
+  border-bottom: 2px solid #ddd;
+  color: grey;
+  padding: 7px;
+  text-align: center;
+  width : 25%;
+  `
+
+
+  return useObserver(() => (
     <div css={bottom}>
       <table css={table}>
         <tr>
-          <td colSpan="3" css={title}>
-            참여 요청 ( {req.length} )
+          <td colSpan={3} css={title}>
+            참여 요청 ( {StudyDetailStore.studyRequest} )
           </td>
         </tr>
         <tr>
-          <th width="45%" css={th}>
+          <th css={w45}>
             닉네임
           </th>
-          <th width="25%" css={th}>
+          <th  css={w25}>
             성실도
           </th>
-          <th width="30%" css={th}></th>
+          <th css={w30}></th>
         </tr>
-        {req.map(r => (
+        {StudyDetailStore.data.studyMemberDTOList.map(
+          (studyMember : studyMember, index : number) => (
+           
+             
           <tr>
-            <td css={nickname}>{r.nickname}</td>
-            <td css={td}>{r.score}</td>
-            <td css={td}>
+          {studyMember.state === 0 && <td css={nickname}>{studyMember.user.nickname}</td>}
+          {studyMember.state === 0 &&  <td css={nickname}>{studyMember.user.evaluation}</td>}
+           {studyMember.state === 0 &&   <td css={td}>
               <div css={btnBox}>
-                <button css={approveBtn}>수락</button>
+                <button css={approveBtn} onClick={()=>{StudyDetailStore.accept(StudyDetailStore.data.id, studyMember.user.id)}}>수락</button>
                 <button css={denyBtn}>거절</button>
               </div>
-            </td>
+            </td>}
           </tr>
-        ))}
+      
+       
+            ))}
       </table>
     </div>
-  )
+  ))
 }
 
 export default StudyRequest

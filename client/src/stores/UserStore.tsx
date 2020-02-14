@@ -353,6 +353,8 @@ const UserStore = observable<UserStoreType>({
       const res = await userAPI.register(data)
       const token = res.headers.token
       sessionStorage.setItem('token', token)
+      const id = res.data.value.id
+      sessionStorage.setItem('id', id)
       this.token = token
       this.isLoggingIn = false
     } catch (error) {
@@ -381,6 +383,8 @@ const UserStore = observable<UserStoreType>({
       const res = await userAPI.login(data)
       const token = res.headers['jwt-auth-token']
       sessionStorage.setItem('token', token)
+      const id = res.data.value.id
+      sessionStorage.setItem('id', id)
       this.token = token
       this.isLoggingIn = false
     } catch (error) {
@@ -391,6 +395,7 @@ const UserStore = observable<UserStoreType>({
 
   logout() {
     sessionStorage.removeItem('token')
+    sessionStorage.removeItem('id')
     this.token = null
   },
 
