@@ -92,7 +92,7 @@ public class StudyScheduleAndAttendanceController {
 
     @DeleteMapping
     @ApiOperation(value = "일정을 삭제한다.", response = CommonResponse.class)
-    public ResponseEntity<CommonResponse> deleteStudySchedule(@RequestBody Integer id, HttpServletRequest request) {
+    public ResponseEntity<CommonResponse> deleteStudySchedule(@PathVariable Integer id, HttpServletRequest request) {
         try {
             int loginUserId = jwtService.getLoginUserId(request);
             StudySchedule schedule = studyScheduleService.find(id);

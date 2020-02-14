@@ -1,5 +1,4 @@
 package com.ssafy.sval.controller;
-
 import com.ssafy.sval.jwt.JwtService;
 import com.ssafy.sval.model.dto.StudyDTO;
 import com.ssafy.sval.model.dto.StudyMemberDTO;
@@ -128,8 +127,10 @@ public class StudyController {
             for (StudyMemberDTO sm : smList) {
                 if(sm.getUser().getId()==loginUserId && sm.getState()==1) {
                     studyDTO.setStudyScheduleDTOList(ssList);
+
                     if(loginUserId!=studyDTO.getLeader().getId())
                         for (int i=0; i<smList.size(); i++) if(smList.get(i).getState()!=1) smList.remove(i--);
+
                     studyDTO.setStudyMemberDTOList(smList);
                     break;
                 }
