@@ -39,6 +39,7 @@ const StudyGroupSchedule = () => {
     margin-bottom: 2px;
 
     &:hover {
+      cursor: pointer;
       background-color: #e6f7ff;
     }
   `
@@ -94,6 +95,7 @@ const StudyGroupSchedule = () => {
   const btn = css`
     background-color: #fff;
     border: none;
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -139,28 +141,40 @@ const StudyGroupSchedule = () => {
           />
           &nbsp;스터디 스케줄
         </div>
-        <button css={btn}>
-          스케줄 추가&nbsp;&nbsp;
-          <Icon
-            css={icon}
-            type="plus-circle"
-            style={{ fontSize: 20 }}
-            theme="twoTone"
-            twoToneColor="navy"
-          />
-        </button>
+        {studyScheduleList.length > 0 ? (
+          <button css={btn}>
+            스케줄 추가&nbsp;&nbsp;
+            <Icon
+              css={icon}
+              type="plus-circle"
+              style={{ fontSize: 20 }}
+              theme="twoTone"
+              twoToneColor="navy"
+            />
+          </button>
+        ) : (
+          <div></div>
+        )}
       </div>
       {studyScheduleList.length > 0 ? (
         studyScheduleList.map((s: StudySchedule, index: number) => (
           <div css={content} key={s.id}>
             <div css={left}>
               <div css={cnt}>{index + 1}회차</div>
-              <div css={date}>{s.meetDate.substr(0, 16)}</div>
             </div>
             <div css={right}>
               <div css={subject}>{s.subject}</div>
-              <div css={homework}>준비사항 : {s.homework}</div>
-              <div css={homework}>장소 : {s.location}</div>
+              <div css={homework}>
+                <b>시간 )</b> {s.meetDate.substr(0, 4)}년{' '}
+                {s.meetDate.substr(5, 2)}월 {s.meetDate.substr(8, 2)}일{' '}
+                {s.meetDate.substr(11, 2)}시 {s.meetDate.substr(14, 2)}분
+              </div>
+              <div css={homework}>
+                <b>장소 )</b> {s.location}
+              </div>
+              <div css={homework}>
+                <b>준비사항 )</b> {s.homework}
+              </div>
             </div>
             {UserStore.loginUser.id === StudyStore.studyGroup.leader.id ? (
               <div css={updateNDeleteLink}>
@@ -182,7 +196,18 @@ const StudyGroupSchedule = () => {
               등록된 스케줄이 없습니다 😮
             </h3>
           }
-        />
+        >
+          <button css={btn}>
+            스케줄 추가&nbsp;&nbsp;
+            <Icon
+              css={icon}
+              type="plus-circle"
+              style={{ fontSize: 20 }}
+              theme="twoTone"
+              twoToneColor="navy"
+            />
+          </button>
+        </Empty>
       )}
     </div>
   ))
