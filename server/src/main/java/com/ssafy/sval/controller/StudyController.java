@@ -186,29 +186,17 @@ public class StudyController {
             }
 
             value = (String) filter.get("lcategory");
-            if (value != null) {
-                spec = spec.and(studySpecs.lCategoryIs(value));
-            }
+            if (value != null) spec = spec.and(studySpecs.lCategoryIs(value));
             value = (String) filter.get("scategory");
-            if (value != null) {
-                spec = spec.and(studySpecs.sCategoryIs(value));
-            }
+            if (value != null) spec = spec.and(studySpecs.sCategoryIs(value));
             value = (String) filter.get("city");
-            if (value != null) {
-                spec = spec.and(studySpecs.cityIs(value));
-            }
+            if (value != null) spec = spec.and(studySpecs.cityIs(value));
             value = (String) filter.get("town");
-            if (value != null) {
-                spec = spec.and(studySpecs.townIs(value));
-            }
+            if (value != null) spec = spec.and(studySpecs.townIs(value));
             Boolean isOnline = (Boolean) filter.get("isOnline");
-            if (isOnline != null) {
-                spec = spec.and(studySpecs.onlineStateIs(isOnline));
-            }
+            if (isOnline != null) spec = spec.and(studySpecs.onlineStateIs(isOnline));
             Integer weekdayOrWeekend = (Integer) filter.get("weekdayOrWeekend");
-            if (weekdayOrWeekend != null) {
-                spec = spec.and(studySpecs.dayStateIs(weekdayOrWeekend));
-            }
+            if (weekdayOrWeekend != null) spec = spec.and(studySpecs.dayStateIs(weekdayOrWeekend));
 
             List<Study> studyList = studyService.findAllByFilterCondition(spec);
             List<StudyDTO> studyDTOList = new ArrayList<>();
@@ -219,6 +207,7 @@ public class StudyController {
             }
             studyDTOList.sort((o1, o2) -> -(o1.getEnrollDate().compareTo(o2.getEnrollDate())));
             return new ResponseEntity<>(new CommonResponse(studyDTOList, "getStudiesUsingFileter", "SUCCESS", "조회 성공"), HttpStatus.OK);
+
         } catch (RuntimeException e) {
             e.printStackTrace();
             throw new RuntimeException("getStudiesUsingFileter");
