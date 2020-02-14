@@ -73,6 +73,15 @@ const studyDetailStore : StudyDetailStoreType = observable({
         }
     },
 
+    async down(studyId : number, userId : number) {
+        try{
+          const res = await studyAPI.studyMemberUpdate(studyId, userId, 2)
+          this.studyDetail()
+        } catch(error){
+
+        }
+    },
+
     async studyTodo(){
       try{
         this.data.state = 1

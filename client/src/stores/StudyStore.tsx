@@ -19,9 +19,10 @@ const StudyStore = observable({
         } = res.data.value
         this.myStudy = joinedStudyList
       }
-
+      
       const { recentlyEnrolled, mostHits } = res.data.value
-
+    
+      
       this.recentStudy = recentlyEnrolled
       this.famousStudy = mostHits
     } catch (error) {

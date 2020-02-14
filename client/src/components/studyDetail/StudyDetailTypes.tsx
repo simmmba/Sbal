@@ -35,6 +35,7 @@ export type StudyDetailStoreType = {
     isJoin: () => boolean
     isMember: () => boolean
     accept: (studyId : number, userId : number) => void
+    down: (studyId : number, userId : number) => void
 }
 
 export type studyMember = {
