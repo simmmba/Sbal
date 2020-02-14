@@ -1,7 +1,7 @@
 import React from 'react'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
-import { Icon } from 'antd'
+import { Icon, Empty } from 'antd'
 import { StudySchedule } from './StudyGroupType'
 import { useObserver } from 'mobx-react'
 import StudyStore from '../../stores/StudyStore'
@@ -111,6 +111,15 @@ const StudyGroupSchedule = () => {
     }
   `
 
+  const empty = css`
+    /* border: 1px solid black; */
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  `
+
   // const clickUpdateSchedule = ()  => {
   // }
   const clickDeleteSchedule = (id: number): void => {
@@ -165,7 +174,15 @@ const StudyGroupSchedule = () => {
           </div>
         ))
       ) : (
-        <div>등록된 스케줄이 없습니다.</div>
+        <Empty
+          css={empty}
+          description={
+            <h3>
+              <br />
+              등록된 스케줄이 없습니다 😮
+            </h3>
+          }
+        />
       )}
     </div>
   ))

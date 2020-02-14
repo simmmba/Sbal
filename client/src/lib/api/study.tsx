@@ -29,8 +29,8 @@ export const getStudyDetails = (studyId: number) => {
 }
 
 export const deleteStudySchedule = (scheduleId: number) => {
-  if(sessionStorage.token) {
+  if (sessionStorage.token) {
     setAuthToken(sessionStorage.token)
   }
-  return apiClient.delete('/study/schedule/'+Number(scheduleId));
+  return apiClient.delete('/study/schedule/' + Number(scheduleId))
 }

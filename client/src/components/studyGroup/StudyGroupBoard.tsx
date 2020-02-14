@@ -3,6 +3,7 @@ import React from 'react'
 import { css, jsx } from '@emotion/core'
 import { Icon } from 'antd'
 import { NavLink } from 'react-router-dom'
+import StudyStore from '../../stores/StudyStore'
 
 const StudyGroupBoard = () => {
   const board = [
@@ -220,7 +221,10 @@ const StudyGroupBoard = () => {
           />
           &nbsp;스터디 게시판
         </div>
-        <NavLink css={btn} to={`/study/1/board/insert`}>
+        <NavLink
+          css={btn}
+          to={`/study/${StudyStore.studyGroup.id}/board/insert`}
+        >
           글쓰기&nbsp;&nbsp;
           <Icon
             css={icon}

@@ -5,6 +5,7 @@ import { css, jsx } from '@emotion/core'
 import { Icon } from 'antd'
 import Reply from './Reply'
 import StudyGroupBoardEdit from './StudyGroupBoardEdit'
+import StudyStore from '../../stores/StudyStore'
 
 const StudyGroupBoardDetail = () => {
   const board = [
@@ -173,7 +174,10 @@ const StudyGroupBoardDetail = () => {
                   <div css={hit}>조회 {b.hits}</div>
                 </div>
                 <div css={right}>
-                  <NavLink css={navLink} to={`/study/1/board/1/edit`}>
+                  <NavLink
+                    css={navLink}
+                    to={`/study/${StudyStore.studyGroup.id}/board/insert`}
+                  >
                     <Icon css={icon} type="edit" theme="filled" />
                     &nbsp;수정
                   </NavLink>

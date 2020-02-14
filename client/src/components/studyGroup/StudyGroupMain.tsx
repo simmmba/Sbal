@@ -12,7 +12,7 @@ import StudyGroupBoardInsert from './StudyGroupBoardInsert'
 import { css, jsx } from '@emotion/core'
 import { useEffect } from 'react'
 import { StudyGroupType, StudyMember, StudySchedule } from './StudyGroupType'
-import { getStudyDetails } from '../../lib/api/study.'
+import { getStudyDetails } from '../../lib/api/study'
 import { useLocalStore, useObserver } from 'mobx-react'
 import StudyStore from '../../stores/StudyStore'
 
@@ -181,6 +181,15 @@ const StudyGroupMain = ({ id }: { id: number }) => {
               <Route
                 path={`/study/${StudyStore.studyGroup.id}/board/${bid}`}
                 component={StudyGroupBoardDetail}
+                exact
+              />
+              <Route
+                path={`/study/${StudyStore.studyGroup.id}/board/${bid}/edit`}
+                component={StudyGroupBoardEdit}
+              />
+              <Route
+                path={`/study/${StudyStore.studyGroup.id}/board/insert`}
+                component={StudyGroupBoardInsert}
               />
             </Switch>
           </div>
