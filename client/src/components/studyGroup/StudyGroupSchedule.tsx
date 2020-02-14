@@ -94,7 +94,6 @@ const StudyGroupSchedule = () => {
     background: #f4fcff;
     border-radius: 10px;
     margin-bottom: 2px;
-    cursor: pointer;
 
     &:hover {
       background-color: #e6f7ff;
@@ -145,7 +144,6 @@ const StudyGroupSchedule = () => {
   const btn = css`
     background-color: #fff;
     border: none;
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;

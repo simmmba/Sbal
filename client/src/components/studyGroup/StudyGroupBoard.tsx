@@ -189,6 +189,7 @@ const StudyGroupBoard = () => {
     border-radius: 7px;
     width: 100px;
     height: 30px;
+    transition: 0.3s;
 
     &:hover {
       background-color: #b2ccff;
@@ -219,7 +220,7 @@ const StudyGroupBoard = () => {
           />
           &nbsp;스터디 게시판
         </div>
-        <button css={btn}>
+        <NavLink css={btn} to={`/study/1/board/insert`}>
           글쓰기&nbsp;&nbsp;
           <Icon
             css={icon}
@@ -228,7 +229,7 @@ const StudyGroupBoard = () => {
             theme="twoTone"
             twoToneColor="navy"
           />
-        </button>
+        </NavLink>
       </div>
       {board.reverse().map((b, index) => (
         <div css={content}>

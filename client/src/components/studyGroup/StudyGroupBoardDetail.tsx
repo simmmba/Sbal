@@ -1,26 +1,21 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
 import { Icon } from 'antd'
+import Reply from './Reply'
+import StudyGroupBoardEdit from './StudyGroupBoardEdit'
 
 const StudyGroupBoardDetail = () => {
   const board = [
     {
       id: 1,
       title: '공지사항 테스트1',
+      content: '공지사항 테스트입니다. 글이 잘 들어가나요?',
       writer: 'jspark',
       hits: 15,
       date: '2020-02-01',
       comment: 2
-    }
-  ]
-
-  const reply = [
-    {
-      id: 1,
-      content: '',
-      writer: '',
-      date: ''
     }
   ]
 
@@ -34,7 +29,6 @@ const StudyGroupBoardDetail = () => {
 
   const upper = css`
     display: flex;
-    justify-content: space-between;
     padding: 8px 0px 10px 20px;
   `
 
@@ -48,47 +42,47 @@ const StudyGroupBoardDetail = () => {
 
   const content = css`
     display: flex;
-    background: #f4fcff;
-    border-radius: 10px;
+    flex-direction: column;
+    background: #eef7ff;
+    border-radius: 5px;
     margin-bottom: 2px;
   `
 
   const btitle = css`
     display: flex;
     align-items: center;
-    padding: 10px 20px 10px 22px;
+    padding: 10px 0px 2px 22px;
     font-weight: bold;
-    font-size: 14px;
-    border-right: 2px dashed #fff;
+    font-size: 20px;
     width: 100%;
   `
 
   const writer = css`
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
-    padding: 10px 20px 10px 20px;
     font-size: 14px;
-    width: 250px;
-    border-right: 2px dashed #fff;
+    /* border-right: 2px dashed #fff; */
   `
 
   const date = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 20px 10px 20px;
-    font-size: 14px;
-    width: 200px;
-    border-right: 2px dashed #fff;
+    /* padding: 10px 20px 10px 20px; */
+    font-size: 13px;
+    padding-left: 10px;
+    /* width: 200px; */
+    /* border-right: 2px dashed #fff; */
   `
   const hit = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 20px 10px 20px;
-    font-size: 14px;
-    width: 100px;
+    /* padding: 10px 20px 10px 20px; */
+    font-size: 13px;
+    /* width: 100px; */
+    padding-left: 10px;
   `
 
   const icon = css`
@@ -98,7 +92,6 @@ const StudyGroupBoardDetail = () => {
   `
 
   const btn = css`
-    background-color: #fff;
     border: none;
     cursor: pointer;
     display: flex;
@@ -114,8 +107,44 @@ const StudyGroupBoardDetail = () => {
     height: 30px;
   `
 
-  const link = css`
-    color: #353535;
+  const detail = css`
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: center; */
+    justify-content: space-between;
+    padding: 3px 0px 10px 27px;
+    color: #747474;
+    flex-wrap: wrap;
+  `
+
+  const top = css`
+    display: flex;
+    flex-direction: column;
+    background: #d1e9ff;
+    border-radius: 5px;
+    margin-bottom: 2px;
+  `
+  const bottom = css`
+    display: flex;
+    padding: 20px;
+    min-height: 150px;
+  `
+
+  const left = css`
+    display: flex;
+  `
+  const right = css`
+    display: flex;
+  `
+
+  const navLink = css`
+    display: flex;
+    color: #747474;
+    padding-right: 15px;
+
+    &:hover {
+      color: #4c4c4c;
+    }
   `
 
   return (
@@ -132,14 +161,34 @@ const StudyGroupBoardDetail = () => {
           &nbsp;게시글 읽기
         </div>
       </div>
-      {board.map(b => (
-        <div css={content}>
-          <div css={btitle}>{b.title}</div>
-          <div css={writer}>{b.writer}</div>
-          <div css={date}>{b.date}</div>
-          <div css={hit}>{b.hits}</div>
-        </div>
-      ))}
+      <div>
+        {board.map(b => (
+          <div css={content}>
+            <div css={top}>
+              <div css={btitle}>{b.title}</div>
+              <div css={detail}>
+                <div css={left}>
+                  <div css={writer}>{b.writer}&nbsp;&nbsp; | </div>
+                  <div css={date}>{b.date}&nbsp;&nbsp; | </div>
+                  <div css={hit}>조회 {b.hits}</div>
+                </div>
+                <div css={right}>
+                  <NavLink css={navLink} to={`/study/1/board/1/edit`}>
+                    <Icon css={icon} type="edit" theme="filled" />
+                    &nbsp;수정
+                  </NavLink>
+                  <NavLink css={navLink} to={``}>
+                    <Icon css={icon} type="delete" theme="filled" />
+                    &nbsp;삭제
+                  </NavLink>
+                </div>
+              </div>
+            </div>
+            <div css={bottom}>{b.content}</div>
+          </div>
+        ))}
+      </div>
+      <Reply />
     </div>
   )
 }

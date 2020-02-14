@@ -6,6 +6,8 @@ import StudyGroupBoard from './StudyGroupBoard'
 import StudyGroupBoardDetail from './StudyGroupBoardDetail'
 import StudyGroupMember from './StudyGroupMember'
 import StudyGroupSchedule from './StudyGroupSchedule'
+import StudyGroupBoardEdit from './StudyGroupBoardEdit'
+import StudyGroupBoardInsert from './StudyGroupBoardInsert'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
 
@@ -147,6 +149,15 @@ const StudyGroupMain = () => {
                 <Route
                   path={`/study/${s.id}/board/${bid}`}
                   component={StudyGroupBoardDetail}
+                  exact
+                />
+                <Route
+                  path={`/study/${s.id}/board/${bid}/edit`}
+                  component={StudyGroupBoardEdit}
+                />
+                <Route
+                  path={`/study/${s.id}/board/insert`}
+                  component={StudyGroupBoardInsert}
                 />
               </Switch>
             </div>

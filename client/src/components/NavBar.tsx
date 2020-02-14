@@ -58,6 +58,7 @@ const StyledLinkPhone = styled(NavLink)`
 
 const StyledButton = styled(Button)`
   padding: auto 0;
+  transition: 0.3s;
 `
 
 const NavBar = () => {
