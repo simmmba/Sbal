@@ -66,7 +66,7 @@ function AuthForm({ type, history }: RouteComponentProps & AuthFormProps) {
             autoComplete="email"
             name="email"
             value={state.email}
-            //type="email"
+            // type="email"
             onChange={state.onChange}
           />
           <StyledLabel htmlFor="password">비밀번호</StyledLabel>

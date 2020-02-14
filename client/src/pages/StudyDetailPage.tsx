@@ -3,7 +3,7 @@ import StudyDetails from '../components/studyDetail/StudyDetails'
 import { useHistory } from 'react-router'
 import { loadToken, authCheck } from '../utils/authCheck'
 
-const StudyDetailPage = () => {
+const StudyDetailPage = (id: number) => {
   const history = useHistory()
   useEffect(() => {
     loadToken()
