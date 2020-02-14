@@ -11,8 +11,10 @@ const UserStore = observable<UserStoreType>({
   isLoggingIn: false,
   token: null,
   data: {} as UserInfoType,
-  //{id, pw, email, phoneNum, nickname, gender, introduction,
-  //city, town, evaluation, profilePhotoDir, socialLogin, interestDTOList, ledStudyList, joinedStudyList}
+  loginUser: {
+    id: 0,
+    nickname: ''
+  },
   cityAndTowns: {
     서울: [
       '강남구',
@@ -351,6 +353,10 @@ const UserStore = observable<UserStoreType>({
     this.isLoggingIn = true
     try {
       const res = await userAPI.register(data)
+      this.loginUser = {
+        id: res.data.value.id,
+        nickname: res.data.value.nickname
+      }
       const token = res.headers.token
       sessionStorage.setItem('token', token)
       this.token = token
@@ -379,6 +385,11 @@ const UserStore = observable<UserStoreType>({
     this.isLoggingIn = true
     try {
       const res = await userAPI.login(data)
+      this.loginUser = {
+        id: res.data.value.id,
+        nickname: res.data.value.nickname
+      }
+      console.log(this.loginUser.id);
       const token = res.headers['jwt-auth-token']
       sessionStorage.setItem('token', token)
       this.token = token
@@ -391,6 +402,10 @@ const UserStore = observable<UserStoreType>({
 
   logout() {
     sessionStorage.removeItem('token')
+    this.loginUser = {
+      id: 0,
+      nickname: ''
+    };
     this.token = null
   },
 

@@ -129,6 +129,10 @@ export type UserStoreType = {
   isLoggingIn: boolean
   token: string | null
   data: UserInfoType
+  loginUser : {
+    id: number,
+    nickname: string
+  },
   cityAndTowns: CityAndTowns
   interests: Interests
   signup: (data: SignupData) => void

@@ -2,71 +2,14 @@ import React from 'react'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
 import { Icon } from 'antd'
-
+import { StudySchedule } from './StudyGroupType'
+import { useObserver } from 'mobx-react'
+import StudyStore from '../../stores/StudyStore'
+import UserStore from '../../stores/UserStore'
+import { useHistory } from 'react-router'
 const StudyGroupSchedule = () => {
-  const schedule = [
-    {
-      date: '2020-02-01',
-      location: '스타벅스',
-      subject: '자기소개',
-      homework: 'abc'
-    },
-    {
-      date: '2020-02-02',
-      location: '스타벅스',
-      subject: '자기소개',
-      homework: 'abc'
-    },
-    {
-      date: '2020-02-03',
-      location: '스타벅스',
-      subject: '자기소개',
-      homework: 'abc'
-    },
-    {
-      date: '2020-02-04',
-      location: '스타벅스',
-      subject: '자기소개',
-      homework: 'abc'
-    },
-    {
-      date: '2020-02-05',
-      location: '스타벅스',
-      subject: '자기소개',
-      homework: 'abc'
-    },
-    {
-      date: '2020-02-06',
-      location: '스타벅스',
-      subject: '자기소개',
-      homework: 'abc'
-    },
-    {
-      date: '2020-02-07',
-      location: '스타벅스',
-      subject: '자기소개',
-      homework: 'abc'
-    },
-    {
-      date: '2020-02-08',
-      location: '스타벅스',
-      subject: '자기소개',
-      homework: 'abc'
-    },
-    {
-      date: '2020-02-09',
-      location: '스타벅스',
-      subject: '자기소개',
-      homework: 'abc'
-    },
-    {
-      date: '2020-02-10',
-      location: '스타벅스',
-      subject: '자기소개',
-      homework: 'abc'
-    }
-  ]
-
+  const history = useHistory()
+  const studyScheduleList = StudyStore.studyGroup.studyScheduleDTOList
   const main = css`
     display: flex;
     flex-direction: column;
@@ -115,6 +58,7 @@ const StudyGroupSchedule = () => {
     /* border: 1px solid black; */
     padding: 10px 10px 10px 20px;
     justify-content: center;
+    width: 70%;
   `
   const cnt = css`
     display: flex;
@@ -141,6 +85,12 @@ const StudyGroupSchedule = () => {
     align-items: center;
   `
 
+  const updateNDeleteLink = css`
+    float: right;
+    display: flex;
+    align-items: center;
+  `
+
   const btn = css`
     background-color: #fff;
     border: none;
@@ -161,7 +111,13 @@ const StudyGroupSchedule = () => {
     }
   `
 
-  return (
+  // const clickUpdateSchedule = ()  => {
+  // }
+  const clickDeleteSchedule = (id: number): void => {
+    StudyStore.deleteStudySchedule(Number(id))
+  }
+
+  return useObserver(() => (
     <div css={main}>
       <div css={upper}>
         <div css={title}>
@@ -185,20 +141,34 @@ const StudyGroupSchedule = () => {
           />
         </button>
       </div>
-      {schedule.reverse().map((s, index) => (
-        <div css={content}>
-          <div css={left}>
-            <div css={cnt}>{schedule.length - index}회차</div>
-            <div css={date}>{s.date}</div>
+      {studyScheduleList.length > 0 ? (
+        studyScheduleList.map((s: StudySchedule, index: number) => (
+          <div css={content} key={s.id}>
+            <div css={left}>
+              <div css={cnt}>{index + 1}회차</div>
+              <div css={date}>{s.meetDate.substr(0, 16)}</div>
+            </div>
+            <div css={right}>
+              <div css={subject}>{s.subject}</div>
+              <div css={homework}>준비사항 : {s.homework}</div>
+              <div css={homework}>장소 : {s.location}</div>
+            </div>
+            {UserStore.loginUser.id === StudyStore.studyGroup.leader.id ? (
+              <div css={updateNDeleteLink}>
+                {/*<span onClick={() => clickUpdateSchedule()}>수정</span>*/}
+                &nbsp;&nbsp;
+                <span onClick={() => clickDeleteSchedule(s.id)}>삭제</span>
+              </div>
+            ) : (
+              <div />
+            )}
           </div>
-          <div css={right}>
-            <div css={subject}>{s.subject}</div>
-            <div css={homework}>준비사항 : {s.homework}</div>
-          </div>
-        </div>
-      ))}
+        ))
+      ) : (
+        <div>등록된 스케줄이 없습니다.</div>
+      )}
     </div>
-  )
+  ))
 }
 
 export default StudyGroupSchedule
