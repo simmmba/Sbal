@@ -12,7 +12,7 @@ import StudyGroupBoardInsert from './StudyGroupBoardInsert'
 import { css, jsx } from '@emotion/core'
 import { useEffect } from 'react'
 import { StudyGroupType, StudyMember, StudySchedule } from './StudyGroupType'
-import { getStudyDetails } from '../../lib/api/study'
+import { getStudyGroup } from '../../lib/api/study'
 import { useLocalStore, useObserver } from 'mobx-react'
 import StudyStore from '../../stores/StudyStore'
 
@@ -53,9 +53,8 @@ const StudyGroupMain = ({ id }: { id: number }) => {
   // }));
   useEffect(() => {
     StudyStore.fetchStudyGroup(Number(id))
-  }, [])
-
-  const bid = 1
+  }, []);
+  const bid = 1;
 
   const title = css`
     padding: 15px 10px 10px 23px;
@@ -162,7 +161,6 @@ const StudyGroupMain = ({ id }: { id: number }) => {
               <Route
                 path={`/study/${StudyStore.studyGroup.id}`}
                 exact={true}
-                // rendor props: 컴포넌트 대신 보여주고싶은 jsx 넣을 수 있음
                 component={() => <StudyGroupSchedule />}
               />
               <Route
@@ -175,21 +173,22 @@ const StudyGroupMain = ({ id }: { id: number }) => {
               />
               <Route
                 path={`/study/${StudyStore.studyGroup.id}/board`}
-                component={StudyGroupBoard}
+                component={() => <StudyGroupBoard />}
                 exact={true}
               />
               <Route
-                path={`/study/${StudyStore.studyGroup.id}/board/${bid}`}
-                component={StudyGroupBoardDetail}
-                exact
+                path={`/study/${StudyStore.studyGroup.id}/board/:index`}
+                component={() => <StudyGroupBoardDetail/>}
+                exact={true}
               />
               <Route
                 path={`/study/${StudyStore.studyGroup.id}/board/${bid}/edit`}
                 component={StudyGroupBoardEdit}
               />
               <Route
-                path={`/study/${StudyStore.studyGroup.id}/board/insert`}
+                path={`/study/${StudyStore.studyGroup.id}/newBoard`}
                 component={StudyGroupBoardInsert}
+                exact={true}
               />
             </Switch>
           </div>

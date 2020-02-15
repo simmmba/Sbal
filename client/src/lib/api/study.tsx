@@ -21,7 +21,7 @@ export const getStudyDetail = () => {
   return apiClient.get('/')
 }
 
-export const getStudyDetails = (studyId: number) => {
+export const getStudyGroup = (studyId: number) => {
   if (sessionStorage.token) {
     setAuthToken(sessionStorage.token)
   }
@@ -33,4 +33,11 @@ export const deleteStudySchedule = (scheduleId: number) => {
     setAuthToken(sessionStorage.token)
   }
   return apiClient.delete('/study/schedule/' + Number(scheduleId))
+}
+
+export const insertNotice = (newNotice: object) => {
+  if (sessionStorage.token) {
+    setAuthToken(sessionStorage.token)
+  }
+  return apiClient.post('/notice', newNotice)
 }

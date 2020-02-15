@@ -25,7 +25,7 @@ export type StudyGroupType = {
 
     studyMemberDTOList: StudyMember[],
     studyScheduleDTOList: StudySchedule[]
-    // noticeDTOList: null
+    noticeDTOList: StudyNotice[],
 }
 
 export type StudyMember = {
@@ -43,4 +43,32 @@ export type StudySchedule = {
     homework: string,
     meetDate: string,
     location: string
+}
+
+export type StudyNotice = {
+    id: number,
+    title: number,
+    content: number,
+    studyId: number,
+    writer: number,
+    hits: number,
+    date: string,
+    replyList: NoticeReply[]
+}
+
+export type NoticeReply = {
+    id: number,
+    content: number,
+    noticeId: number,
+    writer: number,
+    date: string
+}
+
+export type CreatedNotice = {
+    title: string,
+    contents: string,
+    onChangeTextarea: (e: React.ChangeEvent<HTMLTextAreaElement>) => void,
+    [key: string]:
+        string
+        | ((e: React.ChangeEvent<HTMLTextAreaElement>) => void)
 }

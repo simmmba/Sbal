@@ -1,12 +1,16 @@
-import React, { useEffect } from 'react'
-import { useHistory } from 'react-router'
+import React, {useEffect} from 'react'
+import {useHistory} from 'react-router'
 /**@jsx jsx */
-import { css, jsx } from '@emotion/core'
-import { Icon } from 'antd'
+import {css, jsx} from '@emotion/core'
+import {Icon} from 'antd'
 import TextArea from 'antd/lib/input/TextArea'
+import { useLocalStore } from 'mobx-react'
+import StudyStore from "../../stores/StudyStore";
+import {CreatedNotice} from "./StudyGroupType";
+import {StyledTextarea} from "../auth/AuthStyled";
 
 const StudyGroupBoardInsert = () => {
-  const main = css`
+    const main = css`
     display: flex;
     flex-direction: column;
     /* justify-content: center; */
@@ -14,12 +18,12 @@ const StudyGroupBoardInsert = () => {
     /* border: 1px solid black; */
   `
 
-  const upper = css`
+    const upper = css`
     display: flex;
     padding: 8px 0px 10px 20px;
   `
 
-  const title = css`
+    const title = css`
     display: flex;
     font-weight: bold;
     font-size: 21px;
@@ -27,7 +31,7 @@ const StudyGroupBoardInsert = () => {
     /* padding: 0px 17px 0px 5px; */
   `
 
-  const content = css`
+    const content = css`
     display: flex;
     flex-direction: column;
     background: #eef7ff;
@@ -35,32 +39,32 @@ const StudyGroupBoardInsert = () => {
     margin-bottom: 2px;
   `
 
-  const icon = css`
+    const icon = css`
     display: flex;
     justify-content: center;
     align-items: center;
   `
 
-  const top = css`
+    const top = css`
     display: flex;
     flex-direction: column;
     background: #d1e9ff;
     border-radius: 5px;
     padding: 10px;
   `
-  const bottom = css`
+    const bottom = css`
     display: flex;
     margin: 10px;
     min-height: 150px;
   `
 
-  const btnGroup = css`
+    const btnGroup = css`
     display: flex;
     align-items: center;
     justify-content: center;
   `
 
-  const btn = css`
+    const btn = css`
     border: none;
     cursor: pointer;
     display: flex;
@@ -81,63 +85,76 @@ const StudyGroupBoardInsert = () => {
     }
   `
 
-  const history = useHistory()
+    const history = useHistory()
 
-  const goBack = () => {
-    history.goBack()
-  }
+    const state = useLocalStore<CreatedNotice>(() => ({
+            title: '',
+            contents: '',
+            onChangeTextarea(e: React.ChangeEvent<HTMLTextAreaElement>) {
+                state[e.target.name] = e.target.value;
+            },
+        }
+    ))
 
-  useEffect(() => {
-    const unblock = history.block('게시글 작성을 취소하시겠습니까?')
-    return () => {
-      unblock()
+    const clickEnrollBtn = () => {
+        if(state.title.length===0 || state.contents.length===0) {
+            alert("제목, 내용을 입력하세요.");
+            return;
+        }
+        const data = {
+            title: state.title,
+            content: state.contents,
+            studyId: StudyStore.studyGroup.id
+        }
+        StudyStore.enrollNewNotice(data);
+        // history.push('/study/'+ StudyStore.studyGroup.id + '/board');
+        history.goBack();
     }
-  }, [history])
 
-  return (
-    <div>
-      <div css={upper}>
-        <div css={title}>
-          <Icon
-            css={icon}
-            type="snippets"
-            style={{ fontSize: 24 }}
-            theme="twoTone"
-            twoToneColor="navy"
-          />
-          &nbsp;게시글 작성
+    return (
+        <div>
+            <div css={upper}>
+                <div css={title}>
+                    <Icon
+                        css={icon}
+                        type="snippets"
+                        style={{fontSize: 24}}
+                        theme="twoTone"
+                        twoToneColor="navy"
+                    />
+                    &nbsp;게시글 작성
+                </div>
+            </div>
+            <div css={content}>
+                <div css={top}>
+                    <TextArea
+                        rows={1}
+                        cols={100}
+                        placeholder="제목을 입력해주세요"
+                        // value={state.title}
+                        name="title"
+                        onChange={state.onChangeTextarea}
+                    />
+                </div>
+                <div css={bottom}>
+                    <TextArea
+                        rows={10}
+                        cols={100}
+                        placeholder="내용을 입력해주세요"
+                        // value={state.contents}
+                        name="contents"
+                        onChange={state.onChangeTextarea}
+                    />
+                </div>
+            </div>
+            <div css={btnGroup}>
+                <button css={btn} onClick={history.goBack}>
+                    취소
+                </button>
+                <button css={btn} onClick={clickEnrollBtn}>등록</button>
+            </div>
         </div>
-      </div>
-      <div css={content}>
-        <div css={top}>
-          <TextArea
-            // css={textarea}
-            rows={1}
-            placeholder="제목을 입력해주세요"
-            //   value={value}
-            //   onChange={onChange}
-            // onPressEnter={handleChange}
-          />
-        </div>
-        <div css={bottom}>
-          <TextArea
-            // css={textarea}
-            rows={10}
-            placeholder="내용을 입력해주세요"
-            //   value={value}
-            //   onChange={onChange}
-            // onPressEnter={handleChange}
-          />
-        </div>
-      </div>
-      <div css={btnGroup}>
-        <button css={btn} onClick={goBack}>
-          취소
-        </button>
-        <button css={btn}>등록</button>
-      </div>
-    </div>
-  )
+    )
 }
 
 export default StudyGroupBoardInsert

@@ -1,26 +1,17 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 /**@jsx jsx */
-import { css, jsx } from '@emotion/core'
-import { Icon } from 'antd'
+import {css, jsx} from '@emotion/core'
+import {Icon} from 'antd'
 import Reply from './Reply'
-import StudyGroupBoardEdit from './StudyGroupBoardEdit'
 import StudyStore from '../../stores/StudyStore'
+import {useParams} from 'react-router'
+import {StudyNotice} from "./StudyGroupType";
 
 const StudyGroupBoardDetail = () => {
-  const board = [
-    {
-      id: 1,
-      title: '공지사항 테스트1',
-      content: '공지사항 테스트입니다. 글이 잘 들어가나요?',
-      writer: 'jspark',
-      hits: 15,
-      date: '2020-02-01',
-      comment: 2
-    }
-  ]
-
-  const main = css`
+    const {index} = useParams();
+    const notice: StudyNotice = StudyStore.studyGroup.noticeDTOList[Number(index)];
+    const main = css`
     display: flex;
     flex-direction: column;
     /* justify-content: center; */
@@ -28,12 +19,12 @@ const StudyGroupBoardDetail = () => {
     /* border: 1px solid black; */
   `
 
-  const upper = css`
+    const upper = css`
     display: flex;
     padding: 8px 0px 10px 20px;
   `
 
-  const title = css`
+    const title = css`
     display: flex;
     font-weight: bold;
     font-size: 21px;
@@ -41,7 +32,7 @@ const StudyGroupBoardDetail = () => {
     /* padding: 0px 17px 0px 5px; */
   `
 
-  const content = css`
+    const content = css`
     display: flex;
     flex-direction: column;
     background: #eef7ff;
@@ -49,7 +40,7 @@ const StudyGroupBoardDetail = () => {
     margin-bottom: 2px;
   `
 
-  const btitle = css`
+    const btitle = css`
     display: flex;
     align-items: center;
     padding: 10px 0px 2px 22px;
@@ -58,7 +49,7 @@ const StudyGroupBoardDetail = () => {
     width: 100%;
   `
 
-  const writer = css`
+    const writer = css`
     display: flex;
     /* justify-content: center; */
     align-items: center;
@@ -66,7 +57,7 @@ const StudyGroupBoardDetail = () => {
     /* border-right: 2px dashed #fff; */
   `
 
-  const date = css`
+    const date = css`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -76,7 +67,7 @@ const StudyGroupBoardDetail = () => {
     /* width: 200px; */
     /* border-right: 2px dashed #fff; */
   `
-  const hit = css`
+    const hit = css`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -86,13 +77,13 @@ const StudyGroupBoardDetail = () => {
     padding-left: 10px;
   `
 
-  const icon = css`
+    const icon = css`
     display: flex;
     justify-content: center;
     align-items: center;
   `
 
-  const btn = css`
+    const btn = css`
     border: none;
     cursor: pointer;
     display: flex;
@@ -108,7 +99,7 @@ const StudyGroupBoardDetail = () => {
     height: 30px;
   `
 
-  const detail = css`
+    const detail = css`
     display: flex;
     /* justify-content: center; */
     /* align-items: center; */
@@ -118,27 +109,27 @@ const StudyGroupBoardDetail = () => {
     flex-wrap: wrap;
   `
 
-  const top = css`
+    const top = css`
     display: flex;
     flex-direction: column;
     background: #d1e9ff;
     border-radius: 5px;
     margin-bottom: 2px;
   `
-  const bottom = css`
+    const bottom = css`
     display: flex;
     padding: 20px;
     min-height: 150px;
   `
 
-  const left = css`
+    const left = css`
     display: flex;
   `
-  const right = css`
+    const right = css`
     display: flex;
   `
 
-  const navLink = css`
+    const navLink = css`
     display: flex;
     color: #747474;
     padding-right: 15px;
@@ -148,53 +139,51 @@ const StudyGroupBoardDetail = () => {
     }
   `
 
-  return (
-    <div css={main}>
-      <div css={upper}>
-        <div css={title}>
-          <Icon
-            css={icon}
-            type="snippets"
-            style={{ fontSize: 24 }}
-            theme="twoTone"
-            twoToneColor="navy"
-          />
-          &nbsp;게시글 읽기
-        </div>
-      </div>
-      <div>
-        {board.map(b => (
-          <div css={content}>
-            <div css={top}>
-              <div css={btitle}>{b.title}</div>
-              <div css={detail}>
-                <div css={left}>
-                  <div css={writer}>{b.writer}&nbsp;&nbsp; | </div>
-                  <div css={date}>{b.date}&nbsp;&nbsp; | </div>
-                  <div css={hit}>조회 {b.hits}</div>
+    return (
+        <div css={main}>
+            <div css={upper}>
+                <div css={title}>
+                    <Icon
+                        css={icon}
+                        type="snippets"
+                        style={{fontSize: 24}}
+                        theme="twoTone"
+                        twoToneColor="navy"
+                    />
+                    &nbsp;게시글 읽기
                 </div>
-                <div css={right}>
-                  <NavLink
-                    css={navLink}
-                    to={`/study/${StudyStore.studyGroup.id}/board/insert`}
-                  >
-                    <Icon css={icon} type="edit" theme="filled" />
-                    &nbsp;수정
-                  </NavLink>
-                  <NavLink css={navLink} to={``}>
-                    <Icon css={icon} type="delete" theme="filled" />
-                    &nbsp;삭제
-                  </NavLink>
-                </div>
-              </div>
             </div>
-            <div css={bottom}>{b.content}</div>
-          </div>
-        ))}
-      </div>
-      <Reply />
-    </div>
-  )
+            <div>
+                <div css={content}>
+                    <div css={top}>
+                        <div css={btitle}>{notice.title}</div>
+                        <div css={detail}>
+                            <div css={left}>
+                                <div css={writer}>{notice.writer}&nbsp;&nbsp; |</div>
+                                <div css={date}>{notice.date.substr(0, 16)}&nbsp;&nbsp; |</div>
+                                <div css={hit}>조회 {notice.hits}</div>
+                            </div>
+                            <div css={right}>
+                                <NavLink
+                                    css={navLink}
+                                    to={`/study/${StudyStore.studyGroup.id}/board/insert`}
+                                >
+                                    <Icon css={icon} type="edit" theme="filled"/>
+                                    &nbsp;수정
+                                </NavLink>
+                                <NavLink css={navLink} to={``}>
+                                    <Icon css={icon} type="delete" theme="filled"/>
+                                    &nbsp;삭제
+                                </NavLink>
+                            </div>
+                        </div>
+                    </div>
+                    <div css={bottom}>{notice.content}</div>
+                </div>
+            </div>
+            <Reply index={Number(index)}/>
+        </div>
+    )
 }
 
 export default StudyGroupBoardDetail

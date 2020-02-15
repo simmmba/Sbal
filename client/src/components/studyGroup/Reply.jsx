@@ -4,39 +4,11 @@ import { NavLink } from 'react-router-dom'
 import { css, jsx } from '@emotion/core'
 import { Icon } from 'antd'
 import ReplyInsert from './ReplyInsert'
+import StudyStore from "../../stores/StudyStore";
 
-const Reply = () => {
-  const [reply, setReply] = useState([
-    {
-      id: 1,
-      content: '댓글 테스트 1',
-      writer: '가나다',
-      date: '2020-02-01'
-    },
-    {
-      id: 2,
-      content: '댓글 테스트 2',
-      writer: '라마바사',
-      date: '2020-02-05'
-    }
-  ])
+const Reply = ({index}) => {
 
-  const nextId = useRef(3)
-
-  const onInsert = useCallback(
-    content => {
-      const newReply = {
-        id: nextId.current,
-        content,
-        writer: 'aaa',
-        date: '2020-02-01'
-      }
-
-      setReply(reply.concat(newReply))
-      nextId.current += 1
-    },
-    [reply]
-  )
+  const replyList = StudyStore.studyGroup.noticeDTOList[Number(index)].replyList;
 
   const cnt = css`
     border-bottom: 1px solid #d5d5d5;
@@ -100,15 +72,15 @@ const Reply = () => {
   return (
     <div>
       <div css={cnt}>
-        <b>{reply.length}</b>개의 댓글
+        <b>{replyList.length}</b>개의 댓글
       </div>
       <div css={comment}>
-        {reply.map(r => (
+        {replyList.map(r => (
           <div css={list}>
             <div css={upper}>
               <div css={left}>
                 <div css={writer}>{r.writer}</div>
-                <div css={date}>{r.date}</div>
+                <div css={date}>{r.date.substr(0, 16)}</div>
               </div>
               <div css={right}>
                 <NavLink css={navLink} to={`/`}>
@@ -138,7 +110,7 @@ const Reply = () => {
           </div>
         ))}
 
-        <ReplyInsert onInsert={onInsert} />
+        {/*<ReplyInsert />*/}
       </div>
     </div>
   )
