@@ -42,4 +42,4 @@ export const insertNotice = (newNotice: object) => {
     setAuthToken(sessionStorage.token)
   }
   return apiClient.post('/notice', newNotice)
-}
+}}
