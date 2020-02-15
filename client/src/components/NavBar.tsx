@@ -10,12 +10,15 @@ const Spacer = styled.div`
 `
 
 const Logo = styled(Link)`
-  h3 {
-    font-weight: bold;
-    font-size: 20px;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 21px;
+  color: black;
+  margin-right: auto;
+  &:hover {
     color: black;
   }
-  margin-right: auto;
 `
 
 const NavFixBlock = styled.div`
@@ -55,6 +58,7 @@ const StyledLinkPhone = styled(NavLink)`
 
 const StyledButton = styled(Button)`
   padding: auto 0;
+  transition: 0.3s;
 `
 
 const NavBar = () => {
@@ -67,13 +71,12 @@ const NavBar = () => {
       <NavFixBlock>
         <Navbar>
           <Logo to="/">
-            <h3>
-              스<small>터디의</small> 발<small>견</small>
-            </h3>
+            스<small>터디의</small> 발<small>견</small>
           </Logo>
           <StyledLink to="/study/create">스터디 개설</StyledLink>
           <StyledLink to="/study">스터디 목록</StyledLink>
           <StyledLink to="/register">나와 가까운 장소</StyledLink>
+          <StyledLink to="/study/13">ㅋㅋ</StyledLink>
           {!UserStore.token ? (
             <div>
               <StyledLinkPhone to="/signup">회원가입</StyledLinkPhone>
@@ -83,7 +86,7 @@ const NavBar = () => {
             </div>
           ) : (
             <div>
-              <StyledLinkPhone to="/mypage" >내 정보</StyledLinkPhone>
+              <StyledLinkPhone to="/mypage">내 정보</StyledLinkPhone>
               <StyledButton onClick={logout}>로그아웃</StyledButton>
             </div>
           )}

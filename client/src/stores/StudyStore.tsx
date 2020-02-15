@@ -1,8 +1,9 @@
 import { observable } from 'mobx'
-import * as studyAPI from '../lib/api/study.'
+import * as studyAPI from '../lib/api/study'
 import { Study } from '../components/main/MainTypes'
 import * as H from 'history'
 import { message } from 'antd'
+import { StudyGroupType } from '../components/studyGroup/StudyGroupType'
 
 const StudyStore = observable({
   recentStudy: [],
@@ -11,6 +12,8 @@ const StudyStore = observable({
 
   studyList: [],
   studyDetail: {},
+
+  studyGroup: {} as StudyGroupType,
 
   async fetchMainStudyList() {
     try {
@@ -28,7 +31,7 @@ const StudyStore = observable({
       this.recentStudy = recentlyEnrolled
       this.famousStudy = mostHits
     } catch (error) {
-      alert('데이터를 로드하는 중 요류가 발생했습니다')
+      alert('데이터를 로드하는 중 요류가 발생했습니다.')
     }
   },
 
@@ -45,7 +48,32 @@ const StudyStore = observable({
     }
   },
 
-  async UpdateStudy() {}
+  async UpdateStudy() {},
+  async fetchStudyGroup(id: number) {
+    const res = await studyAPI.getStudyGroup(Number(id))
+    this.studyGroup = res.data.value
+    console.log(res.data.value)
+    console.log(this.studyGroup.noticeDTOList[0].title)
+  },
+
+  async deleteStudySchedule(scheduleId: number) {
+    try {
+      const res = await studyAPI.deleteStudySchedule(Number(scheduleId))
+      alert(res.data.message)
+    } catch (e) {
+      alert('삭제 중 오류가 발생했습니다.')
+    }
+  },
+
+  async enrollNewNotice(newNotice: object) {
+    try {
+      const res = await studyAPI.insertNotice(newNotice)
+      this.studyGroup.noticeDTOList.push(res.data.value)
+      alert(res.data.message)
+    } catch (e) {
+      alert('공지사항 등록에 실패했습니다.')
+    }
+  }
 })
 
 export default StudyStore

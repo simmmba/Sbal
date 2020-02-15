@@ -129,6 +129,10 @@ export type UserStoreType = {
   isLoggingIn: boolean
   token: string | null
   data: UserInfoType
+  loginUser: {
+    id: number
+    nickname: string
+  }
   signup: (data: SignupData) => void
   login: (data: LoginData) => void
   logout: () => void

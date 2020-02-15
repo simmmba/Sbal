@@ -1,0 +1,74 @@
+
+export type StudyGroupType = {
+    id: number,
+    title: string,
+    contents: string,
+    leader: {
+        id: number,
+        nickname: string
+    },
+    city: string,
+    town: string,
+    state: number,
+    maxParticipants: number,
+    hits: number,
+    isOnline: boolean,
+    monthOrWeek: number,
+    timeslot: number,
+    evaluationLimit: number,
+    enrollDate: string,
+    startDate: string,
+    endDate: string,
+    joinedMemberCount: number,
+    lcategory: string,
+    scategory: string,
+
+    studyMemberDTOList: StudyMember[],
+    studyScheduleDTOList: StudySchedule[]
+    noticeDTOList: StudyNotice[],
+}
+
+export type StudyMember = {
+    user: {
+        id: number,
+        nickname: string
+    },
+    state: number
+}
+
+export type StudySchedule = {
+    id: number,
+    attendanceDTOList: StudyMember[],
+    subject: string,
+    homework: string,
+    meetDate: string,
+    location: string
+}
+
+export type StudyNotice = {
+    id: number,
+    title: number,
+    content: number,
+    studyId: number,
+    writer: number,
+    hits: number,
+    date: string,
+    replyList: NoticeReply[]
+}
+
+export type NoticeReply = {
+    id: number,
+    content: number,
+    noticeId: number,
+    writer: number,
+    date: string
+}
+
+export type CreatedNotice = {
+    title: string,
+    contents: string,
+    onChangeTextarea: (e: React.ChangeEvent<HTMLTextAreaElement>) => void,
+    [key: string]:
+        string
+        | ((e: React.ChangeEvent<HTMLTextAreaElement>) => void)
+}

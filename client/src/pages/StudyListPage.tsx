@@ -5,6 +5,7 @@ import StudyList from '../components/studyList/StudyList'
 import { useHistory } from 'react-router'
 import { authCheck, loadToken } from '../utils/authCheck'
 import SearchForm from '../components/studyList/SearchForm'
+import StudyGroupMain from '../components/studyGroup/StudyGroupMain'
 
 const StudyListPage = () => {
   const history = useHistory()
