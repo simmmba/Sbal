@@ -18,17 +18,17 @@ const StudyStore = observable({
   async fetchMainStudyList() {
     try {
       const res = await studyAPI.getMainStudyList()
-
       if (res.data.value.loginUser) {
         const {
           loginUser: { joinedStudyList }
         } = res.data.value
-        this.myStudy = joinedStudyList
+        this.myStudy = joinedStudyList.map(
+          (study: { state: number; study: Study; user: null }) => study.study
+        )
       }
-      
+
       const { recentlyEnrolled, mostHits } = res.data.value
-    
-      
+
       this.recentStudy = recentlyEnrolled
       this.famousStudy = mostHits
     } catch (error) {
