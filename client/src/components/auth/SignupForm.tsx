@@ -1,7 +1,8 @@
+import React from 'react'
 /** @jsx jsx */
 import { useLocalStore, useObserver } from 'mobx-react'
 import { css, jsx } from '@emotion/core'
-import { cityAndTowns, interests } from '../../stores/UserStore'
+import UserStore, { cityAndTowns, interests } from '../../stores/UserStore'
 import {
   AuthFormBlock,
   StyledInput,
@@ -20,15 +21,19 @@ import {
   Interests,
   CityAndTowns,
   Interest,
-  AuthFormProps
+  AuthFormProps,
+  UpdateData
 } from './AuthTypes'
 import { RouteComponentProps, withRouter } from 'react-router'
 import qs from 'qs'
 import {
   getSocialData,
   validateEmail,
-  validateNickname
+  validateNickname,
+  getMyInfoDetailsForModify
 } from '../../lib/api/auth'
+import { useEffect } from 'react'
+import { useHistory } from 'react-router'
 
 function ListItem({
   interest,
@@ -55,6 +60,25 @@ function ListItem({
 }
 
 function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
+  const history = useHistory()
+  useEffect(() => {
+    if (type === 'mypage/update') {
+      getMyInfoDetailsForModify()
+        .then(res => {
+          const data = res.data.value
+          state.email = data.email
+          state.nickname = data.nickname
+          state.phoneNumber = data.phoneNum
+          state.city = data.city.substr(0, 2)
+          state.town = data.town
+          state.introduction = data.introduction
+          state.interestList = data.interestDTOList
+        })
+        .catch(e => {
+          alert(e)
+        })
+    }
+  }, [])
   const state = useLocalStore<SignupState>(() => ({
     email: '',
     emailState: false,
@@ -116,7 +140,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
       try {
         const res = await validateEmail(state.email)
         this.isCheckedEmail = true
-        this.emailState = res.data.state === 'SUCCESS' ? true : false
+        this.emailState = res.data.state === 'SUCCESS'
         this.emailDupMessage = res.data.message
       } catch (error) {
         alert(error)
@@ -132,7 +156,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
       try {
         const res = await validateNickname(this.nickname)
         this.isCheckedNickname = true
-        this.nicknameState = res.data.state === 'SUCCESS' ? true : false
+        this.nicknameState = res.data.state === 'SUCCESS'
         this.nicknameDupMessage = res.data.message
       } catch (error) {
         alert(error)
@@ -181,6 +205,20 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
     )
   }
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    if (type === 'mypage/update') {
+      const dataToSend: UpdateData = {
+        email: state.email,
+        nickname: state.nickname,
+        city: state.city,
+        town: state.town,
+        phoneNum: state.phoneNumber,
+        introduction: state.introduction,
+        interestDTOList: state.interestList
+      }
+      UserStore.edit(dataToSend)
+      history.push('/')
+      return
+    }
     // const dataToSend = {
     //   email,
     //   nickname: username,
@@ -201,7 +239,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
     <AuthFormBlock>
       {type === 'signup/oauth' ? (
         <h3>최초 로그인을 위한 추가정보 입력</h3>
-      ) : type === 'myInfo/update' ? (
+      ) : type === 'mypage/update' ? (
         <h3>회원 정보 수정</h3>
       ) : (
         <h3>회원가입</h3>
@@ -223,8 +261,9 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
           <StyledButton
             width={30}
             marginLeft={5}
-            onClick={() => {
+            onClick={e => {
               state.validateUserEmail()
+              e.preventDefault()
             }}
           >
             중복 확인
@@ -250,8 +289,9 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
         <StyledButton
           width={30}
           marginLeft={5}
-          onClick={() => {
+          onClick={e => {
             state.validateUserNickname()
+            e.preventDefault()
           }}
         >
           중복 확인
@@ -261,33 +301,39 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
             {state.nicknameDupMessage}
           </Guide>
         </div>
-        <StyledLabel htmlFor="password">
-          <Guide color="red">* </Guide>비밀번호
-        </StyledLabel>
-        <StyledInput
-          placeholder="비밀번호를 입력하세요"
-          autoComplete="password"
-          name="password"
-          value={state.password}
-          type="password"
-          onChange={state.onChange}
-        />
-        <StyledLabel htmlFor="password2">
-          <Guide color="red">* </Guide>비밀번호 확인
-        </StyledLabel>
-        <StyledInput
-          placeholder="비밀번호를 입력하세요"
-          autoComplete="password"
-          name="password2"
-          value={state.password2}
-          type="password"
-          onChange={state.onChange}
-        />
-        <div>
-          <Guide color={state.isEqualPassword ? 'green' : 'red'}>
-            {state.equalsOfPasswords}
-          </Guide>
-        </div>
+        {type === 'mypage/update' ? (
+          <div />
+        ) : (
+          <div>
+            <StyledLabel htmlFor="password">
+              <Guide color="red">* </Guide>비밀번호
+            </StyledLabel>
+            <StyledInput
+              placeholder="비밀번호를 입력하세요"
+              autoComplete="password"
+              name="password"
+              value={state.password}
+              type="password"
+              onChange={state.onChange}
+            />
+            <StyledLabel htmlFor="password2">
+              <Guide color="red">* </Guide>비밀번호 확인
+            </StyledLabel>
+            <StyledInput
+              placeholder="비밀번호를 입력하세요"
+              autoComplete="password"
+              name="password2"
+              value={state.password2}
+              type="password"
+              onChange={state.onChange}
+            />
+            <div>
+              <Guide color={state.isEqualPassword ? 'green' : 'red'}>
+                {state.equalsOfPasswords}
+              </Guide>
+            </div>
+          </div>
+        )}
         <Guide marginTop="20px">* 아래는 추가 입력사항입니다</Guide>
         <StyledLabel htmlFor="email">연락처</StyledLabel>
         <StyledInput
@@ -298,21 +344,27 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
           type="text"
           onChange={state.onChange}
         />
-        <StyledLabel htmlFor="gender">성별</StyledLabel>
-        <FlexBetween className="gender-select">
-          <StyledRadio name="gender" value="1" onChange={state.onChange}>
-            남성
-          </StyledRadio>
-          <StyledRadio name="gender" value="2" onChange={state.onChange}>
-            여성
-          </StyledRadio>
-          <StyledRadio name="gender" value="3" onChange={state.onChange}>
-            기타
-          </StyledRadio>
-          <StyledRadio name="gender" value="0" onChange={state.onChange}>
-            선택 안함
-          </StyledRadio>
-        </FlexBetween>
+        {type === 'mypage/update' ? (
+          <div />
+        ) : (
+          <div>
+            <StyledLabel htmlFor="gender">성별</StyledLabel>
+            <FlexBetween className="gender-select">
+              <StyledRadio name="gender" value="1" onChange={state.onChange}>
+                남성
+              </StyledRadio>
+              <StyledRadio name="gender" value="2" onChange={state.onChange}>
+                여성
+              </StyledRadio>
+              <StyledRadio name="gender" value="3" onChange={state.onChange}>
+                기타
+              </StyledRadio>
+              <StyledRadio name="gender" value="0" onChange={state.onChange}>
+                선택 안함
+              </StyledRadio>
+            </FlexBetween>
+          </div>
+        )}
         <StyledLabel htmlFor="introduction">간단한 자기소개</StyledLabel>
         <StyledTextarea
           name="introduction"
@@ -386,7 +438,9 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
           </div>
           <PlusButton onClick={appendInterest} />
         </FlexBetween>
-        <StyledButton marginTop={15}>가입</StyledButton>
+        <StyledButton marginTop={15}>
+          {type === 'mypage/update' ? '수정' : '가입'}
+        </StyledButton>
       </form>
     </AuthFormBlock>
   ))

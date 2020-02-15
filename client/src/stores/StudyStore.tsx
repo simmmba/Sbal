@@ -35,9 +35,6 @@ const StudyStore = observable({
     }
   },
 
-  fetchStudyList() {},
-  fetchStudyDetail() {},
-
   async createStudy(studyData: Study, history: H.History) {
     try {
       const res = await studyAPI.createStudy(studyData)
@@ -72,6 +69,14 @@ const StudyStore = observable({
       alert(res.data.message)
     } catch (e) {
       alert('공지사항 등록에 실패했습니다.')
+    }
+  },
+  async getStudyList() {
+    const res = await studyAPI.getStudyList()
+    try {
+      this.studyList = res.data.value
+    } catch (error) {
+      message.error('데이터 로드에 실패했습니다. 새로고침 후 이용해주세요')
     }
   }
 })

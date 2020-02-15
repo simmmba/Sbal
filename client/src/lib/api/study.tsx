@@ -22,6 +22,9 @@ export const getStudyGroup = (studyId: number) => {
   }
   return apiClient.get('/study/' + studyId)
 }
+export const getStudyList = () => {
+  return apiClient.get('/study/list')
+}
 
 export const createStudy = (studyData: Study) => {
   if (sessionStorage.token) {
@@ -42,4 +45,4 @@ export const insertNotice = (newNotice: object) => {
     setAuthToken(sessionStorage.token)
   }
   return apiClient.post('/notice', newNotice)
-}}
+}

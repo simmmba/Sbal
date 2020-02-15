@@ -31,7 +31,7 @@ const App: React.FC = () => {
         {/* 로그인 & 소셜로그인 페이지 */}
         <Route path="/login" component={LoginPage} />
         {/* 마이페이지 */}
-        <Route path="/mypage" component={MyInfoPage} />
+        <Route path="/mypage" component={MyInfoPage} exact />
         {/* 스터디 리스트 페이지 */}
         <Route path="/study" component={StudyListPage} exact />
         {/* 스터디 개설 페이지 */}
@@ -40,6 +40,7 @@ const App: React.FC = () => {
         <Route path="/study/details/:id" component={StudyDetailPage} />
         {/* 스터디 그룹 페이지 */}
         <Route path="/study/:id" component={StudyGroupPage} />
+        <Route path="/mypage/update" component={SignupPage} />
       </Switch>
       <Footer />
     </div>

@@ -43,44 +43,12 @@ const upper = css`
   height: 40px;
 `
 
-const StudyList = () => {
-  const studyList = [
-    {
-      id: 1,
-      state: 0,
-      title: '백엔드 구축 스터디',
-      startDate: '2020-01-02',
-      endDate: '2020-01-31',
-      currentMember: 0,
-      maxMember: 5,
-      city: '서울시',
-      town: '강남구',
-      category: 'IT',
-      frequency: 2,
-      time: '오전',
-      isOnline: true
-    },
-    {
-      id: 2,
-      state: 0,
-      title: 'GSAT 인적성',
-      startDate: '2020-02-02',
-      endDate: '2020-02-15',
-      currentMember: 2,
-      maxMember: 4,
-      city: '서울시',
-      town: '용산구',
-      category: '취업',
-      frequency: 3,
-      time: '오후',
-      isOnline: false
-    }
-  ]
+const StudyList = ({studyList}) => {
 
-  const activeStyle = {
-    color: 'red',
-    background: 'black'
-  }
+    const activeStyle = {
+        color: 'red',
+        background: 'black'
+    }
 
   return (
     <div>
@@ -116,30 +84,32 @@ const StudyList = () => {
           </Thead>
           <Tbody>
             {studyList.length > 0 ? (
-              studyList.map(list => (
+              studyList.map((study) => (
                 <>
                   <Tr css={choose}>
-                    <Td css={d}>{list.category}</Td>
+                    <Td css={d}>{study.lcategory}</Td>
                     <Td css={title}>
                       <NavLink
                         activeStyle={activeStyle}
-                        to={`study/details/${list.id}`}
+                        to={`study/details/${study.id}`}
                         active
                       >
-                        {list.title}
+                        {study.title}
                       </NavLink>
                     </Td>
                     <Td css={d}>
-                      {list.startDate} ~ {list.endDate}
+                      {study.startDate} ~ {study.endDate}
                     </Td>
-                    <Td css={d}>{list.isOnline ? '온라인' : '오프라인'}</Td>
+                    <Td css={d}>{study.isOnline ? '온라인' : '오프라인'}</Td>
                     <Td css={d}>
-                      {list.city} {list.town}
+                      {study.city} {study.town}
                     </Td>
-                    <Td css={d}>주 {list.frequency}회</Td>
-                    <Td css={d}>{list.time}</Td>
                     <Td css={d}>
-                      {list.currentMember} / {list.maxMember}
+                      {study.monthOrWeek===0?"협의":study.monthOrWeek===1?"월":"주"} {study.frequency}회
+                    </Td>
+                    <Td css={d}>{study.timeslot}</Td>
+                    <Td css={d}>
+                      {study.joinedMemberCount} / {study.maxParticipants}
                     </Td>
                   </Tr>
                 </>
