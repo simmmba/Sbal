@@ -61,6 +61,7 @@ public class StudyController {
     @PostMapping
     @ApiOperation(value = "새로운 스터디를 생성한다.", response = CommonResponse.class)
     public ResponseEntity<CommonResponse> enrollNewStudy(@RequestBody StudyDTO study, HttpServletRequest request) {
+        System.out.println(study);
         try {
             int leaderId = jwtService.getLoginUserId(request);
             Study createdStudy = study.insertOrUpdateEntity(leaderId);
@@ -114,6 +115,7 @@ public class StudyController {
     @GetMapping("/{studyId}")
     @ApiOperation(value = "스터디의 상세 정보를 가져온다.", response = CommonResponse.class)
     public ResponseEntity<CommonResponse> details(@PathVariable Integer studyId, HttpServletRequest request) {
+        System.out.println(studyId);
         try {
             int loginUserId = jwtService.getLoginUserId(request);
             StudyDTO studyDTO = studyService.getStudyDetail(studyId).toDTO();
@@ -126,10 +128,12 @@ public class StudyController {
             studyDTO.setStudyScheduleDTOList(null);
 
             for (StudyMemberDTO sm : smList) {
-                if(sm.getUser().getId()==loginUserId && sm.getState()==1) {
+                if(sm.getUser().getId()==loginUserId && (sm.getState()==1 || sm.getState()==0)) {
                     studyDTO.setStudyScheduleDTOList(ssList);
                     if(loginUserId!=studyDTO.getLeader().getId())
-                        for (int i=0; i<smList.size(); i++) if(smList.get(i).getState()!=1) smList.remove(i--);
+                        for (int i=0; i<smList.size(); i++) {
+                            if(smList.get(i).getState() !=1 && smList.get(i).getState() != 0   ) smList.remove(i--);
+                        }
                     studyDTO.setStudyMemberDTOList(smList);
                     break;
                 }

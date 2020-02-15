@@ -4,6 +4,7 @@ import {
   UserDetailStoreType,
   UserInfoType
 } from '../components/userDetail/UserDetailTypes'
+import * as studyAPI from '../lib/api/study'
 
 const UserDetailStore: UserDetailStoreType = observable({
   // isLoggingIn : false,
@@ -23,7 +24,14 @@ const UserDetailStore: UserDetailStoreType = observable({
     ledStudyList: [],
     joinedStudyList: []
   },
-
+  //{id, pw, email, phoneNum, nickname, gender, introduction,
+  //city, town, evaluation, profilePhotoDir, socialLogin, interestDTOList, ledStudyList, joinedStudyList}
+  async deleteStudyMember(studyId: number, idx: number) {
+    try {
+      const res = await studyAPI.studyDelete(studyId)
+      this.data.joinedStudyList.splice(idx, 1)
+    } catch (error) {}
+  },
   async mypage() {
     try {
       const res = await userDetail.userInfo()

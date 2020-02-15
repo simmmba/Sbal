@@ -20,7 +20,7 @@ function MainStudyList() {
 
   return useObserver(() => (
     <div css={studyRank}>
-      <StudyRank title="myStudy" list={StudyStore.myStudy} />
+      <StudyRank title="myStudy"     list={StudyStore.myStudy} />
       <StudyRank title="recentStudy" list={StudyStore.recentStudy} />
       <StudyRank title="famousStudy" list={StudyStore.famousStudy} />
     </div>

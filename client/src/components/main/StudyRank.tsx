@@ -3,6 +3,7 @@
 import { css, jsx } from '@emotion/core'
 import { NavLink } from 'react-router-dom'
 import { StudyRankprops, Study } from './MainTypes'
+import myStudy from '../../stores/StudyStore'
 
 const listBox = css`
   /* width: 650px; */
@@ -65,8 +66,10 @@ const titleMap: { [key: string]: string } = {
 }
 
 const StudyRank = ({ title, list }: StudyRankprops) => {
+
   return (
     <div css={listBox}>
+     
       <div css={listTitle}>{titleMap[title]}</div>
       {list.length > 0 ? (
         list.map((study: Study, index: number) => (

@@ -16,6 +16,7 @@ export type UserInfoType = {
 export type UserDetailStoreType = {
     data: UserInfoType
     mypage: () => void
+    deleteStudyMember: (studyId : number, idx : number)=> void
 }
 export type Interest = {
     lcategory: string

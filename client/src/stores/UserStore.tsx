@@ -797,6 +797,8 @@ const UserStore = observable<UserStoreType>({
       }
       const token = res.headers.token
       sessionStorage.setItem('token', token)
+      const id = res.data.value.id
+      sessionStorage.setItem('id', id)
       this.token = token
       this.isLoggingIn = false
     } catch (error) {
@@ -830,6 +832,8 @@ const UserStore = observable<UserStoreType>({
       console.log(this.loginUser.id)
       const token = res.headers['jwt-auth-token']
       sessionStorage.setItem('token', token)
+      const id = res.data.value.id
+      sessionStorage.setItem('id', id)
       this.token = token
       this.isLoggingIn = false
     } catch (error) {
@@ -844,6 +848,7 @@ const UserStore = observable<UserStoreType>({
       id: 0,
       nickname: ''
     }
+    sessionStorage.removeItem('id')
     this.token = null
     StudyStore.myStudy = []
   },
