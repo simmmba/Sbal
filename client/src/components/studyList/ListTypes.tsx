@@ -8,5 +8,5 @@ export type FieldFormStoreType = {
   weekdayOrWeekend: number | null
   searchBy: string
   searchText: string | null
-  toggle: (e: React.ChangeEvent<HTMLInputElement>) => void
+  toggle: (value: string) => void
 }

@@ -17,8 +17,8 @@ const SearchForm = () => {
     searchBy: 'title',
     searchText: null,
 
-    toggle(e: React.ChangeEvent<HTMLInputElement>) {
-      this.searchBy = e.target.value
+    toggle(value) {
+      this.searchBy = value
     }
   }))
   const { Search } = Input
@@ -42,7 +42,7 @@ const SearchForm = () => {
       <Button>
         <Icon type="filter" />
       </Button>
-      <Select value={state.searchBy} onChange={state.toggle}>
+      <Select defaultValue={state.searchBy} onChange={state.toggle}>
         {searchByMap.map(
           (elem: { value: string; name: string }, index: number) => (
             <Option value={elem.value} key={index}>
