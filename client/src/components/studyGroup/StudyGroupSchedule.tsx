@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
-import { Icon, Empty } from 'antd'
+import { Icon, Empty, Modal } from 'antd'
 import { StudySchedule } from './StudyGroupType'
 import ScheduleAdd from './ScheduleAdd'
+import Score from './Score'
 import { useObserver } from 'mobx-react'
 import StudyStore from '../../stores/StudyStore'
 import UserStore from '../../stores/UserStore'
@@ -42,7 +43,6 @@ const StudyGroupSchedule = () => {
     margin-bottom: 2px;
 
     &:hover {
-      cursor: pointer;
       background-color: #e6f7ff;
     }
   `
@@ -63,6 +63,10 @@ const StudyGroupSchedule = () => {
     padding: 10px 10px 10px 20px;
     justify-content: center;
     width: 70%;
+
+    &:hover {
+      cursor: pointer;
+    }
   `
   const cnt = css`
     display: flex;
@@ -125,6 +129,26 @@ const StudyGroupSchedule = () => {
     align-items: center;
   `
 
+  // 스케줄 클릭시 출석 관리 폼 활성화
+  const [visible, setVisible] = useState(false)
+  const [confirmLoading, setConfirmLoading] = useState(false)
+
+  const showModal = () => {
+    setVisible(true)
+  }
+
+  const handleOk = () => {
+    setConfirmLoading(true)
+    setTimeout(() => {
+      setVisible(false)
+      setConfirmLoading(false)
+    }, 2000)
+  }
+
+  const handleCancel = () => {
+    setVisible(false)
+  }
+
   // const clickUpdateSchedule = ()  => {
   // }
   const clickDeleteSchedule = (id: number): void => {
@@ -152,7 +176,7 @@ const StudyGroupSchedule = () => {
             <div css={left}>
               <div css={cnt}>{index + 1}회차</div>
             </div>
-            <div css={right}>
+            <div css={right} onClick={showModal}>
               <div css={subject}>{s.subject}</div>
               <div css={homework}>
                 <b>시간 )</b> {s.meetDate.substr(0, 4)}년{' '}
@@ -166,6 +190,21 @@ const StudyGroupSchedule = () => {
                 <b>준비사항 )</b> {s.homework}
               </div>
             </div>
+
+            {/* 평가 모달 */}
+            <Modal
+              visible={visible}
+              onOk={handleOk}
+              confirmLoading={confirmLoading}
+              onCancel={handleCancel}
+              cancelText="취소"
+              okText="확인"
+              destroyOnClose={true}
+              width={500}
+            >
+              <Score />
+            </Modal>
+
             {UserStore.loginUser.id === StudyStore.studyGroup.leader.id ? (
               <div css={updateNDeleteLink}>
                 {/*<span onClick={() => clickUpdateSchedule()}>수정</span>*/}
