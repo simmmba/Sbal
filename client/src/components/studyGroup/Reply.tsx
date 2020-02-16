@@ -1,4 +1,4 @@
-import React, {useState, useRef, useCallback} from 'react'
+import React, { useState } from 'react'
 import {NavLink} from 'react-router-dom'
 /**@jsx jsx */
 import {css, jsx} from '@emotion/core'
@@ -8,8 +8,6 @@ import StudyStore from "../../stores/StudyStore";
 import {NoticeReply} from "./StudyGroupType";
 
 const Reply = ({index}: { index: number }) => {
-
-    const replyList = StudyStore.studyGroup.noticeDTOList[Number(index)].replyList;
 
     const cnt = css`
     border-bottom: 1px solid #d5d5d5;
@@ -70,6 +68,25 @@ const Reply = ({index}: { index: number }) => {
     }
   `
 
+    const replyList = StudyStore.studyGroup.noticeDTOList[Number(index)].replyList;
+
+    // const [ editedReply, setEditedReply ] = useState('');
+    // const changeReply = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     setEditedReply(e.target.value)
+    // }
+    // const ReplyEditor = (rIndex: {rIndex: number}) => {
+    //     return (
+    //         <div>
+    //             <StyledInput>
+    //                 name="editedReply"
+    //                 value={replyList[Number(rIndex)]}
+    //                 type="text"
+    //                 onChange={changeReply}
+    //             </StyledInput>
+    //         </div>
+    //     )
+    // }
+
     const clickDeleteIcon = (replyId: number) => {
         StudyStore.deleteReply(replyId);
     }
@@ -80,7 +97,7 @@ const Reply = ({index}: { index: number }) => {
                 <b>{replyList.length}</b>개의 댓글
             </div>
             <div css={comment}>
-                {replyList.map((r: NoticeReply) => (
+                {replyList.map((r: NoticeReply, rIndex: number) => (
                     <div css={list} key={r.id}>
                         <div css={upper}>
                             <div css={left}>
@@ -92,10 +109,11 @@ const Reply = ({index}: { index: number }) => {
                                     <Icon
                                         css={icon}
                                         type="edit"
-                                        //   style={{ fontSize: 24 }}
+                                        // style={{ fontSize: 24 }}
                                         // theme="twoTone"
                                         theme="filled"
                                         // twoToneColor="navy"
+                                        // onClick={() => clickEditIcon(Number(rIndex))}
                                     />
                                 </NavLink>
                                 <Icon
