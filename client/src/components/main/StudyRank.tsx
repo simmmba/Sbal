@@ -66,10 +66,8 @@ const titleMap: { [key: string]: string } = {
 }
 
 const StudyRank = ({ title, list }: StudyRankprops) => {
-
   return (
     <div css={listBox}>
-     
       <div css={listTitle}>{titleMap[title]}</div>
       {list.length > 0 ? (
         list.map((study: Study, index: number) => (

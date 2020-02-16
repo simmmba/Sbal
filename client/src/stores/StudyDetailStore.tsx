@@ -121,6 +121,7 @@ const studyDetailStore: StudyDetailStoreType = observable({
       this.studyMember = 0
       this.studyRequest = 0
       const res = await studyAPI.studyDetail(this.studyId)
+      console.log(res)
       //const token = res.headers['jwt-auth-token']
       //sessionStorage.setItem('token', token)
       this.data = res.data.value

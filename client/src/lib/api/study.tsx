@@ -2,6 +2,7 @@ import apiClient from './client'
 import setAuthToken from '../../utils/setAuthToken'
 import { Study } from '../../components/main/MainTypes'
 import { studyDetailType } from '../../components/studyDetail/StudyDetailTypes'
+import { FilterData } from '../../components/studyList/ListTypes'
 
 export const getMainStudyList = () => {
   if (sessionStorage.token) {
@@ -98,4 +99,11 @@ export const studyMemberUpdate = (
     state: stateNum
   }
   return apiClient.put('/study/member', data)
+}
+
+export const getFilteredList = (filterData: FilterData) => {
+  if (sessionStorage.token) {
+    setAuthToken(sessionStorage.token)
+  }
+  return apiClient.post('/study/list', filterData)
 }

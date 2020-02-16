@@ -22,18 +22,19 @@ const StudyListPage = () => {
 
   return (
     <div>
+      <h1>스터디 찾기</h1>
       <SearchForm
         css={css`
           width: 100px;
         `}
       />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-
-      <StudyList studyList={StudyStore.studyList} />
+      <div
+        css={css`
+          width: 100%;
+        `}
+      >
+        <StudyList studyList={StudyStore.studyList} />
+      </div>
     </div>
   )
 }

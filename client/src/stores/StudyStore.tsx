@@ -3,6 +3,7 @@ import * as studyAPI from '../lib/api/study'
 import { Study } from '../components/main/MainTypes'
 import * as H from 'history'
 import { message } from 'antd'
+import { FilterData } from '../components/studyList/ListTypes'
 import { StudyGroupType } from '../components/studyGroup/StudyGroupType'
 
 const StudyStore = observable({
@@ -14,6 +15,17 @@ const StudyStore = observable({
   studyDetail: {},
 
   studyGroup: {} as StudyGroupType,
+  filterData: {
+    searchBy: 'title',
+    searchText: '',
+    lcategory: '어학',
+    scategory: 'TOEIC',
+    city: '서울',
+    town: '강남구',
+    weekdayOrWeekend: 2,
+    isOnline: 1
+  } as FilterData,
+  modalVisible: false,
 
   async fetchMainStudyList() {
     try {
@@ -73,11 +85,19 @@ const StudyStore = observable({
     }
   },
   async getStudyList() {
-    const res = await studyAPI.getStudyList()
     try {
+      const res = await studyAPI.getStudyList()
       this.studyList = res.data.value
     } catch (error) {
-      message.error('데이터 로드에 실패했습니다. 새로고침 후 이용해주세요')
+      message.error('데이터 로드에 실패했습니다. 새로고침 후 다시 이용해주세요')
+    }
+  },
+  async filterStudyList() {
+    try {
+      const res = await studyAPI.getFilteredList(this.filterData)
+      this.studyList = res.data.value
+    } catch (error) {
+      message.error('데이터 로드에 실패했습니다. 새로고침 후 다시 이용해주세요')
     }
   }
 })
