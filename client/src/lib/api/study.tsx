@@ -55,3 +55,10 @@ export const deleteNotice = (id: number) => {
   }
   return apiClient.delete('/notice/' + Number(id))
 }
+
+export const insertReply = (newReply: object) => {
+  if (sessionStorage.token) {
+    setAuthToken(sessionStorage.token)
+  }
+  return apiClient.post('/reply', newReply)
+}
