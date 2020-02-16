@@ -41,3 +41,17 @@ export const insertNotice = (newNotice: object) => {
   }
   return apiClient.post('/notice', newNotice)
 }
+
+export const updateNotice = (editedNotice: object) => {
+  if (sessionStorage.token) {
+    setAuthToken(sessionStorage.token)
+  }
+  return apiClient.put('/notice', editedNotice)
+}
+
+export const deleteNotice = (id: number) => {
+  if (sessionStorage.token) {
+    setAuthToken(sessionStorage.token)
+  }
+  return apiClient.delete('/notice/' + Number(id))
+}

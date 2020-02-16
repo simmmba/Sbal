@@ -57,7 +57,25 @@ const StudyStore = observable({
       this.studyGroup.noticeDTOList.push(res.data.value);
       alert(res.data.message);
     } catch (e) {
-      alert('공지사항 등록에 실패했습니다.')
+      alert('공지사항 등록 중 오류가 발생했습니다.')
+    }
+  },
+
+  async editNotice(editedNotice: object) {
+    try {
+      const res = await studyAPI.updateNotice(editedNotice);
+      alert(res.data.message);
+    } catch (e) {
+      alert('공지사항 수정 중 오류가 발생했습니다.')
+    }
+  },
+
+  async deleteNotice(id: number) {
+    try {
+      const res = await studyAPI.deleteNotice(Number(id));
+      alert(res.data.message);
+    } catch (e) {
+      alert('공지사항 삭제 중 오류가 발생했습니다.')
     }
   }
 })

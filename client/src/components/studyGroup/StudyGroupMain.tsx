@@ -182,7 +182,7 @@ const StudyGroupMain = ({ id }: { id: number }) => {
                 exact={true}
               />
               <Route
-                path={`/study/${StudyStore.studyGroup.id}/board/${bid}/edit`}
+                path={`/study/${StudyStore.studyGroup.id}/editBoard/:index`}
                 component={StudyGroupBoardEdit}
               />
               <Route

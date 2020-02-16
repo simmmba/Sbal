@@ -5,7 +5,7 @@ import {css, jsx} from '@emotion/core'
 import {Icon} from 'antd'
 import Reply from './Reply'
 import StudyStore from '../../stores/StudyStore'
-import {useParams} from 'react-router'
+import {useParams, useHistory} from 'react-router'
 import {StudyNotice} from "./StudyGroupType";
 
 const StudyGroupBoardDetail = () => {
@@ -138,6 +138,14 @@ const StudyGroupBoardDetail = () => {
       color: #4c4c4c;
     }
   `
+    const history = useHistory();
+    const clickDeleteIcon = (id: number, deleteIndex: number) => {
+        if(window.confirm("게시물을 삭제하시겠습니까?")) {
+            StudyStore.deleteNotice(id);
+            StudyStore.studyGroup.noticeDTOList.splice(deleteIndex, 1);
+            history.goBack();
+        }
+    }
 
     return (
         <div css={main}>
@@ -166,15 +174,14 @@ const StudyGroupBoardDetail = () => {
                             <div css={right}>
                                 <NavLink
                                     css={navLink}
-                                    to={`/study/${StudyStore.studyGroup.id}/board/insert`}
+                                    to={`/study/${StudyStore.studyGroup.id}/editBoard/${Number(index)}`}
                                 >
                                     <Icon css={icon} type="edit" theme="filled"/>
                                     &nbsp;수정
                                 </NavLink>
-                                <NavLink css={navLink} to={``}>
-                                    <Icon css={icon} type="delete" theme="filled"/>
-                                    &nbsp;삭제
-                                </NavLink>
+                                <div onClick={()=>clickDeleteIcon(notice.id, Number(index))}>
+                                    <Icon css={icon} type="delete" theme="filled"/>삭제
+                                </div>
                             </div>
                         </div>
                     </div>
