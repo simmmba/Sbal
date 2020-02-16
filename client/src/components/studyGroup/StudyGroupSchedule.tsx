@@ -1,15 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
 import { Icon, Empty } from 'antd'
 import { StudySchedule } from './StudyGroupType'
+import ScheduleAdd from './ScheduleAdd'
 import { useObserver } from 'mobx-react'
 import StudyStore from '../../stores/StudyStore'
 import UserStore from '../../stores/UserStore'
 import { useHistory } from 'react-router'
+
 const StudyGroupSchedule = () => {
   const history = useHistory()
   const studyScheduleList = StudyStore.studyGroup.studyScheduleDTOList
+
   const main = css`
     display: flex;
     flex-direction: column;
@@ -141,20 +144,7 @@ const StudyGroupSchedule = () => {
           />
           &nbsp;스터디 스케줄
         </div>
-        {studyScheduleList.length > 0 ? (
-          <button css={btn}>
-            스케줄 추가&nbsp;&nbsp;
-            <Icon
-              css={icon}
-              type="plus-circle"
-              style={{ fontSize: 20 }}
-              theme="twoTone"
-              twoToneColor="navy"
-            />
-          </button>
-        ) : (
-          <div></div>
-        )}
+        {studyScheduleList.length > 0 ? <ScheduleAdd /> : <div></div>}
       </div>
       {studyScheduleList.length > 0 ? (
         studyScheduleList.map((s: StudySchedule, index: number) => (

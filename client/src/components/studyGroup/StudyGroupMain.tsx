@@ -53,8 +53,8 @@ const StudyGroupMain = ({ id }: { id: number }) => {
   // }));
   useEffect(() => {
     StudyStore.fetchStudyGroup(Number(id))
-  }, []);
-  const bid = 1;
+  }, [])
+  const bid = 1
 
   const title = css`
     padding: 15px 10px 10px 23px;
@@ -125,7 +125,7 @@ const StudyGroupMain = ({ id }: { id: number }) => {
                     style={{ fontSize: 19 }}
                     theme="twoTone"
                   />
-                  일정
+                  스케줄
                 </NavLink>
               </Menu.Item>
               <Menu.Item key="board">
@@ -178,7 +178,7 @@ const StudyGroupMain = ({ id }: { id: number }) => {
               />
               <Route
                 path={`/study/${StudyStore.studyGroup.id}/board/:index`}
-                component={() => <StudyGroupBoardDetail/>}
+                component={() => <StudyGroupBoardDetail />}
                 exact={true}
               />
               <Route
