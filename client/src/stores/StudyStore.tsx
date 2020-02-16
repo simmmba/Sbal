@@ -96,6 +96,21 @@ const StudyStore = observable({
     } catch (e) {
       alert('댓글 등록 중 오류가 발생했습니다.')
     }
+  },
+
+  async deleteReply(replyId: number) {
+    try {
+      const res = await studyAPI.deleteReply(Number(replyId));
+      if(res.data.state==='SUCCESS') {
+        const studyGroup = await studyAPI.getStudyGroup(this.studyGroup.id);
+        this.studyGroup = studyGroup.data.value;
+        alert('댓글을 삭제 했습니다.')
+      } else {
+        alert('댓글 삭제에 실패했습니다.')
+      }
+    } catch (e) {
+      alert('댓글 삭제 중 오류가 발생했습니다.')
+    }
   }
 })
 

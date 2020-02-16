@@ -62,3 +62,10 @@ export const insertReply = (newReply: object) => {
   }
   return apiClient.post('/reply', newReply)
 }
+
+export const deleteReply = (replyId: number) => {
+  if (sessionStorage.token) {
+    setAuthToken(sessionStorage.token)
+  }
+  return apiClient.delete('/reply/' + Number(replyId))
+}

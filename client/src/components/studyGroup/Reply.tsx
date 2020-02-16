@@ -1,12 +1,13 @@
-import React, { useState, useRef, useCallback } from 'react'
-import { NavLink } from 'react-router-dom'
+import React, {useState, useRef, useCallback} from 'react'
+import {NavLink} from 'react-router-dom'
 /**@jsx jsx */
-import { css, jsx } from '@emotion/core'
-import { Icon } from 'antd'
+import {css, jsx} from '@emotion/core'
+import {Icon} from 'antd'
 import ReplyInsert from './ReplyInsert'
 import StudyStore from "../../stores/StudyStore";
+import {NoticeReply} from "./StudyGroupType";
 
-const Reply = ({index} : {index: number}) => {
+const Reply = ({index}: { index: number }) => {
 
     const replyList = StudyStore.studyGroup.noticeDTOList[Number(index)].replyList;
 
@@ -69,13 +70,17 @@ const Reply = ({index} : {index: number}) => {
     }
   `
 
+    const clickDeleteIcon = (replyId: number) => {
+        StudyStore.deleteReply(replyId);
+    }
+
     return (
         <div>
             <div css={cnt}>
                 <b>{replyList.length}</b>개의 댓글
             </div>
             <div css={comment}>
-                {replyList.map(r => (
+                {replyList.map((r: NoticeReply) => (
                     <div css={list} key={r.id}>
                         <div css={upper}>
                             <div css={left}>
@@ -93,15 +98,14 @@ const Reply = ({index} : {index: number}) => {
                                         // twoToneColor="navy"
                                     />
                                 </NavLink>
-                                <NavLink css={navLink} to={`/`}>
-                                    <Icon
-                                        css={icon}
-                                        type="delete"
-                                        //   style={{ fontSize: 24 }}
-                                        theme="filled"
-                                        // twoToneColor="navy"
-                                    />
-                                </NavLink>
+                                <Icon
+                                    css={icon}
+                                    type="delete"
+                                    //   style={{ fontSize: 24 }}
+                                    theme="filled"
+                                    onClick={() => clickDeleteIcon(Number(r.id))}
+                                    // twoToneColor="navy"
+                                />
                             </div>
                         </div>
                         <div css={content}>
