@@ -126,3 +126,10 @@ export const deleteReply = (replyId: number) => {
   }
   return apiClient.delete('/reply/' + Number(replyId))
 }
+
+export const increaseNoticeHits = (noticeId : number) => {
+  if (sessionStorage.token) {
+    setAuthToken(sessionStorage.token)
+  }
+  return apiClient.get('/notice/increaseHits/' + Number(noticeId))
+}

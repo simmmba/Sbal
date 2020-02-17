@@ -7,6 +7,7 @@ import Reply from './Reply'
 import StudyStore from '../../stores/StudyStore'
 import {useParams, useHistory} from 'react-router'
 import {StudyNotice} from "./StudyGroupType";
+import { useEffect } from 'react'
 
 const StudyGroupBoardDetail = () => {
     const {index} = useParams();
@@ -146,6 +147,10 @@ const StudyGroupBoardDetail = () => {
             history.goBack();
         }
     }
+
+    useEffect( () => {
+        StudyStore.increaseNoticeHits(Number(notice.id), Number(index));
+    })
 
     return (
         <div css={main}>

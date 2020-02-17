@@ -78,3 +78,8 @@ export type CreatedNotice = {
         string
         | ((e: React.ChangeEvent<HTMLTextAreaElement>) => void)
 }
+
+export type loginUser = {
+    id: number,
+    nickname: string
+}
