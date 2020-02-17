@@ -167,7 +167,7 @@ const StudyGroupBoardDetail = () => {
                         <div css={btitle}>{notice.title}</div>
                         <div css={detail}>
                             <div css={left}>
-                                <div css={writer}>{notice.writer}&nbsp;&nbsp; |</div>
+                                <div css={writer}>{notice.writer.nickname}&nbsp;&nbsp; |</div>
                                 <div css={date}>{notice.date.substr(0, 16)}&nbsp;&nbsp; |</div>
                                 <div css={hit}>조회 {notice.hits}</div>
                             </div>

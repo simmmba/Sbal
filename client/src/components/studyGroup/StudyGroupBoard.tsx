@@ -162,7 +162,7 @@ const StudyGroupBoard = () => {
               {notice.title}
             </NavLink>
           </div>
-          <div css={writer}>{notice.writer}</div>
+          <div css={writer}>{notice.writer.nickname}</div>
           <div css={date}>{notice.date.substr(0, 16)}</div>
           <div css={hit}>{notice.hits}</div>
           <div css={hit}>{notice.replyList.length}</div>

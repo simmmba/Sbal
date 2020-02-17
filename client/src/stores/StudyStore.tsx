@@ -48,8 +48,8 @@ const StudyStore = observable({
 
   async UpdateStudy() {},
   async fetchStudyGroup(id: number) {
-    const res = await studyAPI.getStudyGroup(Number(id))
-    this.studyGroup = res.data.value
+    const res = await studyAPI.getStudyGroup(Number(id));
+    this.studyGroup = res.data.value;
   },
 
   async deleteStudySchedule(scheduleId: number) {

@@ -50,7 +50,10 @@ export type StudyNotice = {
     title: string,
     content: string,
     studyId: number,
-    writer: number,
+    writer: {
+        id: number,
+        nickname: string
+    },
     hits: number,
     date: string,
     replyList: NoticeReply[]
@@ -60,7 +63,10 @@ export type NoticeReply = {
     id: number,
     content: number,
     noticeId: number,
-    writer: number,
+    writer: {
+        id: number,
+        nickname: string
+    },
     date: string
 }
 
