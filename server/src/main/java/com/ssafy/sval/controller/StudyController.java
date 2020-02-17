@@ -129,10 +129,10 @@ public class StudyController {
             studyDTO.setStudyScheduleDTOList(null);
 
             for (StudyMemberDTO sm : smList) {
-                if (sm.getUser().getId() == loginUserId && sm.getState() == 1 && sm.getState()==0) {
+                if (sm.getUser().getId() == loginUserId && (sm.getState() == 1 || sm.getState()==0)) {
                     studyDTO.setStudyScheduleDTOList(ssList);
                     if (loginUserId != studyDTO.getLeader().getId())
-                        for (int i = 0; i < smList.size(); i++) if (smList.get(i).getState() != 1) smList.remove(i--);
+                        for (int i = 0; i < smList.size(); i++) if (smList.get(i).getState() != 1 && smList.get(i).getState() != 0) smList.remove(i--);
                     studyDTO.setStudyMemberDTOList(smList);
                     break;
                 }
