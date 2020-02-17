@@ -9290,7 +9290,7 @@ react-dev-utils@^10.0.0:
     strip-ansi "6.0.0"
     text-table "0.2.0"
 
-react-dom@^16.12.0:
+react-dom@^16.12.0, react-dom@^16.8:
   version "16.12.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.12.0.tgz#0da4b714b8d13c2038c9396b54a92baea633fe11"
   integrity sha512-LMxFfAGrcS3kETtQaCkTKjMiifahaMySFDn71fZUNpPHZQEzmk/GiAeIT8JSOrHB23fnuCOMruL2a8NYlw+8Gw==
@@ -9321,6 +9321,13 @@ react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4:
   version "16.12.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.12.0.tgz#2cc0fe0fba742d97fd527c42a13bec4eeb06241c"
   integrity sha512-rPCkf/mWBtKc97aLL9/txD8DZdemK0vkA3JMLShjlJB3Pj3s+lpf1KaBzMfQrAmhMQB0n1cU/SUGgKKBCe837Q==
+
+react-kakao-maps@Musma/react-kakao-maps#0.0.1:
+  version "0.0.1"
+  resolved "https://codeload.github.com/Musma/react-kakao-maps/tar.gz/d52605d1f391671c2bf2983bf118a57dd9bb3940"
+  dependencies:
+    react "^16.8"
+    react-dom "^16.8"
 
 react-lazy-load@^3.0.13:
   version "3.0.13"
@@ -9442,7 +9449,7 @@ react-super-responsive-table@^5.1.1:
   resolved "https://registry.yarnpkg.com/react-super-responsive-table/-/react-super-responsive-table-5.1.1.tgz#ba557481a9a0fed4d6765457c111b872289f24d8"
   integrity sha512-YKynBZSUA4QcN+CJgQYvb4RSv8eXHO/8J2cJPAycW5DwdENRd0KgtE7myclnjQeDMxafiFTDILV73DIX2fRRXw==
 
-react@^16.12.0:
+react@^16.12.0, react@^16.8:
   version "16.12.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.12.0.tgz#0c0a9c6a142429e3614834d5a778e18aa78a0b83"
   integrity sha512-fglqy3k5E+81pA8s+7K0/T3DBCF0ZDOher1elBFzF7O6arXJgzyu/FW+COxFvAWXJoJN9KIZbT2LXlukwphYTA==

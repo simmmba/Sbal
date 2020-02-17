@@ -2,11 +2,14 @@ import React from 'react'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
 import StudyDetailStore from '../../stores/StudyDetailStore'
-import UserStore from '../../stores/UserStore'
+import UserDetailStore from '../../stores/UserDetailStore'
 import { studyMember } from './StudyDetailTypes'
 import {useObserver} from 'mobx-react'
+import {useHistory} from 'react-router'
 
 const StudyMember = () => {
+
+  const history = useHistory()
 
   const btn = css`
     color: #5d5d5d;
@@ -105,10 +108,14 @@ const StudyMember = () => {
         </tr>
         {StudyDetailStore.data.studyMemberDTOList.map(
           (studyMember : studyMember, index : number) => (
-          <tr key={index}>
-            {studyMember.state === 1 && <td css={nickname}>{studyMember.user.nickname}</td> }
+          <tr key={index} >
+            {studyMember.state === 1 && <td css={nickname}> {studyMember.user.nickname}</td>}
+            {studyMember.state === 1 &&  <td css={td}> 
+              <button css={btn} onClick={() =>{UserDetailStore.goUserInfo(studyMember.user.id, history)}}>정보보기</button>
+            </td>}
             {studyMember.state === 1 &&  <td css={td}>
-            {studyMember.user.id !== StudyDetailStore.data.leader.id && StudyDetailStore.data.leader.id+"" === sessionStorage.getItem('id') &&  <button css={btn}>내보내기</button>}
+            {studyMember.user.id !== StudyDetailStore.data.leader.id && StudyDetailStore.data.leader.id+"" === sessionStorage.getItem('id') &&  
+              <button css={btn} onClick={() =>{StudyDetailStore.updateStudyMember(StudyDetailStore.data.id, studyMember.user.id, 3)}}>내보내기</button>}
             </td>}
           </tr>
             

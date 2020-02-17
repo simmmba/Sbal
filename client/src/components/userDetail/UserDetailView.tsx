@@ -8,11 +8,13 @@ import { css, jsx } from '@emotion/core'
 import { Display } from '../Display'
 import Button from '../common/Button'
 import { useHistory } from 'react-router'
+import { NavLink, Link } from 'react-router-dom'
+
 
 const UserDetail = () => {
-  useEffect(() => {
-    UserDetailStore.mypage()
-  }, [])
+  // useEffect(() => {
+    
+  // }, [])
   const history = useHistory()
   //JSON.stringify(UserStore.data);
 
@@ -89,7 +91,7 @@ const UserDetail = () => {
         <div>
           <div>{UserDetailStore.data.nickname}</div>
           <span>
-            참여중인 스터디 : {UserDetailStore.data.joinedStudyList.length}{' '}
+            참여중인 스터디 : {UserDetailStore.data.ledStudyList.length + UserDetailStore.joinCount}{' '}
           </span>{' '}
           <span>
             {' '}
@@ -111,44 +113,32 @@ const UserDetail = () => {
 
         <div>
           <div>
-            <Button onClick={() => history.push('/mypage/update')}>
+            {UserDetailStore.data.id+""=== sessionStorage.getItem('id') && <Button onClick={() => history.push('/mypage/update')}>
               정보 수정
-            </Button>
-            <div>{UserDetailStore.data.nickname}</div>
-            <span>
-              참여중인 스터디 : {UserDetailStore.data.joinedStudyList.length}{' '}
-            </span>
-            <span>
-              개설중인 스터디 : {UserDetailStore.data.ledStudyList.length}
-            </span>
-            <br />
-            <span>성실도 : {UserDetailStore.data.evaluation}</span> <br />
-            <span>
-              관심사 :{' '}
-              {UserDetailStore.data.interestDTOList.map(
-                (interest: Interest, index: number) => (
-                  <span key={index}> {interest.scategory} </span>
-                )
-              )}
-            </span>{' '}
-            <br />
-            <span>한 마디 : {UserDetailStore.data.introduction}</span>
+            </Button>}
+            
           </div>
+          </div>
+            <div>
+              {UserDetailStore.data.id+"" === sessionStorage.getItem("id") &&
+              <div>
           <div>
             <hr />
             <h2>내 스터디 목록</h2>
             <hr />
             <table css={table}>
+            
               <tr>
                 <th css={th}>진행 여부 </th>
                 <th css={th}> 스터디명 </th>
                 <th css={th}> 진행 기간 </th>
                 <th css={th}> 인원 </th>
               </tr>
-
               {UserDetailStore.data.ledStudyList.map(
                 (LedStudy: LedStudy, index: number) => (
-                  <tr key={index}>
+              
+                  <tr key={index} >
+                  <Link to={`study/details/${LedStudy.id}`}>
                     {LedStudy.state === 0 && <td css={td}> 모집 중 </td>}
                     {LedStudy.state === 1 && <td css={td}> 진행 중 </td>}
                     {LedStudy.state === 2 && <td css={td}> 종 료 </td>}
@@ -161,12 +151,16 @@ const UserDetail = () => {
                       {' '}
                       {LedStudy.joinedMemberCount}/{LedStudy.maxParticipants}{' '}
                     </td>
+                  </Link>
                   </tr>
+              
                 )
               )}
               {UserDetailStore.data.joinedStudyList.map(
                 (JoinedStudy: JoinedStudy, index: number) => (
+          
                   <tr key={index}>
+                    <Link to={`study/details/${JoinedStudy.study.id}`}>
                     {JoinedStudy.state === 1 &&
                       JoinedStudy.study.state === 0 && (
                         <td css={td}> 모집 중 </td>
@@ -196,6 +190,7 @@ const UserDetail = () => {
                         {JoinedStudy.study.maxParticipants}{' '}
                       </td>
                     )}
+                    </Link>
                   </tr>
                 )
               )}
@@ -216,6 +211,7 @@ const UserDetail = () => {
             {UserDetailStore.data.joinedStudyList.map(
               (JoinedStudy: JoinedStudy, index: number) => (
                 <tr key={index}>
+                <Link to={`study/details/${JoinedStudy.study.id}`}>
                   {JoinedStudy.state === 0 && <td css={td}> 요청 중 </td>}
                   {JoinedStudy.state === 2 && <td css={td}> 거 절 </td>}
                   {(JoinedStudy.state === 0 || JoinedStudy.state === 2) && (
@@ -260,10 +256,12 @@ const UserDetail = () => {
                       </button>
                     </td>
                   )}
+                  </Link>
                 </tr>
               )
             )}
           </table>
+          </div> }
         </div>
       </Display>
     </div>
