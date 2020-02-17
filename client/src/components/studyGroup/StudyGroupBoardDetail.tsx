@@ -7,6 +7,7 @@ import Reply from './Reply'
 import StudyStore from '../../stores/StudyStore'
 import {useParams, useHistory} from 'react-router'
 import {StudyNotice} from "./StudyGroupType";
+import { useEffect } from 'react'
 
 const StudyGroupBoardDetail = () => {
     const {index} = useParams();
@@ -147,6 +148,10 @@ const StudyGroupBoardDetail = () => {
         }
     }
 
+    useEffect( () => {
+        StudyStore.increaseNoticeHits(Number(notice.id), Number(index));
+    })
+
     return (
         <div css={main}>
             <div css={upper}>
@@ -167,7 +172,7 @@ const StudyGroupBoardDetail = () => {
                         <div css={btitle}>{notice.title}</div>
                         <div css={detail}>
                             <div css={left}>
-                                <div css={writer}>{notice.writer}&nbsp;&nbsp; |</div>
+                                <div css={writer}>{notice.writer.nickname}&nbsp;&nbsp; |</div>
                                 <div css={date}>{notice.date.substr(0, 16)}&nbsp;&nbsp; |</div>
                                 <div css={hit}>조회 {notice.hits}</div>
                             </div>

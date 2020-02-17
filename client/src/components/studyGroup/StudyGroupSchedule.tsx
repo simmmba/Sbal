@@ -8,11 +8,8 @@ import ScheduleEdit from './ScheduleEdit'
 import Score from './Score'
 import { useObserver } from 'mobx-react'
 import StudyStore from '../../stores/StudyStore'
-import UserStore from '../../stores/UserStore'
-import { useHistory } from 'react-router'
 
 const StudyGroupSchedule = () => {
-  const history = useHistory()
   const studyScheduleList = StudyStore.studyGroup.studyScheduleDTOList
 
   const main = css`
@@ -186,9 +183,8 @@ const StudyGroupSchedule = () => {
   // const clickUpdateSchedule = (id: number): void => {
   //   StudyStore.deleteStudySchedule(Number(id))
   // }
-
-  const clickDeleteSchedule = (id: number): void => {
-    StudyStore.deleteStudySchedule(Number(id))
+  const clickDeleteSchedule = (id: number, index: number): void => {
+    StudyStore.deleteStudySchedule(Number(id), Number(index))
   }
 
   return useObserver(() => (
@@ -204,7 +200,7 @@ const StudyGroupSchedule = () => {
           />
           &nbsp;스터디 스케줄
         </div>
-        {studyScheduleList.length > 0 ? <ScheduleAdd /> : <div></div>}
+        {studyScheduleList.length > 0 ? <ScheduleAdd /> : <div />}
       </div>
       {studyScheduleList.length > 0 ? (
         studyScheduleList.map((s: StudySchedule, index: number) => (
@@ -240,11 +236,13 @@ const StudyGroupSchedule = () => {
                 <Score />
               </Modal>
 
-              {UserStore.loginUser.id === StudyStore.studyGroup.leader.id ? (
+              {StudyStore.loginUser.id === StudyStore.studyGroup.leader.id ? (
                 <div css={right}>
                   <ScheduleEdit />
                   &nbsp;&nbsp;
-                  <button css={btn} onClick={() => clickDeleteSchedule(s.id)}>
+                  <button
+                    onClick={() => clickDeleteSchedule(s.id, Number(index))}
+                  >
                     삭제
                   </button>
                 </div>

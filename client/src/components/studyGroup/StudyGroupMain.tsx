@@ -102,7 +102,6 @@ const StudyGroupMain = ({ id }: { id: number }) => {
 
   return useObserver(() => (
     <Display>
-      {/*{study.map(s => (*/}
       <div>
         <div css={top}>
           <NavLink css={title} to={`/study/${StudyStore.studyGroup.id}`}>

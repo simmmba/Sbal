@@ -82,16 +82,9 @@ public class Study {
 
     public StudyDTO mainPageDTO() {
         StudyDTO studyDTO = new StudyDTO(id, title, null, new UserDTO(leader.getId(), leader.getNickname()),
-<<<<<<< HEAD
                 lCategory, sCategory, city, town, state, maxParticipants, hits, isOnline, monthOrWeek,
                 frequency, weekdayOrWeekend, timeslot, evaluationLimit, enrollDate,
-                startDate, endDate, null, null, null);
-=======
-                lCategory, sCategory, city, town, state, maxParticipants, hits, isOnline, null,
-                null, null, null, evaluationLimit, enrollDate,
-                null, null, null, null, null,null);
->>>>>>> study-detail
-
+                startDate, endDate, null, null, null, null);
         return studyDTO;
     }
 
