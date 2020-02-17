@@ -4,6 +4,7 @@ import { css, jsx } from '@emotion/core'
 import { Icon, Empty, Modal } from 'antd'
 import { StudySchedule } from './StudyGroupType'
 import ScheduleAdd from './ScheduleAdd'
+import ScheduleEdit from './ScheduleEdit'
 import Score from './Score'
 import { useObserver } from 'mobx-react'
 import StudyStore from '../../stores/StudyStore'
@@ -38,6 +39,9 @@ const StudyGroupSchedule = () => {
     background: #f4fcff;
     border-radius: 10px;
     margin-bottom: 2px;
+    padding: 10px 0px 10px 0px;
+    /* flex-wrap: wrap; */
+    /* justify-content: space-between; */
 
     &:hover {
       background-color: #e6f7ff;
@@ -46,35 +50,50 @@ const StudyGroupSchedule = () => {
 
   const left = css`
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
     /* border: 1px solid black; */
-    padding: 10px 20px 10px 20px;
+    padding: 10px 10px 10px 10px;
     border-right: 2px dashed #fff;
+    font-weight: bold;
+    width: 80px;
   `
 
-  const right = css`
+  const middle = css`
     display: flex;
     flex-direction: column;
     /* border: 1px solid black; */
-    padding: 10px 10px 10px 20px;
+    padding: 0px 10px 0px 20px;
     justify-content: center;
-    width: 70%;
+    min-width: 500px;
 
     &:hover {
       cursor: pointer;
     }
   `
-  const cnt = css`
+
+  const right = css`
     display: flex;
-    justify-content: center;
-    font-weight: bold;
+    /* border: 1px solid black; */
+    padding: 5px 10px 0px 20px;
+    justify-content: flex-end;
+    align-items: center;
   `
-  const date = css`
+
+  const box = css`
     display: flex;
-    justify-content: center;
-    font-size: 13px;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
   `
+
+  // const cnt = css`
+  //   display: flex;
+  //   justify-content: center;
+  //   font-weight: bold;
+  // `
+
   const subject = css`
     font-weight: bold;
     font-size: 18px;
@@ -90,13 +109,7 @@ const StudyGroupSchedule = () => {
     align-items: center;
   `
 
-  const updateNDeleteLink = css`
-    float: right;
-    display: flex;
-    align-items: center;
-  `
-
-  const btn = css`
+  const add = css`
     background-color: #fff;
     border: none;
     cursor: pointer;
@@ -106,11 +119,32 @@ const StudyGroupSchedule = () => {
     font-size: 14px;
     font-weight: bold;
     color: navy;
-
     background: #d9e5ff;
     border-radius: 7px;
     width: 130px;
     height: 30px;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: #b2ccff;
+    }
+  `
+
+  const btn = css`
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: navy;
+    background: #d9e5ff;
+    border-radius: 7px;
+    width: 50px;
+    height: 25px;
+    transition: 0.3s;
 
     &:hover {
       background-color: #b2ccff;
@@ -127,26 +161,27 @@ const StudyGroupSchedule = () => {
   `
 
   // 스케줄 클릭시 출석 관리 폼 활성화
-  const [visible, setVisible] = useState(false)
-  const [confirmLoading, setConfirmLoading] = useState(false)
+  const [scoreVisible, setScoreVisible] = useState(false)
+  const [scoreConfirmLoading, setScoreConfirmLoading] = useState(false)
 
-  const showModal = () => {
-    setVisible(true)
+  const showScoreModal = () => {
+    setScoreVisible(true)
   }
 
-  const handleOk = () => {
-    setConfirmLoading(true)
+  const handleScoreOk = () => {
+    setScoreConfirmLoading(true)
     setTimeout(() => {
-      setVisible(false)
-      setConfirmLoading(false)
+      setScoreVisible(false)
+      setScoreConfirmLoading(false)
     }, 2000)
   }
 
-  const handleCancel = () => {
-    setVisible(false)
+  const handleScoreCancel = () => {
+    setScoreVisible(false)
   }
 
-  // const clickUpdateSchedule = ()  => {
+  // const clickUpdateSchedule = (id: number): void => {
+  //   StudyStore.deleteStudySchedule(Number(id))
   // }
   const clickDeleteSchedule = (id: number, index: number): void => {
     StudyStore.deleteStudySchedule(Number(id), Number(index))
@@ -165,52 +200,56 @@ const StudyGroupSchedule = () => {
           />
           &nbsp;스터디 스케줄
         </div>
-        {studyScheduleList.length > 0 ? <ScheduleAdd /> : <div/>}
+        {studyScheduleList.length > 0 ? <ScheduleAdd /> : <div />}
       </div>
       {studyScheduleList.length > 0 ? (
         studyScheduleList.map((s: StudySchedule, index: number) => (
           <div css={content} key={s.id}>
-            <div css={left}>
-              <div css={cnt}>{index + 1}회차</div>
-            </div>
-            <div css={right} onClick={showModal}>
-              <div css={subject}>{s.subject}</div>
-              <div css={homework}>
-                <b>시간 )</b> {s.meetDate.substr(0, 4)}년{' '}
-                {s.meetDate.substr(5, 2)}월 {s.meetDate.substr(8, 2)}일{' '}
-                {s.meetDate.substr(11, 2)}시 {s.meetDate.substr(14, 2)}분
+            <div css={left}>{index + 1}회차</div>
+            <div css={box}>
+              <div css={middle} onClick={showScoreModal}>
+                <div css={subject}>{s.subject}</div>
+                <div css={homework}>
+                  <b>시간 )</b> {s.meetDate.substr(0, 4)}년{' '}
+                  {s.meetDate.substr(5, 2)}월 {s.meetDate.substr(8, 2)}일{' '}
+                  {s.meetDate.substr(11, 2)}시 {s.meetDate.substr(14, 2)}분
+                </div>
+                <div css={homework}>
+                  <b>장소 )</b> {s.location}
+                </div>
+                <div css={homework}>
+                  <b>준비사항 )</b> {s.homework}
+                </div>
               </div>
-              <div css={homework}>
-                <b>장소 )</b> {s.location}
-              </div>
-              <div css={homework}>
-                <b>준비사항 )</b> {s.homework}
-              </div>
-            </div>
 
-            {/* 평가 모달 */}
-            <Modal
-              visible={visible}
-              onOk={handleOk}
-              confirmLoading={confirmLoading}
-              onCancel={handleCancel}
-              cancelText="취소"
-              okText="확인"
-              destroyOnClose={true}
-              width={500}
-            >
-              <Score />
-            </Modal>
+              {/* 평가 모달 */}
+              <Modal
+                visible={scoreVisible}
+                onOk={handleScoreOk}
+                confirmLoading={scoreConfirmLoading}
+                onCancel={handleScoreCancel}
+                cancelText="취소"
+                okText="확인"
+                destroyOnClose={true}
+                width={500}
+              >
+                <Score />
+              </Modal>
 
-            {StudyStore.loginUser.id === StudyStore.studyGroup.leader.id ? (
-              <div css={updateNDeleteLink}>
-                {/*<span onClick={() => clickUpdateSchedule()}>수정</span>*/}
-                &nbsp;&nbsp;
-                <span onClick={() => clickDeleteSchedule(s.id, Number(index))}>삭제</span>
-              </div>
-            ) : (
-              <div />
-            )}
+              {StudyStore.loginUser.id === StudyStore.studyGroup.leader.id ? (
+                <div css={right}>
+                  <ScheduleEdit />
+                  &nbsp;&nbsp;
+                  <button
+                    onClick={() => clickDeleteSchedule(s.id, Number(index))}
+                  >
+                    삭제
+                  </button>
+                </div>
+              ) : (
+                <div />
+              )}
+            </div>
           </div>
         ))
       ) : (
@@ -223,7 +262,7 @@ const StudyGroupSchedule = () => {
             </h3>
           }
         >
-          <button css={btn}>
+          <button css={add}>
             스케줄 추가&nbsp;&nbsp;
             <Icon
               css={icon}
