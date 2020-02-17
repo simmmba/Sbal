@@ -143,13 +143,13 @@ const StudyDetails = () => {
                         {/* {StudyDetailStore.data.state === 0 ? '모집' : '신청'} */}
                       </button> : StudyDetailStore.isJoin() && (sessionStorage.getItem("id") !== StudyDetailStore.data.leader.id+"") && 
                       (StudyDetailStore.isMember()) &&
-                      <button css={btn} onClick={() => alert('신청되었습니다.')}>
+                      <button css={btn} onClick={() => {StudyDetailStore.deleteStudyMember(StudyDetailStore.data.id, 2)}}>
                         탈퇴 요청
                         {/* {StudyDetailStore.data.state === 0 ? '모집' : '신청'} */}
                       </button> }
                       { StudyDetailStore.isJoin() && (sessionStorage.getItem("id") !== StudyDetailStore.data.leader.id+"") && 
                       (!StudyDetailStore.isMember()) &&
-                      <button css={btn} onClick={() => {StudyDetailStore.deleteStudyMember(StudyDetailStore.data.id)}}>
+                      <button css={btn} onClick={() => {StudyDetailStore.deleteStudyMember(StudyDetailStore.data.id, 1)}}>
                         신청 취소
                         {/* {StudyDetailStore.data.state === 0 ? '모집' : '신청'} */}
                       </button>

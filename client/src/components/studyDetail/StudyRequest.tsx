@@ -148,8 +148,8 @@ const StudyRequest = () => {
           {studyMember.state === 0 &&  <td css={nickname}>{studyMember.user.evaluation}</td>}
            {studyMember.state === 0 &&   <td css={td}>
               <div css={btnBox}>
-                <button css={approveBtn} onClick={()=>{StudyDetailStore.accept(StudyDetailStore.data.id, studyMember.user.id)}}>수락</button>
-                <button css={denyBtn} onClick={()=>{StudyDetailStore.down(StudyDetailStore.data.id, studyMember.user.id)}}>거절</button>
+                <button css={approveBtn} onClick={()=>{StudyDetailStore.updateStudyMember(StudyDetailStore.data.id, studyMember.user.id,1)}}>수락</button>
+                <button css={denyBtn} onClick={()=>{StudyDetailStore.updateStudyMember(StudyDetailStore.data.id, studyMember.user.id,2)}}>거절</button>
               </div>
             </td>}
           </tr>

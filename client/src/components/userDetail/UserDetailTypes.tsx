@@ -1,3 +1,4 @@
+import * as H from 'history'
 export type UserInfoType = {
     id : number
     email : String
@@ -15,7 +16,10 @@ export type UserInfoType = {
 }
 export type UserDetailStoreType = {
     data: UserInfoType
+    joinCount : number
     mypage: () => void
+    goUserInfo: (userId: number, history : H.History) => void
+    userInfo: (userId : number) => void
     deleteStudyMember: (studyId : number, idx : number)=> void
 }
 export type Interest = {

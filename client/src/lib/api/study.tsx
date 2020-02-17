@@ -92,9 +92,11 @@ export const studyMemberUpdate = (
   }
   const data = {
     study: {
-      id: studyId
+      id: studyId,
     },
-    userid: { id: userId },
+    user: {
+       id: userId 
+      },
     state: stateNum
   }
   return apiClient.put('/study/member', data)

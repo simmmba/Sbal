@@ -5,10 +5,10 @@ import { useHistory } from 'react-router'
 import { useParams } from 'react-router'
 import { loadToken, authCheck } from '../utils/authCheck'
 
-const MyInfoPage = () => {
+const UserInfoPage = () => {
   const history = useHistory()
- 
-  UserDetailStore.mypage()
+  const {id} = useParams()
+  UserDetailStore.userInfo(Number(id))
   useEffect(() => {
     loadToken()
     authCheck(history)
@@ -20,4 +20,4 @@ const MyInfoPage = () => {
   )
 }
 
-export default MyInfoPage
+export default UserInfoPage
