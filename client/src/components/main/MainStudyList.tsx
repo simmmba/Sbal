@@ -9,8 +9,9 @@ const studyRank = css`
   display: flex;
   justify-content: space-around;
   background-color: rgb(236, 236, 236);
-  padding: 20px;
+  /* padding: 20px; */
   flex-wrap: wrap;
+  padding: 20px 20px 100px 20px;
 `
 
 function MainStudyList() {
@@ -20,7 +21,7 @@ function MainStudyList() {
 
   return useObserver(() => (
     <div css={studyRank}>
-      <StudyRank title="myStudy"     list={StudyStore.myStudy} />
+      <StudyRank title="myStudy" list={StudyStore.myStudy} />
       <StudyRank title="recentStudy" list={StudyStore.recentStudy} />
       <StudyRank title="famousStudy" list={StudyStore.famousStudy} />
     </div>

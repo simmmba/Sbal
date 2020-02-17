@@ -81,7 +81,7 @@ const NavBar = () => {
             <div>
               <StyledLinkPhone to="/signup">회원가입</StyledLinkPhone>
               <StyledButton>
-                <Link to="/login">로그인</Link>
+                <NavLink to="/login">로그인</NavLink>
               </StyledButton>
             </div>
           ) : (

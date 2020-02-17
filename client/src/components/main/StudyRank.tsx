@@ -59,6 +59,36 @@ const listContainer = css`
   height: 0px;
 `
 
+const empty = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* height: 100%; */
+  margin-top: 20px;
+`
+
+const link = css`
+  margin: 10px 0px 0px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  color: navy;
+
+  background: #d9e5ff;
+  border-radius: 7px;
+  width: 150px;
+  height: 30px;
+  transition: 0.3s;
+
+  &:hover {
+    background-color: #b2ccff;
+    color: navy;
+  }
+`
+
 const titleMap: { [key: string]: string } = {
   myStudy: '내 진행 중인 스터디',
   recentStudy: '최근 개설된 스터디',
@@ -66,10 +96,8 @@ const titleMap: { [key: string]: string } = {
 }
 
 const StudyRank = ({ title, list }: StudyRankprops) => {
-
   return (
     <div css={listBox}>
-     
       <div css={listTitle}>{titleMap[title]}</div>
       {list.length > 0 ? (
         list.map((study: Study, index: number) => (
@@ -88,7 +116,14 @@ const StudyRank = ({ title, list }: StudyRankprops) => {
           </NavLink>
         ))
       ) : (
-        <div>스터디 없음</div>
+        <div css={empty}>
+          참여중인 스터디가 없네요 😅
+          <br />
+          스터디를 둘러보시겠어요?
+          <NavLink css={link} to="/study">
+            스터디 보러가기
+          </NavLink>
+        </div>
       )}
     </div>
   )
