@@ -15,6 +15,7 @@ export type studyDetailType = {
   maxParticipants: number
   isOnline: boolean
   monthOrWeek: number
+  frequency: number
   weekdayOrWeekend: number
   timeslot: number
   evaluationLimit: number
@@ -32,11 +33,15 @@ export type StudyDetailStoreType = {
   deleteStudy: (studyId: number, history: H.History) => void
   studyTodo: () => void
   insertMember: (studyId: number) => void
-  deleteStudyMember: (studyId: number) => void
+  //   deleteStudyMember: (studyId: number) => void
+  //   isJoin: () => boolean
+  //   isMember: () => boolean
+  //   accept: (studyId: number, userId: number) => void
+  //   down: (studyId: number, userId: number) => void
+  deleteStudyMember: (studyId: number, state: number) => void
   isJoin: () => boolean
   isMember: () => boolean
-  accept: (studyId: number, userId: number) => void
-  down: (studyId: number, userId: number) => void
+  updateStudyMember: (studyId: number, userId: number, state: number) => void
 }
 
 export type studyMember = {

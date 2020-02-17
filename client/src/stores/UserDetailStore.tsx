@@ -5,10 +5,12 @@ import {
   UserInfoType
 } from '../components/userDetail/UserDetailTypes'
 import * as studyAPI from '../lib/api/study'
+import { userInfo } from 'os'
+import * as H from 'history'
 
 const UserDetailStore: UserDetailStoreType = observable({
   // isLoggingIn : false,
-
+  joinCount : 0,
   data: {
     id: 0,
     email: '',
@@ -34,11 +36,39 @@ const UserDetailStore: UserDetailStoreType = observable({
   },
   async mypage() {
     try {
-      const res = await userDetail.userInfo()
-      console.log(res.data)
+      this.joinCount = 0
+      const res = await userDetail.myInfo()
       this.data = res.data.value
+      if(this.data.joinedStudyList !== null){
+        for(let i=0; i<this.data.joinedStudyList.length; i++){
+          if(this.data.joinedStudyList[i]['state']==1){
+            this.joinCount++
+          }
+        }
+      }
     } catch (error) {
       alert('사용자 정보를 가져오지 못했습니다.')
+    }
+  },
+
+  goUserInfo(userId: number, history:H.History){
+    history.push(`/UserInfopage/${userId}`)
+  },
+
+  async userInfo(userId : number){
+    try{
+      this.joinCount = 0
+      const res = await userDetail.userInfo(userId)
+      this.data = res.data.value
+      if(this.data.joinedStudyList !== null){
+        for(let i=0; i<this.data.joinedStudyList.length; i++){
+          if(this.data.joinedStudyList[i]['state']==1){
+            this.joinCount++
+          }
+        }
+      }
+    } catch(error){
+
     }
   }
 })

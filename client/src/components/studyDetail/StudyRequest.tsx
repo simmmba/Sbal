@@ -1,12 +1,15 @@
 import React from 'react'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
-import {studyMember} from '../studyDetail/StudyDetailTypes'
+import { studyMember } from '../studyDetail/StudyDetailTypes'
 import StudyDetailStore from '../../stores/StudyDetailStore'
-import {useObserver} from 'mobx-react'
+import UserDetailStore from '../../stores/UserDetailStore'
+import { useObserver } from 'mobx-react'
+import { useHistory } from 'react-router'
 
 const StudyRequest = () => {
- 
+  const history = useHistory()
+
   const approveBtn = css`
     color: #5d5d5d;
     background: #d9e5ff;
@@ -86,7 +89,7 @@ const StudyRequest = () => {
     padding: 5px;
   `
   const nickname = css`
-    padding-left: 30px;
+    padding-left: 20px;
     border-top: 2px solid #ddd;
     border-bottom: 2px solid #ddd;
     color: #353535;
@@ -97,30 +100,52 @@ const StudyRequest = () => {
   `
 
   const w45 = css`
-  border-top: 4px solid #ddd;
-  border-bottom: 2px solid #ddd;
-  color: grey;
-  padding: 7px;
-  text-align: center;
-  width : 45%;
+    border-top: 4px solid #ddd;
+    border-bottom: 2px solid #ddd;
+    color: grey;
+    padding: 7px;
+    text-align: center;
+    width: 45%;
   `
   const w30 = css`
-  border-top: 4px solid #ddd;
-  border-bottom: 2px solid #ddd;
-  color: grey;
-  padding: 7px;
-  text-align: center;
-  width : 30%;
+    border-top: 4px solid #ddd;
+    border-bottom: 2px solid #ddd;
+    color: grey;
+    padding: 7px;
+    text-align: center;
+    width: 30%;
   `
   const w25 = css`
-  border-top: 4px solid #ddd;
-  border-bottom: 2px solid #ddd;
-  color: grey;
-  padding: 7px;
-  text-align: center;
-  width : 25%;
+    border-top: 4px solid #ddd;
+    border-bottom: 2px solid #ddd;
+    color: grey;
+    padding: 7px;
+    text-align: center;
+    width: 25%;
   `
 
+  const memberInfoBtn = css`
+    color: #5d5d5d;
+    background: #fff;
+    /* font-weight: bold; */
+    font-size: 14px;
+    /* padding: 5px 15px 5px 15px; */
+    /* margin: 0px 0px 0px 2px; */
+    /* margin-left: 20px; */
+    width: 100%;
+    height: 25px;
+    border: none;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      font-weight: bold;
+      /* background: #ffe08c; */
+    }
+  `
 
   return useObserver(() => (
     <div css={bottom}>
@@ -131,31 +156,61 @@ const StudyRequest = () => {
           </td>
         </tr>
         <tr>
-          <th css={w45}>
-            닉네임
-          </th>
-          <th  css={w25}>
-            성실도
-          </th>
+          <th css={w45}>닉네임</th>
+          <th css={w25}>성실도</th>
           <th css={w30}></th>
         </tr>
         {StudyDetailStore.data.studyMemberDTOList.map(
-          (studyMember : studyMember, index : number) => (
-           
-             
-          <tr>
-          {studyMember.state === 0 && <td css={nickname}>{studyMember.user.nickname}</td>}
-          {studyMember.state === 0 &&  <td css={nickname}>{studyMember.user.evaluation}</td>}
-           {studyMember.state === 0 &&   <td css={td}>
-              <div css={btnBox}>
-                <button css={approveBtn} onClick={()=>{StudyDetailStore.accept(StudyDetailStore.data.id, studyMember.user.id)}}>수락</button>
-                <button css={denyBtn} onClick={()=>{StudyDetailStore.down(StudyDetailStore.data.id, studyMember.user.id)}}>거절</button>
-              </div>
-            </td>}
-          </tr>
-      
-       
-            ))}
+          (studyMember: studyMember, index: number) => (
+            <tr>
+              {studyMember.state === 0 && (
+                <td css={nickname}>
+                  <button
+                    css={memberInfoBtn}
+                    onClick={() => {
+                      UserDetailStore.goUserInfo(studyMember.user.id, history)
+                    }}
+                  >
+                    {studyMember.user.nickname}
+                  </button>
+                </td>
+              )}
+              {studyMember.state === 0 && (
+                <td css={nickname}>{studyMember.user.evaluation}</td>
+              )}
+              {studyMember.state === 0 && (
+                <td css={td}>
+                  <div css={btnBox}>
+                    <button
+                      css={approveBtn}
+                      onClick={() => {
+                        StudyDetailStore.updateStudyMember(
+                          StudyDetailStore.data.id,
+                          studyMember.user.id,
+                          1
+                        )
+                      }}
+                    >
+                      수락
+                    </button>
+                    <button
+                      css={denyBtn}
+                      onClick={() => {
+                        StudyDetailStore.updateStudyMember(
+                          StudyDetailStore.data.id,
+                          studyMember.user.id,
+                          2
+                        )
+                      }}
+                    >
+                      거절
+                    </button>
+                  </div>
+                </td>
+              )}
+            </tr>
+          )
+        )}
       </table>
     </div>
   ))

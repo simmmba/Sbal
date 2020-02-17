@@ -10,11 +10,13 @@ import StudyStore from '../stores/StudyStore'
 
 const StudyListPage = () => {
   const history = useHistory()
-
+  // const state = useLocalStore(() => ({
+  //   list: []
+  // }))
+  // StudyStore.getStudyList()
   useEffect(() => {
     loadToken()
     authCheck(history)
-    StudyStore.getStudyList()
   }, [history])
 
   return useObserver(() => (

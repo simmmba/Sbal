@@ -14,11 +14,12 @@ import { Descriptions, Modal } from 'antd'
 import { studyMember } from './StudyDetailTypes'
 import { useHistory } from 'react-router'
 import CreateForm from '../studyList/CreateForm'
+import { NavLink } from 'react-router-dom'
+import studyDetailStore from '../../stores/StudyDetailStore'
 
 const StudyDetails = () => {
   useEffect(() => {
     StudyDetailStore.studyDetail()
-    console.log(StudyDetailStore.data)
   }, [])
 
   const history = useHistory()
@@ -60,7 +61,7 @@ const StudyDetails = () => {
     color: #113000;
     text-align: left;
     /* border: 1px solid black; */
-    margin-left: 10px;
+    margin-left: 15px;
   `
 
   const hit = css`
@@ -128,10 +129,16 @@ const StudyDetails = () => {
     width: 100%;
   `
 
-  const all = css``
+  const link = css`
+    color: navy;
+
+    &:hover {
+      color: navy;
+    }
+  `
 
   return useObserver(() => (
-    <div css={all}>
+    <div>
       <Display>
         <div>
           <br />
@@ -142,7 +149,11 @@ const StudyDetails = () => {
                 <FaEye size="18" color="#747474" />
                 {StudyDetailStore.data.hits}
               </div>
-              <div css={title}>{StudyDetailStore.data.title}</div>
+              <div css={title}>
+                <NavLink css={link} to={`/study/${studyDetailStore.data.id}`}>
+                  {StudyDetailStore.data.title}
+                </NavLink>
+              </div>
             </div>
             <div>
               <div css={btnBox}>
@@ -164,7 +175,16 @@ const StudyDetails = () => {
                   sessionStorage.getItem('id') !==
                     StudyDetailStore.data.leader.id + '' &&
                   StudyDetailStore.isMember() && (
-                    <button css={btn} onClick={() => alert('신청되었습니다.')}>
+                    // <button css={btn} onClick={() => alert('신청되었습니다.')}>
+                    <button
+                      css={btn}
+                      onClick={() => {
+                        StudyDetailStore.deleteStudyMember(
+                          StudyDetailStore.data.id,
+                          2
+                        )
+                      }}
+                    >
                       탈퇴 요청
                       {/* {StudyDetailStore.data.state === 0 ? '모집' : '신청'} */}
                     </button>
@@ -178,7 +198,43 @@ const StudyDetails = () => {
                       css={btn}
                       onClick={() => {
                         StudyDetailStore.deleteStudyMember(
-                          StudyDetailStore.data.id
+                          //           StudyDetailStore.data.id
+                          //         )
+                          //       }}
+                          //     >
+                          //       신청 취소
+                          //       {/* {StudyDetailStore.data.state === 0 ? '모집' : '신청'} */}
+                          //     </button>
+                          //   )}
+                          // {sessionStorage.getItem('id') ===
+                          //   StudyDetailStore.data.leader.id + '' &&
+                          //   StudyDetailStore.data.state !== 1 && (
+                          //     <button
+                          //       css={btn}
+                          //       onClick={() => {
+                          //         StudyDetailStore.studyTodo()
+                          //       }}
+                          //     >
+                          //       진행
+                          //     </button>
+                          //   )}
+                          // {sessionStorage.getItem('id') ===
+                          //   StudyDetailStore.data.leader.id + '' && (
+                          //   <div>
+                          //     <button css={btn} onClick={openModal}>
+                          //       수정
+                          //     </button>
+                          //     <Modal
+                          //       title="스터디 수정"
+                          //       visible={StudyDetailStore.modalVisible}
+                          //       onCancel={handleCancel}
+                          //       footer={[<div></div>]}
+                          //     >
+                          //       <CreateForm />
+                          //     </Modal>
+                          //   </div>
+                          StudyDetailStore.data.id,
+                          1
                         )
                       }}
                     >
@@ -200,19 +256,7 @@ const StudyDetails = () => {
                   )}
                 {sessionStorage.getItem('id') ===
                   StudyDetailStore.data.leader.id + '' && (
-                  <div>
-                    <button css={btn} onClick={openModal}>
-                      수정
-                    </button>
-                    <Modal
-                      title="스터디 수정"
-                      visible={StudyDetailStore.modalVisible}
-                      onCancel={handleCancel}
-                      footer={[<div></div>]}
-                    >
-                      <CreateForm />
-                    </Modal>
-                  </div>
+                  <button css={btn}>수정</button>
                 )}
                 {sessionStorage.getItem('id') ===
                   StudyDetailStore.data.leader.id + '' && (
@@ -251,11 +295,6 @@ const StudyDetails = () => {
                   {StudyDetailStore.data.lcategory} /{' '}
                   {StudyDetailStore.data.scategory}
                 </Descriptions.Item>
-                <Descriptions.Item label="방식">
-                  {StudyDetailStore.data.isOnline === false
-                    ? '오프라인'
-                    : '온라인'}
-                </Descriptions.Item>
                 <Descriptions.Item label="기간">
                   {StudyDetailStore.data.startDate} ~{' '}
                   {StudyDetailStore.data.endDate}
@@ -267,19 +306,24 @@ const StudyDetails = () => {
                       StudyDetailStore.data.town
                     : '온라인'}
                 </Descriptions.Item>
-                <Descriptions.Item label="횟수">추후 협의</Descriptions.Item>
-                <Descriptions.Item label="요일">
+                <Descriptions.Item label="일정">
+                  {StudyDetailStore.data.monthOrWeek === 0
+                    ? '추후 협의'
+                    : StudyDetailStore.data.monthOrWeek === 1
+                    ? '월'
+                    : '주'}{' '}
+                  {StudyDetailStore.data.frequency}회
+                </Descriptions.Item>
+                <Descriptions.Item label="시간">
                   {StudyDetailStore.data.weekdayOrWeekend === 0
-                    ? '협의'
+                    ? '요일 협의,'
                     : StudyDetailStore.data.weekdayOrWeekend === 1
                     ? '평일'
                     : StudyDetailStore.data.weekdayOrWeekend === 2
                     ? '주말'
-                    : '무관'}
-                </Descriptions.Item>
-                <Descriptions.Item label="시간">
+                    : '요일 무관,'}{' '}
                   {StudyDetailStore.data.timeslot === 0
-                    ? '협의'
+                    ? '시간 협의'
                     : StudyDetailStore.data.timeslot === 1
                     ? '오전'
                     : StudyDetailStore.data.timeslot === 2

@@ -30,6 +30,7 @@ const studyDetailStore: StudyDetailStoreType = observable({
     maxParticipants: 0,
     isOnline: true,
     monthOrWeek: 0,
+    frequency: 0,
     weekdayOrWeekend: 0,
     timeslot: 0,
     evaluationLimit: 0,
@@ -63,19 +64,19 @@ const studyDetailStore: StudyDetailStoreType = observable({
     return false
   },
 
-  async accept(studyId: number, userId: number) {
+  async updateStudyMember(studyId: number, userId: number, state: number) {
     try {
-      const res = await studyAPI.studyMemberUpdate(studyId, userId, 1)
+      const res = await studyAPI.studyMemberUpdate(studyId, userId, state)
       this.studyDetail()
     } catch (error) {}
   },
 
-  async down(studyId: number, userId: number) {
-    try {
-      const res = await studyAPI.studyMemberUpdate(studyId, userId, 2)
-      this.studyDetail()
-    } catch (error) {}
-  },
+  // async down(studyId: number, userId: number) {
+  //   try {
+  //     const res = await studyAPI.studyMemberUpdate(studyId, userId, 2)
+  //     this.studyDetail()
+  //   } catch (error) {}
+  // },
 
   async studyTodo() {
     try {
@@ -107,10 +108,11 @@ const studyDetailStore: StudyDetailStoreType = observable({
     }
   },
 
-  async deleteStudyMember(studyId: number) {
+  async deleteStudyMember(studyId: number, state: number) {
     try {
       const res = await studyAPI.studyDelete(studyId)
-      alert('신청이 취소 되었습니다.')
+      if (state === 1) alert('신청이 취소 되었습니다.')
+      else if (state === 2) alert('탈퇴 되었습니다.')
       this.studyDetail()
     } catch (error) {
       alert('요청에 실패하였습니다.')

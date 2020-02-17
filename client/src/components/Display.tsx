@@ -15,6 +15,7 @@ export const Display = styled.div`
       flex-direction: row;
     } */
     width: 95%;
+    margin-bottom: 100px;
   }
 `
 

@@ -10,8 +10,9 @@ import StudyGroupPage from './pages/StudyGroupPage'
 import StudyDetailPage from './pages/StudyDetailPage'
 import CreatePage from './pages/CreatePage'
 import MyInfoPage from './pages/MyInfoPage'
+import UserInfoPage from './pages/UserInfoPage'
 import Footer from './components/Footer'
-
+import MapPage from './pages/Map'
 import './App.css'
 
 const App: React.FC = () => {
@@ -32,14 +33,16 @@ const App: React.FC = () => {
         <Route path="/login" component={LoginPage} />
         {/* 마이페이지 */}
         <Route path="/mypage" component={MyInfoPage} exact />
+        <Route path="/UserInfoPage/:id" component={UserInfoPage} exact />
         {/* 스터디 리스트 페이지 */}
         <Route path="/study" component={StudyListPage} exact />
         {/* 스터디 개설 페이지 */}
         <Route path="/study/create" component={CreatePage} exact />
         {/* 스터디 상세정보 페이지 */}
-        <Route path="/study/details/:id" component={StudyDetailPage} />
+        <Route path="/study/details/:id" component={StudyDetailPage} exact />
         {/* 스터디 그룹 페이지 */}
         <Route path="/study/:id" component={StudyGroupPage} />
+        <Route path="/map" component={MapPage} />
         <Route path="/mypage/update" component={SignupPage} />
       </Switch>
       <Footer />
