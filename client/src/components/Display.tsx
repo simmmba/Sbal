@@ -8,6 +8,7 @@ export const Display = styled.div`
   /* display: inline-block; */
   /* border: 1px solid black; */
   margin: 0 auto;
+  min-height: 700px;
 
   @media screen and (max-width: 500px) {
     /* .site-container {
