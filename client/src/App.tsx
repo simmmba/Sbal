@@ -39,10 +39,10 @@ const App: React.FC = () => {
         {/* 스터디 개설 페이지 */}
         <Route path="/study/create" component={CreatePage} exact />
         {/* 스터디 상세정보 페이지 */}
-        <Route path="/study/details/:id" component={StudyDetailPage} />
+        <Route path="/study/details/:id" component={StudyDetailPage} exact />
         {/* 스터디 그룹 페이지 */}
         <Route path="/study/:id" component={StudyGroupPage} />
-        <Route path="/map" component={MapPage}/>
+        <Route path="/map" component={MapPage} />
         <Route path="/mypage/update" component={SignupPage} />
       </Switch>
       <Footer />

@@ -13,6 +13,8 @@ import UserStore from '../../stores/UserStore'
 import { Descriptions } from 'antd'
 import { studyMember } from './StudyDetailTypes'
 import { useHistory } from 'react-router'
+import { NavLink } from 'react-router-dom'
+import studyDetailStore from '../../stores/StudyDetailStore'
 
 const StudyDetails = () => {
   useEffect(() => {
@@ -51,7 +53,7 @@ const StudyDetails = () => {
     color: #113000;
     text-align: left;
     /* border: 1px solid black; */
-    margin-left: 10px;
+    margin-left: 15px;
   `
 
   const hit = css`
@@ -119,10 +121,16 @@ const StudyDetails = () => {
     width: 100%;
   `
 
-  const all = css``
+  const link = css`
+    color: navy;
+
+    &:hover {
+      color: navy;
+    }
+  `
 
   return useObserver(() => (
-    <div css={all}>
+    <div>
       <Display>
         <div>
           <br />
@@ -133,7 +141,11 @@ const StudyDetails = () => {
                 <FaEye size="18" color="#747474" />
                 {StudyDetailStore.data.hits}
               </div>
-              <div css={title}>{StudyDetailStore.data.title}</div>
+              <div css={title}>
+                <NavLink css={link} to={`/study/${studyDetailStore.data.id}`}>
+                  {StudyDetailStore.data.title}
+                </NavLink>
+              </div>
             </div>
             <div>
               <div css={btnBox}>
@@ -226,7 +238,7 @@ const StudyDetails = () => {
               <Descriptions
                 // title="Responsive Descriptions"
                 bordered
-                column={{ xxl: 4, xl: 4, lg: 4, md: 3, sm: 2, xs: 1 }}
+                column={{ xxl: 4, xl: 4, lg: 3, md: 3, sm: 2, xs: 1 }}
               >
                 <Descriptions.Item label="인원">
                   {StudyDetailStore.data.joinedMemberCount} /{' '}
@@ -250,8 +262,6 @@ const StudyDetails = () => {
                       StudyDetailStore.data.town
                     : '온라인'}
                 </Descriptions.Item>
-
-                {/* 0 : 추후 협의, 1 : MONTH, 2 : WEEK */}
                 <Descriptions.Item label="일정">
                   {StudyDetailStore.data.monthOrWeek === 0
                     ? '추후 협의'
