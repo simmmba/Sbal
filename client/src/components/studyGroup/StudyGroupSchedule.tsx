@@ -243,6 +243,7 @@ const StudyGroupSchedule = () => {
                   <ScheduleEdit />
                   &nbsp;&nbsp;
                   <button
+                    css={btn}
                     onClick={() => clickDeleteSchedule(s.id, Number(index))}
                   >
                     삭제
