@@ -6,6 +6,7 @@ import {Icon} from 'antd'
 import ReplyInsert from './ReplyInsert'
 import StudyStore from "../../stores/StudyStore";
 import {NoticeReply} from "./StudyGroupType";
+import {StyledInput} from "../auth/AuthStyled";
 
 const Reply = ({index}: { index: number }) => {
 
@@ -70,22 +71,22 @@ const Reply = ({index}: { index: number }) => {
 
     const replyList = StudyStore.studyGroup.noticeDTOList[Number(index)].replyList;
 
-    // const [ editedReply, setEditedReply ] = useState('');
-    // const changeReply = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     setEditedReply(e.target.value)
-    // }
-    // const ReplyEditor = (rIndex: {rIndex: number}) => {
-    //     return (
-    //         <div>
-    //             <StyledInput>
-    //                 name="editedReply"
-    //                 value={replyList[Number(rIndex)]}
-    //                 type="text"
-    //                 onChange={changeReply}
-    //             </StyledInput>
-    //         </div>
-    //     )
-    // }
+    const [ editedReply, setEditedReply ] = useState('');
+    const changeReply = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setEditedReply(e.target.value)
+    }
+    const ReplyEditor = (rIndex: {rIndex: number}) => {
+        return (
+            <div>
+                <StyledInput>
+                    name="editedReply"
+                    value={replyList[Number(rIndex)]}
+                    type="text"
+                    onChange={changeReply}
+                </StyledInput>
+            </div>
+        )
+    }
 
     const clickDeleteIcon = (replyId: number) => {
         StudyStore.deleteReply(replyId);
@@ -115,6 +116,7 @@ const Reply = ({index}: { index: number }) => {
                                         // twoToneColor="navy"
                                         // onClick={() => clickEditIcon(Number(rIndex))}
                                     />
+                                    <ReplyEditor rIndex={Number(rIndex)}/>
                                 </NavLink>
                                 <Icon
                                     css={icon}
