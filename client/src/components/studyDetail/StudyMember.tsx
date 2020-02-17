@@ -4,11 +4,10 @@ import { css, jsx } from '@emotion/core'
 import StudyDetailStore from '../../stores/StudyDetailStore'
 import UserDetailStore from '../../stores/UserDetailStore'
 import { studyMember } from './StudyDetailTypes'
-import {useObserver} from 'mobx-react'
-import {useHistory} from 'react-router'
+import { useObserver } from 'mobx-react'
+import { useHistory } from 'react-router'
 
 const StudyMember = () => {
-
   const history = useHistory()
 
   const btn = css`
@@ -37,7 +36,6 @@ const StudyMember = () => {
     /* padding-bottom: 100px; */
     /* float: left; */
     width: 350px;
-    
   `
 
   const title = css`
@@ -81,45 +79,83 @@ const StudyMember = () => {
     border-bottom: 2px solid #ddd;
     color: #5d5d5d;
     padding: 5px;
-    width : 30%;
+    width: 30%;
   `
   const w30 = css`
-    width : 70%;
+    width: 70%;
   `
   const tr = css`
-  height: 25px;
+    height: 25px;
   `
-  
+
+  const memberInfoBtn = css`
+    color: #5d5d5d;
+    background: #fff;
+    /* font-weight: bold; */
+    font-size: 14px;
+    /* padding: 5px 15px 5px 15px; */
+    /* margin: 0px 0px 0px 2px; */
+    width: 70px;
+    height: 25px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      font-weight: bold;
+      /* background: #ffe08c; */
+    }
+  `
 
   return useObserver(() => (
     <div css={top}>
       <table css={table}>
-
         <tr>
           <td colSpan={2} css={title}>
             스터디 멤버 ( {StudyDetailStore.studyMember} )
           </td>
         </tr>
-        <tr>
-          <th  css={w70}>
-            닉네임
-          </th>
-          <th css={w30}></th>
-        </tr>
         {StudyDetailStore.data.studyMemberDTOList.map(
-          (studyMember : studyMember, index : number) => (
-          <tr key={index} >
-            {studyMember.state === 1 && <td css={nickname}> {studyMember.user.nickname}</td>}
-            {studyMember.state === 1 &&  <td css={td}> 
-              <button css={btn} onClick={() =>{UserDetailStore.goUserInfo(studyMember.user.id, history)}}>정보보기</button>
-            </td>}
-            {studyMember.state === 1 &&  <td css={td}>
-            {studyMember.user.id !== StudyDetailStore.data.leader.id && StudyDetailStore.data.leader.id+"" === sessionStorage.getItem('id') &&  
-              <button css={btn} onClick={() =>{StudyDetailStore.updateStudyMember(StudyDetailStore.data.id, studyMember.user.id, 3)}}>내보내기</button>}
-            </td>}
-          </tr>
-            
-        ))}
+          (studyMember: studyMember, index: number) => (
+            <tr key={index}>
+              {studyMember.state === 1 && (
+                <td css={td}>
+                  <button
+                    css={memberInfoBtn}
+                    onClick={() => {
+                      UserDetailStore.goUserInfo(studyMember.user.id, history)
+                    }}
+                  >
+                    {studyMember.user.nickname}
+                  </button>
+                </td>
+              )}
+              {studyMember.state === 1 && (
+                <td css={td}>
+                  {studyMember.user.id !== StudyDetailStore.data.leader.id &&
+                    StudyDetailStore.data.leader.id + '' ===
+                      sessionStorage.getItem('id') && (
+                      <button
+                        css={btn}
+                        onClick={() => {
+                          StudyDetailStore.updateStudyMember(
+                            StudyDetailStore.data.id,
+                            studyMember.user.id,
+                            3
+                          )
+                        }}
+                      >
+                        내보내기
+                      </button>
+                    )}
+                </td>
+              )}
+            </tr>
+          )
+        )}
       </table>
     </div>
   ))

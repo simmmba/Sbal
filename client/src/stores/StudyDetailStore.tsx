@@ -29,6 +29,7 @@ const studyDetailStore: StudyDetailStoreType = observable({
     maxParticipants: 0,
     isOnline: true,
     monthOrWeek: 0,
+    frequency: 0,
     weekdayOrWeekend: 0,
     timeslot: 0,
     evaluationLimit: 0,
@@ -62,9 +63,9 @@ const studyDetailStore: StudyDetailStoreType = observable({
     return false
   },
 
-  async updateStudyMember(studyId: number , userId: number, state : number) {
+  async updateStudyMember(studyId: number, userId: number, state: number) {
     try {
-      const res = await studyAPI.studyMemberUpdate(studyId,  userId, state)
+      const res = await studyAPI.studyMemberUpdate(studyId, userId, state)
       this.studyDetail()
     } catch (error) {}
   },
@@ -106,11 +107,11 @@ const studyDetailStore: StudyDetailStoreType = observable({
     }
   },
 
-  async deleteStudyMember(studyId: number, state:number) {
+  async deleteStudyMember(studyId: number, state: number) {
     try {
       const res = await studyAPI.studyDelete(studyId)
-      if(state === 1) alert('신청이 취소 되었습니다.')
-      else if(state === 2 ) alert('탈퇴 되었습니다.')
+      if (state === 1) alert('신청이 취소 되었습니다.')
+      else if (state === 2) alert('탈퇴 되었습니다.')
       this.studyDetail()
     } catch (error) {
       alert('요청에 실패하였습니다.')
