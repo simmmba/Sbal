@@ -31,7 +31,7 @@ public class ReplyController {
 
     @ExceptionHandler
     public ResponseEntity<CommonResponse> errorHandler(Exception e) {
-        return new ResponseEntity<CommonResponse>(new CommonResponse(e.getMessage(), "ERROR",
+        return new ResponseEntity<>(new CommonResponse(e.getMessage(), "ERROR",
                 "현재 서버 상태가 불안정하여 정상적인 서비스 이용이 불가합니다. 잠시 후 다시 시도해주세요."), HttpStatus.OK);
     }
 
@@ -69,7 +69,7 @@ public class ReplyController {
     public ResponseEntity<Object> update(@RequestBody ReplyDTO replyDTO, HttpServletRequest request){
         try {
             int userId = jwtService.getLoginUserId(request);
-            Reply reply =replyService.getNoticeDetail(replyDTO.getWriter());
+            Reply reply = replyService.getNoticeDetail(replyDTO.getWriter().getId());
             if(reply.getWriter().getId()==userId){
                 Reply updateReply = replyDTO.toEntity(userId);
                 updateReply = replyService.insert(updateReply);

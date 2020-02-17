@@ -33,7 +33,7 @@ public class Notice {
 
     public NoticeDTO toDTO(){
         NoticeDTO notice = new NoticeDTO(id, title, content, study.getId(),
-                writer.getId(), hits, date, null);
+                new UserDTO(writer.getId(), writer.getNickname()), hits, date, null);
         List<ReplyDTO> replyDTOS = new ArrayList<>();
         for(Reply r : replyList) replyDTOS.add(r.toDTO());
         notice.setReplyList(replyDTOS);
