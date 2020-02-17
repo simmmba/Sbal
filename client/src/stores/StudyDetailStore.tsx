@@ -9,6 +9,7 @@ const studyDetailStore: StudyDetailStoreType = observable({
   studyId: -1,
   studyMember: 0,
   studyRequest: 0,
+  modalVisible: false,
   data: {
     id: 0,
     title: '',

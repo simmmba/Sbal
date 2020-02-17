@@ -82,8 +82,8 @@ function CreateForm({ form }: FormComponentProps) {
             isOnline: values.isOnline,
             timeslot: values.timeslot
           }
-
-          StudyStore.createStudy(dataToSend, history)
+          console.log(dataToSend)
+          // StudyStore.createStudy(dataToSend, history)
         } else {
           StudyStore.filterData.lcategory = values.category[0]
           StudyStore.filterData.scategory = values.category[1]
@@ -156,7 +156,15 @@ function CreateForm({ form }: FormComponentProps) {
       `}
       onSubmit={handleSubmit}
     >
-      {pathname !== '/study' && <h1>스터디 만들기</h1>}
+      {pathname === '/study/create' && (
+        <h2
+          css={css`
+            text-align: center;
+          `}
+        >
+          스터디 만들기
+        </h2>
+      )}
       <Col>
         {pathname !== '/study' && (
           <Row>
@@ -225,7 +233,7 @@ function CreateForm({ form }: FormComponentProps) {
         {pathname !== '/study' && (
           <Row>
             <Form.Item label={'스터디 일정'}>
-              {getFieldDecorator('monthorWeek', {
+              {getFieldDecorator('monthOrWeek', {
                 initialValue: 2
               })(
                 <Radio.Group
@@ -242,16 +250,19 @@ function CreateForm({ form }: FormComponentProps) {
                   )}
                 </Radio.Group>
               )}
-              <InputNumber
-                defaultValue={1}
-                css={css`
-                  margin-left: 15px;
-                  width: 35px;
-                `}
-                min={freqMinMax[`${state.monthOrWeek}`].min}
-                max={freqMinMax[`${state.monthOrWeek}`].max}
-                disabled={freqMinMax[`${state.monthOrWeek}`].disabled}
-              />
+              {getFieldDecorator('frequency', {
+                initialValue: 1
+              })(
+                <InputNumber
+                  css={css`
+                    margin-left: 15px;
+                    width: 35px;
+                  `}
+                  min={freqMinMax[`${state.monthOrWeek}`].min}
+                  max={freqMinMax[`${state.monthOrWeek}`].max}
+                  disabled={freqMinMax[`${state.monthOrWeek}`].disabled}
+                />
+              )}
               회
             </Form.Item>
           </Row>

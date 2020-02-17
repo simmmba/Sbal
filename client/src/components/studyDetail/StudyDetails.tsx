@@ -10,9 +10,10 @@ import { Display } from '../Display'
 import { FaEye } from 'react-icons/fa'
 import StudyDetailStore from '../../stores/StudyDetailStore'
 import UserStore from '../../stores/UserStore'
-import { Descriptions } from 'antd'
+import { Descriptions, Modal } from 'antd'
 import { studyMember } from './StudyDetailTypes'
 import { useHistory } from 'react-router'
+import CreateForm from '../studyList/CreateForm'
 
 const StudyDetails = () => {
   useEffect(() => {
@@ -21,6 +22,13 @@ const StudyDetails = () => {
   }, [])
 
   const history = useHistory()
+
+  const openModal = () => {
+    StudyDetailStore.modalVisible = true
+  }
+  const handleCancel = () => {
+    StudyDetailStore.modalVisible = false
+  }
 
   const top = css`
     display: flex;
@@ -192,7 +200,19 @@ const StudyDetails = () => {
                   )}
                 {sessionStorage.getItem('id') ===
                   StudyDetailStore.data.leader.id + '' && (
-                  <button css={btn}>수정</button>
+                  <div>
+                    <button css={btn} onClick={openModal}>
+                      수정
+                    </button>
+                    <Modal
+                      title="스터디 수정"
+                      visible={StudyDetailStore.modalVisible}
+                      onCancel={handleCancel}
+                      footer={[<div></div>]}
+                    >
+                      <CreateForm />
+                    </Modal>
+                  </div>
                 )}
                 {sessionStorage.getItem('id') ===
                   StudyDetailStore.data.leader.id + '' && (
