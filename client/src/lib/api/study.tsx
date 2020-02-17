@@ -140,3 +140,10 @@ export const enrollNewSchedule = (newSchedule: object) => {
   }
   return apiClient.post('/study/schedule', newSchedule)
 }
+
+export const editSchedule = (editedSchedule: object) => {
+  if(sessionStorage.token) {
+    setAuthToken(sessionStorage.token)
+  }
+  return apiClient.put('/study/schedule', editedSchedule)
+}

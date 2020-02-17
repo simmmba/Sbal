@@ -1,4 +1,4 @@
-import {DatePickerDecorator} from "antd/es/date-picker/interface";
+import { Moment } from 'moment'
 
 export type StudyGroupType = {
     id: number,
@@ -85,7 +85,8 @@ export type loginUser = {
     nickname: string
 }
 
-export type CreatedSchedule = {
+export type CreatedOrUpdatedSchedule = {
+    id: number,
     study : {
         id: number
     },
@@ -97,5 +98,6 @@ export type CreatedSchedule = {
     [key: string]:
         string
         | object
+        | number
         | ((e: React.ChangeEvent<HTMLTextAreaElement>) => void)
 }

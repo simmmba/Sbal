@@ -1,11 +1,12 @@
-import React, {ChangeEvent, useState} from 'react'
+import React, { useState } from 'react'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
 import { Icon, Modal, DatePicker } from 'antd'
 import TextArea from 'antd/lib/input/TextArea'
 import { useLocalStore } from 'mobx-react'
 import StudyStore from "../../stores/StudyStore";
-import {CreatedSchedule} from "./StudyGroupType";
+import {CreatedOrUpdatedSchedule} from "./StudyGroupType";
+import moment from 'moment'
 
 const ScheduleAdd = () => {
   const icon = css`
@@ -94,7 +95,8 @@ const ScheduleAdd = () => {
     setVisible(false)
   }
 
-  const state = useLocalStore<CreatedSchedule>(() => ({
+  const state = useLocalStore<CreatedOrUpdatedSchedule>(() => ({
+    id: -1,
     study: {
       id: StudyStore.studyGroup.id
     },
@@ -104,14 +106,11 @@ const ScheduleAdd = () => {
     location: '',
     onChangeTextArea(e: React.ChangeEvent<HTMLTextAreaElement>) {
       state[e.target.name] = e.target.value;
-      console.log(e.target.value)
-      console.log(state.meetDate)
     }
   }))
 
   const handleDatePickerChanged = (date: any, dateString: string) => {
     state.meetDate = dateString;
-    console.log(state.meetDate)
   }
 
   return (
@@ -142,8 +141,8 @@ const ScheduleAdd = () => {
           <TextArea
             css={content}
             rows={1}
-            placeholder="스케줄명을 입력하세요"
-            name="title"
+            placeholder="이번 스터디의 목표 혹은 주제가 있다면 입력해주세요."
+            name="subject"
             onChange={state.onChangeTextArea}
           />
         </div>
@@ -155,6 +154,7 @@ const ScheduleAdd = () => {
               format="YYYY-MM-DD HH:mm"
               placeholder="날짜, 시간을 입력하세요"
               name="meetDate"
+              defaultValue={moment().locale('ko-KR')}
               onChange={handleDatePickerChanged}
             />
           </div>

@@ -202,7 +202,7 @@ const StudyGroupSchedule = () => {
           />
           &nbsp;스터디 스케줄
         </div>
-        {studyScheduleList.length > 0 ? <ScheduleAdd /> : <div />}
+        {studyScheduleList.length > 0 && StudyStore.loginUser.id===StudyStore.studyGroup.leader.id ? <ScheduleAdd /> : <div />}
       </div>
       {studyScheduleList.length > 0 ? (
         studyScheduleList.map((s: StudySchedule, index: number) => (
@@ -210,7 +210,7 @@ const StudyGroupSchedule = () => {
             <div css={left}>{index + 1}회차</div>
             <div css={box}>
               <div css={middle} onClick={showScoreModal}>
-                <div css={subject}>{s.subject}</div>
+                <div css={subject}>{s.subject}</div><br/>
                 <div css={homework}>
                   <b>시간 )</b> {s.meetDate.substr(0, 4)}년{' '}
                   {s.meetDate.substr(5, 2)}월 {s.meetDate.substr(8, 2)}일{' '}
@@ -240,7 +240,7 @@ const StudyGroupSchedule = () => {
 
               {StudyStore.loginUser.id === StudyStore.studyGroup.leader.id ? (
                 <div css={right}>
-                  <ScheduleEdit />
+                  <ScheduleEdit sIndex={Number(index)}/>
                   &nbsp;&nbsp;
                   <button
                     css={btn}
