@@ -1,3 +1,4 @@
+import {DatePickerDecorator} from "antd/es/date-picker/interface";
 
 export type StudyGroupType = {
     id: number,
@@ -82,4 +83,19 @@ export type CreatedNotice = {
 export type loginUser = {
     id: number,
     nickname: string
+}
+
+export type CreatedSchedule = {
+    study : {
+        id: number
+    },
+    subject: string,
+    homework: string,
+    meetDate: string,
+    location: string,
+    onChangeTextArea: (e: React.ChangeEvent<HTMLTextAreaElement>) => void,
+    [key: string]:
+        string
+        | object
+        | ((e: React.ChangeEvent<HTMLTextAreaElement>) => void)
 }

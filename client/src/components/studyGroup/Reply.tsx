@@ -116,7 +116,7 @@ const Reply = ({index}: { index: number }) => {
                                         // twoToneColor="navy"
                                         // onClick={() => clickEditIcon(Number(rIndex))}
                                     />
-                                    <ReplyEditor rIndex={Number(rIndex)}/>
+                                    {/*<ReplyEditor rIndex={Number(rIndex)}/>*/}
                                 </NavLink>
                                 <Icon
                                     css={icon}

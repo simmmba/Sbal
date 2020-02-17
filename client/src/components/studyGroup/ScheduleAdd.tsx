@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, {ChangeEvent, useState} from 'react'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
 import { Icon, Modal, DatePicker } from 'antd'
 import TextArea from 'antd/lib/input/TextArea'
+import { useLocalStore } from 'mobx-react'
+import StudyStore from "../../stores/StudyStore";
+import {CreatedSchedule} from "./StudyGroupType";
 
 const ScheduleAdd = () => {
   const icon = css`
@@ -70,6 +73,16 @@ const ScheduleAdd = () => {
   }
 
   const handleOk = () => {
+    const newSchedule = {
+      studyDTO: {
+        id: state.study.id
+      },
+      subject: state.subject,
+      homework: state.homework,
+      meetDate: state.meetDate.concat(":00"),
+      location: state.location
+    }
+    StudyStore.enrollNewSchedule(newSchedule);
     setConfirmLoading(true)
     setTimeout(() => {
       setVisible(false)
@@ -79,6 +92,26 @@ const ScheduleAdd = () => {
 
   const handleCancel = () => {
     setVisible(false)
+  }
+
+  const state = useLocalStore<CreatedSchedule>(() => ({
+    study: {
+      id: StudyStore.studyGroup.id
+    },
+    subject: '',
+    homework: '',
+    meetDate: '',
+    location: '',
+    onChangeTextArea(e: React.ChangeEvent<HTMLTextAreaElement>) {
+      state[e.target.name] = e.target.value;
+      console.log(e.target.value)
+      console.log(state.meetDate)
+    }
+  }))
+
+  const handleDatePickerChanged = (date: any, dateString: string) => {
+    state.meetDate = dateString;
+    console.log(state.meetDate)
   }
 
   return (
@@ -110,9 +143,8 @@ const ScheduleAdd = () => {
             css={content}
             rows={1}
             placeholder="스케줄명을 입력하세요"
-            // value={state.title}
-            // name="title"
-            //   onChange={state.onChangeTextarea}
+            name="title"
+            onChange={state.onChangeTextArea}
           />
         </div>
         <div css={element}>
@@ -122,7 +154,8 @@ const ScheduleAdd = () => {
               showTime={{ format: 'HH:mm' }}
               format="YYYY-MM-DD HH:mm"
               placeholder="날짜, 시간을 입력하세요"
-              name="time"
+              name="meetDate"
+              onChange={handleDatePickerChanged}
             />
           </div>
         </div>
@@ -132,9 +165,8 @@ const ScheduleAdd = () => {
             css={content}
             rows={1}
             placeholder="장소를 입력하세요"
-            // value={state.place}
-            // name="place"
-            //   onChange={state.onChangeTextarea}
+            name="location"
+            onChange={state.onChangeTextArea}
           />
         </div>
         <div css={element}>
@@ -143,9 +175,8 @@ const ScheduleAdd = () => {
             css={content}
             rows={1}
             placeholder="준비사항을 입력하세요"
-            // value={state.todo}
-            // name="todo"
-            //   onChange={state.onChangeTextarea}
+            name="homework"
+            onChange={state.onChangeTextArea}
           />
         </div>
       </Modal>

@@ -133,3 +133,10 @@ export const increaseNoticeHits = (noticeId : number) => {
   }
   return apiClient.get('/notice/increaseHits/' + Number(noticeId))
 }
+
+export const enrollNewSchedule = (newSchedule: object) => {
+  if(sessionStorage.token) {
+    setAuthToken(sessionStorage.token)
+  }
+  return apiClient.post('/study/schedule', newSchedule)
+}

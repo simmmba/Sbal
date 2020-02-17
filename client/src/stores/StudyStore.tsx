@@ -159,6 +159,18 @@ const StudyStore = observable({
     } catch (e) {
       alert('조회 중 오류가 발생했습니다. 새로고침 후 이용해주세요.')
     }
+  },
+
+  async enrollNewSchedule(newSchedule: object) {
+    try {
+      const res = await studyAPI.enrollNewSchedule(newSchedule);
+      if(res.data.state==='SUCCESS') {
+        this.fetchStudyGroup(this.studyGroup.id);
+      }
+      alert(res.data.message)
+    } catch (e) {
+      alert('스케줄 등록 중 오류가 발생했습니다. 잠시 후 이용해주세요.')
+    }
   }
 })
 

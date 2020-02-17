@@ -184,7 +184,9 @@ const StudyGroupSchedule = () => {
   //   StudyStore.deleteStudySchedule(Number(id))
   // }
   const clickDeleteSchedule = (id: number, index: number): void => {
-    StudyStore.deleteStudySchedule(Number(id), Number(index))
+    if(window.confirm("일정을 삭제하시겠습니까?")) {
+      StudyStore.deleteStudySchedule(Number(id), Number(index))
+    }
   }
 
   return useObserver(() => (
