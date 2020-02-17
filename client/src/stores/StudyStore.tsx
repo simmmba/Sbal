@@ -17,13 +17,13 @@ const StudyStore = observable({
   studyGroup: {} as StudyGroupType,
   filterData: {
     searchBy: 'title',
-    searchText: '',
-    lcategory: '어학',
-    scategory: 'TOEIC',
-    city: '서울',
-    town: '강남구',
-    weekdayOrWeekend: 2,
-    isOnline: 1
+    searchText: null,
+    lcategory: null,
+    scategory: null,
+    city: null,
+    town: null,
+    weekdayOrWeekend: null,
+    isOnline: null
   } as FilterData,
   modalVisible: false,
 

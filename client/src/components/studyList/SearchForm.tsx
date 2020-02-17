@@ -48,7 +48,7 @@ const SearchForm = () => {
   return useObserver(() => (
     <div
       css={css`
-        margin: 40px 0 5px 0;
+        margin: 0 0 5px 0;
         display: flex;
         flex-direction: column;
         justify-content: center;

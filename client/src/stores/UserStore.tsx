@@ -688,7 +688,24 @@ export const cityAndTownsForForm: CascaderOptionType[] = [
     ]
   }
 ]
-
+export const makeFilter = (cascaderOption: CascaderOptionType[]) => {
+  const newList: CascaderOptionType[] = JSON.parse(
+    JSON.stringify(cascaderOption)
+  )
+  newList.forEach(cas => {
+    if (cas.children) {
+      cas.children.unshift({
+        value: undefined,
+        label: '전체'
+      })
+    }
+  })
+  newList.unshift({
+    value: undefined,
+    label: '전체'
+  })
+  return newList
+}
 export const interests: { [key: string]: string[] } = {
   개발: [
     '.NET',

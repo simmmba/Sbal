@@ -38,7 +38,7 @@ build/
 /client/node_modules
 /client/.pnp
 /client/.env
-/client/.history
+.history
 .pnp.js
 
 # testing

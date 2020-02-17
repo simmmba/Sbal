@@ -16,13 +16,19 @@ import {
   Checkbox,
   message
 } from 'antd'
-import { cityAndTownsForForm, interestsForForm } from '../../stores/UserStore'
+import {
+  cityAndTownsForForm,
+  interestsForForm,
+  makeFilter
+} from '../../stores/UserStore'
 import StudyStore from '../../stores/StudyStore'
 import { Study } from '../main/MainTypes'
 import { FormComponentProps } from 'antd/lib/form/Form'
+import { CheckboxChangeEvent } from 'antd/lib/checkbox/Checkbox'
+import { CascaderOptionType } from 'antd/lib/cascader'
 import { useHistory, useLocation } from 'react-router'
 
-function FilterForm({ form }: FormComponentProps) {
+function CreateForm({ form }: FormComponentProps) {
   const { getFieldDecorator } = form
   const { RangePicker } = DatePicker
   const { TextArea } = Input
@@ -34,7 +40,24 @@ function FilterForm({ form }: FormComponentProps) {
     monthOrWeek: 2,
     weekdayOrWeekend: 0,
     timeslot: 0,
-    checked: false
+    checked: false,
+    interestDisabled: false,
+    isOnlineDisabled: false,
+    weekdayOrWeekendDisabled: false,
+    locationDisabled: false,
+    interestChecked: false,
+    isOnlineChecked: false,
+    weekdayOrWeekendChecked: false,
+    locationChecked: false,
+
+    onInterestChange(e: CheckboxChangeEvent) {
+      this.interestChecked = !this.interestChecked
+      this.interestDisabled = !this.interestDisabled
+    },
+    onChangeIsOnline(e: CheckboxChangeEvent) {
+      this.isOnlineChecked = !this.isOnlineChecked
+      this.isOnlineDisabled = !this.isOnlineDisabled
+    }
   }))
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -62,14 +85,13 @@ function FilterForm({ form }: FormComponentProps) {
 
           StudyStore.createStudy(dataToSend, history)
         } else {
-          console.log(values)
           StudyStore.filterData.lcategory = values.category[0]
           StudyStore.filterData.scategory = values.category[1]
           StudyStore.filterData.city = values.location[0]
           StudyStore.filterData.town = values.location[1]
           StudyStore.filterData.weekdayOrWeekend = values.weekdayOrWeekend
           StudyStore.filterData.isOnline = values.isOnline
-          console.log(StudyStore.filterData)
+          StudyStore.filterStudyList()
           StudyStore.modalVisible = false
         }
       } else {
@@ -161,7 +183,15 @@ function FilterForm({ form }: FormComponentProps) {
                   message: '스터디 분야를 입력해주세요'
                 }
               ]
-            })(<Cascader options={interestsForForm} />)}
+            })(
+              <Cascader
+                options={
+                  pathname !== '/study'
+                    ? interestsForForm
+                    : makeFilter(interestsForForm)
+                }
+              />
+            )}
           </Form.Item>
         </Row>
         <Row>
@@ -169,7 +199,7 @@ function FilterForm({ form }: FormComponentProps) {
             {getFieldDecorator('isOnline', {
               initialValue: 1
             })(
-              <Radio.Group>
+              <Radio.Group disabled={state.isOnlineDisabled}>
                 {isOnline.map(
                   (iO: { value: number; label: string }, index: number) => (
                     <Radio.Button value={iO.value} key={index}>
@@ -177,9 +207,20 @@ function FilterForm({ form }: FormComponentProps) {
                     </Radio.Button>
                   )
                 )}
+                {pathname === '/study' && (
+                  <Radio.Button value={null} key={99}>
+                    적용 안함
+                  </Radio.Button>
+                )}
               </Radio.Group>
             )}
           </Form.Item>
+          {/* <Checkbox
+            checked={state.isOnlineChecked}
+            onChange={state.onChangeIsOnline}
+          >
+            적용 안함
+          </Checkbox> */}
         </Row>
         {pathname !== '/study' && (
           <Row>
@@ -228,6 +269,11 @@ function FilterForm({ form }: FormComponentProps) {
                   </Radio.Button>
                 )
               )}
+              {pathname === '/study' && (
+                <Radio.Button value={null} key={99}>
+                  적용 안함
+                </Radio.Button>
+              )}
             </Radio.Group>
           )}
         </Form.Item>
@@ -273,7 +319,15 @@ function FilterForm({ form }: FormComponentProps) {
                   message: '스터디 지역을 입력해주세요'
                 }
               ]
-            })(<Cascader options={cityAndTownsForForm} />)}
+            })(
+              <Cascader
+                options={
+                  pathname !== '/study'
+                    ? cityAndTownsForForm
+                    : makeFilter(cityAndTownsForForm)
+                }
+              />
+            )}
           </Form.Item>
         </Row>
         {pathname !== '/study' && (
@@ -329,4 +383,4 @@ function FilterForm({ form }: FormComponentProps) {
     </Form>
   ))
 }
-export default Form.create({ name: 'filter_form' })(FilterForm)
+export default Form.create({ name: 'filter_form' })(CreateForm)

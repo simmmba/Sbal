@@ -1,26 +1,23 @@
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
 import React, { useEffect } from 'react'
-import { useLocalStore } from 'mobx-react'
+import { useObserver } from 'mobx-react'
 import StudyList from '../components/studyList/StudyList'
 import { useHistory } from 'react-router'
 import { authCheck, loadToken } from '../utils/authCheck'
 import SearchForm from '../components/studyList/SearchForm'
 import StudyStore from '../stores/StudyStore'
-import StudyGroupMain from '../components/studyGroup/StudyGroupMain'
 
 const StudyListPage = () => {
   const history = useHistory()
-  const state = useLocalStore(() => ({
-    list: []
-  }))
+
   useEffect(() => {
     loadToken()
     authCheck(history)
     StudyStore.getStudyList()
   }, [history])
 
-  return (
+  return useObserver(() => (
     <div>
       <h1>스터디 찾기</h1>
       <SearchForm
@@ -36,7 +33,7 @@ const StudyListPage = () => {
         <StudyList studyList={StudyStore.studyList} />
       </div>
     </div>
-  )
+  ))
 }
 
 export default StudyListPage
