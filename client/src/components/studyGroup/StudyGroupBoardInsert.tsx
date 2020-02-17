@@ -7,7 +7,6 @@ import TextArea from 'antd/lib/input/TextArea'
 import { useLocalStore } from 'mobx-react'
 import StudyStore from "../../stores/StudyStore";
 import {CreatedNotice} from "./StudyGroupType";
-import {StyledTextarea} from "../auth/AuthStyled";
 
 const StudyGroupBoardInsert = () => {
     const main = css`
@@ -96,6 +95,7 @@ const StudyGroupBoardInsert = () => {
         }
     ))
 
+
     const clickEnrollBtn = () => {
         if(state.title.length===0 || state.contents.length===0) {
             alert("제목, 내용을 입력하세요.");
@@ -107,8 +107,13 @@ const StudyGroupBoardInsert = () => {
             studyId: StudyStore.studyGroup.id
         }
         StudyStore.enrollNewNotice(data);
-        // history.push('/study/'+ StudyStore.studyGroup.id + '/board');
         history.goBack();
+    }
+
+    const clickCancelBtn = () => {
+        if(window.confirm("게시물 작성을 취소하시겠습니까?")) {
+            history.goBack();
+        }
     }
 
     return (
@@ -148,7 +153,7 @@ const StudyGroupBoardInsert = () => {
                 </div>
             </div>
             <div css={btnGroup}>
-                <button css={btn} onClick={history.goBack}>
+                <button css={btn} onClick={clickCancelBtn}>
                     취소
                 </button>
                 <button css={btn} onClick={clickEnrollBtn}>등록</button>

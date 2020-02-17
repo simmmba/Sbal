@@ -99,3 +99,30 @@ export const studyMemberUpdate = (
   }
   return apiClient.put('/study/member', data)
 }
+export const updateNotice = (editedNotice: object) => {
+  if (sessionStorage.token) {
+    setAuthToken(sessionStorage.token)
+  }
+  return apiClient.put('/notice', editedNotice)
+}
+
+export const deleteNotice = (id: number) => {
+  if (sessionStorage.token) {
+    setAuthToken(sessionStorage.token)
+  }
+  return apiClient.delete('/notice/' + Number(id))
+}
+
+export const insertReply = (newReply: object) => {
+  if (sessionStorage.token) {
+    setAuthToken(sessionStorage.token)
+  }
+  return apiClient.post('/reply', newReply)
+}
+
+export const deleteReply = (replyId: number) => {
+  if (sessionStorage.token) {
+    setAuthToken(sessionStorage.token)
+  }
+  return apiClient.delete('/reply/' + Number(replyId))
+}

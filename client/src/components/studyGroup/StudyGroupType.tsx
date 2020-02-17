@@ -47,8 +47,8 @@ export type StudySchedule = {
 
 export type StudyNotice = {
     id: number,
-    title: number,
-    content: number,
+    title: string,
+    content: string,
     studyId: number,
     writer: number,
     hits: number,

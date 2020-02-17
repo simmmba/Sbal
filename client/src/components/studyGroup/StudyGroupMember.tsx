@@ -7,28 +7,28 @@ import { useObserver } from 'mobx-react'
 import StudyStore from '../../stores/StudyStore'
 
 const StudyGroupMember = () => {
-  const member = [
-    {
-      date: '2020-02-01',
-      nickname: 'seongho',
-      attendance: '100'
-    },
-    {
-      date: '2020-01-29',
-      nickname: 'seowon',
-      attendance: '80'
-    },
-    {
-      date: '2020-02-03',
-      nickname: 'jspark',
-      attendance: '95'
-    },
-    {
-      date: '2020-02-04',
-      nickname: 'sswoo',
-      attendance: '90'
-    }
-  ]
+  // const member = [
+  //   {
+  //     date: '2020-02-01',
+  //     nickname: 'seongho',
+  //     attendance: '100'
+  //   },
+  //   {
+  //     date: '2020-01-29',
+  //     nickname: 'seowon',
+  //     attendance: '80'
+  //   },
+  //   {
+  //     date: '2020-02-03',
+  //     nickname: 'jspark',
+  //     attendance: '95'
+  //   },
+  //   {
+  //     date: '2020-02-04',
+  //     nickname: 'sswoo',
+  //     attendance: '90'
+  //   }
+  // ]
 
   const main = css`
     display: flex;

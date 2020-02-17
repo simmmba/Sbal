@@ -50,8 +50,6 @@ const StudyStore = observable({
   async fetchStudyGroup(id: number) {
     const res = await studyAPI.getStudyGroup(Number(id))
     this.studyGroup = res.data.value
-    console.log(res.data.value)
-    console.log(this.studyGroup.noticeDTOList[0].title)
   },
 
   async deleteStudySchedule(scheduleId: number) {
@@ -66,10 +64,64 @@ const StudyStore = observable({
   async enrollNewNotice(newNotice: object) {
     try {
       const res = await studyAPI.insertNotice(newNotice)
-      this.studyGroup.noticeDTOList.push(res.data.value)
+      if (res.data.state === 'SUCCESS') {
+        const studyGroup = await studyAPI.getStudyGroup(this.studyGroup.id)
+        this.studyGroup = studyGroup.data.value
+      } else {
+        alert('공지사항 등록 중 오류가 발생했습니다.')
+      }
+      // this.studyGroup.noticeDTOList.push(res.data.value);
       alert(res.data.message)
     } catch (e) {
-      alert('공지사항 등록에 실패했습니다.')
+      alert('공지사항 등록 중 오류가 발생했습니다.')
+    }
+  },
+
+  async editNotice(editedNotice: object) {
+    try {
+      const res = await studyAPI.updateNotice(editedNotice)
+      alert(res.data.message)
+    } catch (e) {
+      alert('공지사항 수정 중 오류가 발생했습니다.')
+    }
+  },
+
+  async deleteNotice(id: number) {
+    try {
+      const res = await studyAPI.deleteNotice(Number(id))
+      alert(res.data.message)
+    } catch (e) {
+      alert('공지사항 삭제 중 오류가 발생했습니다.')
+    }
+  },
+
+  async enrollNewReply(newReply: object, index: number) {
+    try {
+      const res = await studyAPI.insertReply(newReply)
+      if (res.data.state === 'SUCCESS') {
+        // this.studyGroup.noticeDTOList[Number(index)].replyList.push(res.data.value)
+        const studyGroup = await studyAPI.getStudyGroup(this.studyGroup.id)
+        this.studyGroup = studyGroup.data.value
+      } else {
+        alert('댓글 등록에 실패했습니다.')
+      }
+    } catch (e) {
+      alert('댓글 등록 중 오류가 발생했습니다.')
+    }
+  },
+
+  async deleteReply(replyId: number) {
+    try {
+      const res = await studyAPI.deleteReply(Number(replyId))
+      if (res.data.state === 'SUCCESS') {
+        const studyGroup = await studyAPI.getStudyGroup(this.studyGroup.id)
+        this.studyGroup = studyGroup.data.value
+        alert('댓글을 삭제 했습니다.')
+      } else {
+        alert('댓글 삭제에 실패했습니다.')
+      }
+    } catch (e) {
+      alert('댓글 삭제 중 오류가 발생했습니다.')
     }
   },
   async getStudyList() {

@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react'
-import { useHistory } from 'react-router'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
 import { Icon } from 'antd'
 import TextArea from 'antd/lib/input/TextArea'
+import { useParams, useHistory } from 'react-router'
+import StudyStore from "../../stores/StudyStore";
+import {useLocalStore} from "mobx-react";
+import {CreatedNotice, StudyNotice} from "./StudyGroupType";
 
 const StudyGroupBoardEdit = () => {
   const main = css`
@@ -81,19 +84,34 @@ const StudyGroupBoardEdit = () => {
     }
   `
 
-  const history = useHistory()
+  const {index} = useParams();
+  const history = useHistory();
+  const editNotice: StudyNotice = StudyStore.studyGroup.noticeDTOList[Number(index)];
 
-  const goBack = () => {
-    history.goBack()
+
+  const state = useLocalStore<CreatedNotice>(() => ({
+        title: editNotice.title,
+        contents: editNotice.content,
+        onChangeTextarea(e: React.ChangeEvent<HTMLTextAreaElement>) {
+          state[e.target.name] = e.target.value;
+        },
+      }
+  ))
+
+  const clickCancelBtn = () => {
+    if(window.confirm("게시물 수정을 취소하시겠습니까?")) {
+      history.goBack();
+    }
   }
 
-  useEffect(() => {
-    const unblock = history.block('수정을 취소하시겠습니까?')
-    return () => {
-      unblock()
-    }
-  }, [history])
+  const clickEditBtn = () => {
+    editNotice.title = state.title;
+    editNotice.content = state.contents;
+    StudyStore.editNotice(editNotice);
+    history.goBack();
+  }
 
+  console.log(editNotice);
   return (
     <div>
       <div css={upper}>
@@ -111,30 +129,26 @@ const StudyGroupBoardEdit = () => {
       <div css={content}>
         <div css={top}>
           <TextArea
-            // css={textarea}
             rows={1}
-            // placeholder={b.content}
-            //   value={value}
-            //   onChange={onChange}
-            // onPressEnter={handleChange}
+            placeholder={state.title}
+            name="title"
+            id="title"
+            onChange={state.onChangeTextarea}
           />
         </div>
         <div css={bottom}>
           <TextArea
-            // css={textarea}
             rows={10}
-            // placeholder={b.content}
-            //   value={value}
-            //   onChange={onChange}
-            // onPressEnter={handleChange}
+            placeholder={state.contents}
+            name="contents"
+            id="contents"
+            onChange={state.onChangeTextarea}
           />
         </div>
       </div>
       <div css={btnGroup}>
-        <button css={btn} onClick={goBack}>
-          취소
-        </button>
-        <button css={btn}>등록</button>
+        <button css={btn} onClick={clickCancelBtn}>취소</button>
+        <button css={btn} onClick={clickEditBtn}>등록</button>
       </div>
     </div>
   )
