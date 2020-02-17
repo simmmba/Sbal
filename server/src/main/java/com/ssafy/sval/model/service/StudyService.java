@@ -27,6 +27,8 @@ public class StudyService {
     public Study insert(Study study) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         study.setEnrollDate(sdf.format(new Date(System.currentTimeMillis())));
+        study.setHits(0);
+        study.setState(0);
         Study createdStudy = sRepo.save(study);
         StudyMember leader = smRepo.save(new StudyMember(createdStudy, createdStudy.getLeader(), 1));
         createdStudy.setMemberList(new ArrayList<>());
