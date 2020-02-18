@@ -7,12 +7,14 @@ import myStudy from '../../stores/StudyStore'
 
 const listBox = css`
   /* width: 650px; */
-  /* margin: 10px; */
-  border: 1px solid red;
+  margin: 10px;
+  /* border: 1px solid red; */
   background-color: white;
   padding: 15px 15px 20px 15px;
   width: 330px;
-  border: 10px solid rgb(236, 236, 236);
+  border-radius: 10px;
+  /* border: 10px solid rgb(236, 236, 236); */
+  /* border: 10px solid #d9e5ff; */
 `
 const listTitle = css`
   font-size: 15px;

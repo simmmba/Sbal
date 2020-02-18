@@ -22,11 +22,13 @@ import {
   makeFilter
 } from '../../stores/UserStore'
 import StudyStore from '../../stores/StudyStore'
+import StudyDetailStore from '../../stores/StudyDetailStore'
 import { Study } from '../main/MainTypes'
 import { FormComponentProps } from 'antd/lib/form/Form'
 import { CheckboxChangeEvent } from 'antd/lib/checkbox/Checkbox'
-import { CascaderOptionType } from 'antd/lib/cascader'
 import { useHistory, useLocation } from 'react-router'
+import moment from 'moment'
+import { format } from 'path'
 
 function CreateForm({ form }: FormComponentProps) {
   const { getFieldDecorator } = form
@@ -36,6 +38,46 @@ function CreateForm({ form }: FormComponentProps) {
   const history = useHistory()
   const { pathname } = useLocation()
 
+  let initialValues: Study
+  if (pathname.slice(0, 14) === '/study/details') {
+    initialValues = {
+      title: StudyDetailStore.data.title,
+      lcategory: StudyDetailStore.data.lcategory,
+      scategory: StudyDetailStore.data.scategory,
+      city: StudyDetailStore.data.city,
+      town: StudyDetailStore.data.town,
+      maxParticipants: StudyDetailStore.data.maxParticipants,
+      contents: StudyDetailStore.data.contents,
+      frequency: StudyDetailStore.data.frequency,
+      monthOrWeek: StudyDetailStore.data.monthOrWeek,
+      weekdayOrWeekend: StudyDetailStore.data.weekdayOrWeekend,
+      startDate: StudyDetailStore.data.startDate,
+      endDate: StudyDetailStore.data.endDate,
+      evaluationLimit: StudyDetailStore.data.evaluationLimit,
+      isOnline: StudyDetailStore.data.isOnline,
+      timeslot: StudyDetailStore.data.timeslot
+    }
+  } else {
+    initialValues = {
+      title: '',
+      lcategory: '어학',
+      scategory: 'TOEIC',
+      city: '서울',
+      town: '강남구',
+      maxParticipants: 30,
+      contents: '',
+      frequency: 2,
+      monthOrWeek: 2,
+      weekdayOrWeekend: 2,
+      startDate: moment().format('YYYY-MM-DD'),
+      endDate: moment()
+        .add(30, 'days')
+        .format('YYYY-MM-DD'),
+      evaluationLimit: 30,
+      isOnline: true,
+      timeslot: 2
+    }
+  }
   const state = useLocalStore(() => ({
     monthOrWeek: 2,
     weekdayOrWeekend: 0,
@@ -78,12 +120,24 @@ function CreateForm({ form }: FormComponentProps) {
             weekdayOrWeekend: values.weekdayOrWeekend,
             startDate: values.studyDate[0].format('YYYY-MM-DD'),
             endDate: values.studyDate[1].format('YYYY-MM-DD'),
-            evaluationLimit: values.evaluationLimit,
+            evaluationLimit: state.checked ? 0 : values.evaluationLimit,
             isOnline: values.isOnline,
             timeslot: values.timeslot
           }
-          console.log(dataToSend)
-          // StudyStore.createStudy(dataToSend, history)
+          if (pathname === '/study/create') {
+            StudyStore.createStudy(dataToSend, history)
+            history.push('/study')
+          } else {
+            dataToSend.leader = {
+              id: parseInt(sessionStorage.id),
+              nickname: ''
+            }
+            dataToSend.id = StudyDetailStore.data.id
+            dataToSend.state = StudyDetailStore.data.state
+            dataToSend.hits = StudyDetailStore.data.hits
+            StudyStore.updateStudy(dataToSend, history)
+            history.push('/study')
+          }
         } else {
           StudyStore.filterData.lcategory = values.category[0]
           StudyStore.filterData.scategory = values.category[1]
@@ -170,6 +224,7 @@ function CreateForm({ form }: FormComponentProps) {
           <Row>
             <Form.Item label={'스터디 이름'}>
               {getFieldDecorator('title', {
+                initialValue: initialValues.title,
                 rules: [
                   {
                     required: true,
@@ -183,7 +238,7 @@ function CreateForm({ form }: FormComponentProps) {
         <Row>
           <Form.Item label="분야">
             {getFieldDecorator('category', {
-              initialValue: ['어학', 'TOEIC'],
+              initialValue: [initialValues.lcategory, initialValues.scategory],
               rules: [
                 {
                   type: 'array',
@@ -205,7 +260,7 @@ function CreateForm({ form }: FormComponentProps) {
         <Row>
           <Form.Item label={'방식'}>
             {getFieldDecorator('isOnline', {
-              initialValue: 1
+              initialValue: initialValues.isOnline
             })(
               <Radio.Group disabled={state.isOnlineDisabled}>
                 {isOnline.map(
@@ -234,7 +289,7 @@ function CreateForm({ form }: FormComponentProps) {
           <Row>
             <Form.Item label={'스터디 일정'}>
               {getFieldDecorator('monthOrWeek', {
-                initialValue: 2
+                initialValue: initialValues.monthOrWeek
               })(
                 <Radio.Group
                   onChange={e => {
@@ -251,7 +306,7 @@ function CreateForm({ form }: FormComponentProps) {
                 </Radio.Group>
               )}
               {getFieldDecorator('frequency', {
-                initialValue: 1
+                initialValue: initialValues.frequency
               })(
                 <InputNumber
                   css={css`
@@ -270,7 +325,7 @@ function CreateForm({ form }: FormComponentProps) {
 
         <Form.Item label={'요일'}>
           {getFieldDecorator('weekdayOrWeekend', {
-            initialValue: 2
+            initialValue: initialValues.weekdayOrWeekend
           })(
             <Radio.Group>
               {weekdayOrWeekend.map(
@@ -294,7 +349,7 @@ function CreateForm({ form }: FormComponentProps) {
             {' '}
             <Form.Item label={'시간대'}>
               {getFieldDecorator('timeslot', {
-                initialValue: 2
+                initialValue: initialValues.timeslot
               })(
                 <Radio.Group>
                   {timeslot.map(
@@ -309,6 +364,10 @@ function CreateForm({ form }: FormComponentProps) {
             </Form.Item>
             <Form.Item label={'스터디 일자'}>
               {getFieldDecorator('studyDate', {
+                initialValue: [
+                  moment(initialValues.startDate),
+                  moment(initialValues.endDate)
+                ],
                 rules: [
                   {
                     required: true,
@@ -322,7 +381,7 @@ function CreateForm({ form }: FormComponentProps) {
         <Row>
           <Form.Item label="지역">
             {getFieldDecorator('location', {
-              initialValue: ['서울', '강남구'],
+              initialValue: [initialValues.city, initialValues.town],
               rules: [
                 {
                   type: 'array',
@@ -345,12 +404,13 @@ function CreateForm({ form }: FormComponentProps) {
           <Row>
             <Form.Item label="최대 인원">
               {getFieldDecorator('maxParticipants', {
-                initialValue: 30
+                initialValue: initialValues.maxParticipants
               })(<Slider marks={sliderMarks} min={1} max={30} />)}
             </Form.Item>
 
             <Form.Item label="간단한 소개">
               {getFieldDecorator('contents', {
+                initialValue: initialValues.contents,
                 rules: [
                   {
                     required: true,
@@ -360,7 +420,9 @@ function CreateForm({ form }: FormComponentProps) {
               })(<TextArea rows={4} allowClear />)}
             </Form.Item>
             <Form.Item label={'성실도 제한'}>
-              {getFieldDecorator('evaluationLimit')(
+              {getFieldDecorator('evaluationLimit', {
+                initialValue: initialValues.evaluationLimit
+              })(
                 <Slider
                   marks={sliderMarksEval}
                   min={1}
@@ -394,4 +456,5 @@ function CreateForm({ form }: FormComponentProps) {
     </Form>
   ))
 }
-export default Form.create({ name: 'filter_form' })(CreateForm)
+
+export default Form.create({ name: 'filter-form' })(CreateForm)

@@ -88,8 +88,8 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
     nicknameState: false,
     nicknameDupMessage: '',
     isCheckedNickname: false,
-    password: '',
-    password2: '',
+    pw: '',
+    pw2: '',
     phoneNumber: '',
     introduction: '',
     isEqualPassword: false,
@@ -102,8 +102,8 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
     equalsOfPasswords: '',
     onChange(e: React.ChangeEvent<HTMLInputElement>) {
       state[e.target.name] = e.target.value
-      if (e.target.name === 'password' || e.target.name === 'password2') {
-        state.isEqualPassword = this.password === this.password2
+      if (e.target.name === 'pw' || e.target.name === 'pw2') {
+        state.isEqualPassword = this.pw === this.pw2
         if (this.isEqualPassword) {
           state.equalsOfPasswords = '비밀번호가 일치합니다.'
         } else {
@@ -168,7 +168,6 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
     const query = qs.parse(location.search, { ignoreQueryPrefix: true })
     const kakaoAccessToken = query.code
     const res = await getSocialData(kakaoAccessToken, 'kakao')
-    console.log(res)
     const { email, nickname, socialLogin } = res.data.value
 
     if (email) {
@@ -218,22 +217,22 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
       UserStore.edit(dataToSend)
       history.push('/')
       return
+    } else {
+      const dataToSend = {
+        email: state.email,
+        nickname: state.nickname,
+        city: state.city,
+        town: state.town,
+        phoneNum: state.phoneNumber,
+        introduction: state.introduction,
+        interestDTOList: state.interestList,
+        pw: state.pw,
+        gender: state.gender
+      }
+      UserStore.signup(dataToSend)
+      history.push('/')
+      e.preventDefault()
     }
-    // const dataToSend = {
-    //   email,
-    //   nickname: username,
-    //   pw: password,
-    //   city,
-    //   town,
-    //   gender,
-    //   phoneNum: phoneNumber,
-    //   introduction,
-    //   interestList: interestList,
-    //   socialLogin
-    // }
-    // signup(dataToSend)
-    // dispatch({ type: 'RESET' })
-    e.preventDefault()
   }
   return useObserver(() => (
     <AuthFormBlock>
@@ -259,7 +258,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
             width={60}
           />
           <StyledButton
-            width={30}
+            width={35}
             marginLeft={5}
             onClick={e => {
               state.validateUserEmail()
@@ -287,7 +286,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
           width={60}
         />
         <StyledButton
-          width={30}
+          width={35}
           marginLeft={5}
           onClick={e => {
             state.validateUserNickname()
@@ -305,25 +304,25 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
           <div />
         ) : (
           <div>
-            <StyledLabel htmlFor="password">
+            <StyledLabel htmlFor="pw">
               <Guide color="red">* </Guide>비밀번호
             </StyledLabel>
             <StyledInput
               placeholder="비밀번호를 입력하세요"
               autoComplete="password"
-              name="password"
-              value={state.password}
+              name="pw"
+              value={state.pw}
               type="password"
               onChange={state.onChange}
             />
-            <StyledLabel htmlFor="password2">
+            <StyledLabel htmlFor="pw2">
               <Guide color="red">* </Guide>비밀번호 확인
             </StyledLabel>
             <StyledInput
               placeholder="비밀번호를 입력하세요"
               autoComplete="password"
-              name="password2"
-              value={state.password2}
+              name="pw2"
+              value={state.pw2}
               type="password"
               onChange={state.onChange}
             />
@@ -370,7 +369,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
           name="introduction"
           id="introduction"
           value={state.introduction}
-          cols={37}
+          cols={32}
           rows={10}
           onChange={state.onChangeTextarea}
         >
@@ -438,7 +437,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
           </div>
           <PlusButton onClick={appendInterest} />
         </FlexBetween>
-        <StyledButton marginTop={15}>
+        <StyledButton width={100} marginTop={15}>
           {type === 'mypage/update' ? '수정' : '가입'}
         </StyledButton>
       </form>
