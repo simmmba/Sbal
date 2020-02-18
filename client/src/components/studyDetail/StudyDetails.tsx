@@ -256,7 +256,19 @@ const StudyDetails = () => {
                   )}
                 {sessionStorage.getItem('id') ===
                   StudyDetailStore.data.leader.id + '' && (
-                  <button css={btn}>수정</button>
+                  <div>
+                    <button css={btn} onClick={openModal}>
+                      수정
+                    </button>
+                    <Modal
+                      title="스터디 수정"
+                      visible={StudyDetailStore.modalVisible}
+                      onCancel={handleCancel}
+                      footer={[<div></div>]}
+                    >
+                      <CreateForm />
+                    </Modal>
+                  </div>
                 )}
                 {sessionStorage.getItem('id') ===
                   StudyDetailStore.data.leader.id + '' && (

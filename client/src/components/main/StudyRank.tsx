@@ -3,7 +3,7 @@
 import { css, jsx } from '@emotion/core'
 import { NavLink } from 'react-router-dom'
 import { StudyRankprops, Study } from './MainTypes'
-import myStudy from '../../stores/StudyStore'
+import LoadingSpin from '../common/LoadingSpin'
 
 const listBox = css`
   /* width: 650px; */
@@ -117,7 +117,7 @@ const StudyRank = ({ title, list }: StudyRankprops) => {
             </div>
           </NavLink>
         ))
-      ) : (
+      ) : title === 'myStudy' ? (
         <div css={empty}>
           참여중인 스터디가 없네요 😅
           <br />
@@ -126,6 +126,8 @@ const StudyRank = ({ title, list }: StudyRankprops) => {
             스터디 보러가기
           </NavLink>
         </div>
+      ) : (
+        <LoadingSpin />
       )}
     </div>
   )

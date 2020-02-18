@@ -13,12 +13,13 @@ const StudyListPage = () => {
   // const state = useLocalStore(() => ({
   //   list: []
   // }))
-  // StudyStore.getStudyList()
+
   useEffect(() => {
     loadToken()
     authCheck(history)
+    StudyStore.getStudyList()
   }, [history])
-
+  console.log(StudyStore.studyList)
   return useObserver(() => (
     <div>
       <SearchForm
