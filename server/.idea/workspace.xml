@@ -1,86 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="703f5862-ffa2-4945-9468-12af9d573c3c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/.babelrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/.prettierrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/public/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/public/images/1080_360_1.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/public/images/1080_360_2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/public/images/1080_360_3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/public/images/1080_360_4.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/public/images/1080_360_5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/public/images/1080_360_6.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/public/images/600_120_1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/public/images/600_120_2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/public/images/600_120_3.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/public/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/public/logo192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/public/logo512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/public/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/public/robots.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/App.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/App.test.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/App.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/assets/GodoB.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/assets/GodoM.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/assets/naver_icon.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/Display.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/Footer.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/NavBar.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/auth/AuthFooter.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/auth/AuthForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/auth/AuthForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/auth/AuthStyled.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/auth/AuthTemplate.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/auth/AuthTypes.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/auth/SignupForm.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/common/Button.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/common/ToggleSwitch.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/main/MainStudyList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/main/MainStudyList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/main/MainTypes.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/main/StudyRank.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/main/StudyRank.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/studyDetail/StudyDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/studyDetail/StudyDetails.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/studyDetail/StudyMember.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/studyDetail/StudyMember.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/studyDetail/StudyRequest.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/studyDetail/StudyRequest.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/studyGroup/StudyGroupMain.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/studyList/FilterForm.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/studyList/StudyList.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/userDetail/UserDetailTypes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/userDetail/UserDetailTypes.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/userDetail/UserDetailView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/userDetail/UserDetailView.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/css/CSSModule.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/css/SuperResponsiveTableStyle.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/lib/api/auth.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/lib/api/client.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/lib/api/client.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/lib/api/study..tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/lib/api/study..tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/lib/api/userDetail.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/lib/styles/palette.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/CreatePage.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/HomePage.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/LoginPage.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/MyInfoPage.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/SignupPage.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/StudyDetailPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/StudyDetailPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/StudyGroupPage.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/StudyListPage.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/pages/StudyPage.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/react-app-env.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/serviceWorker.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/setupTests.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/stores/StudyStore.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/stores/StudyStore.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/stores/UserDetailStore.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/stores/UserDetailStore.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/stores/UserStore.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/stores/UserStore.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/utils/authCheck.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/utils/setAuthToken.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/tsconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/tslint.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/yarn.lock" beforeDir="false" />
-    </list>
+    <list default="true" id="703f5862-ffa2-4945-9468-12af9d573c3c" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -241,6 +162,11 @@
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="root:AWS" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="root:AWS" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@e648f8c" type="9fbbdea:ServiceModel$ServiceNode" />
               </path>
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
