@@ -7,5 +7,11 @@
       <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mariadb://13.124.98.149:3306</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="TEST_DB@localhost" uuid="6beb24c6-91c6-4c68-88f4-814697ff1ac4">
+      <driver-ref>mariadb</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mariadb://localhost:3306/TEST_DB</jdbc-url>
+    </data-source>
   </component>
 </project>

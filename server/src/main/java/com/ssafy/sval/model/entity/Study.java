@@ -1,14 +1,11 @@
 package com.ssafy.sval.model.entity;
 
-import com.ssafy.sval.model.dto.StudyScheduleDTO;
+import com.ssafy.sval.model.dto.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-import com.ssafy.sval.model.dto.StudyDTO;
-import com.ssafy.sval.model.dto.StudyMemberDTO;
-import com.ssafy.sval.model.dto.UserDTO;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -21,7 +18,6 @@ import java.util.List;
 @Entity
 @Table(name = "STUDY")
 public class Study {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -53,22 +49,31 @@ public class Study {
     @OneToMany(mappedBy = "study")
     private List<StudySchedule> scheduleList;
 
+    @OneToMany(mappedBy = "study")
+    private List<Notice> noticeList;
+
     public StudyDTO toDTO() {
         StudyDTO studyDTO = new StudyDTO(id, title, contents, new UserDTO(leader.getId(), leader.getNickname()),
                 lCategory, sCategory, city, town, state, maxParticipants, hits, isOnline, monthOrWeek,
                 frequency, weekdayOrWeekend, timeslot, evaluationLimit, enrollDate, startDate, endDate,
-                null, null, null);
+                null, null, null, null);
 
-        if(memberList != null) {
+        if (memberList != null) {
             List<StudyMemberDTO> memberDTOList = new ArrayList<>();
             for (StudyMember sm : memberList) memberDTOList.add(sm.toMemberDTO());
             studyDTO.setStudyMemberDTOList(memberDTOList);
         }
 
-        if(scheduleList!=null) {
+        if (scheduleList != null) {
             List<StudyScheduleDTO> scheduleDTOList = new ArrayList<>();
-            for(StudySchedule ss : scheduleList) scheduleDTOList.add(ss.toDTO());
+            for (StudySchedule ss : scheduleList) scheduleDTOList.add(ss.toDTO());
             studyDTO.setStudyScheduleDTOList(scheduleDTOList);
+        }
+
+        if(noticeList!=null) {
+            List<NoticeDTO> noticeDTOList = new ArrayList<>();
+            for (Notice n : noticeList) noticeDTOList.add(n.toDTO());
+            studyDTO.setNoticeDTOList(noticeDTOList);
         }
 
         return studyDTO;
@@ -76,9 +81,9 @@ public class Study {
 
     public StudyDTO mainPageDTO() {
         StudyDTO studyDTO = new StudyDTO(id, title, null, new UserDTO(leader.getId(), leader.getNickname()),
-                lCategory, sCategory, city, town, state, maxParticipants, hits, isOnline, null,
-                null, null, null, evaluationLimit, enrollDate,
-                null, null, null, null, null);
+                lCategory, sCategory, city, town, state, maxParticipants, hits, isOnline, monthOrWeek,
+                frequency, weekdayOrWeekend, timeslot, evaluationLimit, enrollDate,
+                startDate, endDate, null, null, null, null);
 
         return studyDTO;
     }
@@ -87,8 +92,7 @@ public class Study {
         StudyDTO studyDTO = new StudyDTO(id, title, null, null, null, null,
                 null, null, state, maxParticipants, null, isOnline, null, null,
                 null, null, null, null, startDate, endDate,
-                null, null, null);
-
+                null, null, null, null);
         return studyDTO;
     }
 }

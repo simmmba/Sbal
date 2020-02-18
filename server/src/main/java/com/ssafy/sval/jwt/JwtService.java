@@ -1,6 +1,5 @@
 package com.ssafy.sval.jwt;
 
-import com.ssafy.sval.model.dto.UserDTO;
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,10 +40,12 @@ public class JwtService {
         int loginUserId = 0;
         try {
             final String jwt = request.getHeader("jwt-auth-token");
+            System.out.println(jwt);
             if(jwt==null || jwt.length() <= 0) return -1;
             Map jwtPayload = Jwts.parser().setSigningKey(salt.getBytes()).parseClaimsJws(jwt).getBody();
             loginUserId = (int) jwtPayload.get("loginUser");
         } catch (RuntimeException e) {
+            e.printStackTrace();
             throw new RuntimeException("JWT_getLoginUserId");
         }
         return loginUserId;
