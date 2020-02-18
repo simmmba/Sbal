@@ -79,6 +79,7 @@ public class StudyController {
     @PutMapping
     @ApiOperation(value = "스터디를 수정한다.", response = CommonResponse.class)
     public ResponseEntity<CommonResponse> update(@RequestBody StudyDTO study, HttpServletRequest request) {
+        System.out.println(study);
         try {
             int leaderId = jwtService.getLoginUserId(request);
             if (study.getLeader().getId() != leaderId)

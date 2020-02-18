@@ -5,6 +5,7 @@ import com.ssafy.sval.model.dto.SocialParam;
 import com.ssafy.sval.model.dto.UserDTO;
 import com.ssafy.sval.model.entity.User;
 import com.ssafy.sval.model.service.CommonService;
+import com.ssafy.sval.model.service.EmailService;
 import com.ssafy.sval.model.service.UserProfileService;
 import com.ssafy.sval.model.service.UserService;
 import com.ssafy.sval.responseType.CommonResponse;
@@ -22,6 +23,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 @RestController
 @RequestMapping("/user")
@@ -182,7 +186,14 @@ public class UserController {
             "이미 가입된 이메일이라면 FAIL 문자열을 리턴한다.", response = CommonResponse.class)
     public ResponseEntity<CommonResponse> validateEmail(@PathVariable String email) {
         if (userService.isExistEmail(email)) {
-            return new ResponseEntity<>(new CommonResponse("validateEmail", "SUCCESS", "사용할 수 있는 이메일입니다."), HttpStatus.OK);
+            EmailService emailService = new EmailService();
+            String sub = "스터디의 발견 이메일 인증입니다.";
+            int ran = new Random().nextInt(100000) + 10000;
+            String dice = ran+"";
+            Map<String, String> result = new HashMap<>();
+            emailService.sendMail(email, sub, dice);
+            result.put("dice", dice);
+            return new ResponseEntity<>(new CommonResponse(result,"validateEmail", "SUCCESS", "사용할 수 있는 이메일입니다."), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(new CommonResponse("validateEmail", "FAIL", "사용할 수 없는 이메일입니다."), HttpStatus.OK);
         }
@@ -216,7 +227,6 @@ public class UserController {
         String code = param.getCode();
         System.out.println(code);
         String service = param.getService();
-
         SnsValue sns = null;
         SnsLogin sl = null;
         User user = null;
