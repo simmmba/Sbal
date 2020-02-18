@@ -19,19 +19,18 @@ public class NoticeDTO {
     private String title;
     private String content;
     private Integer studyId;
-    private Integer writer;
+    private UserDTO writer;
     private int hits;
     private String date;
 
     private List<ReplyDTO> replyList = new ArrayList<>();
 
-    public Notice toEntity(Integer writer){
+    public Notice toEntity(Integer writerId){
         Study study = new Study();
         study.setId(studyId);
-        this.writer = writer;
-        User user = new User();
-        user.setId(writer);
-        Notice notice = new Notice(id, title, content, user, study, hits,date, new ArrayList<>() );
+        User writer = new User();
+        writer.setId(writerId);
+        Notice notice = new Notice(id, title, content, writer, study, hits,date, new ArrayList<>());
         return notice;
     }
 }

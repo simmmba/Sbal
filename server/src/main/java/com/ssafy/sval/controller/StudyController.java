@@ -1,5 +1,4 @@
 package com.ssafy.sval.controller;
-
 import com.ssafy.sval.jwt.JwtService;
 import com.ssafy.sval.model.dto.StudyDTO;
 import com.ssafy.sval.model.dto.StudyMemberDTO;
@@ -9,18 +8,22 @@ import com.ssafy.sval.model.service.StudyMemberService;
 import com.ssafy.sval.model.service.StudyService;
 import com.ssafy.sval.model.service.UserService;
 import com.ssafy.sval.responseType.CommonResponse;
+import com.ssafy.sval.util.StudySpecs;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/study")
@@ -78,7 +81,7 @@ public class StudyController {
     public ResponseEntity<CommonResponse> update(@RequestBody StudyDTO study, HttpServletRequest request) {
         try {
             int leaderId = jwtService.getLoginUserId(request);
-            if(study.getLeader().getId()!=leaderId)
+            if (study.getLeader().getId() != leaderId)
                 return new ResponseEntity<>(new CommonResponse("update", "FAIL", "스터디가 수정은 리더만 가능합니다."), HttpStatus.OK);
             else {
                 Study updatedStudy = study.insertOrUpdateEntity(leaderId);
@@ -98,7 +101,7 @@ public class StudyController {
         try {
             int loginUserId = jwtService.getLoginUserId(request);
             Study study = studyService.getStudy(studyId);
-            if(study.getLeader().getId()!=loginUserId) {
+            if (study.getLeader().getId() != loginUserId) {
                 return new ResponseEntity<>(new CommonResponse("delete", "FAIL", "스터디 삭제는 리더만 가능합니다."), HttpStatus.OK);
             } else {
                 studyService.delete(studyId);
@@ -127,12 +130,10 @@ public class StudyController {
             studyDTO.setStudyScheduleDTOList(null);
 
             for (StudyMemberDTO sm : smList) {
-                if(sm.getUser().getId()==loginUserId && (sm.getState()==1 || sm.getState()==0)) {
+                if (sm.getUser().getId() == loginUserId && (sm.getState() == 1 || sm.getState() == 0)) {
                     studyDTO.setStudyScheduleDTOList(ssList);
-                    if(loginUserId!=studyDTO.getLeader().getId())
-                        for (int i=0; i<smList.size(); i++) {
-                            if(smList.get(i).getState() !=1 && smList.get(i).getState() != 0   ) smList.remove(i--);
-                        }
+                    if (loginUserId != studyDTO.getLeader().getId())
+                        for (int i = 0; i < smList.size(); i++) if (smList.get(i).getState() != 1 && smList.get(i).getState() != 0) smList.remove(i--);
                     studyDTO.setStudyMemberDTOList(smList);
                     break;
                 }
@@ -165,6 +166,53 @@ public class StudyController {
         }
     }
 
+    // 필터 검색
+    @PostMapping("/list")
+    public ResponseEntity<CommonResponse> getStudiesUsingFileter(@RequestBody Map<String, Object> filter) {
+        try {
+
+            StudySpecs studySpecs = new StudySpecs();
+            Specification<Study> spec = studySpecs.init();
+
+            String value = (String) filter.get("searchBy");
+            if (value != null) {
+                String searchText = (String) filter.get("searchText");
+                if (searchText == null) searchText = "";
+                if (value.equals("leader")) {
+                    spec = spec.and(studySpecs.leaderIdIs(userService.findByNickname(searchText).getId()));
+                } else if (value.equals("title")) {
+                    spec = spec.and(studySpecs.titleLike(searchText));
+                }
+            }
+
+            value = (String) filter.get("lcategory");
+            if (value != null) spec = spec.and(studySpecs.lCategoryIs(value));
+            value = (String) filter.get("scategory");
+            if (value != null) spec = spec.and(studySpecs.sCategoryIs(value));
+            value = (String) filter.get("city");
+            if (value != null) spec = spec.and(studySpecs.cityIs(value));
+            value = (String) filter.get("town");
+            if (value != null) spec = spec.and(studySpecs.townIs(value));
+            Boolean isOnline = (Boolean) filter.get("isOnline");
+            if (isOnline != null) spec = spec.and(studySpecs.onlineStateIs(isOnline));
+            Integer weekdayOrWeekend = (Integer) filter.get("weekdayOrWeekend");
+            if (weekdayOrWeekend != null) spec = spec.and(studySpecs.dayStateIs(weekdayOrWeekend));
+
+            List<Study> studyList = studyService.findAllByFilterCondition(spec);
+            List<StudyDTO> studyDTOList = new ArrayList<>();
+            for (Study s : studyList) {
+                StudyDTO studyDTO = s.mainPageDTO();
+                studyDTO.setJoinedMemberCount(studyMemberService.getjoinedMemeberCount(studyDTO.getId()));
+                studyDTOList.add(studyDTO);
+            }
+            studyDTOList.sort((o1, o2) -> -(o1.getEnrollDate().compareTo(o2.getEnrollDate())));
+            return new ResponseEntity<>(new CommonResponse(studyDTOList, "getStudiesUsingFileter", "SUCCESS", "조회 성공"), HttpStatus.OK);
+
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            throw new RuntimeException("getStudiesUsingFileter");
+        }
+    }
     @GetMapping("/renew/{studyId}")
     @ApiOperation(value = "등록된 스터디의 등록 시간을 현재로 갱신한다.", response = CommonResponse.class)
     public ResponseEntity<CommonResponse> renewStudy(@PathVariable Integer studyId, HttpServletRequest request) {

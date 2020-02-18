@@ -6,6 +6,7 @@ import com.ssafy.sval.model.repository.StudyMemberRepository;
 import com.ssafy.sval.model.repository.StudyRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -26,6 +27,8 @@ public class StudyService {
     public Study insert(Study study) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         study.setEnrollDate(sdf.format(new Date(System.currentTimeMillis())));
+        study.setHits(0);
+        study.setState(0);
         Study createdStudy = sRepo.save(study);
         StudyMember leader = smRepo.save(new StudyMember(createdStudy, createdStudy.getLeader(), 1));
         createdStudy.setMemberList(new ArrayList<>());
@@ -58,5 +61,9 @@ public class StudyService {
 
     public Study findById(Integer id) {
         return sRepo.findById(id).get();
+    }
+
+    public List<Study> findAllByFilterCondition(Specification<Study> spec) {
+        return sRepo.findAll(spec);
     }
 }

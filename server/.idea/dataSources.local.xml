@@ -6,7 +6,7 @@
         <extra-name-characters>#@</extra-name-characters>
         <identifier-quote-string>`</identifier-quote-string>
       </database-info>
-      <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
+      <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>
       <schema-mapping>
@@ -14,9 +14,14 @@
           <node kind="schema">
             <name qname="@" />
             <name qname="TEST_DB" />
+            <name qname="test_db" />
           </node>
         </introspection-scope>
       </schema-mapping>
+    </data-source>
+    <data-source name="TEST_DB@localhost" uuid="6beb24c6-91c6-4c68-88f4-814697ff1ac4">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MARIADB" exact-version="0" />
+      <schema-mapping />
     </data-source>
   </component>
 </project>

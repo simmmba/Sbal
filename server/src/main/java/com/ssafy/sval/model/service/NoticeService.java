@@ -24,6 +24,12 @@ public class NoticeService {
         return notice;
     }
 
+    public void increaseHits(Integer noticeId) {
+        Notice notice = nRepo.findById(noticeId).get();
+        notice.setHits(notice.getHits()+1);
+        nRepo.save(notice);
+    }
+
     public Notice getNotice(Integer id) {
         return nRepo.findById(id).get();
     }

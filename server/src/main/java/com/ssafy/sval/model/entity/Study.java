@@ -18,7 +18,6 @@ import java.util.List;
 @Entity
 @Table(name = "STUDY")
 public class Study {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -56,24 +55,24 @@ public class Study {
     public StudyDTO toDTO() {
         StudyDTO studyDTO = new StudyDTO(id, title, contents, new UserDTO(leader.getId(), leader.getNickname()),
                 lCategory, sCategory, city, town, state, maxParticipants, hits, isOnline, monthOrWeek,
-                frequency, weekdayOrWeekend, timeslot, evaluationLimit, enrollDate, startDate, endDate,
-                null, null, null,null);
+                frequency, weekdayOrWeekend, timeslot, evaluationLimit, enrollDate, startDate, endDate, null, null, null,null);
 
-        if(memberList != null) {
+
+        if (memberList != null) {
             List<StudyMemberDTO> memberDTOList = new ArrayList<>();
             for (StudyMember sm : memberList) memberDTOList.add(sm.toMemberDTO());
             studyDTO.setStudyMemberDTOList(memberDTOList);
         }
 
-        if(scheduleList!=null) {
+        if (scheduleList != null) {
             List<StudyScheduleDTO> scheduleDTOList = new ArrayList<>();
-            for(StudySchedule ss : scheduleList) scheduleDTOList.add(ss.toDTO());
+            for (StudySchedule ss : scheduleList) scheduleDTOList.add(ss.toDTO());
             studyDTO.setStudyScheduleDTOList(scheduleDTOList);
         }
 
-        if(noticeList != null){
+        if(noticeList!=null) {
             List<NoticeDTO> noticeDTOList = new ArrayList<>();
-            for(Notice n : noticeList) noticeDTOList.add(n.toDTO());
+            for (Notice n : noticeList) noticeDTOList.add(n.toDTO());
             studyDTO.setNoticeDTOList(noticeDTOList);
         }
 
@@ -82,9 +81,10 @@ public class Study {
 
     public StudyDTO mainPageDTO() {
         StudyDTO studyDTO = new StudyDTO(id, title, null, new UserDTO(leader.getId(), leader.getNickname()),
-                lCategory, sCategory, city, town, state, maxParticipants, hits, isOnline, null,
-                null, null, null, evaluationLimit, enrollDate,
-                null, null, null, null, null,null);
+
+                lCategory, sCategory, city, town, state, maxParticipants, hits, isOnline, monthOrWeek,
+                frequency, weekdayOrWeekend, timeslot, evaluationLimit, enrollDate,
+                startDate, endDate, null, null, null, null);
 
         return studyDTO;
     }

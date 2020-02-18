@@ -79,7 +79,6 @@ public class StudyMemberController {
     @DeleteMapping("/{studyId}")
     @ApiOperation(value = "스터디 참가 신청을 했던 사용자가 요청을 삭제한다.", response = CommonResponse.class)
     public ResponseEntity<Object> deleteMember(@PathVariable Integer studyId, HttpServletRequest request) {
-        System.out.println("si : "+studyId);
         try {
             int loginUserId = jwtService.getLoginUserId(request);
             studyMemberService.delete(studyId, loginUserId);
