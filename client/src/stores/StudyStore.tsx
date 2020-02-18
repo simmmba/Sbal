@@ -4,7 +4,7 @@ import { getMyInfoDetailsForModify } from '../lib/api/auth'
 import { Study } from '../components/main/MainTypes'
 import * as H from 'history'
 import { message } from 'antd'
-import {loginUser, StudyGroupType} from '../components/studyGroup/StudyGroupType'
+import {loginUser, StudyGroupType, UpdatedAttendance} from '../components/studyGroup/StudyGroupType'
 
 const StudyStore = observable({
   recentStudy: [],
@@ -16,6 +16,8 @@ const StudyStore = observable({
 
   studyGroup: {} as StudyGroupType,
   loginUser : {} as loginUser,
+
+  userScores: [] as any,
 
   async fetchMainStudyList() {
     try {
@@ -182,6 +184,17 @@ const StudyStore = observable({
       alert(res.data.message)
     } catch (e) {
       alert('스케줄 수정 중 오류가 발생했습니다. 잠시 후 이용해주세요.')
+    }
+  },
+
+  async updateAttendance(updatedAttendance: object) {
+    try {
+      const res = await studyAPI.updateAttendance(updatedAttendance);
+      if(res.data.state==='SUCCESS') {
+        this.fetchStudyGroup(this.studyGroup.id);
+      }
+    } catch (e) {
+      alert('출석 변경 중 오류가 발생했습니다. 잠시 후 이용해주세요.')
     }
   }
 })

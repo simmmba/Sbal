@@ -58,7 +58,11 @@ const Reply = ({index}: { index: number }) => {
   `
 
     const list = css`
-    padding-bottom: 15px;
+    margin-top: 5px;
+    padding-top: 0px;
+    padding-left: 20px;
+    padding-right: 50px;
+    padding-bottom: 5px;
   `
 
     const navLink = css`
@@ -71,25 +75,10 @@ const Reply = ({index}: { index: number }) => {
 
     const replyList = StudyStore.studyGroup.noticeDTOList[Number(index)].replyList;
 
-    const [ editedReply, setEditedReply ] = useState('');
-    const changeReply = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEditedReply(e.target.value)
-    }
-    const ReplyEditor = (rIndex: {rIndex: number}) => {
-        return (
-            <div>
-                <StyledInput>
-                    name="editedReply"
-                    value={replyList[Number(rIndex)]}
-                    type="text"
-                    onChange={changeReply}
-                </StyledInput>
-            </div>
-        )
-    }
-
     const clickDeleteIcon = (replyId: number) => {
-        StudyStore.deleteReply(replyId);
+        if(window.confirm('댓글을 삭제할까요?')) {
+            StudyStore.deleteReply(replyId);
+        }
     }
 
     return (
@@ -98,7 +87,7 @@ const Reply = ({index}: { index: number }) => {
                 <b>{replyList.length}</b>개의 댓글
             </div>
             <div css={comment}>
-                {replyList.map((r: NoticeReply, rIndex: number) => (
+                {replyList.map((r: NoticeReply) => (
                     <div css={list} key={r.id}>
                         <div css={upper}>
                             <div css={left}>
@@ -106,26 +95,18 @@ const Reply = ({index}: { index: number }) => {
                                 <div css={date}>{r.date.substr(0, 16)}</div>
                             </div>
                             <div css={right}>
-                                <NavLink css={navLink} to={`/`}>
-                                    <Icon
-                                        css={icon}
-                                        type="edit"
-                                        // style={{ fontSize: 24 }}
-                                        // theme="twoTone"
-                                        theme="filled"
-                                        // twoToneColor="navy"
-                                        // onClick={() => clickEditIcon(Number(rIndex))}
-                                    />
-                                    {/*<ReplyEditor rIndex={Number(rIndex)}/>*/}
-                                </NavLink>
-                                <Icon
-                                    css={icon}
-                                    type="delete"
-                                    //   style={{ fontSize: 24 }}
-                                    theme="filled"
-                                    onClick={() => clickDeleteIcon(Number(r.id))}
-                                    // twoToneColor="navy"
-                                />
+                                {r.writer.id===StudyStore.loginUser.id?
+                                    (
+                                        <Icon
+                                            css={icon}
+                                            type="delete"
+                                            theme="filled"
+                                            onClick={() => clickDeleteIcon(Number(r.id))}
+                                        />
+                                    ): (
+                                        <p/>
+                                    )
+                                }
                             </div>
                         </div>
                         <div css={content}>

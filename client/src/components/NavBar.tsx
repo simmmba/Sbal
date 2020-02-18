@@ -76,7 +76,7 @@ const NavBar = () => {
           <StyledLink to="/study/create">스터디 개설</StyledLink>
           <StyledLink to="/study">스터디 목록</StyledLink>
           <StyledLink to="/register">나와 가까운 장소</StyledLink>
-          <StyledLink to="/study/13">ㅋㅋ</StyledLink>
+          <StyledLink to="/study/1">ㅋㅋ</StyledLink>
           {!UserStore.token ? (
             <div>
               <StyledLinkPhone to="/signup">회원가입</StyledLinkPhone>

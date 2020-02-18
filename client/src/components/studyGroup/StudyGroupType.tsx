@@ -101,3 +101,11 @@ export type CreatedOrUpdatedSchedule = {
         | number
         | ((e: React.ChangeEvent<HTMLTextAreaElement>) => void)
 }
+
+export type UpdatedAttendance = {
+    id: number,
+    user: {
+        id: number
+    },
+    state: number
+}

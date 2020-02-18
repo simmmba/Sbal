@@ -147,3 +147,10 @@ export const editSchedule = (editedSchedule: object) => {
   }
   return apiClient.put('/study/schedule', editedSchedule)
 }
+
+export const updateAttendance = (updatedAttendance: object) => {
+  if(sessionStorage.token) {
+    setAuthToken(sessionStorage.token)
+  }
+  return apiClient.put('/study/schedule/attendance', updatedAttendance)
+}

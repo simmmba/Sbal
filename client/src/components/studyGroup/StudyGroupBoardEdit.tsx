@@ -130,7 +130,7 @@ const StudyGroupBoardEdit = () => {
         <div css={top}>
           <TextArea
             rows={1}
-            placeholder={state.title}
+            defaultValue={state.title}
             name="title"
             id="title"
             onChange={state.onChangeTextarea}
@@ -139,7 +139,7 @@ const StudyGroupBoardEdit = () => {
         <div css={bottom}>
           <TextArea
             rows={10}
-            placeholder={state.contents}
+            defaultValue={state.contents}
             name="contents"
             id="contents"
             onChange={state.onChangeTextarea}
