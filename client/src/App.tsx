@@ -14,12 +14,14 @@ import UserInfoPage from './pages/UserInfoPage'
 import Footer from './components/Footer'
 import MapPage from './pages/Map'
 import './App.css'
+import ScrollToTop from './components/ScrollToTop'
 
 const App: React.FC = () => {
   return (
     <div className="App">
       <NavBar />
 
+      <ScrollToTop />
       <Switch>
         {/* 랜딩페이지 & 홈페이지 */}
         <Route path="/" component={HomePage} exact />

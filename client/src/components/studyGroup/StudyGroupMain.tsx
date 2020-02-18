@@ -15,6 +15,7 @@ import { StudyGroupType, StudyMember, StudySchedule } from './StudyGroupType'
 import { getStudyGroup } from '../../lib/api/study'
 import { useLocalStore, useObserver } from 'mobx-react'
 import StudyStore from '../../stores/StudyStore'
+import ScrollToTop from '../ScrollToTop'
 
 const StudyGroupMain = ({ id }: { id: number }) => {
   // const study = [
@@ -156,6 +157,7 @@ const StudyGroupMain = ({ id }: { id: number }) => {
             </Menu>
           </div>
           <div css={content}>
+            <ScrollToTop />
             <Switch>
               <Route
                 path={`/study/${StudyStore.studyGroup.id}`}

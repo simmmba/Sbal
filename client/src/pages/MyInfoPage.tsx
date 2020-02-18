@@ -7,7 +7,7 @@ import { loadToken, authCheck } from '../utils/authCheck'
 
 const MyInfoPage = () => {
   const history = useHistory()
- 
+
   UserDetailStore.mypage()
   useEffect(() => {
     loadToken()
