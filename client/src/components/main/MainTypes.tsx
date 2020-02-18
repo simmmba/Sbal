@@ -7,7 +7,7 @@ export type Study = {
   leader?: Leader
   city: string
   town: string
-  state?: 0
+  state?: number
   maxParticipants: number
   hits?: number
   isOnline: boolean

@@ -47,6 +47,12 @@ export const createStudy = (studyData: Study) => {
   }
   return apiClient.post('/study', studyData)
 }
+export const updateStudy = (studyData: Study) => {
+  if (sessionStorage.token) {
+    setAuthToken(sessionStorage.token)
+  }
+  return apiClient.put('/study', studyData)
+}
 export const deleteStudy = (studyId: number) => {
   if (sessionStorage.token) {
     setAuthToken(sessionStorage.token)

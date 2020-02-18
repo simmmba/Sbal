@@ -8,7 +8,8 @@ import StudyRank from './StudyRank'
 const studyRank = css`
   display: flex;
   justify-content: space-around;
-  background-color: rgb(236, 236, 236);
+  /* background-color: rgb(236, 236, 236); */
+  background: #d9e5ff;
   /* padding: 20px; */
   flex-wrap: wrap;
   padding: 20px 20px 100px 20px;

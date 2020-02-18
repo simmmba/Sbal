@@ -51,17 +51,24 @@ const StudyStore = observable({
   async createStudy(studyData: Study, history: H.History) {
     try {
       const res = await studyAPI.createStudy(studyData)
-      console.log(res)
       history.push('/study')
     } catch (error) {
       message.error(error)
     }
   },
 
-  async UpdateStudy() {},
+  async updateStudy(studyData: Study, history: H.History) {
+    try {
+      const res = await studyAPI.updateStudy(studyData)
+      history.push('/study')
+    } catch (error) {
+      message.error(error)
+    }
+  },
+
   async fetchStudyGroup(id: number) {
-    const res = await studyAPI.getStudyGroup(Number(id));
-    this.studyGroup = res.data.value;
+    const res = await studyAPI.getStudyGroup(Number(id))
+    this.studyGroup = res.data.value
   },
 
   async deleteStudySchedule(scheduleId: number) {
