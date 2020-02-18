@@ -171,10 +171,10 @@ const StudyGroupSchedule = () => {
         {studyScheduleList.length > 0 ? <ScheduleAdd /> : <div></div>}
       </div>
       {studyScheduleList.length > 0 ? (
-        studyScheduleList.map((s: StudySchedule, index: number) => (
+        studyScheduleList.reverse().map((s: StudySchedule, index: number) => (
           <div css={content} key={s.id}>
             <div css={left}>
-              <div css={cnt}>{index + 1}회차</div>
+              <div css={cnt}>{studyScheduleList.length - index}회차</div>
             </div>
             <div css={right} onClick={showModal}>
               <div css={subject}>{s.subject}</div>
