@@ -50,7 +50,6 @@ public class StudyController {
         return new ResponseEntity<>(new CommonResponse("JWT_EXPIRED", "ERROR",
                 "로그인 세션이 만료되었습니다. 다시 로그인 해주세요"), HttpStatus.OK);
     }
-
     @ExceptionHandler
     public ResponseEntity<CommonResponse> errorHandler(JwtException e) {
         return new ResponseEntity<>(new CommonResponse("JWT_FALSIFIED", "ERROR",
