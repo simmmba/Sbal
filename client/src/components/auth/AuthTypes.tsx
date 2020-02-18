@@ -18,8 +18,8 @@ export type SignupState = {
   nicknameState: boolean
   isCheckedNickname: boolean
   nicknameDupMessage: string
-  password: string
-  password2: string
+  pw: string
+  pw2: string
   phoneNumber: string
   introduction: string
   city: string
@@ -90,28 +90,26 @@ export type LoginData = {
 }
 
 export type SignupData = {
-  id: string
+  id?: string
   email: string
   nickname: string
-  password: string
-  password2: string
+  pw: string
+  pw2?: string
   phoneNum: string
   introduction: string
   city: string
   town: string
-  lcategory: string
-  scategory: string
   gender: number
-  interestList: Interest[]
+  interestList?: Interest[]
 }
 
 export type UpdateData = {
-  email: string,
-  nickname: string,
-  phoneNum: string,
-  introduction: string,
-  city: string,
-  town: string,
+  email: string
+  nickname: string
+  phoneNum: string
+  introduction: string
+  city: string
+  town: string
   interestDTOList: Interest[]
 }
 

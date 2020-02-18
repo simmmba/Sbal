@@ -21,6 +21,7 @@ export type studyDetailType = {
   evaluationLimit: number
   state: number
   studyMemberDTOList: studyMember[]
+  frequency: number
 }
 
 export type StudyDetailStoreType = {

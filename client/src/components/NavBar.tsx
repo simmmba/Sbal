@@ -71,7 +71,7 @@ const NavBar = () => {
       <NavFixBlock>
         <Navbar>
           <Logo to="/">
-            스<small>터디의</small> 발<small>견</small>
+            스<small>터디의</small>&nbsp;발<small>견</small>
           </Logo>
           <StyledLink to="/study/create">스터디 개설</StyledLink>
           <StyledLink to="/study">스터디 목록</StyledLink>
