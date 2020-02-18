@@ -35,8 +35,7 @@ const studyDetailStore: StudyDetailStoreType = observable({
     timeslot: 0,
     evaluationLimit: 0,
     state: 0,
-    studyMemberDTOList: [],
-    frequency: 0
+    studyMemberDTOList: []
   },
 
   isJoin() {
