@@ -1,14 +1,20 @@
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
+import styled from '@emotion/styled'
+import palette from '../../lib/styles/palette'
 import { Card, Avatar } from 'antd'
 import { Study } from './StudyTypes'
 import moment from 'moment'
+import { CalenderIcon, PlaceIcon, StarIcon } from '../common/Icons'
 
 const cardStyle = css`
-  width: 300px;
-  border: 1px solid #cc5de8;
-  border-radius: 10px;
+  width: 250px;
+  border: 1px solid ${palette.violet[6]};
+  border-radius: 30px;
   padding: 15px;
+  color: white;
+  background: ${palette.violet[6]};
+  margin: 10px;
 `
 
 const titleContainer = css`
@@ -16,15 +22,50 @@ const titleContainer = css`
   justify-content: space-between;
   align-items: center;
   padding: 5px;
-  border-bottom: 1px solid gray;
+
+  margin-bottom: 20px;
+`
+const marginThree = css`
+  margin-right: 3px;
 `
 
 const titleStyle = css`
   font-weight: bold;
+  font-size: 1rem;
+`
+
+const Row = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  background: white;
+  color: black;
+  padding: 5px;
+  border-radius: 25px;
+  margin-bottom: 10px;
+`
+
+const footerContainerLeft = css`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 20px;
+`
+
+const footerContainerRigth = css`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 `
 
 function StudyCard({ study }: { study: Study }) {
-  const { Meta } = Card
+  const timeslotMap: { [key: string]: string } = {
+    1: '오전 시간대',
+    2: '오후 시간대',
+    3: '저녁 시간대',
+    0: '시간 협의'
+  }
 
   return (
     <div css={cardStyle}>
@@ -35,13 +76,44 @@ function StudyCard({ study }: { study: Study }) {
         </span>
       </div>
       <div>
-        <span>리더</span>
-        <Avatar icon="user" />
-        <span>{study.leader.nickname}</span>
+        <Row>
+          <CalenderIcon css={marginThree} />
+          <span>
+            {study.monthOrWeek === 0 || !study.monthOrWeek
+              ? '일정 협의'
+              : study.monthOrWeek === 1
+              ? `월 ${study.frequency}회`
+              : `주 ${study.frequency}회 `}{' '}
+            / {timeslotMap[study.timeslot]}
+          </span>
+        </Row>
+        <Row>
+          <PlaceIcon css={marginThree} />
+          <span>
+            {study.isOnline ? '온라인' : `${study.city} ${study.town}`}
+          </span>
+        </Row>
+        <Row>
+          <StarIcon css={marginThree} />
+          <span>{`성실도 제한 ${study.evaluationLimit} 이상`}</span>
+        </Row>
       </div>
       <div>
+        <div css={footerContainerLeft}>
+          <Avatar
+            icon="user"
+            css={css`
+              margin-right: 5px;
+            `}
+          />
+          <span>{study.leader.nickname} (리더)</span>
+        </div>
+        <div></div>
+      </div>
+      <div></div>
+      <div css={footerContainerRigth}>
         <span>
-          published {moment(study.enrollDate, 'YYYY-MM-DD').fromNow()}
+          published {moment(study.enrollDate, 'YYYY-MM-DD').fromNow()}...
         </span>
       </div>
     </div>
