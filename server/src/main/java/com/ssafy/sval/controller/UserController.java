@@ -96,6 +96,7 @@ public class UserController {
         }
     }
 
+
     @GetMapping("/myPage")
     @ApiOperation(value = "마이 페이지에 제공할 정보를 구성하여 전달한다.", response = CommonResponse.class)
     public ResponseEntity<CommonResponse> getMyInfo(HttpServletRequest request) {
@@ -104,6 +105,21 @@ public class UserController {
             System.out.println(loginUserId);
             System.out.println(loginUserId);
             UserDTO loginUser = userService.findById(loginUserId).myPageDTO();
+            loginUser = commonService.manufactureMyInfo(loginUser);
+            return new ResponseEntity<>(new CommonResponse(loginUser, "getMyInfo", "SUCCESS", "조회 성공"), HttpStatus.OK);
+        } catch(RuntimeException e) {
+            e.printStackTrace();
+            throw new RuntimeException("getMyInfo");
+        }
+    }
+
+    @GetMapping("/userInfo/{userId}")
+    @ApiOperation(value = "마이 페이지에 제공할 정보를 구성하여 전달한다.", response = CommonResponse.class)
+    public ResponseEntity<CommonResponse> getMyInfo(@PathVariable String userId, HttpServletRequest request) {
+        System.out.println(userId);
+        try {
+            int loginUserId = jwtService.getLoginUserId(request);
+            UserDTO loginUser = userService.findById(Integer.parseInt(userId)).myPageDTO();
             loginUser = commonService.manufactureMyInfo(loginUser);
             return new ResponseEntity<>(new CommonResponse(loginUser, "getMyInfo", "SUCCESS", "조회 성공"), HttpStatus.OK);
         } catch(RuntimeException e) {

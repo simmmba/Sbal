@@ -44,7 +44,8 @@ public class StudyMemberService {
             return false;
         } else {
             studyMember.setState(studyMemberDTO.getState());
-            studyMemberRepository.save(studyMember);
+            if(studyMember.getState()==3) studyMemberRepository.delete(studyMember);
+            else studyMemberRepository.save(studyMember);
             return true;
         }
     }
