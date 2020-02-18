@@ -22,7 +22,9 @@ public class StudyMember {
         return new StudyMemberDTO(study.toDTO(), state);
     }
     public StudyMemberDTO toMemberDTO() {
-        return new StudyMemberDTO(new UserDTO(user.getId(), user.getNickname()), state);
+        UserDTO userDTO = new UserDTO(user.getId(), user.getNickname());
+        userDTO.setEvaluation(user.getEvaluation());
+        return new StudyMemberDTO(userDTO, state);
     }
     public StudyMemberDTO myPageDTO() {
         return new StudyMemberDTO(study.myPageDTO(), state);
