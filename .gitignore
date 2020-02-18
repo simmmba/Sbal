@@ -1,0 +1,63 @@
+####### java spring ######
+
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/Back/nbproject/private/
+/Back/nbbuild/
+/Back/dist/
+/Back/nbdist/
+/Back/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+
+###### react ######
+/client
+# dependencies
+/client/node_modules
+/client/.pnp
+/client/.env
+/client/.history
+/.history
+.pnp.js
+
+# testing
+/client/coverage
+
+# production
+/client/build
+
+/node-modules/
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+node_modules
