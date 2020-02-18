@@ -49,6 +49,7 @@ public class StudyMemberController {
     @PostMapping
     @ApiOperation(value = "개설된 스터디에 참가 요청 한다.", response = CommonResponse.class)
     public ResponseEntity<Object> insertMember(@RequestBody Integer studyId, HttpServletRequest request) {
+        System.out.println(studyId);
         try {
             int loginUserId = jwtService.getLoginUserId(request);
             if (studyMemberService.insert(studyId, loginUserId))
@@ -63,6 +64,7 @@ public class StudyMemberController {
     @PutMapping
     @ApiOperation(value = "참가 신청자의 상태를 변경한다.", response = CommonResponse.class)
     public ResponseEntity<Object> updateMemberState(@RequestBody StudyMemberDTO studyMemberDTO, HttpServletRequest request) {
+        System.out.println(studyMemberDTO);
         try {
             int loginUserId = jwtService.getLoginUserId(request);
             if (studyMemberService.update(studyMemberDTO, loginUserId))

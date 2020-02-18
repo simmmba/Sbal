@@ -2,12 +2,84 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="703f5862-ffa2-4945-9468-12af9d573c3c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../client/.idea/client.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/.babelrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/.prettierrc" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/public/images/1080_360_1.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/public/images/1080_360_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/public/images/1080_360_3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/public/images/1080_360_4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/public/images/1080_360_5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/public/images/1080_360_6.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/public/images/600_120_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/public/images/600_120_2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/public/images/600_120_3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/App.test.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/App.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/assets/GodoB.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/assets/GodoM.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/assets/naver_icon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/Display.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/Footer.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/NavBar.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/auth/AuthFooter.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/auth/AuthForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/auth/AuthForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/auth/AuthStyled.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/auth/AuthTemplate.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/auth/AuthTypes.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/auth/SignupForm.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/common/Button.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/common/ToggleSwitch.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/main/MainStudyList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/main/MainStudyList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/main/MainTypes.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/main/StudyRank.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/main/StudyRank.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/studyDetail/StudyDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/studyDetail/StudyDetails.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/studyDetail/StudyMember.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/studyDetail/StudyMember.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/studyDetail/StudyRequest.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/studyDetail/StudyRequest.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/studyGroup/StudyGroupMain.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/studyList/FilterForm.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/studyList/StudyList.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/userDetail/UserDetailTypes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/userDetail/UserDetailTypes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/userDetail/UserDetailView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/userDetail/UserDetailView.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/css/CSSModule.module.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/css/SuperResponsiveTableStyle.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/lib/api/auth.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/lib/api/client.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/lib/api/client.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/lib/api/study..tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/lib/api/study..tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/lib/api/userDetail.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/lib/styles/palette.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/pages/CreatePage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/pages/HomePage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/pages/LoginPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/pages/MyInfoPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/pages/SignupPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/pages/StudyDetailPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/pages/StudyDetailPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/pages/StudyGroupPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/pages/StudyListPage.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/pages/StudyPage.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/react-app-env.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/serviceWorker.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/setupTests.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/stores/StudyStore.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/stores/StudyStore.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/stores/UserDetailStore.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/stores/UserDetailStore.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/stores/UserStore.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/stores/UserStore.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/utils/authCheck.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/utils/setAuthToken.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/tslint.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/yarn.lock" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +97,32 @@
     <option name="HIDDEN_KINDS">
       <set />
     </option>
-    <expand />
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="AWS" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="AWS" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="AWS" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="test_db: schema" type="ebfa3cd1:MariaImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="TEST_DB@localhost" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="TEST_DB@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+    </expand>
     <select />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -148,11 +245,6 @@
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="root:AWS" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@e648f8c" type="9fbbdea:ServiceModel$ServiceNode" />
-              </path>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="root:AWS" type="7427dc5b:ServiceModel$ServiceGroupNode" />
                 <item name="com.intellij.database.console.session.MessageBusSession@55063e98" type="9fbbdea:ServiceModel$ServiceNode" />
               </path>
             </expand>
@@ -208,6 +300,10 @@
       <workItem from="1581386431918" duration="3541000" />
       <workItem from="1581405508047" duration="931000" />
       <workItem from="1581323006288" duration="880000" />
+      <workItem from="1581552232824" duration="16891000" />
+      <workItem from="1581639034764" duration="14908000" />
+      <workItem from="1581901149504" duration="13338000" />
+      <workItem from="1581984446241" duration="3812000" />
       <workItem from="1581912615615" duration="1112000" />
       <workItem from="1581985851264" duration="2839000" />
     </task>
@@ -245,10 +341,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="438" y="338" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1536.824@0.0.1536.824" timestamp="1580975212052" />
-    <state x="560" y="271" width="415" height="291" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1580697504423">
+    <state x="560" y="271" width="415" height="291" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1581928936353">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="560" y="271" width="440" height="291" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824@0.0.1536.824" timestamp="1581038114277" />
+    <state x="560" y="271" width="440" height="291" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824@0.0.1536.824" timestamp="1581928936353" />
     <state x="162" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1579744007186">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -261,42 +357,42 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1581050698588" />
-    <state width="1493" height="216" key="GridCell.Tab.0.bottom" timestamp="1581988794607">
+    <state width="746" height="215" key="GridCell.Tab.0.bottom" timestamp="1581989482920">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="216" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1581988794607" />
+    <state width="746" height="215" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1581989482920" />
     <state width="1493" height="207" key="GridCell.Tab.0.bottom/0.40.1536.824@0.40.1536.824" timestamp="1581325111008" />
-    <state width="1493" height="216" key="GridCell.Tab.0.center" timestamp="1581988794607">
+    <state width="746" height="215" key="GridCell.Tab.0.center" timestamp="1581989482920">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="216" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1581988794607" />
+    <state width="746" height="215" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1581989482920" />
     <state width="1493" height="207" key="GridCell.Tab.0.center/0.40.1536.824@0.40.1536.824" timestamp="1581325111008" />
-    <state width="1493" height="216" key="GridCell.Tab.0.left" timestamp="1581988794607">
+    <state width="746" height="215" key="GridCell.Tab.0.left" timestamp="1581989482920">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="216" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1581988794607" />
+    <state width="746" height="215" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1581989482920" />
     <state width="1493" height="207" key="GridCell.Tab.0.left/0.40.1536.824@0.40.1536.824" timestamp="1581325111008" />
-    <state width="1493" height="216" key="GridCell.Tab.0.right" timestamp="1581988794607">
+    <state width="746" height="215" key="GridCell.Tab.0.right" timestamp="1581989482920">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="216" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1581988794607" />
+    <state width="746" height="215" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1581989482920" />
     <state width="1493" height="207" key="GridCell.Tab.0.right/0.40.1536.824@0.40.1536.824" timestamp="1581325111008" />
-    <state width="1493" height="216" key="GridCell.Tab.1.bottom" timestamp="1581988794607">
+    <state width="746" height="215" key="GridCell.Tab.1.bottom" timestamp="1581989482920">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="216" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1581988794607" />
-    <state width="1493" height="216" key="GridCell.Tab.1.center" timestamp="1581988794607">
+    <state width="746" height="215" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1581989482920" />
+    <state width="746" height="215" key="GridCell.Tab.1.center" timestamp="1581989482920">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="216" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1581988794607" />
-    <state width="1493" height="216" key="GridCell.Tab.1.left" timestamp="1581988794607">
+    <state width="746" height="215" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1581989482920" />
+    <state width="746" height="215" key="GridCell.Tab.1.left" timestamp="1581989482920">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="216" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1581988794607" />
-    <state width="1493" height="216" key="GridCell.Tab.1.right" timestamp="1581988794607">
+    <state width="746" height="215" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1581989482920" />
+    <state width="746" height="215" key="GridCell.Tab.1.right" timestamp="1581989482920">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="216" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1581988794607" />
+    <state width="746" height="215" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1581989482920" />
     <state width="1493" height="261" key="GridCell.Tab.2.bottom" timestamp="1580288106434">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -317,10 +413,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="55" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1581314726582" />
-    <state x="659" y="305" width="330" height="234" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1581988500194">
+    <state x="490" y="154" width="540" height="524" key="StructurePopup" timestamp="1581676250570">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="659" y="305" width="330" height="234" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1536.824@0.0.1536.824" timestamp="1581988500194" />
+    <state x="490" y="154" width="540" height="524" key="StructurePopup/0.0.1536.824@0.0.1536.824" timestamp="1581676250570" />
+    <state x="659" y="305" width="330" height="234" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1581989403892">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="659" y="305" width="330" height="234" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1536.824@0.0.1536.824" timestamp="1581989403892" />
     <state x="349" y="68" key="com.intellij.database.dbimport.ImportDialog" timestamp="1580369534362">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -329,6 +429,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="218" key="com.intellij.database.dbimport.ImportUtil.MyDialog/0.0.1536.824@0.0.1536.824" timestamp="1581313702914" />
+    <state x="620" y="140" width="445" height="543" key="com.intellij.database.view.ui.DbObjectDialog" timestamp="1581989419660">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="620" y="140" width="445" height="543" key="com.intellij.database.view.ui.DbObjectDialog/0.0.1536.824@0.0.1536.824" timestamp="1581989419660" />
     <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1581668775458">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -336,7 +440,7 @@
     <state x="459" y="237" key="com.intellij.ide.util.TipDialog" timestamp="1581033783643">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="459" y="237" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1581033783643" />
+    <state x="459" y="237" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1581988318502" />
     <state x="533" y="131" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1580696668797">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -356,7 +460,7 @@
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1581064694373">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1581064694373" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1581986882127" />
     <state x="491" y="324" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1579743968555">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

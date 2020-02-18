@@ -53,7 +53,6 @@ public class StudyController {
         return new ResponseEntity<>(new CommonResponse("JWT_EXPIRED", "ERROR",
                 "로그인 세션이 만료되었습니다. 다시 로그인 해주세요"), HttpStatus.OK);
     }
-
     @ExceptionHandler
     public ResponseEntity<CommonResponse> errorHandler(JwtException e) {
         return new ResponseEntity<>(new CommonResponse("JWT_FALSIFIED", "ERROR",
@@ -64,6 +63,7 @@ public class StudyController {
     @PostMapping
     @ApiOperation(value = "새로운 스터디를 생성한다.", response = CommonResponse.class)
     public ResponseEntity<CommonResponse> enrollNewStudy(@RequestBody StudyDTO study, HttpServletRequest request) {
+        System.out.println(study);
         try {
             int leaderId = jwtService.getLoginUserId(request);
             Study createdStudy = study.insertOrUpdateEntity(leaderId);
@@ -117,6 +117,7 @@ public class StudyController {
     @GetMapping("/{studyId}")
     @ApiOperation(value = "스터디의 상세 정보를 가져온다.", response = CommonResponse.class)
     public ResponseEntity<CommonResponse> details(@PathVariable Integer studyId, HttpServletRequest request) {
+        System.out.println(studyId);
         try {
             int loginUserId = jwtService.getLoginUserId(request);
             StudyDTO studyDTO = studyService.getStudyDetail(studyId).toDTO();
