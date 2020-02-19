@@ -260,7 +260,7 @@ const StudyDetails = () => {
                       title="스터디 수정"
                       visible={StudyDetailStore.modalVisible}
                       onCancel={handleCancel}
-                      footer={[<div></div>]}
+                      footer={[<div key={StudyDetailStore.data.id}/>]}
                     >
                       <CreateForm />
                     </Modal>

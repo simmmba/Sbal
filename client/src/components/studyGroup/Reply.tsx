@@ -1,12 +1,10 @@
-import React, { useState } from 'react'
-import {NavLink} from 'react-router-dom'
+import React from 'react'
 /**@jsx jsx */
 import {css, jsx} from '@emotion/core'
 import {Icon} from 'antd'
 import ReplyInsert from './ReplyInsert'
 import StudyStore from "../../stores/StudyStore";
 import {NoticeReply} from "./StudyGroupType";
-import {StyledInput} from "../auth/AuthStyled";
 
 const Reply = ({index}: { index: number }) => {
 
@@ -65,13 +63,13 @@ const Reply = ({index}: { index: number }) => {
     padding-bottom: 5px;
   `
 
-    const navLink = css`
-    color: #747474;
-
-    &:hover {
-      color: #4c4c4c;
-    }
-  `
+  //   const navLink = css`
+  //   color: #747474;
+  //
+  //   &:hover {
+  //     color: #4c4c4c;
+  //   }
+  // `
 
     const replyList = StudyStore.studyGroup.noticeDTOList[Number(index)].replyList;
 

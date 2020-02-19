@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 /**@jsx jsx */
 import {css, jsx} from '@emotion/core'
 import {Icon, Empty, Rate} from 'antd'
@@ -19,18 +19,18 @@ const Attendance = ({scheduleIndex}: { scheduleIndex: number }) => {
       background-color: #e6f7ff;
     }
   `
-    const list = css`
-    display: flex;
-    margin-bottom: 2px;
-  `
-    const listNickname = css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
-    border-right: 2px dashed #fff;
-    width: 100%;
-  `
+  //   const list = css`
+  //   display: flex;
+  //   margin-bottom: 2px;
+  // `
+  //   const listNickname = css`
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   font-size: 14px;
+  //   border-right: 2px dashed #fff;
+  //   width: 100%;
+  // `
     const num = css`
     display: flex;
     justify-content: center;

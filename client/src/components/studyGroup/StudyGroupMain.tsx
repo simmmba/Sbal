@@ -11,9 +11,7 @@ import StudyGroupBoardInsert from './StudyGroupBoardInsert'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
 import { useEffect } from 'react'
-import { StudyGroupType, StudyMember, StudySchedule } from './StudyGroupType'
-import { getStudyGroup } from '../../lib/api/study'
-import { useLocalStore, useObserver } from 'mobx-react'
+import { useObserver } from 'mobx-react'
 import StudyStore from '../../stores/StudyStore'
 import ScrollToTop from '../ScrollToTop'
 
@@ -55,7 +53,7 @@ const StudyGroupMain = ({ id }: { id: number }) => {
   useEffect(() => {
     StudyStore.fetchStudyGroup(Number(id))
   }, [])
-  const bid = 1
+  // const bid = 1
 
   const title = css`
     padding: 15px 10px 10px 23px;

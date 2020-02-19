@@ -4,13 +4,13 @@ import * as H from 'history'
 
 function ScrollToTop({ history }: { history: H.History }) {
   useEffect(() => {
-    const unlisten = history.listen(() => {
+    const unListen = history.listen(() => {
       window.scrollTo(0, 0)
     })
     return () => {
-      unlisten()
+      unListen()
     }
-  }, [])
+  }, [history])
 
   return null
 }

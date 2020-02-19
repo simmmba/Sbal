@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {useHistory} from 'react-router'
 /**@jsx jsx */
 import {css, jsx} from '@emotion/core'
@@ -9,13 +9,13 @@ import StudyStore from "../../stores/StudyStore";
 import {CreatedNotice} from "./StudyGroupType";
 
 const StudyGroupBoardInsert = () => {
-    const main = css`
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    /* align-content: center; */
-    /* border: 1px solid black; */
-  `
+  //   const main = css`
+  //   display: flex;
+  //   flex-direction: column;
+  //   /* justify-content: center; */
+  //   /* align-content: center; */
+  //   /* border: 1px solid black; */
+  // `
 
     const upper = css`
     display: flex;

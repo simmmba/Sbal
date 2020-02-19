@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
 import { Icon } from 'antd'
@@ -9,13 +9,13 @@ import {useLocalStore} from "mobx-react";
 import {CreatedNotice, StudyNotice} from "./StudyGroupType";
 
 const StudyGroupBoardEdit = () => {
-  const main = css`
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    /* align-content: center; */
-    /* border: 1px solid black; */
-  `
+  // const main = css`
+  //   display: flex;
+  //   flex-direction: column;
+  //   /* justify-content: center; */
+  //   /* align-content: center; */
+  //   /* border: 1px solid black; */
+  // `
 
   const upper = css`
     display: flex;

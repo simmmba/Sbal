@@ -107,26 +107,26 @@ const StudyGroupSchedule = () => {
     align-items: center;
   `
 
-    const add = css`
-    background-color: #fff;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-weight: bold;
-    color: navy;
-    background: #d9e5ff;
-    border-radius: 7px;
-    width: 130px;
-    height: 30px;
-    transition: 0.3s;
-
-    &:hover {
-      background-color: #b2ccff;
-    }
-  `
+  //   const add = css`
+  //   background-color: #fff;
+  //   border: none;
+  //   cursor: pointer;
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+  //   font-size: 14px;
+  //   font-weight: bold;
+  //   color: navy;
+  //   background: #d9e5ff;
+  //   border-radius: 7px;
+  //   width: 130px;
+  //   height: 30px;
+  //   transition: 0.3s;
+  //
+  //   &:hover {
+  //     background-color: #b2ccff;
+  //   }
+  // `
 
     const btn = css`
     background-color: #fff;

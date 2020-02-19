@@ -16,7 +16,7 @@ function LoginPage({ location }: RouteComponentProps) {
   useEffect(() => {
     loadToken()
     loggedIn(history)
-  }, [UserStore.isLoggingIn, history])
+  }, [history])
 
   const path = location.pathname.substring(1)
 

@@ -119,8 +119,7 @@ const StudyRank = ({ title, list }: StudyRankprops) => {
         ))
       ) : title === 'myStudy' ? (
         <div css={empty}>
-          참여중인 스터디가 없네요 😅
-          <br />
+          <span className='emoji' role='img' aria-label={'^^'}>참여중인 스터디가 없네요 😅</span>
           스터디를 둘러보시겠어요?
           <NavLink css={link} to="/study">
             스터디 보러가기

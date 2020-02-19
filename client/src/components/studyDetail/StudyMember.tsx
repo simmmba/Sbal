@@ -207,6 +207,7 @@ const StudyMember = () => {
   return useObserver(() => (
     <div css={top}>
       <table css={table}>
+        <tbody>
         <tr>
           <td colSpan={2} css={title}>
             스터디 멤버 ( {StudyDetailStore.studyMember} )
@@ -282,6 +283,7 @@ const StudyMember = () => {
             </tr>
           )
         )}
+        </tbody>
       </table>
 
       {/* 멤버 클릭 모달 */}
