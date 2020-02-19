@@ -1,5 +1,7 @@
+/**@jsx jsx */
 import React from 'react'
 import styled from '@emotion/styled'
+import { css, jsx } from '@emotion/core'
 
 const Spacer = styled.div`
   height: 4rem;
@@ -22,10 +24,15 @@ const NormalP = styled.p`
   margin-top: 10px;
   padding: 0px;
 `
+const FooterStyle = css`
+  @media screen and (max-width: 815px) {
+    display: none;
+  }
+`
 
 const Footer = () => {
   return (
-    <div>
+    <div css={FooterStyle}>
       {/* <Spacer /> */}
       <WrapperDiv>
         <br />

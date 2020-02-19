@@ -1,5 +1,7 @@
+/**@jsx jsx */
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
+import { css, jsx } from '@emotion/core'
 
 import NavBar from './components/NavBar'
 import HomePage from './pages/HomePage'
@@ -15,6 +17,7 @@ import Footer from './components/Footer'
 import MapPage from './pages/Map'
 import './App.css'
 import ScrollToTop from './components/ScrollToTop'
+import NavBarBottom from './components/NavBarBottom'
 
 const App: React.FC = () => {
   return (
@@ -48,6 +51,7 @@ const App: React.FC = () => {
         <Route path="/mypage/update" component={SignupPage} />
       </Switch>
       <Footer />
+      <NavBarBottom />
     </div>
   )
 }
