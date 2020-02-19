@@ -7,8 +7,11 @@ import { Study } from './StudyTypes'
 import moment from 'moment'
 import { CalenderIcon, PlaceIcon, StarIcon } from '../common/Icons'
 
+moment.locale('ko')
+
 const cardStyle = css`
   width: 250px;
+  min-width: 250px;
   border: 1px solid ${palette.violet[6]};
   border-radius: 30px;
   padding: 15px;
@@ -70,7 +73,11 @@ function StudyCard({ study }: { study: Study }) {
   return (
     <div css={cardStyle}>
       <div css={titleContainer}>
-        <span css={titleStyle}>{study.title}</span>
+        <span css={titleStyle}>
+          {study.title.length > 11
+            ? study.title.slice(0, 12) + '...'
+            : study.title}
+        </span>
         <span>
           {study.joinedMemberCount} / {study.maxParticipants}
         </span>
@@ -112,9 +119,7 @@ function StudyCard({ study }: { study: Study }) {
       </div>
       <div></div>
       <div css={footerContainerRigth}>
-        <span>
-          published {moment(study.enrollDate, 'YYYY-MM-DD').fromNow()}...
-        </span>
+        <span>{moment(study.enrollDate, 'YYYY-MM-DD').fromNow()}...</span>
       </div>
     </div>
   )

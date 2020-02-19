@@ -10,6 +10,9 @@ const StudyList = ({ studyList }: { studyList: Study[] }) => {
     <div
       css={css`
         display: flex;
+        padding: 0 10em;
+        flex-wrap: wrap;
+        justify-content: space-around;
       `}
     >
       {studyList.length > 0 ? (

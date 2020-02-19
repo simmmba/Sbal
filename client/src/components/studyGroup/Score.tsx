@@ -87,6 +87,10 @@ const Attendance = ({scheduleIndex}: { scheduleIndex: number }) => {
     const attendanceList = StudyStore.studyGroup.studyScheduleDTOList[Number(scheduleIndex)].attendanceDTOList;
 
     function scoreChanged(value: number, tempIndex: number) {
+        if(value < 1) {
+            alert('출석 점수는 1점 이상으로 설정해주세요.');
+            return;
+        }
         StudyStore.userScores.push(
             {
                 schedule: {
