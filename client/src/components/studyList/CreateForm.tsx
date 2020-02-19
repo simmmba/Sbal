@@ -2,6 +2,7 @@
 import React from 'react'
 import { useLocalStore, useObserver } from 'mobx-react'
 import { css, jsx } from '@emotion/core'
+import "../../css/custom-antd.css"
 import {
   Form,
   Radio,
@@ -215,11 +216,14 @@ function CreateForm({ form }: FormComponentProps) {
         <h2
           css={css`
             text-align: center;
+            font-weight: bold;
+            color: #6741d9;
           `}
         >
-          스터디 만들기
+          스터디 개설하기
         </h2>
       )}
+      <br />
       <Col>
         {pathname !== '/study' && (
           <Row>
@@ -306,20 +310,21 @@ function CreateForm({ form }: FormComponentProps) {
                   )}
                 </Radio.Group>
               )}
+              <br />
               {getFieldDecorator('frequency', {
                 initialValue: initialValues.frequency
               })(
                 <InputNumber
                   css={css`
-                    margin-left: 15px;
-                    width: 35px;
+                    /* margin-left: 15px; */
+                    width: 60px;
                   `}
                   min={freqMinMax[`${state.monthOrWeek}`].min}
                   max={freqMinMax[`${state.monthOrWeek}`].max}
                   disabled={freqMinMax[`${state.monthOrWeek}`].disabled}
                 />
               )}
-              회
+              &nbsp;회
             </Form.Item>
           </Row>
         )}
@@ -363,7 +368,7 @@ function CreateForm({ form }: FormComponentProps) {
                 </Radio.Group>
               )}
             </Form.Item>
-            <Form.Item label={'스터디 일자'}>
+            <Form.Item label={'스터디 기간'}>
               {getFieldDecorator('studyDate', {
                 initialValue: [
                   moment(initialValues.startDate),
@@ -372,7 +377,7 @@ function CreateForm({ form }: FormComponentProps) {
                 rules: [
                   {
                     required: true,
-                    message: '스터디 일자를 입력해주세요!'
+                    message: '스터디 기간를 입력해주세요!'
                   }
                 ]
               })(<RangePicker />)}
@@ -409,17 +414,6 @@ function CreateForm({ form }: FormComponentProps) {
               })(<Slider marks={sliderMarks} min={1} max={30} />)}
             </Form.Item>
 
-            <Form.Item label="간단한 소개">
-              {getFieldDecorator('contents', {
-                initialValue: initialValues.contents,
-                rules: [
-                  {
-                    required: true,
-                    message: '간단하게 소개를 입력해주세요!'
-                  }
-                ]
-              })(<TextArea rows={4} allowClear />)}
-            </Form.Item>
             <Form.Item label={'성실도 제한'}>
               {getFieldDecorator('evaluationLimit', {
                 initialValue: initialValues.evaluationLimit
@@ -431,7 +425,7 @@ function CreateForm({ form }: FormComponentProps) {
                   disabled={state.checked}
                 />
               )}
-              <Checkbox
+              &nbsp;&nbsp;<Checkbox
                 checked={state.checked}
                 onChange={() => {
                   state.checked = !state.checked
@@ -440,20 +434,34 @@ function CreateForm({ form }: FormComponentProps) {
                 제한 없음
               </Checkbox>
             </Form.Item>
+
+            <Form.Item label="스터디 소개">
+              {getFieldDecorator('contents', {
+                initialValue: initialValues.contents,
+                rules: [
+                  {
+                    required: true,
+                    message: '간단하게 소개를 입력해주세요!'
+                  }
+                ]
+              })(<TextArea rows={4} allowClear />)}
+            </Form.Item>
           </Row>
         )}
 
         <Button
           css={css`
             height: 40px;
+            border: none;
           `}
           block
           type="primary"
           htmlType="submit"
         >
-          {pathname !== '/study' ? '스터디 생성' : '필터 적용'}
+          {pathname !== '/study' ? '스터디 개설' : '필터 적용'}
         </Button>
       </Col>
+      <br />
     </Form>
   ))
 }

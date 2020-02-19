@@ -15,11 +15,7 @@ const Logo = styled(Link)`
   align-items: center;
   font-weight: bold;
   font-size: 21px;
-  color: black;
   margin-right: auto;
-  &:hover {
-    color: black;
-  }
 `
 
 const NavFixBlock = styled.div`
@@ -46,7 +42,7 @@ const Navbar = styled.nav`
 const StyledLink = styled(NavLink)`
   margin-left: 10px;
   padding: 20px;
-  color: black;
+  /* color: black; */
   @media (max-width: 815px) {
     display: none;
   }
@@ -54,7 +50,7 @@ const StyledLink = styled(NavLink)`
 const StyledLinkPhone = styled(NavLink)`
   margin-left: 10px;
   padding: 20px;
-  color: black;
+  /* color: black; */
 `
 
 const StyledButton = styled(Button)`

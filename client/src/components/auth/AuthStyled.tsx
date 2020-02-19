@@ -16,8 +16,9 @@ export const WhiteBox = styled.div`
     letter-spacing: 2px;
   }
 
-  padding: 3rem 1rem 1rem 1rem;
+  padding: 2rem 1rem 1rem 1rem;
   width: 320px;
+  min-height: 400px;
   background: white;
   border-radius: 2px;
 `
@@ -43,19 +44,21 @@ export const StyledLabel = styled.label`
   font-size: 0.8em;
   font-weight: bold;
   display: block;
-  margin-top: 5px;
+  margin-top: 7px;
+  color: ${palette.violet[7]};
 `
 export const StyledInput = styled.input<{ width?: number | undefined }>`
   font-size: 1rem;
   border: none;
-  border-bottom: 1px solid ${palette.yellow[7]};
-  margin: 5px 0px 8px 0px;
-  padding: 0.5rem;
+  border-bottom: 1px solid ${palette.violet[7]};
+  margin: 0px 0px 8px 0px;
+  padding: 0.4rem  0.5rem  0.2rem  0.5rem;
   outline: none;
-  width: ${props => (props.width ? props.width : 90)}%;
+  width: ${props => (props.width ? props.width : 98)}%;
+
   &:focus {
     color: oc-teal-7;
-    border-bottom: 1px solid ${palette.yellow[7]};
+    border-bottom: 1px solid ${palette.violet[7]};
   }
   & + & {
     margin-top: 1rem;
@@ -68,13 +71,12 @@ export const FlexBetween = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 10px 0px 14px 0px;
+  margin: 10px 0px 20px 0px;
 `
 
 export const StyledSelect = styled.select`
   width: 100px;
   text-align: center;
-  margin-top: 5px;
   margin-right: 10px;
   border: none;
 `
@@ -82,7 +84,7 @@ export const StyledSelect = styled.select`
 export const StyledTextarea = styled.textarea`
   display: inline-block;
   /* border-color: ${palette.yellow[4]}; */
-  margin: 20px 0px 10px 0px;
+  margin: 10px 0px 10px 0px;
   resize: none;
 
   /* box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.7); */
@@ -109,6 +111,9 @@ export const SocialButton = ({
       justify-content: center;
       margin-top: 10px;
       cursor: pointer;
+      &:hover{
+        opacity: 0.7;
+      }
     `}
     onClick={onRemove}
   >
@@ -167,9 +172,9 @@ export const StyledButton = styled.button<{
   outline: none;
   cursor: pointer;
 
-  background: ${palette.yellow[7]};
+  background: ${palette.violet[6]};
   &:hover {
-    background: ${palette.yellow[3]};
+    background: ${palette.violet[4]};
   }
 `
 
@@ -177,7 +182,7 @@ export const Guide = styled.span<{ marginTop?: string; color?: string }>`
   display: inline-block;
   color: ${props => props.color};
   margin-top: ${props => props.marginTop};
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: bold;
   margin-bottom: 5px;
   margin-right: 3px;
@@ -200,7 +205,7 @@ export const PlusButton = ({ onClick, ...props }: ButtonProps) => {
     >
       <FaPlusSquare
         css={css`
-          color: ${palette.yellow[7]};
+          color: ${palette.violet[7]};
           height: 1.5rem;
           width: 1.5rem;
         `}
@@ -225,7 +230,7 @@ export const DeleteButton = ({ onClick, ...props }: ButtonProps) => (
   >
     <AiFillMinusSquare
       css={css`
-        color: ${palette.yellow[7]};
+        color: ${palette.violet[7]};
         height: 1.6rem;
         width: 1.6rem;
       `}

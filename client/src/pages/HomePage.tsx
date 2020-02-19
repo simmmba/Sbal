@@ -21,8 +21,7 @@ const HomePage = () => {
   ]
 
   const back = css`
-    /* background-color: rgb(236, 236, 236); */
-    background: #d9e5ff;
+    background: #e5dbff;
   `
 
   return useObserver(() => (

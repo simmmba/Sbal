@@ -2,6 +2,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
+import {Link} from 'react-router-dom'
 
 const Spacer = styled.div`
   height: 4rem;
@@ -14,7 +15,7 @@ const WrapperDiv = styled.div`
   text-align: center;
 `
 const StressedSpan = styled.span`
-  color: #3c7eb9;
+  color: #d0bfff;
   margin-top: 30px;
   padding-left: 10px;
   padding-right: 10px;
@@ -44,10 +45,11 @@ const Footer = () => {
         <br />
         <NormalP>
           <small>
-            Copyright by 서울 A306 6:00NotFound Team. All rights reserved.
+            Copyright by 서울 A306 600-Not-Found Team. All rights reserved.
           </small>
         </NormalP>
         <small>
+          {/* <StressedSpan><Link to = "/">박준성</Link></StressedSpan> */}
           <StressedSpan>박준성</StressedSpan>
           <StressedSpan>배성호</StressedSpan>
           <StressedSpan>임선우</StressedSpan>

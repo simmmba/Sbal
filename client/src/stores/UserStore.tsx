@@ -710,10 +710,16 @@ export const makeFilter = (cascaderOption: CascaderOptionType[]) => {
 }
 export const interests: { [key: string]: string[] } = {
   개발: [
-    '.NET',
+    'Web',
+    'Java',
+    'Python',
+    'Publisher',
+    'Front-End',
+    'Back-End',
     'C/C++',
     'Node.js',
     'PHP',
+    '.NET',
     'iOS',
     'UI/UX Design',
     'Ruby on rails',
@@ -723,12 +729,7 @@ export const interests: { [key: string]: string[] } = {
     'Server',
     'Android',
     'Algorithms',
-    '영상/음성처리',
-    'Web',
-    'Java',
-    'Python',
-    'Publisher',
-    'Front-End'
+    '영상/음성처리'
   ],
   어학: [
     'BCT',
