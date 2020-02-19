@@ -11,7 +11,7 @@ const listBox = css`
   /* border: 1px solid red; */
   background-color: white;
   padding: 15px 15px 20px 15px;
-  width: 330px;
+  width: 400px;
   border-radius: 10px;
   /* border: 10px solid rgb(236, 236, 236); */
   /* border: 10px solid #d9e5ff; */
@@ -119,7 +119,9 @@ const StudyRank = ({ title, list }: StudyRankprops) => {
         ))
       ) : title === 'myStudy' ? (
         <div css={empty}>
-          <span className='emoji' role='img' aria-label={'^^'}>참여중인 스터디가 없네요 😅</span>
+          <span className="emoji" role="img" aria-label={'^^'}>
+            참여중인 스터디가 없네요 😅
+          </span>
           스터디를 둘러보시겠어요?
           <NavLink css={link} to="/study">
             스터디 보러가기
