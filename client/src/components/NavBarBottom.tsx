@@ -1,7 +1,7 @@
 /**@jsx jsx */
-import { css, jsx } from '@emotion/core'
-import { WriteIcon } from '../components/common/Icons'
-import { useHistory } from 'react-router'
+import {css, jsx} from '@emotion/core'
+import {WriteIcon} from '../components/common/Icons'
+import {useHistory} from 'react-router'
 import * as H from 'history'
 
 const NavButtonStyle = css`
@@ -36,64 +36,63 @@ const eesetButton = css`
 `
 
 const NavButton = ({
-  title,
-  children,
-  onClick
-}: {
-  title: string
-  children: React.ReactNode
-  onClick: (event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+                       title,
+                       children,
+                       onClick
+                   }: {
+    title: string
+    children: React.ReactNode
+    onClick: (event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }) => {
-  return (
-    <button css={NavButtonStyle} onClick={onClick}>
-      {children}
-      <span>{title}</span>
-    </button>
-  )
+    return (
+        <button css={NavButtonStyle} onClick={onClick}>
+            {children}
+            <span>{title}</span>
+        </button>
+    )
 }
 
 function NavBarBottom() {
-  const history = useHistory()
-  const handleClick = (to: string) => {
-    history.push(to)
-  }
+    const history = useHistory()
+    const handleClick = (to: string) => {
+        history.push(to)
+    }
 
-  return (
-    <div css={NavStyle}>
-      <NavButton
-        title="개설"
-        onClick={() => {
-          handleClick('/study/create')
-        }}
-      >
-        ><WriteIcon />
-      </NavButton>
-      <NavButton
-        title="목록"
-        onClick={() => {
-          handleClick('/study')
-        }}
-      >
-        ><WriteIcon />
-      </NavButton>
-      <NavButton
-        title="추천 장소"
-        onClick={() => {
-          handleClick('/map')
-        }}
-      >
-        ><WriteIcon />
-      </NavButton>
-      <NavButton
-        title="내 정보"
-        onClick={() => {
-          handleClick('/mypage')
-        }}
-      >
-        ><WriteIcon />
-      </NavButton>
-    </div>
-  )
+    return (
+        <div css={NavStyle}>
+            <NavButton
+                title="개설"
+                onClick={() => {
+                    handleClick('/study/create')
+                }}
+            ><WriteIcon/>
+            </NavButton>
+            <NavButton
+                title="목록"
+                onClick={() => {
+                    handleClick('/study')
+                }}
+            >
+                <WriteIcon/>
+            </NavButton>
+            <NavButton
+                title="추천 장소"
+                onClick={() => {
+                    handleClick('/map')
+                }}
+            >
+                <WriteIcon/>
+            </NavButton>
+            <NavButton
+                title="내 정보"
+                onClick={() => {
+                    handleClick('/mypage')
+                }}
+            >
+                <WriteIcon/>
+            </NavButton>
+        </div>
+    )
 }
 
 export default NavBarBottom
