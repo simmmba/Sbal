@@ -27,6 +27,7 @@ import {
 } from '../../lib/api/auth'
 import { useEffect } from 'react'
 import { useHistory } from 'react-router'
+import UserDetailStore from "../../stores/UserDetailStore";
 
 function ListItem({
   interest,
@@ -56,6 +57,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
   const history = useHistory()
   useEffect(() => {
     if (type === 'mypage/update') {
+      UserDetailStore.mypage();
       getMyInfoDetailsForModify()
         .then(res => {
           const data = res.data.value
@@ -253,6 +255,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
           <StyledButton
             width={35}
             marginLeft={5}
+            disabled={type==='mypage/update' && UserDetailStore.data.email===state.email}
             onClick={e => {
               state.validateUserEmail()
               e.preventDefault()
@@ -281,6 +284,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
         <StyledButton
           width={35}
           marginLeft={5}
+          disabled={type==='mypage/update' && UserDetailStore.data.nickname===state.nickname}
           onClick={e => {
             state.validateUserNickname()
             e.preventDefault()

@@ -16,7 +16,7 @@ const UserDetail = () => {
 
   // }, [])
   const history = useHistory()
-  //JSON.stringify(UserStore.data);
+  // JSON.stringify(UserStore.data);
 
   const btn = css`
     color: #5d5d5d;
@@ -186,6 +186,11 @@ const UserDetail = () => {
     margin-top: 10px;
   `
 
+  const clickedUpdateButton = () => {
+    // UserDetailStore.mypage();
+    history.push('/mypage/update');
+  }
+
   return useObserver(() => (
     <Display>
       <div css={top}>
@@ -195,7 +200,7 @@ const UserDetail = () => {
             <div css={btnBox}>
               <button
                 css={editBtn}
-                onClick={() => history.push('/mypage/update')}
+                onClick={() => clickedUpdateButton()}
               >
                 정보 수정
               </button>
