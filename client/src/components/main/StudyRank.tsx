@@ -71,11 +71,11 @@ const link = css`
   width: 150px;
   height: 30px;
   transition: 0.3s;
-  background-color: #f3f0ff;
-  border: 2px solid #e5dbff;
+  /* border: 2px solid #e5dbff; */
+    background: #e5dbff;
   
   &:hover {
-    background: #e5dbff;
+  background-color: #f3f0ff;
   }
 `
 
