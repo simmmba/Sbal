@@ -814,19 +814,20 @@ const UserStore = observable<UserStoreType>({
         id: res.data.value.id,
         nickname: res.data.value.nickname
       }
-      const token = res.headers.token
+      const token = res.headers['jwt-auth-token']
       if (token) {
         sessionStorage.setItem('token', token)
         const id = res.data.value.id
         sessionStorage.setItem('id', id)
         this.token = token
         this.isLoggingIn = false
+        message.info('회원 가입 되었습니다!', 2);
       } else {
-        message.info('이제 로그인 해주세요')
+        message.info('이제 로그인 해주세요', 2)
       }
       history.push('/')
     } catch (error) {
-      message.error('로그인에 실패했습니다')
+      message.error('로그인에 실패했습니다', 2)
       this.isLoggingIn = false
     }
   },
@@ -859,9 +860,10 @@ const UserStore = observable<UserStoreType>({
       sessionStorage.setItem('id', id)
       this.token = token
       this.isLoggingIn = false
+      message.info('로그인 되었습니다.', 2)
       history.push('/')
     } catch (error) {
-      message.error('로그인에 실패했습니다')
+      message.error('로그인에 실패했습니다', 2)
       this.isLoggingIn = false
     }
   },
@@ -877,7 +879,7 @@ const UserStore = observable<UserStoreType>({
     StudyStore.myStudy = []
   },
 
-  async edit(data: UpdateData) {
+  async edit(data: UpdateData, history: H.History) {
     this.isLoggingIn = true
     try {
       const res = await userAPI.update(data)
@@ -885,11 +887,13 @@ const UserStore = observable<UserStoreType>({
       sessionStorage.setItem('token', token)
       this.token = token
       this.isLoggingIn = false
-      alert('회원 정보가 수정되었습니다.')
+      message.info('회원 정보가 수정되었습니다.', 2)
+
     } catch (e) {
       alert('정보 수정 실패')
       this.isLoggingIn = false
     }
+    history.push('/mypage')
   },
 
   signout() {},

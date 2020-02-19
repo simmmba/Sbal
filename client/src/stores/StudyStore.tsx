@@ -8,7 +8,6 @@ import { FilterData } from '../components/studyList/ListTypes'
 import {
   loginUser,
   StudyGroupType,
-  UpdatedAttendance
 } from '../components/studyGroup/StudyGroupType'
 
 const StudyStore = observable({
@@ -108,7 +107,6 @@ const StudyStore = observable({
       } else {
         alert('공지사항 등록 중 오류가 발생했습니다.')
       }
-      // this.studyGroup.noticeDTOList.push(res.data.value);
       alert(res.data.message)
     } catch (e) {
       alert('공지사항 등록 중 오류가 발생했습니다.')
@@ -137,7 +135,6 @@ const StudyStore = observable({
     try {
       const res = await studyAPI.insertReply(newReply)
       if (res.data.state === 'SUCCESS') {
-        // this.studyGroup.noticeDTOList[Number(index)].replyList.push(res.data.value)
         const studyGroup = await studyAPI.getStudyGroup(this.studyGroup.id)
         this.studyGroup = studyGroup.data.value
       } else {
