@@ -1,10 +1,8 @@
 package com.ssafy.sval.model.service;
 
 import com.ssafy.sval.model.dto.StudyMemberDTO;
-import com.ssafy.sval.model.entity.Study;
-import com.ssafy.sval.model.entity.StudyMember;
-import com.ssafy.sval.model.entity.StudyMemberId;
-import com.ssafy.sval.model.entity.User;
+import com.ssafy.sval.model.entity.*;
+import com.ssafy.sval.model.repository.AttendanceRepository;
 import com.ssafy.sval.model.repository.StudyMemberRepository;
 import com.ssafy.sval.model.repository.StudyRepository;
 import com.ssafy.sval.model.repository.UserRepository;
@@ -21,6 +19,8 @@ public class StudyMemberService {
     StudyRepository studyRepository;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    AttendanceRepository attendanceRepository;
 
     @Transactional
     public boolean insert(Integer studyId, Integer userId) {
@@ -44,7 +44,7 @@ public class StudyMemberService {
             return false;
         } else {
             studyMember.setState(studyMemberDTO.getState());
-            if(studyMember.getState()==3) studyMemberRepository.delete(studyMember);
+            if(studyMember.getState()==3) delete(studyMember.getStudy().getId(),studyMember.getUser().getId());
             else studyMemberRepository.save(studyMember);
             return true;
         }
@@ -53,6 +53,20 @@ public class StudyMemberService {
     @Transactional
     public void delete(Integer studyId, Integer loginUserId) {
         StudyMember studyMember = studyMemberRepository.findById(new StudyMemberId(studyId, loginUserId)).get();
+        Study study = studyRepository.findById(studyId).get();
+        if(study.getScheduleList() != null){
+            for(int i=0; i<study.getScheduleList().size(); i++){
+                if(study.getScheduleList().get(i).getAttendanceList()!=null){
+                    for(int j=0; j<study.getScheduleList().get(i).getAttendanceList().size(); j++){
+                        if(study.getScheduleList().get(i).getAttendanceList().get(j).getUser().getId()==loginUserId){
+                            if(study.getScheduleList().get(i).getAttendanceList().get(j).getState()==0){
+                                attendanceRepository.delete(study.getScheduleList().get(i).getAttendanceList().get(j));
+                            }
+                        }
+                    }
+                }
+            }
+        }
         studyMemberRepository.delete(studyMember);
     }
 
