@@ -137,6 +137,7 @@ function CreateForm({ form }: FormComponentProps) {
             dataToSend.hits = StudyDetailStore.data.hits
             StudyStore.updateStudy(dataToSend, history)
             history.push('/study')
+            StudyDetailStore.modalVisible = false
           }
         } else {
           StudyStore.filterData.lcategory = values.category[0]

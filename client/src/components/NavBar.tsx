@@ -4,6 +4,7 @@ import Button from './common/Button'
 import { Link, NavLink } from 'react-router-dom'
 import { useObserver } from 'mobx-react'
 import UserStore from '../stores/UserStore'
+import { useHistory } from 'react-router'
 
 const Spacer = styled.div`
   height: 4rem;
@@ -62,8 +63,10 @@ const StyledButton = styled(Button)`
 `
 
 const NavBar = () => {
+  const history = useHistory()
   const logout = useCallback(() => {
     UserStore.logout()
+    history.push('/')
   }, [])
 
   return useObserver(() => (

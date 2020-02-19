@@ -4,6 +4,8 @@ import { css, jsx } from '@emotion/core'
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table'
 import '../../css/SuperResponsiveTableStyle.css'
 import { NavLink } from 'react-router-dom'
+import LoadingSpin from '../common/LoadingSpin'
+import StudyCard from './StudyCard'
 
 const t = css`
   border-collapse: collapse;
@@ -43,12 +45,11 @@ const upper = css`
   height: 40px;
 `
 
-const StudyList = ({studyList}) => {
-
-    const activeStyle = {
-        color: 'red',
-        background: 'black'
-    }
+const StudyList = ({ studyList }) => {
+  const activeStyle = {
+    color: 'red',
+    background: 'black'
+  }
 
   return (
     <div>
@@ -84,8 +85,9 @@ const StudyList = ({studyList}) => {
           </Thead>
           <Tbody>
             {studyList.length > 0 ? (
-              studyList.map((study) => (
+              studyList.map(study => (
                 <>
+                  <StudyCard study={study} />
                   <Tr css={choose}>
                     <Td css={d}>{study.lcategory}</Td>
                     <Td css={title}>
@@ -105,7 +107,12 @@ const StudyList = ({studyList}) => {
                       {study.city} {study.town}
                     </Td>
                     <Td css={d}>
-                      {study.monthOrWeek===0?"협의":study.monthOrWeek===1?"월":"주"} {study.frequency}회
+                      {study.monthOrWeek === 0
+                        ? '협의'
+                        : study.monthOrWeek === 1
+                        ? '월'
+                        : '주'}{' '}
+                      {study.frequency}회
                     </Td>
                     <Td css={d}>{study.timeslot}</Td>
                     <Td css={d}>
@@ -115,7 +122,7 @@ const StudyList = ({studyList}) => {
                 </>
               ))
             ) : (
-              <div>스터디 없음</div>
+              <LoadingSpin tip="로딩중입니다..." />
             )}
           </Tbody>
         </Table>
