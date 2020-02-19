@@ -1,13 +1,13 @@
-import React from 'react'
+import React, {useState} from 'react'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
 import { Icon } from 'antd'
 import { NavLink } from 'react-router-dom'
 import StudyStore from '../../stores/StudyStore'
 import { StudyNotice } from './StudyGroupType'
+import { Pagination } from 'antd'
 
 const StudyGroupBoard = () => {
-  const noticeList = StudyStore.studyGroup.noticeDTOList
   const main = css`
     display: flex;
     flex-direction: column;
@@ -126,6 +126,20 @@ const StudyGroupBoard = () => {
     font-size: 12px;
     color: #ff5e00;
   `
+  const pageNation = css`
+    margin-top: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+  `
+
+  const noticeList = StudyStore.studyGroup.noticeDTOList;
+  const [pageNumber, setPageNumber] = useState(1);
+  const pageSize = 7;
+  const handlePageChange = (pn: number) => {
+    setPageNumber(pn);
+  }
+
 
   return (
     <div css={main}>
@@ -151,23 +165,34 @@ const StudyGroupBoard = () => {
           />
         </NavLink>
       </div>
-      {noticeList.reverse().map((notice: StudyNotice, index) => (
-        <div css={content} key={notice.id}>
-          <div css={num}>{noticeList.length - index}</div>
-          <div css={btitle}>
-            <NavLink
-              css={link}
-              to={`/study/${StudyStore.studyGroup.id}/board/` + index}
-            >
-              {notice.title}
-            </NavLink>
-          </div>
-          <div css={writer}>{notice.writer.nickname}</div>
-          <div css={date}>{notice.date.substr(0, 16)}</div>
-          <div css={hit}>{notice.hits}</div>
-          <div css={hit}>{notice.replyList.length}</div>
-        </div>
-      ))}
+      {noticeList.reverse().slice((pageNumber-1)*pageSize, ((pageNumber-1)*pageSize)+pageSize)
+          .map((notice:StudyNotice, index: number) => (
+              <div css={content} key={notice.id}>
+                <div css={num}>{noticeList.length-((pageNumber-1)*(pageSize))-index}</div>
+                <div css={btitle}>
+                  <NavLink
+                      css={link}
+                      to={`/study/${StudyStore.studyGroup.id}/board/` + (noticeList.length-((pageNumber-1)*(pageSize))-index-1)}
+                  >
+                    {notice.title}
+                  </NavLink>
+                </div>
+                <div css={writer}>{notice.writer.nickname}</div>
+                <div css={date}>{notice.date.substr(0, 16)}</div>
+                <div css={hit}>{notice.hits}</div>
+                <div css={hit}>{notice.replyList.length}</div>
+              </div>
+          ))}
+      {noticeList.length>pageSize?(
+          <Pagination
+              css={pageNation}
+              total={noticeList.length}
+              onChange={handlePageChange}
+              current={pageNumber}
+              defaultCurrent={1}
+              pageSize={pageSize}
+          />
+      ):(<div/>)}
     </div>
   )
 }
