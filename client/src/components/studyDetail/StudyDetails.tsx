@@ -133,10 +133,22 @@ const StudyDetails = () => {
                 {StudyDetailStore.data.hits}
               </div>
               <div css={title}>
-                <NavLink css={link} to={`/study/${studyDetailStore.data.id}`}>
-                  {StudyDetailStore.data.title}
-                </NavLink>
-                {StudyDetailStore.isMember() && <button onClick={() => {StudyDetailStore.goStudyGroup(StudyDetailStore.data.id, history)}}> 스터디그룹 </button> }
+                {/* <NavLink css={link} to={`/study/${studyDetailStore.data.id}`}> */}
+                {StudyDetailStore.data.title}
+                {/* </NavLink> */}
+                {StudyDetailStore.isMember() && (
+                  <button
+                    onClick={() => {
+                      StudyDetailStore.goStudyGroup(
+                        StudyDetailStore.data.id,
+                        history
+                      )
+                    }}
+                  >
+                    {' '}
+                    스터디그룹{' '}
+                  </button>
+                )}
               </div>
             </div>
             <div>

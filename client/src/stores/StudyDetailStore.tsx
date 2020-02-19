@@ -64,8 +64,8 @@ const studyDetailStore: StudyDetailStoreType = observable({
     return false
   },
 
-  goStudyGroup(studyId : number, history:H.History){
-    history.push(`study/${studyId}`)
+  goStudyGroup(studyId: number, history: H.History) {
+    history.push(`/study/${studyId}`)
   },
 
   async updateStudyMember(studyId: number, userId: number, state: number) {
