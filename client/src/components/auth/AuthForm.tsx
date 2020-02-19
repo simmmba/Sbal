@@ -47,7 +47,7 @@ function AuthForm({ type, history }: RouteComponentProps & AuthFormProps) {
       email: state.email,
       pw: state.password
     }
-    UserStore.login(dataToSend)
+    UserStore.login(dataToSend, history)
     e.preventDefault()
     //history.push('/mypage')
   }, [])
@@ -105,7 +105,9 @@ function AuthForm({ type, history }: RouteComponentProps & AuthFormProps) {
         </form>
       )}
       {type === 'signup' && (
-        <StyledButton marginTop={15} onClick={onClickToSignupForm}>{footerText}</StyledButton>
+        <StyledButton marginTop={15} onClick={onClickToSignupForm}>
+          {footerText}
+        </StyledButton>
       )}
     </AuthFormBlock>
   ))
