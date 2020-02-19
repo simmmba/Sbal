@@ -409,7 +409,6 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
           rows={10}
           onChange={state.onChangeTextarea}
         >
-          aaa
         </StyledTextarea>
         <StyledLabel htmlFor="city">지역</StyledLabel>
         <FlexBetween>

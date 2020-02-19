@@ -49,7 +49,7 @@ function AuthForm({ type, history }: RouteComponentProps & AuthFormProps) {
     }
     UserStore.login(dataToSend, history)
     e.preventDefault()
-    //history.push('/mypage')
+    // history.push('/mypage')
   }, [])
 
   const headerText = textMapForHeader[type]

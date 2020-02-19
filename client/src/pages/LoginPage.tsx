@@ -33,7 +33,7 @@ function LoginPage({ location }: RouteComponentProps) {
                 height: 50px;
               `}
             />
-            <AuthFooter />)
+            <AuthFooter />
           </div>
         )}
       </AuthTemplate>
