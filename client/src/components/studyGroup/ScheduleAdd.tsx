@@ -4,8 +4,8 @@ import { css, jsx } from '@emotion/core'
 import { Icon, Modal, DatePicker } from 'antd'
 import TextArea from 'antd/lib/input/TextArea'
 import { useLocalStore } from 'mobx-react'
-import StudyStore from "../../stores/StudyStore";
-import {CreatedOrUpdatedSchedule} from "./StudyGroupType";
+import StudyStore from '../../stores/StudyStore'
+import { CreatedOrUpdatedSchedule } from './StudyGroupType'
 import moment from 'moment'
 
 const ScheduleAdd = () => {
@@ -80,10 +80,10 @@ const ScheduleAdd = () => {
       },
       subject: state.subject,
       homework: state.homework,
-      meetDate: state.meetDate.concat(":00"),
+      meetDate: state.meetDate.concat(':00'),
       location: state.location
     }
-    StudyStore.enrollNewSchedule(newSchedule);
+    StudyStore.enrollNewSchedule(newSchedule)
     setConfirmLoading(true)
     setTimeout(() => {
       setVisible(false)
@@ -105,12 +105,12 @@ const ScheduleAdd = () => {
     meetDate: '',
     location: '',
     onChangeTextArea(e: React.ChangeEvent<HTMLTextAreaElement>) {
-      state[e.target.name] = e.target.value;
+      state[e.target.name] = e.target.value
     }
   }))
 
   const handleDatePickerChanged = (date: any, dateString: string) => {
-    state.meetDate = dateString;
+    state.meetDate = dateString
   }
 
   return (
@@ -131,8 +131,7 @@ const ScheduleAdd = () => {
         onOk={handleOk}
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
-        cancelText="취소"
-        okText="등록"
+        footer={null}
         destroyOnClose={true}
       >
         <h2 css={top}>스터디 스케줄 추가</h2>

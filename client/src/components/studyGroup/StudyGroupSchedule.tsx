@@ -87,12 +87,6 @@ const StudyGroupSchedule = () => {
     flex-wrap: wrap;
   `
 
-  // const cnt = css`
-  //   display: flex;
-  //   justify-content: center;
-  //   font-weight: bold;
-  // `
-
   const subject = css`
     font-weight: bold;
     font-size: 18px;
@@ -151,7 +145,6 @@ const StudyGroupSchedule = () => {
   `
 
   const empty = css`
-    /* border: 1px solid black; */
     height: 300px;
     display: flex;
     flex-direction: column;

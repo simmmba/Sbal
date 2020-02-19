@@ -12,9 +12,6 @@ import { NavLink, Link } from 'react-router-dom'
 import { Progress } from 'antd'
 
 const UserDetail = () => {
-  // useEffect(() => {
-
-  // }, [])
   const history = useHistory()
   //JSON.stringify(UserStore.data);
 
@@ -24,8 +21,6 @@ const UserDetail = () => {
     font-weight: bold;
     font-size: 12px;
     border-radius: 30px;
-    /* padding: 5px 15px 5px 15px; */
-    /* margin: 0px 0px 0px 2px; */
     width: 70px;
     height: 25px;
     border: none;
@@ -41,28 +36,17 @@ const UserDetail = () => {
 
   const table = css`
     border-collapse: collapse;
-    /* padding-bottom: 100px; */
-    /* float: left; */
     width: 100%;
   `
 
   const top = css`
     display: flex;
-    /* justify-content: space-around; */
     padding: 30px 0px 40px 0px;
-    /* align-items: center; */
-    /* flex-direction: column; */
-    /* flex-wrap: wrap; */
-    /* justify-content: space-between; */
-    /* border: 1px solid black; */
-    /* margin-left: 100px; */
-    /* width: 60%; */
   `
 
   const left = css`
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     margin: 5px 50px 0px 50px;
 
     @media (max-width: 415px) {
@@ -75,20 +59,6 @@ const UserDetail = () => {
     align-items: flex-start;
 
     margin: 0px 10px 0px 0px;
-  `
-
-  const content = css`
-    display: flex;
-    justify-content: space-between;
-    /* justify-content: space-around; */
-    flex-wrap: wrap;
-  `
-
-  const main = css`
-    /* font-weight: bold; */
-    /* font-size: 30px; */
-    /* border: 1px solid black; */
-    display: flex;
   `
 
   const th = css`
@@ -132,8 +102,6 @@ const UserDetail = () => {
     font-weight: bold;
     font-size: 12px;
     border-radius: 4px;
-    /* padding: 5px 15px 5px 15px; */
-    /* margin: 0px 0px 0px 2px; */
     width: 70px;
     height: 25px;
     border: none;
@@ -162,8 +130,6 @@ const UserDetail = () => {
   const first = css`
     display: flex;
     margin-bottom: 10px;
-    /* justify-content: center; */
-    /* align-items: center; */
   `
 
   const second = css`
@@ -190,7 +156,7 @@ const UserDetail = () => {
     <Display>
       <div css={top}>
         <div css={left}>
-          <img css={img} src="images/default1.png" />
+          <img css={img} src="/images/default1.png" />
           {UserDetailStore.data.id + '' === sessionStorage.getItem('id') && (
             <div css={btnBox}>
               <button

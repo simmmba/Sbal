@@ -35,32 +35,23 @@ const StudyDetails = () => {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    /* border: 1px solid black; */
-    /* margin-left: 100px; */
-    /* width: 60%; */
   `
 
   const content = css`
     display: flex;
     justify-content: space-between;
-    /* justify-content: space-around; */
     flex-wrap: wrap;
   `
 
   const main = css`
-    /* font-weight: bold; */
-    /* font-size: 30px; */
-    /* border: 1px solid black; */
     display: flex;
   `
 
   const title = css`
-    /* width: 100%; */
     font-weight: bold;
     font-size: 30px;
     color: #113000;
     text-align: left;
-    /* border: 1px solid black; */
     margin-left: 15px;
   `
 
@@ -74,11 +65,9 @@ const StudyDetails = () => {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* border: 1px solid black; */
     text-align: left;
     font-size: 13px;
     color: gray;
-    /* padding: 0 0 5px 5px; */
   `
 
   const btn = css`
@@ -103,29 +92,23 @@ const StudyDetails = () => {
   `
 
   const btnBox = css`
-    /* border: 1px solid black; */
-    /* width: 350px; */
     display: flex;
     justify-content: flex-end;
     margin-top: 20px;
   `
 
   const middle = css`
-    /* border: 1px solid black; */
     width: 100%;
     padding-top: 20px;
     padding-bottom: 50px;
     display: flex;
     justify-content: center;
-    /* align-items: center; */
   `
 
   const bottom = css`
     display: flex;
-    /* flex-direction: column; */
     justify-content: space-between;
     flex-wrap: wrap;
-    /* border: 1px solid black; */
     width: 100%;
   `
 
@@ -296,12 +279,12 @@ const StudyDetails = () => {
                 bordered
                 column={{ xxl: 4, xl: 4, lg: 3, md: 3, sm: 2, xs: 1 }}
               >
+                <Descriptions.Item label="리더">
+                  {StudyDetailStore.data.leader.nickname}
+                </Descriptions.Item>
                 <Descriptions.Item label="인원">
                   {StudyDetailStore.data.joinedMemberCount} /{' '}
                   {StudyDetailStore.data.maxParticipants}
-                </Descriptions.Item>
-                <Descriptions.Item label="리더">
-                  {StudyDetailStore.data.leader.nickname}
                 </Descriptions.Item>
                 <Descriptions.Item label="분야">
                   {StudyDetailStore.data.lcategory} /{' '}
