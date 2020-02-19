@@ -161,7 +161,8 @@ const UserDetail = () => {
     <Display>
       <div css={top}>
         <div css={left}>
-          <img css={img} src="/images/default1.png" />
+          {/* <img css={img} src="/images/default1.png" /> */}
+          
           {UserDetailStore.data.id + '' === sessionStorage.getItem('id') && (
             <div css={btnBox}>
               <button

@@ -120,7 +120,7 @@ const StudyMember = () => {
     font-size: 14px;
     width: 100%;
     height: 25px;
-    border: none;
+   
     display: flex;
     align-items: center;
     justify-content: center;
@@ -230,26 +230,26 @@ const StudyMember = () => {
         <tr key={index} >
          {studyMember.user.id + '' ===
                     sessionStorage.getItem('id') && (
-                    <div css={me}>
+                    <td css={td}>
                       {/* 본인이 리더일 때 */}
                       {studyMember.user.id ===
                         StudyDetailStore.data.leader.id && <span>👑</span>}
                       🙋‍♂️&nbsp;{studyMember.user.nickname}
-                    </div>
+                    </td>
                   )}
         {studyMember.state === 1 && studyMember.user.id+"" === sessionStorage.getItem('id') && <td css={td}></td>}
-        {studyMember.state === 1 && studyMember.user.id+"" === sessionStorage.getItem('id') && <td css={td}></td>}
-
         </tr> ))} 
+
+
+
         {StudyDetailStore.data.studyMemberDTOList.map(
           (studyMember: studyMember, index: number) => (
             <tr key={index}>
-              {studyMember.state === 1 && (
-                <td css={td}>
-                 
-                  {/* 본인이 아닐 때 */}
-                  {studyMember.user.id + '' !==
+              {studyMember.state === 1 && studyMember.user.id + '' !==
                     sessionStorage.getItem('id') && (
+                <td css={td}>
+                  {/* 본인이 아닐 때 */}
+                  {(
                     // StudyDetailStore.data.leader.id &&
                     // StudyDetailStore.data.leader.id + '' ===
                     //   sessionStorage.getItem('id') && (
@@ -265,25 +265,24 @@ const StudyMember = () => {
                   )}
                 </td>
               )}
-              {studyMember.state === 1 && (
-                <td css={td}>
-                  {studyMember.user.id !== StudyDetailStore.data.leader.id &&
+              {studyMember.state === 1 && studyMember.user.id+"" !== sessionStorage.getItem('id')  && (
+              <td css={td}>
+                  {studyMember.user.id !== StudyDetailStore.data.leader.id && 
                     StudyDetailStore.data.leader.id + '' ===
-                      sessionStorage.getItem('id') && (
+                      sessionStorage.getItem('id') &&  (
                       <button
                         css={btn}
                         onClick={() => {
                           StudyDetailStore.updateStudyMember(
                             StudyDetailStore.data.id,
-                            studyMember.user.id,
-                            3
+                            studyMember.user.id, 3
                           )
                         }}
                       >
                         내보내기
-                      </button>
-                    )}
+                      </button> )}
                 </td>
+               
               )}
             </tr>
           )
