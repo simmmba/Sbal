@@ -27,6 +27,7 @@ import {
 } from '../../lib/api/auth'
 import { useEffect } from 'react'
 import { useHistory } from 'react-router'
+import { message } from 'antd'
 
 function ListItem({
   interest,
@@ -72,7 +73,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
         })
     }
   }, [])
-  const state = useLocalStore<SignupState>(() => ({
+  const state: SignupState = useLocalStore<SignupState>(() => ({
     email: '',
     emailState: false,
     emailDupMessage: '',
@@ -93,6 +94,8 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
     scategory: interests[Object.keys(interests)[0]][0],
     interestList: [],
     equalsOfPasswords: '',
+    emailValidationCode: '',
+    emailValidationInput: '',
     onChange(e: React.ChangeEvent<HTMLInputElement>) {
       state[e.target.name] = e.target.value
       if (e.target.name === 'pw' || e.target.name === 'pw2') {
@@ -132,11 +135,12 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
       }
       try {
         const res = await validateEmail(state.email)
+        this.emailValidationCode = res.data.value.dice
         this.isCheckedEmail = true
         this.emailState = res.data.state === 'SUCCESS'
         this.emailDupMessage = res.data.message
       } catch (error) {
-        alert(error)
+        message.error(error)
       }
     },
     async validateUserNickname() {
@@ -152,7 +156,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
         this.nicknameState = res.data.state === 'SUCCESS'
         this.nicknameDupMessage = res.data.message
       } catch (error) {
-        alert(error)
+        message.error(error)
       }
     }
   }))
@@ -197,6 +201,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
     )
   }
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     if (type === 'mypage/update') {
       const dataToSend: UpdateData = {
         email: state.email,
@@ -208,23 +213,30 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
         interestDTOList: state.interestList
       }
       UserStore.edit(dataToSend)
-      history.push('/')
       return
     } else {
-      const dataToSend = {
-        email: state.email,
-        nickname: state.nickname,
-        city: state.city,
-        town: state.town,
-        phoneNum: state.phoneNumber,
-        introduction: state.introduction,
-        interestDTOList: state.interestList,
-        pw: state.pw,
-        gender: state.gender
+      if (
+        state.isEqualPassword &&
+        state.isCheckedEmail &&
+        state.isCheckedNickname &&
+        // state.emailValidationCode === state.emailValidationInput &&
+        state.interestList !== []
+      ) {
+        const dataToSend = {
+          email: state.email,
+          nickname: state.nickname,
+          city: state.city,
+          town: state.town,
+          phoneNum: state.phoneNumber,
+          introduction: state.introduction,
+          interestDTOList: state.interestList,
+          pw: state.pw,
+          gender: state.gender
+        }
+        UserStore.signup(dataToSend, history)
+      } else {
+        message.error('입력하신 정보를 확인해주세요')
       }
-      UserStore.signup(dataToSend)
-      history.push('/')
-      e.preventDefault()
     }
   }
   return useObserver(() => (
@@ -266,6 +278,31 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
             </Guide>
           </div>
         </div>
+        {state.emailValidationCode && (
+          <div>
+            <StyledInput
+              placeholder="인증번호를 입력하세요"
+              autoComplete="number"
+              name="emailValidationInput"
+              value={state.emailValidationInput}
+              onChange={state.onChange}
+              width={60}
+            />
+            {state.emailValidationCode && (
+              <Guide
+                color={
+                  state.emailValidationInput === state.emailValidationCode
+                    ? 'green'
+                    : 'red'
+                }
+              >
+                {state.emailValidationInput === state.emailValidationCode
+                  ? '인증되었습니다'
+                  : '인증번호를 확인주세요'}
+              </Guide>
+            )}
+          </div>
+        )}
         <StyledLabel htmlFor="nickname">
           <Guide color="red">* </Guide>닉네임
         </StyledLabel>

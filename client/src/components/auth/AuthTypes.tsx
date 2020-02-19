@@ -1,5 +1,6 @@
 import { Study } from '../main/MainTypes'
 import { UserInfoType } from '../userDetail/UserDetailTypes'
+import * as H from 'history'
 
 export type AuthTemplateProps = {
   children: React.ReactNode
@@ -30,6 +31,8 @@ export type SignupState = {
   interestList: Interest[]
   equalsOfPasswords: string
   isEqualPassword: boolean
+  emailValidationCode: string
+  emailValidationInput: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   onChangeTextarea: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
   onChangeSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void
@@ -140,8 +143,8 @@ export type UserStoreType = {
     id: number
     nickname: string
   }
-  signup: (data: SignupData) => void
-  login: (data: LoginData) => void
+  signup: (data: SignupData, history: H.History) => void
+  login: (data: LoginData, history: H.History) => void
   logout: () => void
   edit: (data: UpdateData) => void
   signout: () => void

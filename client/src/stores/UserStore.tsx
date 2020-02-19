@@ -9,6 +9,8 @@ import {
 import { UserInfoType } from '../components/userDetail/UserDetailTypes'
 import StudyStore from './StudyStore'
 import { CascaderOptionType } from 'antd/lib/cascader'
+import { message } from 'antd'
+import * as H from 'history'
 
 export const cityAndTowns: { [key: string]: string[] } = {
   서울: [
@@ -804,7 +806,7 @@ const UserStore = observable<UserStoreType>({
   // {id, pw, email, phoneNum, nickname, gender, introduction,
   // city, town, evaluation, profilePhotoDir, socialLogin, interestDTOList, ledStudyList, joinedStudyList}
 
-  async signup(data: SignupData) {
+  async signup(data: SignupData, history: H.History) {
     this.isLoggingIn = true
     try {
       const res = await userAPI.register(data)
@@ -813,13 +815,18 @@ const UserStore = observable<UserStoreType>({
         nickname: res.data.value.nickname
       }
       const token = res.headers.token
-      sessionStorage.setItem('token', token)
-      const id = res.data.value.id
-      sessionStorage.setItem('id', id)
-      this.token = token
-      this.isLoggingIn = false
+      if (token) {
+        sessionStorage.setItem('token', token)
+        const id = res.data.value.id
+        sessionStorage.setItem('id', id)
+        this.token = token
+        this.isLoggingIn = false
+      } else {
+        message.info('이제 로그인 해주세요')
+      }
+      history.push('/')
     } catch (error) {
-      alert('로그인에 실패했습니다')
+      message.error('로그인에 실패했습니다')
       this.isLoggingIn = false
     }
   },
@@ -838,7 +845,7 @@ const UserStore = observable<UserStoreType>({
   //   }
   // },
 
-  async login(data: LoginData) {
+  async login(data: LoginData, history: H.History) {
     this.isLoggingIn = true
     try {
       const res = await userAPI.login(data)
@@ -846,15 +853,15 @@ const UserStore = observable<UserStoreType>({
         id: res.data.value.id,
         nickname: res.data.value.nickname
       }
-      console.log(this.loginUser.id)
       const token = res.headers['jwt-auth-token']
       sessionStorage.setItem('token', token)
       const id = res.data.value.id
       sessionStorage.setItem('id', id)
       this.token = token
       this.isLoggingIn = false
+      history.push('/')
     } catch (error) {
-      alert('로그인에 실패했습니다')
+      message.error('로그인에 실패했습니다')
       this.isLoggingIn = false
     }
   },
