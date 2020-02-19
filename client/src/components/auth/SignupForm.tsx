@@ -216,7 +216,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
         introduction: state.introduction,
         interestDTOList: state.interestList
       }
-      UserStore.edit(dataToSend)
+      UserStore.edit(dataToSend, history)
       return
     } else {
       if (
