@@ -223,13 +223,12 @@ const StudyMember = () => {
           <th css={w70}>닉네임</th>
           <th css={w30}></th>
         </tr>
-        {StudyDetailStore.data.studyMemberDTOList.map(
-          (studyMember: studyMember, index: number) => (
-            <tr key={index}>
-              {studyMember.state === 1 && (
-                <td css={td}>
-                  {/* 본인일 때 */}
-                  {studyMember.user.id + '' ===
+
+      {StudyDetailStore.data.studyMemberDTOList.map(
+
+        (studyMember : studyMember, index : number) => (
+        <tr key={index} >
+         {studyMember.user.id + '' ===
                     sessionStorage.getItem('id') && (
                     <div css={me}>
                       {/* 본인이 리더일 때 */}
@@ -238,7 +237,16 @@ const StudyMember = () => {
                       🙋‍♂️&nbsp;{studyMember.user.nickname}
                     </div>
                   )}
+        {studyMember.state === 1 && studyMember.user.id+"" === sessionStorage.getItem('id') && <td css={td}></td>}
+        {studyMember.state === 1 && studyMember.user.id+"" === sessionStorage.getItem('id') && <td css={td}></td>}
 
+        </tr> ))} 
+        {StudyDetailStore.data.studyMemberDTOList.map(
+          (studyMember: studyMember, index: number) => (
+            <tr key={index}>
+              {studyMember.state === 1 && (
+                <td css={td}>
+                 
                   {/* 본인이 아닐 때 */}
                   {studyMember.user.id + '' !==
                     sessionStorage.getItem('id') && (

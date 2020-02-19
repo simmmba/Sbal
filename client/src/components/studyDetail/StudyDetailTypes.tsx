@@ -33,6 +33,7 @@ export type StudyDetailStoreType = {
   deleteStudy: (studyId: number, history: H.History) => void
   studyTodo: () => void
   insertMember: (studyId: number) => void
+  goStudyGroup: (studyId: number, history:H.History) => void
   //   deleteStudyMember: (studyId: number) => void
   //   isJoin: () => boolean
   //   isMember: () => boolean

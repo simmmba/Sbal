@@ -64,6 +64,10 @@ const studyDetailStore: StudyDetailStoreType = observable({
     return false
   },
 
+  goStudyGroup(studyId : number, history:H.History){
+    history.push(`study/${studyId}`)
+  },
+
   async updateStudyMember(studyId: number, userId: number, state: number) {
     try {
       const res = await studyAPI.studyMemberUpdate(studyId, userId, state)
