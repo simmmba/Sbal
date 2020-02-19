@@ -7,6 +7,7 @@ import Reply from './Reply'
 import StudyStore from '../../stores/StudyStore'
 import {useParams, useHistory} from 'react-router'
 import {StudyNotice} from "./StudyGroupType";
+import {useEffect} from 'react'
 
 const StudyGroupBoardDetail = () => {
     const {index} = useParams();
@@ -104,7 +105,7 @@ const StudyGroupBoardDetail = () => {
     /* justify-content: center; */
     /* align-items: center; */
     justify-content: space-between;
-    padding: 3px 0px 10px 27px;
+    padding: 3px 50px 30px 27px;
     color: #747474;
     flex-wrap: wrap;
   `
@@ -140,12 +141,16 @@ const StudyGroupBoardDetail = () => {
   `
     const history = useHistory();
     const clickDeleteIcon = (id: number, deleteIndex: number) => {
-        if(window.confirm("게시물을 삭제하시겠습니까?")) {
+        if (window.confirm("게시물을 삭제하시겠습니까?")) {
             StudyStore.deleteNotice(id);
             StudyStore.studyGroup.noticeDTOList.splice(deleteIndex, 1);
             history.goBack();
         }
     }
+
+    useEffect(() => {
+        StudyStore.increaseNoticeHits(Number(notice.id), Number(index));
+    })
 
     return (
         <div css={main}>
@@ -171,18 +176,19 @@ const StudyGroupBoardDetail = () => {
                                 <div css={date}>{notice.date.substr(0, 16)}&nbsp;&nbsp; |</div>
                                 <div css={hit}>조회 {notice.hits}</div>
                             </div>
-                            <div css={right}>
-                                <NavLink
-                                    css={navLink}
-                                    to={`/study/${StudyStore.studyGroup.id}/editBoard/${Number(index)}`}
-                                >
-                                    <Icon css={icon} type="edit" theme="filled"/>
-                                    &nbsp;수정
-                                </NavLink>
-                                <div onClick={()=>clickDeleteIcon(notice.id, Number(index))}>
-                                    <Icon css={icon} type="delete" theme="filled"/>삭제
+                            {notice.writer.id === StudyStore.loginUser.id ? (
+                                <div css={right}>
+                                    <NavLink
+                                        css={navLink}
+                                        to={`/study/${StudyStore.studyGroup.id}/editBoard/${Number(index)}`}
+                                    >
+                                        <Icon css={icon} type="edit" theme="filled"/>
+                                    </NavLink>
+                                    <Icon css={icon} type="delete" theme="filled"
+                                          onClick={() => clickDeleteIcon(notice.id, Number(index))}/>
+
                                 </div>
-                            </div>
+                            ) : (<div/>)}
                         </div>
                     </div>
                     <div css={bottom}>{notice.content}</div>

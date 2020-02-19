@@ -1,3 +1,4 @@
+import { Moment } from 'moment'
 
 export type StudyGroupType = {
     id: number,
@@ -77,4 +78,34 @@ export type CreatedNotice = {
     [key: string]:
         string
         | ((e: React.ChangeEvent<HTMLTextAreaElement>) => void)
+}
+
+export type loginUser = {
+    id: number,
+    nickname: string
+}
+
+export type CreatedOrUpdatedSchedule = {
+    id: number,
+    study : {
+        id: number
+    },
+    subject: string,
+    homework: string,
+    meetDate: string,
+    location: string,
+    onChangeTextArea: (e: React.ChangeEvent<HTMLTextAreaElement>) => void,
+    [key: string]:
+        string
+        | object
+        | number
+        | ((e: React.ChangeEvent<HTMLTextAreaElement>) => void)
+}
+
+export type UpdatedAttendance = {
+    id: number,
+    user: {
+        id: number
+    },
+    state: number
 }

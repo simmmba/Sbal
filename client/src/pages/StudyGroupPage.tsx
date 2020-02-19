@@ -1,11 +1,11 @@
 import React from 'react'
 import StudyGroupMain from '../components/studyGroup/StudyGroupMain'
-import { useParams } from 'react-router';
+import { useParams } from 'react-router'
 const StudyGroupPage = () => {
-    const {id} = useParams();
+  const { id } = useParams()
   return (
     <>
-      <StudyGroupMain id={Number(id)}/>
+      <StudyGroupMain id={Number(id)} />
     </>
   )
 }

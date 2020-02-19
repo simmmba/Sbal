@@ -99,11 +99,11 @@ export const studyMemberUpdate = (
   }
   const data = {
     study: {
-      id: studyId,
+      id: studyId
     },
     user: {
-       id: userId 
-      },
+      id: userId
+    },
     state: stateNum
   }
   return apiClient.put('/study/member', data)
@@ -141,4 +141,31 @@ export const getFilteredList = (filterData: FilterData) => {
     setAuthToken(sessionStorage.token)
   }
   return apiClient.post('/study/list', filterData)
+}
+export const increaseNoticeHits = (noticeId: number) => {
+  if (sessionStorage.token) {
+    setAuthToken(sessionStorage.token)
+  }
+  return apiClient.get('/notice/increaseHits/' + Number(noticeId))
+}
+
+export const enrollNewSchedule = (newSchedule: object) => {
+  if (sessionStorage.token) {
+    setAuthToken(sessionStorage.token)
+  }
+  return apiClient.post('/study/schedule', newSchedule)
+}
+
+export const editSchedule = (editedSchedule: object) => {
+  if (sessionStorage.token) {
+    setAuthToken(sessionStorage.token)
+  }
+  return apiClient.put('/study/schedule', editedSchedule)
+}
+
+export const updateAttendance = (updatedAttendance: object) => {
+  if (sessionStorage.token) {
+    setAuthToken(sessionStorage.token)
+  }
+  return apiClient.put('/study/schedule/attendance', updatedAttendance)
 }
