@@ -151,9 +151,9 @@ const StudyGroupBoard = () => {
           />
         </NavLink>
       </div>
-      {noticeList.map((notice: StudyNotice, index) => (
+      {noticeList.reverse().map((notice: StudyNotice, index) => (
         <div css={content} key={notice.id}>
-          <div css={num}>{index + 1}</div>
+          <div css={num}>{noticeList.length - index}</div>
           <div css={btitle}>
             <NavLink
               css={link}

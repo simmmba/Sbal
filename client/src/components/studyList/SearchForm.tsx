@@ -83,7 +83,12 @@ const SearchForm = () => {
           `}
           onClick={openModal}
         >
-          <Icon css={css`color: ;primary`} type="filter" />
+          <Icon
+            css={css`
+              color: primary;
+            `}
+            type="filter"
+          />
         </Button>
         <Modal
           title="검색 필터"
