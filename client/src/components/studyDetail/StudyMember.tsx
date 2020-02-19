@@ -63,6 +63,15 @@ const StudyMember = () => {
     border-bottom: 2px solid #ddd;
     color: #5d5d5d;
     padding: 5px;
+    background: #fff;
+
+    font-size: 14px;
+    /* width: 100%; */
+    height: 30px;
+    /* border: none; */
+    /* display: flex;
+    align-items: center;
+    justify-content: center; */
   `
 
   const nickname = css`
@@ -92,10 +101,6 @@ const StudyMember = () => {
     text-align: center;
   `
 
-  const tr = css`
-    height: 25px;
-  `
-
   const memberInfoBtn = css`
     color: #5d5d5d;
     background: #fff;
@@ -112,18 +117,6 @@ const StudyMember = () => {
     &:hover {
       font-weight: bold;
     }
-  `
-
-  const me = css`
-    color: #5d5d5d;
-    background: #fff;
-    font-size: 14px;
-    width: 100%;
-    height: 25px;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   `
 
   const detailNickname = css`
@@ -224,67 +217,68 @@ const StudyMember = () => {
           <th css={w30}></th>
         </tr>
 
-      {StudyDetailStore.data.studyMemberDTOList.map(
-
-        (studyMember : studyMember, index : number) => (
-        <tr key={index} >
-         {studyMember.user.id + '' ===
-                    sessionStorage.getItem('id') && (
-                    <div css={me}>
-                      {/* 본인이 리더일 때 */}
-                      {studyMember.user.id ===
-                        StudyDetailStore.data.leader.id && <span>👑</span>}
-                      🙋‍♂️&nbsp;{studyMember.user.nickname}
-                    </div>
-                  )}
-        {studyMember.state === 1 && studyMember.user.id+"" === sessionStorage.getItem('id') && <td css={td}></td>}
-        {studyMember.state === 1 && studyMember.user.id+"" === sessionStorage.getItem('id') && <td css={td}></td>}
-
-        </tr> ))} 
         {StudyDetailStore.data.studyMemberDTOList.map(
           (studyMember: studyMember, index: number) => (
             <tr key={index}>
-              {studyMember.state === 1 && (
-                <td css={td}>
-                 
-                  {/* 본인이 아닐 때 */}
-                  {studyMember.user.id + '' !==
-                    sessionStorage.getItem('id') && (
-                    // StudyDetailStore.data.leader.id &&
-                    // StudyDetailStore.data.leader.id + '' ===
-                    //   sessionStorage.getItem('id') && (
+              {/* 본인일 때 */}
+              {studyMember.state === 1 &&
+                studyMember.user.id + '' === sessionStorage.getItem('id') && (
+                  <td css={td}>
+                    {/* 본인이 리더일 때 */}
+                    {studyMember.user.id ===
+                      StudyDetailStore.data.leader.id && <span>👑&nbsp;</span>}
+                    🙋‍♂️&nbsp;{studyMember.user.nickname}
+                  </td>
+                )}
+
+              {studyMember.state === 1 &&
+                studyMember.user.id + '' === sessionStorage.getItem('id') && (
+                  <td css={td}></td>
+                )}
+            </tr>
+          )
+        )}
+        {StudyDetailStore.data.studyMemberDTOList.map(
+          (studyMember: studyMember, index: number) => (
+            <tr key={index}>
+              {/* 본인이 아닐 때 */}
+              {studyMember.state === 1 &&
+                studyMember.user.id + '' !== sessionStorage.getItem('id') && (
+                  <td css={td}>
                     <button
                       css={memberInfoBtn}
                       onClick={() => showModal(studyMember.user.id)}
                     >
                       {/* 본인이 아닌 사람이 리더일 때 */}
                       {studyMember.user.id ===
-                        StudyDetailStore.data.leader.id && <span>👑</span>}
-                      &nbsp;{studyMember.user.nickname}
+                        StudyDetailStore.data.leader.id && (
+                        <span>👑&nbsp;</span>
+                      )}
+                      {studyMember.user.nickname}
                     </button>
-                  )}
-                </td>
-              )}
-              {studyMember.state === 1 && (
-                <td css={td}>
-                  {studyMember.user.id !== StudyDetailStore.data.leader.id &&
-                    StudyDetailStore.data.leader.id + '' ===
-                      sessionStorage.getItem('id') && (
-                      <button
-                        css={btn}
-                        onClick={() => {
-                          StudyDetailStore.updateStudyMember(
-                            StudyDetailStore.data.id,
-                            studyMember.user.id,
-                            3
-                          )
-                        }}
-                      >
-                        내보내기
-                      </button>
-                    )}
-                </td>
-              )}
+                  </td>
+                )}
+              {studyMember.state === 1 &&
+                studyMember.user.id + '' !== sessionStorage.getItem('id') && (
+                  <td css={td}>
+                    {studyMember.user.id !== StudyDetailStore.data.leader.id &&
+                      StudyDetailStore.data.leader.id + '' ===
+                        sessionStorage.getItem('id') && (
+                        <button
+                          css={btn}
+                          onClick={() => {
+                            StudyDetailStore.updateStudyMember(
+                              StudyDetailStore.data.id,
+                              studyMember.user.id,
+                              3
+                            )
+                          }}
+                        >
+                          내보내기
+                        </button>
+                      )}
+                  </td>
+                )}
             </tr>
           )
         )}
@@ -329,13 +323,6 @@ const StudyMember = () => {
             <div css={comment}>
               <div>관심사&nbsp;&nbsp;&nbsp;</div>
               <div>
-                {UserDetailStore.data.interestDTOList.map(
-                  (interest: Interest, index: number) => (
-                    <span key={index}>
-                      <b>#{interest.scategory}&nbsp;&nbsp;</b>
-                    </span>
-                  )
-                )}
                 {UserDetailStore.data.interestDTOList.map(
                   (interest: Interest, index: number) => (
                     <span key={index}>

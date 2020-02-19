@@ -821,7 +821,7 @@ const UserStore = observable<UserStoreType>({
         sessionStorage.setItem('id', id)
         this.token = token
         this.isLoggingIn = false
-        message.info('회원 가입 되었습니다!', 2);
+        message.info('회원 가입 되었습니다!', 2)
       } else {
         message.info('이제 로그인 해주세요', 2)
       }
@@ -888,7 +888,6 @@ const UserStore = observable<UserStoreType>({
       this.token = token
       this.isLoggingIn = false
       message.info('회원 정보가 수정되었습니다.', 2)
-
     } catch (e) {
       alert('정보 수정 실패')
       this.isLoggingIn = false

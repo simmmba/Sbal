@@ -154,7 +154,7 @@ const UserDetail = () => {
 
   const clickedUpdateButton = () => {
     // UserDetailStore.mypage();
-    history.push('/mypage/update');
+    history.push('/mypage/update')
   }
 
   return useObserver(() => (
@@ -164,10 +164,7 @@ const UserDetail = () => {
           <img css={img} src="/images/default1.png" />
           {UserDetailStore.data.id + '' === sessionStorage.getItem('id') && (
             <div css={btnBox}>
-              <button
-                css={editBtn}
-                onClick={() => clickedUpdateButton()}
-              >
+              <button css={editBtn} onClick={() => clickedUpdateButton()}>
                 정보 수정
               </button>
             </div>
@@ -201,13 +198,6 @@ const UserDetail = () => {
           <div css={comment}>
             <div>관심사&nbsp;&nbsp;&nbsp;</div>
             <div>
-              {UserDetailStore.data.interestDTOList.map(
-                (interest: Interest, index: number) => (
-                  <span key={index}>
-                    <b>#{interest.scategory}&nbsp;&nbsp;</b>
-                  </span>
-                )
-              )}
               {UserDetailStore.data.interestDTOList.map(
                 (interest: Interest, index: number) => (
                   <span key={index}>
