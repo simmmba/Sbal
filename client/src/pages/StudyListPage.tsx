@@ -19,7 +19,6 @@ const StudyListPage = () => {
     authCheck(history)
     StudyStore.getStudyList()
   }, [history])
-  console.log(StudyStore.studyList)
   return useObserver(() => (
     <div>
       <SearchForm

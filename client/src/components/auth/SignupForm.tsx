@@ -16,14 +16,7 @@ import {
   DeleteButton,
   StyledRadio
 } from './AuthStyled'
-import {
-  SignupState,
-  Interests,
-  CityAndTowns,
-  Interest,
-  AuthFormProps,
-  UpdateData
-} from './AuthTypes'
+import { SignupState, Interest, AuthFormProps, UpdateData } from './AuthTypes'
 import { RouteComponentProps, withRouter } from 'react-router'
 import qs from 'qs'
 import {
