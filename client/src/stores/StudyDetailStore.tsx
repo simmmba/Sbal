@@ -4,6 +4,7 @@ import { StudyDetailStoreType } from '../components/studyDetail/StudyDetailTypes
 import { timingSafeEqual } from 'crypto'
 import { FaTintSlash } from 'react-icons/fa'
 import * as H from 'history'
+import { message } from 'antd'
 
 const studyDetailStore: StudyDetailStoreType = observable({
   studyId: -1,
@@ -88,27 +89,27 @@ const studyDetailStore: StudyDetailStoreType = observable({
       const res = await studyAPI.studyUpdate(this.data)
       this.studyDetail()
     } catch (error) {
-      alert('스터디 진행에 실패하였습니다.')
+      message.error('스터디 진행에 실패하였습니다.')
     }
   },
 
   async insertMember(studyId: number) {
     try {
       const res = await studyAPI.insertMember(studyId)
-      alert('신청 되었습니다.')
+      message.info('신청 되었습니다.')
       this.studyDetail()
     } catch (error) {
-      alert('요청에 실패하였습니다.')
+      message.error('요청에 실패하였습니다.')
     }
   },
 
   async deleteStudy(studyId: number, history: H.History) {
     try {
       const res = await studyAPI.deleteStudy(studyId)
-      alert('스터디가 삭제 되었습니다.')
+      message.info('스터디가 삭제 되었습니다.')
       history.push('/')
     } catch {
-      alert('스터디 삭제에 실패하였습니다.')
+      message.error('스터디 삭제에 실패하였습니다.')
     }
   },
 
@@ -119,7 +120,7 @@ const studyDetailStore: StudyDetailStoreType = observable({
       else if (state === 2) alert('탈퇴 되었습니다.')
       this.studyDetail()
     } catch (error) {
-      alert('요청에 실패하였습니다.')
+      message.error('요청에 실패하였습니다.')
     }
   },
 
@@ -143,7 +144,7 @@ const studyDetailStore: StudyDetailStoreType = observable({
         }
       }
     } catch (error) {
-      alert('정보를 가져오지 못했습니다.')
+      message.error('정보를 가져오지 못했습니다.')
     }
   }
 })

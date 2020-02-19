@@ -9,7 +9,7 @@ const listBox = css`
   margin: 10px;
   background-color: white;
   padding: 15px 15px 20px 15px;
-  width: 330px;
+  width: 400px;
   border-radius: 10px;
 `
 const listTitle = css`
@@ -107,7 +107,9 @@ const StudyRank = ({ title, list }: StudyRankprops) => {
         ))
       ) : title === 'myStudy' ? (
         <div css={empty}>
-          <span className='emoji' role='img' aria-label={'^^'}>참여중인 스터디가 없네요 😅</span>
+          <span className="emoji" role="img" aria-label={'^^'}>
+            참여중인 스터디가 없네요 😅
+          </span>
           스터디를 둘러보시겠어요?
           <NavLink css={link} to="/study">
             스터디 보러가기

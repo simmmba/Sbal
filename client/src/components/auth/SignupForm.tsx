@@ -27,7 +27,7 @@ import {
 } from '../../lib/api/auth'
 import { useEffect } from 'react'
 import { useHistory } from 'react-router'
-import UserDetailStore from "../../stores/UserDetailStore";
+import UserDetailStore from '../../stores/UserDetailStore'
 import { message } from 'antd'
 
 function ListItem({
@@ -65,7 +65,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
   const history = useHistory()
   useEffect(() => {
     if (type === 'mypage/update') {
-      UserDetailStore.mypage();
+      UserDetailStore.mypage()
       getMyInfoDetailsForModify()
         .then(res => {
           const data = res.data.value
@@ -78,7 +78,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
           state.interestList = data.interestDTOList
         })
         .catch(e => {
-          alert(e)
+          message.error(e)
         })
     }
   }, [])
@@ -145,7 +145,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
       try {
         const res = await validateEmail(state.email)
         this.emailState = res.data.state === 'SUCCESS'
-        if(this.emailState) {
+        if (this.emailState) {
           this.emailValidationCode = res.data.value.dice
         }
         this.isCheckedEmail = true
@@ -231,7 +231,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
         state.emailState &&
         state.nicknameState &&
         // state.emailValidationCode === state.emailValidationInput &&
-        state.interestList.length!==0
+        state.interestList.length !== 0
       ) {
         const dataToSend = {
           email: state.email,
@@ -246,7 +246,9 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
         }
         UserStore.signup(dataToSend, history)
       } else {
-        message.error('입력하신 정보를 확인해주세요. 관심사는 최소 하나 이상 필요합니다.')
+        message.error(
+          '입력하신 정보를 확인해주세요. 관심사는 최소 하나 이상 필요합니다.'
+        )
       }
     }
   }
@@ -277,7 +279,10 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
           <StyledButton
             width={35}
             marginLeft={5}
-            disabled={type==='mypage/update' && UserDetailStore.data.email===state.email}
+            disabled={
+              type === 'mypage/update' &&
+              UserDetailStore.data.email === state.email
+            }
             onClick={e => {
               state.validateUserEmail()
               e.preventDefault()
@@ -331,7 +336,10 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
         <StyledButton
           width={35}
           marginLeft={5}
-          disabled={type==='mypage/update' && UserDetailStore.data.nickname===state.nickname}
+          disabled={
+            type === 'mypage/update' &&
+            UserDetailStore.data.nickname === state.nickname
+          }
           onClick={e => {
             state.validateUserNickname()
             e.preventDefault()
@@ -408,7 +416,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
             </FlexBetween>
           </div>
         )}
-        
+
         <StyledLabel htmlFor="city">지역</StyledLabel>
         <FlexBetween>
           <div>

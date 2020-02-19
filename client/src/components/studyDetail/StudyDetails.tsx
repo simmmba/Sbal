@@ -9,13 +9,9 @@ import { css, jsx } from '@emotion/core'
 import { Display } from '../Display'
 import { FaEye } from 'react-icons/fa'
 import StudyDetailStore from '../../stores/StudyDetailStore'
-import UserStore from '../../stores/UserStore'
-import { Descriptions, Modal } from 'antd'
-import { studyMember } from './StudyDetailTypes'
+import { Descriptions, Modal, message } from 'antd'
 import { useHistory } from 'react-router'
 import CreateForm from '../studyList/CreateForm'
-import { NavLink } from 'react-router-dom'
-import studyDetailStore from '../../stores/StudyDetailStore'
 
 const StudyDetails = () => {
   useEffect(() => {
@@ -260,7 +256,7 @@ const StudyDetails = () => {
                       title="스터디 수정"
                       visible={StudyDetailStore.modalVisible}
                       onCancel={handleCancel}
-                      footer={[<div key={StudyDetailStore.data.id}/>]}
+                      footer={[<div key={StudyDetailStore.data.id} />]}
                     >
                       <CreateForm />
                     </Modal>

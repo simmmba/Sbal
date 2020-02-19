@@ -869,7 +869,7 @@ const UserStore = observable<UserStoreType>({
     }
   },
 
-  logout() {
+  logout(history: H.History) {
     sessionStorage.removeItem('token')
     this.loginUser = {
       id: 0,
@@ -878,6 +878,7 @@ const UserStore = observable<UserStoreType>({
     sessionStorage.removeItem('id')
     this.token = null
     StudyStore.myStudy = []
+    history.push('/')
   },
 
   async edit(data: UpdateData, history: H.History) {
@@ -890,7 +891,7 @@ const UserStore = observable<UserStoreType>({
       this.isLoggingIn = false
       message.info('회원 정보가 수정되었습니다.', 2)
     } catch (e) {
-      alert('정보 수정 실패')
+      message.error('정보 수정 실패')
       this.isLoggingIn = false
     }
     history.push('/mypage')
@@ -902,7 +903,7 @@ const UserStore = observable<UserStoreType>({
     try {
       const res = await userAPI.getMyInfoDetailsForModify()
     } catch (e) {
-      alert('정보 조회에 실패했습니다.')
+      message.error('정보 조회에 실패했습니다.')
     }
   }
 })
