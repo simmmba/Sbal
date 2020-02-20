@@ -7,15 +7,15 @@ import { css, jsx } from '@emotion/core'
 import { Display } from '../Display'
 // import Button from '../common/Button'
 
-import {useHistory} from 'react-router'
-import {Progress, message} from 'antd'
+import { useHistory } from 'react-router'
+import { Progress, message } from 'antd'
 
 import UserStore from '../../stores/UserStore'
-
+import palette from '../../lib/styles/palette'
 
 const btn = css`
-  color: #5d5d5d;
-  background: #faecc5;
+  color: #747474;
+  background: ${palette.violet[1]};
   font-weight: bold;
   font-size: 12px;
   border-radius: 30px;
@@ -28,7 +28,7 @@ const btn = css`
   cursor: pointer;
 
   &:hover {
-    background: #ffe08c;
+    background: ${palette.violet[2]};
   }
 `
 
@@ -94,11 +94,12 @@ const nickname = css`
   font-size: 25px;
   font-weight: bold;
   padding-right: 20px;
+  color: ${palette.violet[9]};
 `
 
 const editBtn = css`
-  color: #5d5d5d;
-  background: #faecc5;
+  color: #747474;
+  background: ${palette.violet[1]};
   font-weight: bold;
   font-size: 12px;
   border-radius: 4px;
@@ -113,12 +114,38 @@ const editBtn = css`
   margin-top: 10px;
 
   &:hover {
-    background: #ffe08c;
+    background: ${palette.violet[2]};
+  }
+`
+
+const logoutBtn = css`
+  color: #747474;
+  background: ${palette.violet[1]};
+  font-weight: bold;
+  font-size: 12px;
+  border-radius: 4px;
+  width: 70px;
+  height: 25px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 5px;
+
+  &:hover {
+    background: ${palette.violet[2]};
+  }
+
+  @media screen and (min-width: 815px) {
+    display: none;
   }
 `
 
 const btnBox = css`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 `
@@ -151,10 +178,6 @@ const comment = css`
   flex-wrap: wrap;
   margin-top: 10px;
 `
-const flexEnd = css`
-  display: flex;
-  justify-content: flex-end;
-`
 const link = css`
   margin: 10px 0px 0px 0px;
   display: flex;
@@ -178,6 +201,33 @@ const link = css`
     display: none;
   }
 `
+
+const hoverTr = css`
+  text-align: center;
+  border-top: 2px solid #ddd;
+  border-bottom: 2px solid #ddd;
+  color: #5d5d5d;
+  padding: 5px;
+
+  &:hover {
+    background-color: ${palette.violet[0]};
+  }
+`
+
+const hover = css`
+  text-align: center;
+  border-top: 2px solid #ddd;
+  border-bottom: 2px solid #ddd;
+  color: #5d5d5d;
+  padding: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${palette.violet[0]};
+    font-weight: bold;
+  }
+`
+
 const UserDetail = () => {
   const history = useHistory()
   // JSON.stringify(UserStore.data);
@@ -193,26 +243,31 @@ const UserDetail = () => {
     inputFile?.click()
   }
 
-
-    const state = useLocalStore(() => ({
-        //filename : "http://13.124.98.149/images/"+ UserDetailStore.data.profilePhotoDir,
-        //http://13.124.98.149/images/default.png
-        //file : 'http://13.124.98.149/images/default.png',
-        onChange(f:any){
-            //this.filename  = "images/"+f[0].name;
-            //this.file = e.target.files[0];
-            //alert(f[0].type)
-            let type = f[0].name.substring(f[0].name.lastIndexOf(".")+1);
-            type = type.toLowerCase()
-            if(type != "jpg"&& type !="jpeg" && type != "gif" && type != "png" && type !="bmp") {
-              message.error("이미지 형식만 업로드 가능합니다.");
-              return;
-            }
-            const formData = new FormData();
-            formData.append('file', f[0])
-            UserDetailStore.upload(formData)
-        }
-    }))
+  const state = useLocalStore(() => ({
+    //filename : "http://13.124.98.149/images/"+ UserDetailStore.data.profilePhotoDir,
+    //http://13.124.98.149/images/default.png
+    //file : 'http://13.124.98.149/images/default.png',
+    onChange(f: any) {
+      //this.filename  = "images/"+f[0].name;
+      //this.file = e.target.files[0];
+      //alert(f[0].type)
+      let type = f[0].name.substring(f[0].name.lastIndexOf('.') + 1)
+      type = type.toLowerCase()
+      if (
+        type != 'jpg' &&
+        type != 'jpeg' &&
+        type != 'gif' &&
+        type != 'png' &&
+        type != 'bmp'
+      ) {
+        message.error('이미지 형식만 업로드 가능합니다.')
+        return
+      }
+      const formData = new FormData()
+      formData.append('file', f[0])
+      UserDetailStore.upload(formData)
+    }
+  }))
 
   return useObserver(() => (
     <Display>
@@ -242,8 +297,34 @@ const UserDetail = () => {
           </form>
           {UserDetailStore.data.id + '' === sessionStorage.getItem('id') && (
             <div css={btnBox}>
+              {UserDetailStore.data.id + '' ===
+                sessionStorage.getItem('id') && (
+                <div
+                  css={css`
+                    color: grey;
+                    font-size: 12px;
+                    margin-top: 7px;
+                    width: 180px;
+                    text-align: center;
+
+                    @media (max-width: 815px) {
+                      width: 100px;
+                    }
+                  `}
+                >
+                  * 프로필사진 클릭 → 사진 변경
+                </div>
+              )}
               <button css={editBtn} onClick={() => clickedUpdateButton()}>
                 정보 수정
+              </button>
+              <button
+                css={logoutBtn}
+                onClick={() => {
+                  UserStore.logout(history)
+                }}
+              >
+                로그아웃
               </button>
             </div>
           )}
@@ -295,89 +376,204 @@ const UserDetail = () => {
           </span>
         </div>
       </div>
-      <div css={flexEnd}>
-        <button
-          css={link}
-          onClick={() => {
-            UserStore.logout(history)
-          }}
-        >
-          로그아웃
-        </button>
-      </div>
+
       <div>
         {UserDetailStore.data.id + '' === sessionStorage.getItem('id') && (
           <div>
             <div>
-              <h2>내 스터디</h2>
+              <h2
+                css={css`
+                  color: ${palette.violet[9]};
+                  font-weight: bold;
+                `}
+              >
+                내 스터디
+                <span
+                  css={css`
+                    font-size: 12px;
+                    color: #5d5d5d;
+                  `}
+                >
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;👑내가 개설한 스터디
+                </span>
+              </h2>
+              {UserDetailStore.data.ledStudyList.length === 0 ? (
+                <div>&nbsp;&nbsp;&nbsp;&nbsp;현재 스터디가 없습니다.</div>
+              ) : (
+                <table css={table}>
+                  <tbody>
+                    <tr>
+                      <th css={th}> 상태</th>
+                      <th css={th}> 스터디명</th>
+                      <th css={th}> 진행 기간</th>
+                      <th css={th}> 인원</th>
+                    </tr>
+                    {UserDetailStore.data.ledStudyList.map(
+                      (ledStudy: LedStudy, index: number) => (
+                        <tr
+                          css={hoverTr}
+                          key={index}
+                          // onClick={() => {
+                          //   history.push(`study/details/${ledStudy.id}`)
+                          // }}
+                        >
+                          {ledStudy.state === 0 && <td css={td}> 모집 중 </td>}
+                          {ledStudy.state === 1 && <td css={td}> 진행 중 </td>}
+                          {ledStudy.state === 2 && <td css={td}> 종 료 </td>}
+                          <td
+                            css={hover}
+                            onClick={() => {
+                              history.push(`study/details/${ledStudy.id}`)
+                            }}
+                          >
+                            {' '}
+                            👑&nbsp; {ledStudy.title}{' '}
+                          </td>
+                          <td css={td}>
+                            {' '}
+                            {ledStudy.startDate} ~ {ledStudy.endDate}{' '}
+                          </td>
+                          <td css={td}>
+                            {' '}
+                            {ledStudy.joinedMemberCount}/
+                            {ledStudy.maxParticipants}{' '}
+                          </td>
+                        </tr>
+                      )
+                    )}
+                    {UserDetailStore.data.joinedStudyList.map(
+                      (joinedStudy: JoinedStudy, index: number) => (
+                        <tr css={hoverTr} key={index}>
+                          {joinedStudy.state === 1 &&
+                            joinedStudy.study.state === 0 && (
+                              <td css={td}> 모집 중 </td>
+                            )}
+                          {joinedStudy.state === 1 &&
+                            joinedStudy.study.state === 1 && (
+                              <td css={td}> 진행 중 </td>
+                            )}
+                          {joinedStudy.state === 1 &&
+                            joinedStudy.study.state === 2 && (
+                              <td css={td}> 종 료 </td>
+                            )}
+                          {joinedStudy.state === 1 && (
+                            <td
+                              css={hover}
+                              onClick={() => {
+                                history.push(
+                                  `study/details/${joinedStudy.study.id}`
+                                )
+                              }}
+                            >
+                              {' '}
+                              {joinedStudy.study.title}{' '}
+                            </td>
+                          )}
+                          {joinedStudy.state === 1 && (
+                            <td css={td}>
+                              {' '}
+                              {joinedStudy.study.startDate} ~{' '}
+                              {joinedStudy.study.endDate}{' '}
+                            </td>
+                          )}
+                          {joinedStudy.state === 1 && (
+                            <td css={td}>
+                              {' '}
+                              {joinedStudy.study.joinedMemberCount} /{' '}
+                              {joinedStudy.study.maxParticipants}{' '}
+                            </td>
+                          )}
+                        </tr>
+                      )
+                    )}
+                  </tbody>
+                </table>
+              )}
+            </div>
 
+            <h2
+              css={css`
+                color: ${palette.violet[9]};
+                font-weight: bold;
+              `}
+            >
+              스터디 요청
+            </h2>
+            {UserDetailStore.data.joinedStudyList.length === 0 ? (
+              <div>&nbsp;&nbsp;&nbsp;&nbsp;요청중인 스터디가 없습니다.</div>
+            ) : (
               <table css={table}>
                 <tbody>
                   <tr>
-                    <th css={th} />
+                    <th css={th}>상태</th>
                     <th css={th}> 스터디명</th>
                     <th css={th}> 진행 기간</th>
-                    <th css={th}> 인원</th>
+                    <th css={th} />
                   </tr>
-                  {UserDetailStore.data.ledStudyList.map(
-                    (ledStudy: LedStudy, index: number) => (
-                      <tr
-                        key={index}
-                        onClick={() => {
-                          history.push(`study/details/${ledStudy.id}`)
-                        }}
-                      >
-                        {ledStudy.state === 0 && <td css={td}> 모집 중 </td>}
-                        {ledStudy.state === 1 && <td css={td}> 진행 중 </td>}
-                        {ledStudy.state === 2 && <td css={td}> 종 료 </td>}
-                        <td css={td}> 👑&nbsp; {ledStudy.title} </td>
-                        <td css={td}>
-                          {' '}
-                          {ledStudy.startDate} ~ {ledStudy.endDate}{' '}
-                        </td>
-                        <td css={td}>
-                          {' '}
-                          {ledStudy.joinedMemberCount}/
-                          {ledStudy.maxParticipants}{' '}
-                        </td>
-                      </tr>
-                    )
-                  )}
+
                   {UserDetailStore.data.joinedStudyList.map(
                     (joinedStudy: JoinedStudy, index: number) => (
                       <tr
+                        css={hoverTr}
                         key={index}
-                        onClick={() => {
-                          history.push(`study/details/${joinedStudy.study.id}`)
-                        }}
+                        // onClick={() => {
+                        //   history.push(`study/details/${joinedStudy.study.id}`)
+                        // }}
                       >
-                        {joinedStudy.state === 1 &&
-                          joinedStudy.study.state === 0 && (
-                            <td css={td}> 모집 중 </td>
-                          )}
-                        {joinedStudy.state === 1 &&
-                          joinedStudy.study.state === 1 && (
-                            <td css={td}> 진행 중 </td>
-                          )}
-                        {joinedStudy.state === 1 &&
-                          joinedStudy.study.state === 2 && (
-                            <td css={td}> 종 료 </td>
-                          )}
-                        {joinedStudy.state === 1 && (
-                          <td css={td}> {joinedStudy.study.title} </td>
+                        {joinedStudy.state === 0 && <td css={td}> 요청 중 </td>}
+                        {joinedStudy.state === 2 && <td css={td}> 거절 </td>}
+                        {(joinedStudy.state === 0 ||
+                          joinedStudy.state === 2) && (
+                          <td
+                            css={hover}
+                            onClick={() => {
+                              history.push(
+                                `study/details/${joinedStudy.study.id}`
+                              )
+                            }}
+                          >
+                            {' '}
+                            {joinedStudy.study.title}{' '}
+                          </td>
                         )}
-                        {joinedStudy.state === 1 && (
+                        {(joinedStudy.state === 0 ||
+                          joinedStudy.state === 2) && (
                           <td css={td}>
                             {' '}
                             {joinedStudy.study.startDate} ~{' '}
                             {joinedStudy.study.endDate}{' '}
                           </td>
                         )}
-                        {joinedStudy.state === 1 && (
+                        {joinedStudy.state === 0 && (
                           <td css={td}>
-                            {' '}
-                            {joinedStudy.study.joinedMemberCount}/
-                            {joinedStudy.study.maxParticipants}{' '}
+                            <button
+                              css={btn}
+                              onClick={() => {
+                                UserDetailStore.deleteStudyMember(
+                                  joinedStudy.study.id,
+                                  index
+                                )
+                              }}
+                            >
+                              {' '}
+                              요청취소{' '}
+                            </button>{' '}
+                          </td>
+                        )}
+                        {joinedStudy.state === 2 && (
+                          <td css={td}>
+                            <button
+                              css={btn}
+                              onClick={() => {
+                                UserDetailStore.deleteStudyMember(
+                                  joinedStudy.study.id,
+                                  index
+                                )
+                              }}
+                            >
+                              {' '}
+                              삭제하기{' '}
+                            </button>
                           </td>
                         )}
                       </tr>
@@ -385,76 +581,7 @@ const UserDetail = () => {
                   )}
                 </tbody>
               </table>
-            </div>
-
-            <h2>스터디 요청</h2>
-
-            <table css={table}>
-              <tbody>
-                <tr>
-                  <th css={th} />
-                  <th css={th}> 스터디명</th>
-                  <th css={th}> 진행 기간</th>
-                  <th css={th} />
-                </tr>
-
-                {UserDetailStore.data.joinedStudyList.map(
-                  (joinedStudy: JoinedStudy, index: number) => (
-                    <tr
-                      key={index}
-                      onClick={() => {
-                        history.push(`study/details/${joinedStudy.study.id}`)
-                      }}
-                    >
-                      {joinedStudy.state === 0 && <td css={td}> 요청 중 </td>}
-                      {joinedStudy.state === 2 && <td css={td}> 거 절 </td>}
-                      {(joinedStudy.state === 0 || joinedStudy.state === 2) && (
-                        <td css={td}> {joinedStudy.study.title} </td>
-                      )}
-                      {(joinedStudy.state === 0 || joinedStudy.state === 2) && (
-                        <td css={td}>
-                          {' '}
-                          {joinedStudy.study.startDate} ~{' '}
-                          {joinedStudy.study.endDate}{' '}
-                        </td>
-                      )}
-                      {joinedStudy.state === 0 && (
-                        <td css={td}>
-                          <button
-                            css={btn}
-                            onClick={() => {
-                              UserDetailStore.deleteStudyMember(
-                                joinedStudy.study.id,
-                                index
-                              )
-                            }}
-                          >
-                            {' '}
-                            요청취소{' '}
-                          </button>{' '}
-                        </td>
-                      )}
-                      {joinedStudy.state === 2 && (
-                        <td css={td}>
-                          <button
-                            css={btn}
-                            onClick={() => {
-                              UserDetailStore.deleteStudyMember(
-                                joinedStudy.study.id,
-                                index
-                              )
-                            }}
-                          >
-                            {' '}
-                            삭제하기{' '}
-                          </button>
-                        </td>
-                      )}
-                    </tr>
-                  )
-                )}
-              </tbody>
-            </table>
+            )}
           </div>
         )}
       </div>

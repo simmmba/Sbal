@@ -16,7 +16,6 @@ declare global {
 let map: any
 
 const MapView = () => {
-
   useEffect(() => {
     UserDetailStore.mypage()
     let container = document.getElementById('map')
@@ -278,7 +277,7 @@ const MapView = () => {
   const searchStyle = css`
     display: flex;
     justidy-content: space-around;
-    margin: 10px 0;
+    margin: 50px 0 10px 0;
   `
   const buttonStyle = css`
     width: 59%;

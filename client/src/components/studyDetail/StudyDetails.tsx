@@ -84,7 +84,7 @@ const StudyDetails = () => {
     border-radius: 4px;
     padding: 5px 15px 5px 15px;
     margin: 0px 0px 0px 2px;
-    width: 85px;
+    width: 90px;
     height: 30px;
     border: none;
     display: flex;
@@ -194,7 +194,7 @@ const StudyDetails = () => {
                     StudyDetailStore.insertMember(StudyDetailStore.data.id)
                   }}
                 >
-                  신청
+                  가입신청
                   {/* {StudyDetailStore.data.state === 0 ? '모집' : '신청'} */}
                 </button>
                 ) : (
