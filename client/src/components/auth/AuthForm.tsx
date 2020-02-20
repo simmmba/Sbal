@@ -71,7 +71,7 @@ function AuthForm({ type, history }: RouteComponentProps & AuthFormProps) {
         <form onSubmit={handleSubmit}>
           <StyledLabel htmlFor="email">이메일 아이디</StyledLabel>
           <StyledInput
-            placeholder="ex) sbal123@email.com"
+            placeholder="이메일 아이디를 입력하세요"
             autoComplete="email"
             name="email"
             value={state.email}

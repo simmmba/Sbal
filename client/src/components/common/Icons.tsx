@@ -331,6 +331,28 @@ const MapColorSvg = () => (
   </svg>
 )
 
+const RegisterSvg = () => (
+  <svg
+    to="1582157199809"
+    className="icon"
+    viewBox="0 0 1024 1024"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    p-id="7095"
+    xmlnsXlink="http://www.w3.org/1999/xlink"
+    width="30"
+    height="30"
+  >
+    <defs>
+      <style type="text/css"></style>
+    </defs>
+    <path
+      d="M903.43424 265.60512a30.72 30.72 0 0 1-30.72 30.72h-43.37664v43.39712a30.72 30.72 0 1 1-61.44 0v-43.39712h-43.39712a30.72 30.72 0 1 1 0-61.44h43.39712v-43.37664a30.72 30.72 0 1 1 61.44 0v43.37664h43.37664a30.72 30.72 0 0 1 30.72 30.72z m-90.05056 453.34528l-216.22784-67.54304c46.73536-55.62368 75.12064-143.872 75.12064-226.4064 0-124.90752-71.20896-205.59872-181.37088-205.59872s-181.37088 80.6912-181.37088 205.59872c0 82.5344 28.38528 170.78272 75.12064 226.4064l-216.22784 67.54304a51.2 51.2 0 0 0-35.9424 48.86528v78.35648a51.2 51.2 0 0 0 51.2 51.2h614.44096a51.2 51.2 0 0 0 51.2-51.2v-78.35648a51.22048 51.22048 0 0 0-35.9424-48.86528z"
+      p-id="7096"
+    ></path>
+  </svg>
+)
+
 export const CalenderIcon = (props: any) => (
   <Icon component={CalenderSvg} style={{ background: 'white' }} {...props} />
 )
@@ -369,4 +391,8 @@ export const MyinfoIcon = (props: any) => (
 
 export const MyinfoColorIcon = (props: any) => (
   <Icon component={MyinfoColorSvg} {...props} />
+)
+
+export const RegisterIcon = (props: any) => (
+  <Icon component={RegisterSvg} {...props} />
 )

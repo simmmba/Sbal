@@ -31,7 +31,7 @@ const NavFixBlock = styled.div`
   background: ${palette.violet[4]};
   width: 100%;
   z-index: 10;
-
+  height: 4rem;
   top: 0;
   left: 0;
   -webkit-box-shadow: 0 1px 2px rgba(57, 63, 72, 0.3);
