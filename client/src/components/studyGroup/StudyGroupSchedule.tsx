@@ -293,12 +293,12 @@ const StudyGroupSchedule = () => {
 
                 {StudyStore.loginUser.id === StudyStore.studyGroup.leader.id ? (
                   <div css={right}>
-                    <ScheduleEdit sIndex={Number(scheduleIndex)} />
+                    <ScheduleEdit sIndex={Number(pageSize * (pageNumber - 1) + scheduleIndex)} />
                     &nbsp;&nbsp;
                     <button
                       css={btn}
                       onClick={() =>
-                        clickDeleteSchedule(s.id, Number(scheduleIndex))
+                        clickDeleteSchedule(s.id, Number(pageSize * (pageNumber - 1) + scheduleIndex))
                       }
                     >
                       삭제
