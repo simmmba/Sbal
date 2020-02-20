@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -211,15 +212,17 @@ public class UserController {
     }
 
     @PostMapping("/profileUpload")
-    public ResponseEntity<CommonResponse> profileUpload(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+    public ResponseEntity<CommonResponse> profileUpload(@RequestBody MultipartFile file, HttpServletRequest request) {
         try {
+            log.error(file.getName());
+            log.error(StringUtils.cleanPath(file.getOriginalFilename()));
             int loginUserId = jwtService.getLoginUserId(request);
             User user = userService.findById(loginUserId);
-            System.out.println(user);
             if (!user.getProfilePhotoDir().equals("default.png")) {
                 profileService.deleteFile(user.getProfilePhotoDir());
             }
             String fileName = profileService.saveFile(file, user.getId() + "");
+            log.error("file name: {}", fileName);
             if(fileName == null) fileName = "default.png";
             user.setProfilePhotoDir(fileName);
 

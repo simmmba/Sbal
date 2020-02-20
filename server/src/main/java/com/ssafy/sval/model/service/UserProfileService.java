@@ -29,6 +29,8 @@ public class UserProfileService {
         if(fileName.equals("default.png")) return fileName;
 
         fileName  = userId + fileName;
+        System.out.println(fileName);
+        System.out.println(this.fileLocation);
         try {
             if (fileName.contains("..")) return null;
 
