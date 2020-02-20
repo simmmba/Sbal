@@ -8,7 +8,8 @@ import {
   MapIcon,
   MapColorIcon,
   MyinfoIcon,
-  MyinfoColorIcon
+  MyinfoColorIcon,
+  RegisterIcon
 } from '../components/common/Icons'
 import { useHistory, useLocation } from 'react-router'
 
@@ -111,7 +112,7 @@ function NavBarBottom() {
             handleClick('/signup/form')
           }}
         >
-          {pathname === '/map' ? <MapColorIcon /> : <MapIcon />}
+          <RegisterIcon />
         </NavButton>
       )}
       {sessionStorage.token ? (

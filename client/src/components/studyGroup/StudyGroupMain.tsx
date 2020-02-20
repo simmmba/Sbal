@@ -34,16 +34,6 @@ const StudyGroupMain = ({ id }: { id: number }) => {
     }
   `
 
-  // const title = css`
-  //   /* width: 100%; */
-  //   font-weight: bold;
-  //   font-size: 30px;
-  //   color: #113000;
-  //   text-align: left;
-  //   /* border: 1px solid black; */
-  //   margin-left: 10px;
-  // `
-
   const total = css`
     display: flex;
     @media screen and (max-width: 815px) {
@@ -62,10 +52,15 @@ const StudyGroupMain = ({ id }: { id: number }) => {
     width: 100%;
     margin-left: 25px;
     min-height: 360px;
+    @media screen and (max-width: 815px) {
+      margin-left: 0;
+    }
   `
 
   const menu = css`
     margin-top: 50px;
+    display: flex;
+    justify-content: center;
     @media screen and (max-width: 815px) {
       margin-top: 0;
     }
@@ -113,7 +108,7 @@ const StudyGroupMain = ({ id }: { id: number }) => {
                     style={{ fontSize: 19 }}
                     theme="twoTone"
                   />
-                  스케줄
+                  {state.width >= 815 ? '스케줄' : ''}
                 </NavLink>
               </Menu.Item>
               <Menu.Item key="board">
@@ -123,13 +118,13 @@ const StudyGroupMain = ({ id }: { id: number }) => {
                     style={{ fontSize: 19 }}
                     theme="twoTone"
                   />
-                  게시판
+                  {state.width >= 815 ? '게시판' : ''}
                 </NavLink>
               </Menu.Item>
               <Menu.Item key="memberinfo">
                 <NavLink to={`/study/${StudyStore.studyGroup.id}/member`}>
                   <Icon type="smile" style={{ fontSize: 19 }} theme="twoTone" />
-                  멤버 정보
+                  {state.width >= 815 ? '멤버 정보' : ''}
                 </NavLink>
               </Menu.Item>
               <Menu.Item key="studyinfo">
@@ -139,7 +134,7 @@ const StudyGroupMain = ({ id }: { id: number }) => {
                     style={{ fontSize: 19 }}
                     theme="twoTone"
                   />
-                  스터디 정보
+                  {state.width >= 815 ? '스터디 정보' : ''}
                 </NavLink>
               </Menu.Item>
             </Menu>
