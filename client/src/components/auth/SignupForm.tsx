@@ -185,16 +185,32 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
     const query = qs.parse(location.search, { ignoreQueryPrefix: true })
     const kakaoAccessToken = query.code
     const res = await getSocialData(kakaoAccessToken, 'kakao')
-    const { email, nickname, socialLogin } = res.data.value
+    alert(res)
+    if (res.data.value.token) {
+      UserStore.isLoggingIn = true
+      UserStore.loginUser = {
+        id: res.data.value.id,
+        nickname: res.data.value.nickname
+      }
+      const token = res.headers['jwt-auth-token']
+      sessionStorage.setItem('token', token)
+      const id = res.data.value.id
+      sessionStorage.setItem('id', id)
+      UserStore.token = token
+      UserStore.isLoggingIn = false
+      message.info('로그인 되었습니다.', 2)
+      history.push('/')
+    } else {
+      const { email, nickname, socialLogin } = res.data.value
 
-    if (email) {
-      // dispatch({ type: 'CREATE', field: 'email', value: email })
-    }
-    if (nickname) {
-      // dispatch({ type: 'CREATE', field: 'nickname', value: nickname })
-    }
-    if (socialLogin) {
-      // something
+      if (email) {
+        state.email = email
+      }
+      if (nickname) {
+        state.nickname = nickname
+      }
+      if (socialLogin) {
+      }
     }
   }
   if (type === 'signup/oauth') {
