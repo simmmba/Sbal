@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { useObserver, useLocalStore } from 'mobx-react'
 import UserDetailStore from '../../stores/UserDetailStore'
 import { Interest, LedStudy, JoinedStudy } from './UserDetailTypes'
@@ -8,7 +7,6 @@ import { css, jsx } from '@emotion/core'
 import { Display } from '../Display'
 // import Button from '../common/Button'
 import { useHistory } from 'react-router'
-import { Link } from 'react-router-dom'
 import { Progress } from 'antd'
 import UserStore from '../../stores/UserStore'
 
@@ -167,6 +165,7 @@ const link = css`
   border: none;
   /* border: 2px solid #e5dbff; */
   background: #e5dbff;
+  cursor: pointer;
 
   &:hover {
     background-color: #f3f0ff;
