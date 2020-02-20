@@ -49,6 +49,11 @@ const StudyDetails = () => {
     color: #113000;
     text-align: left;
     margin-left: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
   `
 
   const hit = css`
@@ -75,6 +80,27 @@ const StudyDetails = () => {
     padding: 5px 15px 5px 15px;
     margin: 0px 0px 0px 2px;
     width: 100px;
+    height: 30px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #cef279;
+    }
+  `
+
+  const move = css`
+    color: #4c4c4c;
+    background: #e4f7ba;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 4px;
+    padding: 5px 15px 5px 15px;
+    margin: 0px 0px 0px 2px;
+    /* width: 100px; */
     height: 30px;
     border: none;
     display: flex;
@@ -124,16 +150,17 @@ const StudyDetails = () => {
           <br />
           <div css={top}>
             <div css={main}>
-              <div css={hit}>
+              {/* <div css={hit}>
                 <FaEye size="18" color="#747474" />
                 {StudyDetailStore.data.hits}
-              </div>
+              </div> */}
               <div css={title}>
                 {/* <NavLink css={link} to={`/study/${studyDetailStore.data.id}`}> */}
-                {StudyDetailStore.data.title}
+                {StudyDetailStore.data.title}&nbsp;&nbsp;
                 {/* </NavLink> */}
                 {StudyDetailStore.isMember() && (
                   <button
+                    css={move}
                     onClick={() => {
                       StudyDetailStore.goStudyGroup(
                         StudyDetailStore.data.id,
@@ -141,8 +168,7 @@ const StudyDetails = () => {
                       )
                     }}
                   >
-                    {' '}
-                    스터디그룹{' '}
+                    그룹 페이지로 이동 🏃‍♀️
                   </button>
                 )}
               </div>
