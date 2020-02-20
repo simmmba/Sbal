@@ -15,6 +15,7 @@ const studyRank = css`
 `
 
 function MainStudyList() {
+  
   useEffect(() => {
     StudyStore.fetchMainStudyList()
   }, [])

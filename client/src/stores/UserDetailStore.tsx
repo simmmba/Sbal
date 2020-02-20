@@ -3,6 +3,7 @@ import * as userDetail from '../lib/api/userDetail'
 import { UserDetailStoreType } from '../components/userDetail/UserDetailTypes'
 import * as studyAPI from '../lib/api/study'
 import * as H from 'history'
+import { message } from 'antd'
 
 const UserDetailStore: UserDetailStoreType = observable({
   // isLoggingIn : false,
@@ -26,8 +27,11 @@ const UserDetailStore: UserDetailStoreType = observable({
   //city, town, evaluation, profilePhotoDir, socialLogin, interestDTOList, ledStudyList, joinedStudyList}
   async deleteStudyMember(studyId: number, idx: number) {
     try {
-      const res = await studyAPI.studyDelete(studyId)
-      this.data.joinedStudyList.splice(idx, 1)
+      if(window.confirm("목록에서 삭제 하시겠습니까?")){
+        const res = await studyAPI.studyDelete(studyId)
+        this.data.joinedStudyList.splice(idx, 1)
+      } else return;
+      
     } catch (error) {}
   },
   async mypage() {
@@ -43,7 +47,7 @@ const UserDetailStore: UserDetailStoreType = observable({
         }
       }
     } catch (error) {
-      alert('사용자 정보를 가져오지 못했습니다.')
+      message.error('사용자 정보를 가져오지 못했습니다.')
     }
   },
 
