@@ -240,7 +240,9 @@ const StudyDetails = () => {
                     <button
                       css={btn}
                       onClick={() => {
-                        StudyDetailStore.studyTodo()
+                        if(window.confirm('스터디를 진행하시겠습니까?')) {
+                          StudyDetailStore.studyTodo()
+                        }
                       }}
                     >
                       진행
@@ -343,7 +345,7 @@ const StudyDetails = () => {
               </Descriptions>
             </div>
             <div css={bottom}>
-              {StudyDetailStore.isMember() ? <StudyMember /> : <div></div>}
+              {StudyDetailStore.isMember() ? <StudyMember /> : <div/>}
               {StudyDetailStore.data.leader.id + '' ===
                 sessionStorage.getItem('id') && <StudyRequest />}
             </div>
