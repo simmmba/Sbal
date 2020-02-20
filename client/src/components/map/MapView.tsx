@@ -276,7 +276,7 @@ const MapView = () => {
   `
   const searchStyle = css`
     display: flex;
-    justidy-content: space-around;
+    justify-content: space-around;
     margin: 50px 0 10px 0;
   `
   const buttonStyle = css`
@@ -285,10 +285,15 @@ const MapView = () => {
     font-weight: bold;
     border: 1px solid white;
     border-radius: 5px;
-    background: ${palette.violet[5]};
+    background: ${palette.violet[4]};
     padding: 10px 0;
     color: white;
     cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: ${palette.violet[3]};
+    }
   `
 
   return useObserver(() => (
@@ -317,7 +322,16 @@ const MapView = () => {
       <div className="map_wrap">
         <div id="map" css={mapcss}></div>
         <div id="menu_wrap" className="bg_white">
-          <div>
+          <div
+            css={css`
+              text-align: center;
+              font-size: 13px;
+              font-weight: bold;
+              margin-top: 10px;
+              margin-bottom: 10px;
+              background-color: white;
+            `}
+          >
             {UserDetailStore.data.city} {UserDetailStore.data.town} 기준 검색
             결과입니다...
           </div>
