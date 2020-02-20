@@ -9,7 +9,7 @@ import {css, jsx} from '@emotion/core'
 import {Display} from '../Display'
 // import Button from '../common/Button'
 import {useHistory} from 'react-router'
-import {Progress} from 'antd'
+import {Progress, message} from 'antd'
 
 const UserDetail = () => {
     const history = useHistory()
@@ -173,6 +173,12 @@ const UserDetail = () => {
             //this.filename  = "images/"+f[0].name;
             //this.file = e.target.files[0];
             //alert(f[0].type)
+            let type = f[0].name.substring(f[0].name.lastIndexOf(".")+1);
+            type = type.toLowerCase()
+            if(type != "jpg"&& type !="jpeg" && type != "gif" && type != "png" && type !="bmp") {
+              message.error("이미지 형식만 업로드 가능합니다.");
+              return;
+            }
             const formData = new FormData();
             formData.append('file', f[0])
             UserDetailStore.upload(formData)

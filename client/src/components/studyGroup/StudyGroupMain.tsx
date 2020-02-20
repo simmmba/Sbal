@@ -14,6 +14,7 @@ import { useEffect } from 'react'
 import { useLocalStore, useObserver } from 'mobx-react'
 import StudyStore from '../../stores/StudyStore'
 import ScrollToTop from '../ScrollToTop'
+import StudyMap from './StudyMap'
 
 const StudyGroupMain = ({ id }: { id: number }) => {
   useEffect(() => {
@@ -132,13 +133,13 @@ const StudyGroupMain = ({ id }: { id: number }) => {
                 </NavLink>
               </Menu.Item>
               <Menu.Item key="studyinfo">
-                <NavLink to={`/study/details/${StudyStore.studyGroup.id}`}>
+                <NavLink to={`/study/${StudyStore.studyGroup.id}/map`}>
                   <Icon
                     type="info-circle"
                     style={{ fontSize: 19 }}
                     theme="twoTone"
                   />
-                  스터디 정보
+                  스터디 장소
                 </NavLink>
               </Menu.Item>
             </Menu>
@@ -176,6 +177,11 @@ const StudyGroupMain = ({ id }: { id: number }) => {
               <Route
                 path={`/study/${StudyStore.studyGroup.id}/newBoard`}
                 component={StudyGroupBoardInsert}
+                exact={true}
+              />
+              <Route
+                path={`/study/:id/map`}
+                component={StudyMap}
                 exact={true}
               />
             </Switch>

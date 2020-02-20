@@ -190,41 +190,7 @@ const StudyDetails = () => {
                       css={btn}
                       onClick={() => {
                         StudyDetailStore.deleteStudyMember(
-                          //           StudyDetailStore.data.id
-                          //         )
-                          //       }}
-                          //     >
-                          //       신청 취소
-                          //       {/* {StudyDetailStore.data.state === 0 ? '모집' : '신청'} */}
-                          //     </button>
-                          //   )}
-                          // {sessionStorage.getItem('id') ===
-                          //   StudyDetailStore.data.leader.id + '' &&
-                          //   StudyDetailStore.data.state !== 1 && (
-                          //     <button
-                          //       css={btn}
-                          //       onClick={() => {
-                          //         StudyDetailStore.studyTodo()
-                          //       }}
-                          //     >
-                          //       진행
-                          //     </button>
-                          //   )}
-                          // {sessionStorage.getItem('id') ===
-                          //   StudyDetailStore.data.leader.id + '' && (
-                          //   <div>
-                          //     <button css={btn} onClick={openModal}>
-                          //       수정
-                          //     </button>
-                          //     <Modal
-                          //       title="스터디 수정"
-                          //       visible={StudyDetailStore.modalVisible}
-                          //       onCancel={handleCancel}
-                          //       footer={[<div></div>]}
-                          //     >
-                          //       <CreateForm />
-                          //     </Modal>
-                          //   </div>
+                       
                           StudyDetailStore.data.id,
                           1
                         )
@@ -236,16 +202,29 @@ const StudyDetails = () => {
                   )}
                 {sessionStorage.getItem('id') ===
                   StudyDetailStore.data.leader.id + '' &&
-                  StudyDetailStore.data.state !== 1 && (
+                  StudyDetailStore.data.state === 0  && (
                     <button
                       css={btn}
                       onClick={() => {
-                        StudyDetailStore.studyTodo()
+                        StudyDetailStore.studyTodo(1)
                       }}
                     >
                       진행
                     </button>
                   )}
+                  {sessionStorage.getItem('id') ===
+                  StudyDetailStore.data.leader.id + '' &&
+                  StudyDetailStore.data.state === 1  && (
+                    <button
+                      css={btn}
+                      onClick={() => {
+                        StudyDetailStore.studyTodo(2)
+                      }}
+                    >
+                      종료
+                    </button>
+                  )}
+
                 {sessionStorage.getItem('id') ===
                   StudyDetailStore.data.leader.id + '' && (
                   <div>
