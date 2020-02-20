@@ -1,12 +1,7 @@
 /**@jsx jsx */
-import React from 'react'
 import styled from '@emotion/styled'
 import { css, jsx } from '@emotion/core'
-import { Link } from 'react-router-dom'
 
-const Spacer = styled.div`
-  height: 4rem;
-`
 const WrapperDiv = styled.div`
   background: #24282b;
   width: 100%;

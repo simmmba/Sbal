@@ -5,12 +5,10 @@ import { Icon, Empty, Modal, Progress } from 'antd'
 import { StudyMember } from './StudyGroupType'
 import { useObserver } from 'mobx-react'
 import StudyStore from '../../stores/StudyStore'
-import { useHistory } from 'react-router'
 import UserDetailStore from '../../stores/UserDetailStore'
 import { Interest } from '../userDetail/UserDetailTypes'
 
 const StudyGroupMember = () => {
-  const history = useHistory()
 
   const main = css`
     display: flex;

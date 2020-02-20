@@ -2,10 +2,8 @@ import { observable } from 'mobx'
 import * as userDetail from '../lib/api/userDetail'
 import {
   UserDetailStoreType,
-  UserInfoType
 } from '../components/userDetail/UserDetailTypes'
 import * as studyAPI from '../lib/api/study'
-import { userInfo } from 'os'
 import * as H from 'history'
 
 const UserDetailStore: UserDetailStoreType = observable({
@@ -50,6 +48,18 @@ const UserDetailStore: UserDetailStoreType = observable({
       alert('사용자 정보를 가져오지 못했습니다.')
     }
   },
+
+  async upload(formdata : FormData){
+    try{
+      console.log(formdata.get('file'))
+      const res = await userDetail.upload(formdata)
+      console.log(res)
+      this.mypage()
+    } catch(error){
+
+    }
+  },
+
 
   goUserInfo(userId: number, history:H.History){
     history.push(`/UserInfopage/${userId}`)

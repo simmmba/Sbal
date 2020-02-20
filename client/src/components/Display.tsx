@@ -1,6 +1,5 @@
 import React from 'react'
 /**@jsx jsx */
-import { css, jsx } from '@emotion/core'
 import styled from '@emotion/styled'
 
 export const Display = styled.div`

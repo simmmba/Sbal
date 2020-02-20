@@ -21,6 +21,7 @@ export type UserDetailStoreType = {
     goUserInfo: (userId: number, history : H.History) => void
     userInfo: (userId : number) => void
     deleteStudyMember: (studyId : number, idx : number)=> void
+    upload: (formdata: FormData) => void
 }
 export type Interest = {
     lcategory: string

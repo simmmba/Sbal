@@ -97,7 +97,7 @@ const NavBar = () => {
   const history = useHistory()
   const logout = useCallback(() => {
     UserStore.logout(history)
-  }, [])
+  }, [history])
 
   return useObserver(() => (
     <>

@@ -193,8 +193,8 @@ const StudyGroupSchedule = () => {
       })
     })
 
-    setScoreVisible(true)
-    setAttendanceIndex(scheduleIndex)
+    setScoreVisible(true);
+    setAttendanceIndex(scheduleIndex);
   }
 
   const handleScoreOk = () => {

@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 /**@jsx jsx */
 import {css, jsx} from '@emotion/core'
-import {Icon, Modal, DatePicker} from 'antd'
+import { Modal, DatePicker } from 'antd'
 import TextArea from 'antd/lib/input/TextArea'
 import StudyStore from "../../stores/StudyStore";
 import {useLocalStore} from 'mobx-react';
@@ -9,11 +9,11 @@ import {CreatedOrUpdatedSchedule} from "./StudyGroupType";
 import moment from 'moment'
 const ScheduleEdit = ({sIndex}: { sIndex: number }) => {
 
-    const icon = css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  `
+  //   const icon = css`
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  // `
 
     const btn = css`
     background-color: #fff;

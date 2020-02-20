@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useObserver } from 'mobx-react'
+import { useObserver, useLocalStore } from 'mobx-react'
 import UserDetailStore from '../../stores/UserDetailStore'
 import { Interest, LedStudy, JoinedStudy } from './UserDetailTypes'
 import React from 'react'
@@ -137,12 +137,12 @@ const UserDetail = () => {
     flex-wrap: wrap;
   `
 
-  const third = css`
-    display: flex;
-    font-size: 16px;
-    flex-wrap: wrap;
-    margin-bottom: 10px;
-  `
+  //   const third = css`
+  //   display: flex;
+  //   font-size: 16px;
+  //   flex-wrap: wrap;
+  //   margin-bottom: 10px;
+  // `
 
   const comment = css`
     display: flex;
@@ -156,11 +156,54 @@ const UserDetail = () => {
     history.push('/mypage/update')
   }
 
+  const dis = css`
+    display: none;
+  `
+  const inputFile = () => {
+    let inputFile = document.getElementById('inputFile')
+    inputFile?.click()
+  }
+
+  const state = useLocalStore(() => ({
+    //filename : "http://13.124.98.149/images/"+ UserDetailStore.data.profilePhotoDir,
+    //http://13.124.98.149/images/default.png
+    //file : 'http://13.124.98.149/images/default.png',
+    onChange(f: any) {
+      //this.filename  = "images/"+f[0].name;
+      //this.file = e.target.files[0];
+      //alert(f[0].type)
+      const formData = new FormData()
+      formData.append('file', f[0])
+      UserDetailStore.upload(formData)
+    }
+  }))
+
   return useObserver(() => (
     <Display>
       <div css={top}>
         <div css={left}>
-          <img css={img} src="http://i02a306.p.ssafy.io/images/default.png" />
+          <form id="form">
+            <label
+              onClick={() => {
+                inputFile()
+              }}
+            >
+              <img
+                css={img}
+                src={
+                  'http://13.124.98.149/images/' +
+                  UserDetailStore.data.profilePhotoDir
+                }
+              />
+            </label>
+            <input
+              id="inputFile"
+              css={dis}
+              name="file"
+              type="file"
+              onChange={e => state.onChange(e.target.files)}
+            ></input>
+          </form>
           {UserDetailStore.data.id + '' === sessionStorage.getItem('id') && (
             <div css={btnBox}>
               <button css={editBtn} onClick={() => clickedUpdateButton()}>
