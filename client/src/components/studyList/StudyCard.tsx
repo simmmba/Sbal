@@ -149,7 +149,7 @@ function StudyCard({
             css={css`
               margin-right: 5px;
             `}
-            src={study.leader.profilePhotoDir}
+            src={"http://13.124.98.149/images/"+ study.leader.profilePhotoDir}
           />
           <span>{study.leader.nickname} (리더)</span>
         </div>
