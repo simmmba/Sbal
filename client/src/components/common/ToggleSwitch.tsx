@@ -38,7 +38,8 @@ const SwitchStyle = css`
     border-radius: 50%;
   }
   & input:checked + span {
-    background-color: ${palette.yellow[7]};
+    /* background-color: ${palette.yellow[7]}; */
+    background-color: #845ef7;
   }
 
   & input:checked + span:after {

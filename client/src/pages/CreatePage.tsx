@@ -5,7 +5,7 @@ import { authCheck, loadToken } from '../utils/authCheck'
 import CreateForm from '../components/studyList/CreateForm'
 
 const StyledContainer = styled.div`
-  background: #f0f5ff;
+  background: #f3f0ff;
   display: flex;
   flex-direction: column;
   justify-content: center;

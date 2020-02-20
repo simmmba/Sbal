@@ -7,7 +7,7 @@ import { message } from 'antd'
 import { FilterData } from '../components/studyList/ListTypes'
 import {
   loginUser,
-  StudyGroupType,
+  StudyGroupType
 } from '../components/studyGroup/StudyGroupType'
 
 const StudyStore = observable({
@@ -51,7 +51,7 @@ const StudyStore = observable({
       this.recentStudy = recentlyEnrolled
       this.famousStudy = mostHits
     } catch (error) {
-      alert('데이터를 로드하는 중 요류가 발생했습니다.')
+      message.error('데이터를 로드하는 중 요류가 발생했습니다.')
     }
   },
 
@@ -82,7 +82,7 @@ const StudyStore = observable({
 
       this.studyGroup = res.data.value
     } catch (e) {
-      alert('조회 중 오류가 발생했습니다.')
+      message.error('조회 중 오류가 발생했습니다.')
     }
   },
 
@@ -92,9 +92,9 @@ const StudyStore = observable({
       if (res.data.state === 'SUCCESS') {
         this.studyGroup.studyScheduleDTOList.splice(Number(index), 1)
       }
-      alert(res.data.message)
+      message.info(res.data.message)
     } catch (e) {
-      alert('삭제 중 오류가 발생했습니다.')
+      message.error('삭제 중 오류가 발생했습니다.')
     }
   },
 
@@ -105,29 +105,29 @@ const StudyStore = observable({
         const studyGroup = await studyAPI.getStudyGroup(this.studyGroup.id)
         this.studyGroup = studyGroup.data.value
       } else {
-        alert('공지사항 등록 중 오류가 발생했습니다.')
+        message.error('공지사항 등록 중 오류가 발생했습니다.')
       }
-      alert(res.data.message)
+      message.info(res.data.message)
     } catch (e) {
-      alert('공지사항 등록 중 오류가 발생했습니다.')
+      message.error('공지사항 등록 중 오류가 발생했습니다.')
     }
   },
 
   async editNotice(editedNotice: object) {
     try {
       const res = await studyAPI.updateNotice(editedNotice)
-      alert(res.data.message)
+      message.info(res.data.message)
     } catch (e) {
-      alert('공지사항 수정 중 오류가 발생했습니다.')
+      message.error('공지사항 수정 중 오류가 발생했습니다.')
     }
   },
 
   async deleteNotice(id: number) {
     try {
       const res = await studyAPI.deleteNotice(Number(id))
-      alert(res.data.message)
+      message.info(res.data.message)
     } catch (e) {
-      alert('공지사항 삭제 중 오류가 발생했습니다.')
+      message.error('공지사항 삭제 중 오류가 발생했습니다.')
     }
   },
 
@@ -138,10 +138,10 @@ const StudyStore = observable({
         const studyGroup = await studyAPI.getStudyGroup(this.studyGroup.id)
         this.studyGroup = studyGroup.data.value
       } else {
-        alert('댓글 등록에 실패했습니다.')
+        message.error('댓글 등록에 실패했습니다.')
       }
     } catch (e) {
-      alert('댓글 등록 중 오류가 발생했습니다.')
+      message.error('댓글 등록 중 오류가 발생했습니다.')
     }
   },
 
@@ -151,12 +151,12 @@ const StudyStore = observable({
       if (res.data.state === 'SUCCESS') {
         const studyGroup = await studyAPI.getStudyGroup(this.studyGroup.id)
         this.studyGroup = studyGroup.data.value
-        alert('댓글을 삭제 했습니다.')
+        message.info('댓글을 삭제 했습니다.')
       } else {
-        alert('댓글 삭제에 실패했습니다.')
+        message.error('댓글 삭제에 실패했습니다.')
       }
     } catch (e) {
-      alert('댓글 삭제 중 오류가 발생했습니다.')
+      message.error('댓글 삭제 중 오류가 발생했습니다.')
     }
   },
 
@@ -183,10 +183,10 @@ const StudyStore = observable({
       if (res.data.state === 'SUCCESS') {
         this.studyGroup.noticeDTOList[Number(nIndex)].hits++
       } else {
-        alert('조회 중 오류가 발생했습니다. 새로고침 후 이용해주세요.')
+        message.error('조회 중 오류가 발생했습니다. 새로고침 후 이용해주세요.')
       }
     } catch (e) {
-      alert('조회 중 오류가 발생했습니다. 새로고침 후 이용해주세요.')
+      message.error('조회 중 오류가 발생했습니다. 새로고침 후 이용해주세요.')
     }
   },
 
@@ -196,9 +196,9 @@ const StudyStore = observable({
       if (res.data.state === 'SUCCESS') {
         this.fetchStudyGroup(this.studyGroup.id)
       }
-      alert(res.data.message)
+      message.info(res.data.message)
     } catch (e) {
-      alert('스케줄 등록 중 오류가 발생했습니다. 잠시 후 이용해주세요.')
+      message.error('스케줄 등록 중 오류가 발생했습니다. 잠시 후 이용해주세요.')
     }
   },
 
@@ -208,9 +208,9 @@ const StudyStore = observable({
       if (res.data.state === 'SUCCESS') {
         this.fetchStudyGroup(this.studyGroup.id)
       }
-      alert(res.data.message)
+      message.info(res.data.message)
     } catch (e) {
-      alert('스케줄 수정 중 오류가 발생했습니다. 잠시 후 이용해주세요.')
+      message.error('스케줄 수정 중 오류가 발생했습니다. 잠시 후 이용해주세요.')
     }
   },
 
@@ -221,7 +221,7 @@ const StudyStore = observable({
         this.fetchStudyGroup(this.studyGroup.id)
       }
     } catch (e) {
-      alert('출석 변경 중 오류가 발생했습니다. 잠시 후 이용해주세요.')
+      message.error('출석 변경 중 오류가 발생했습니다. 잠시 후 이용해주세요.')
     }
   }
 })

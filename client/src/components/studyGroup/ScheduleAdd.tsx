@@ -131,7 +131,7 @@ const ScheduleAdd = () => {
         onOk={handleOk}
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
-        footer={null}
+        // footer={null}
         destroyOnClose={true}
       >
         <h2 css={top}>스터디 스케줄 추가</h2>

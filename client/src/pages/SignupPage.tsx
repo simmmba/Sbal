@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import AuthTemplate from '../components/auth/AuthTemplate'
 import SignupForm from '../components/auth/SignupForm'
 import { RouteComponentProps, withRouter } from 'react-router-dom'

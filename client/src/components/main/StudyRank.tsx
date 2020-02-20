@@ -6,49 +6,42 @@ import { StudyRankprops, Study } from './MainTypes'
 import LoadingSpin from '../common/LoadingSpin'
 
 const listBox = css`
-  /* width: 650px; */
   margin: 10px;
-  /* border: 1px solid red; */
   background-color: white;
   padding: 15px 15px 20px 15px;
-  width: 330px;
+  width: 400px;
   border-radius: 10px;
-  /* border: 10px solid rgb(236, 236, 236); */
-  /* border: 10px solid #d9e5ff; */
 `
 const listTitle = css`
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 900;
   color: grey;
   margin-bottom: 10px;
-  /* border: 1px solid skyblue; */
+  margin-left: 10px;
 `
 
 const listContent = css`
   display: flex;
-  /* border: 1px solid yellow; */
   padding: 0px 0px 3px 0px;
   &:hover {
-    background: rgb(236, 236, 236);
+    /* background: rgb(236, 236, 236); */
+    background: #f3f0ff;
   }
 `
 
 const listRank = css`
   margin: 5px 20px 5px 15px;
-  /* border: 1px solid orange; */
   color: grey;
   font-weight: bold;
 `
 
 const listName = css`
   margin: 5px 5px 0px 5px;
-  /* border: 1px solid green; */
   font-weight: 750;
 `
 
 const listType = css`
   margin: 0px 5px 5px 5px;
-  /* border: 1px solid purple; */
   font-size: small;
 `
 
@@ -56,8 +49,6 @@ const listContainer = css`
   display: flex;
   flex-direction: table-column;
   justify-content: flex-end;
-  /* vertical-align: middle; */
-  /* border: 1px solid brown; */
   height: 0px;
 `
 
@@ -66,8 +57,7 @@ const empty = css`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* height: 100%; */
-  margin-top: 20px;
+  height: 80%;
 `
 
 const link = css`
@@ -77,17 +67,15 @@ const link = css`
   justify-content: center;
   font-size: 14px;
   font-weight: bold;
-  color: navy;
-
-  background: #d9e5ff;
   border-radius: 7px;
   width: 150px;
   height: 30px;
   transition: 0.3s;
-
+  /* border: 2px solid #e5dbff; */
+    background: #e5dbff;
+  
   &:hover {
-    background-color: #b2ccff;
-    color: navy;
+  background-color: #f3f0ff;
   }
 `
 
@@ -119,8 +107,9 @@ const StudyRank = ({ title, list }: StudyRankprops) => {
         ))
       ) : title === 'myStudy' ? (
         <div css={empty}>
-          참여중인 스터디가 없네요 😅
-          <br />
+          <span className="emoji" role="img" aria-label={'^^'}>
+            참여중인 스터디가 없네요 😅
+          </span>
           스터디를 둘러보시겠어요?
           <NavLink css={link} to="/study">
             스터디 보러가기

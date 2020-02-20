@@ -27,7 +27,7 @@ import {
 } from '../../lib/api/auth'
 import { useEffect } from 'react'
 import { useHistory } from 'react-router'
-import UserDetailStore from "../../stores/UserDetailStore";
+import UserDetailStore from '../../stores/UserDetailStore'
 import { message } from 'antd'
 
 function ListItem({
@@ -55,10 +55,17 @@ function ListItem({
 }
 
 function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
+  const title = css`
+      text-align: center;
+      font-weight: bold;
+      color: #6741d9;
+      padding-bottom: 15px;
+  `
+
   const history = useHistory()
   useEffect(() => {
     if (type === 'mypage/update') {
-      UserDetailStore.mypage();
+      UserDetailStore.mypage()
       getMyInfoDetailsForModify()
         .then(res => {
           const data = res.data.value
@@ -71,7 +78,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
           state.interestList = data.interestDTOList
         })
         .catch(e => {
-          alert(e)
+          message.error(e)
         })
     }
   }, [])
@@ -138,7 +145,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
       try {
         const res = await validateEmail(state.email)
         this.emailState = res.data.state === 'SUCCESS'
-        if(this.emailState) {
+        if (this.emailState) {
           this.emailValidationCode = res.data.value.dice
         }
         this.isCheckedEmail = true
@@ -224,7 +231,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
         state.emailState &&
         state.nicknameState &&
         // state.emailValidationCode === state.emailValidationInput &&
-        state.interestList.length!==0
+        state.interestList.length !== 0
       ) {
         const dataToSend = {
           email: state.email,
@@ -239,19 +246,22 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
         }
         UserStore.signup(dataToSend, history)
       } else {
-        message.error('입력하신 정보를 확인해주세요. 관심사는 최소 하나 이상 필요합니다.')
+        message.error(
+          '입력하신 정보를 확인해주세요. 관심사는 최소 하나 이상 필요합니다.'
+        )
       }
     }
   }
   return useObserver(() => (
     <AuthFormBlock>
       {type === 'signup/oauth' ? (
-        <h3>최초 로그인을 위한 추가정보 입력</h3>
+        <h2 css={title}>최초 로그인을 위한 추가정보 입력</h2>
       ) : type === 'mypage/update' ? (
-        <h3>회원 정보 수정</h3>
+        <h2 css={title}>회원 정보 수정</h2>
       ) : (
-        <h3>회원가입</h3>
+        <h2 css={title}>회원가입</h2>
       )}
+
       <Guide color="red">* 아래는 필수 입력사항입니다</Guide>
       <form onSubmit={handleSubmit}>
         <div>
@@ -269,7 +279,10 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
           <StyledButton
             width={35}
             marginLeft={5}
-            disabled={type==='mypage/update' && UserDetailStore.data.email===state.email}
+            disabled={
+              type === 'mypage/update' &&
+              UserDetailStore.data.email === state.email
+            }
             onClick={e => {
               state.validateUserEmail()
               e.preventDefault()
@@ -323,7 +336,10 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
         <StyledButton
           width={35}
           marginLeft={5}
-          disabled={type==='mypage/update' && UserDetailStore.data.nickname===state.nickname}
+          disabled={
+            type === 'mypage/update' &&
+            UserDetailStore.data.nickname === state.nickname
+          }
           onClick={e => {
             state.validateUserNickname()
             e.preventDefault()
@@ -369,7 +385,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
             </div>
           </div>
         )}
-        <Guide marginTop="20px">* 아래는 추가 입력사항입니다</Guide>
+        <Guide marginTop="20px"  color="#6741d9">* 아래는 추가 입력사항입니다</Guide>
         <StyledLabel htmlFor="email">연락처</StyledLabel>
         <StyledInput
           placeholder="휴대폰 번호를 입력하세요"
@@ -400,16 +416,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
             </FlexBetween>
           </div>
         )}
-        <StyledLabel htmlFor="introduction">간단한 자기소개</StyledLabel>
-        <StyledTextarea
-          name="introduction"
-          id="introduction"
-          value={state.introduction}
-          cols={32}
-          rows={10}
-          onChange={state.onChangeTextarea}
-        >
-        </StyledTextarea>
+
         <StyledLabel htmlFor="city">지역</StyledLabel>
         <FlexBetween>
           <div>
@@ -434,7 +441,10 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
           </div>
         </FlexBetween>
         <StyledLabel htmlFor="interest">관심사</StyledLabel>
-        <div>
+        <div 
+                css={css`
+                  margin-left: 5px;
+                `}>
           {state.interestList.map((interest: Interest, index: number) => (
             <ListItem
               interest={interest}
@@ -472,9 +482,22 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
           </div>
           <PlusButton onClick={appendInterest} />
         </FlexBetween>
+        <StyledLabel htmlFor="introduction">간단한 자기소개</StyledLabel>
+        <StyledTextarea
+          name="introduction"
+          id="introduction"
+          value={state.introduction}
+          cols={37}
+          rows={7}
+          onChange={state.onChangeTextarea}
+        >
+        </StyledTextarea>
         <StyledButton width={100} marginTop={15}>
           {type === 'mypage/update' ? '수정' : '가입'}
         </StyledButton>
+        <br />
+        <br />
+        <br />
       </form>
     </AuthFormBlock>
   ))

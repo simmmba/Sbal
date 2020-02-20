@@ -1,4 +1,7 @@
 import React from 'react'
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core'
+import palette from '../../lib/styles/palette'
 import { SocialButton, FbIcon, KakaoIcon, NaverIcon } from './AuthStyled'
 import dotenv from 'dotenv'
 dotenv.config()
@@ -16,12 +19,9 @@ function AuthFooter() {
     'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=ZaZ22Ro1uzKMK_w_pbkX&redirect_uri=http%3A%2F%2F70.12.247.32%3A8080%2Fuser%2Fauth%2Fnaver%2Fcallback&scope=profile'
   return (
     <div>
-      <h4>SNS 로그인</h4>
-      <SocialButton color="white" bColor="#1673EA">
-        <FbIcon />
-        페이스북 계정으로 로그인
-      </SocialButton>
-
+      <h4 css={css`
+        color: ${palette.violet[7]};
+      `}>SNS 로그인</h4>
       <SocialButton
         bColor="#F7E317"
         color="#3C1E1E"
@@ -32,17 +32,8 @@ function AuthFooter() {
         <KakaoIcon />
         카카오 계정으로 로그인
       </SocialButton>
-
-      <SocialButton
-        bColor="#1EC800"
-        color="white"
-        onRemove={() => {
-          openWindow(naverURL)
-        }}
-      >
-        <NaverIcon />
-        네이버 계정으로 로그인
-      </SocialButton>
+      <br />
+      <br />
     </div>
   )
 }

@@ -18,6 +18,14 @@ const cardStyle = css`
   color: white;
   background: ${palette.violet[6]};
   margin: 10px;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.05);
+  }
+  @media screen and (max-width: 815px) {
+    width: 100%;
+    min-width: 100%;
+  }
 `
 
 const titleContainer = css`
@@ -62,7 +70,13 @@ const footerContainerRigth = css`
   align-items: center;
 `
 
-function StudyCard({ study }: { study: Study }) {
+function StudyCard({
+  study,
+  onClick
+}: {
+  study: Study
+  onClick: (e?: React.MouseEvent<HTMLButtonElement>) => void
+}) {
   const timeslotMap: { [key: string]: string } = {
     1: '오전 시간대',
     2: '오후 시간대',
@@ -71,7 +85,7 @@ function StudyCard({ study }: { study: Study }) {
   }
 
   return (
-    <div css={cardStyle}>
+    <button css={cardStyle} onClick={onClick}>
       <div css={titleContainer}>
         <span css={titleStyle}>
           {study.title.length > 11
@@ -115,13 +129,11 @@ function StudyCard({ study }: { study: Study }) {
           />
           <span>{study.leader.nickname} (리더)</span>
         </div>
-        <div></div>
       </div>
-      <div></div>
       <div css={footerContainerRigth}>
         <span>{moment(study.enrollDate, 'YYYY-MM-DD').fromNow()}...</span>
       </div>
-    </div>
+    </button>
   )
 }
 

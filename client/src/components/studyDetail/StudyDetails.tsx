@@ -9,13 +9,9 @@ import { css, jsx } from '@emotion/core'
 import { Display } from '../Display'
 import { FaEye } from 'react-icons/fa'
 import StudyDetailStore from '../../stores/StudyDetailStore'
-import UserStore from '../../stores/UserStore'
-import { Descriptions, Modal } from 'antd'
-import { studyMember } from './StudyDetailTypes'
+import { Descriptions, Modal, message } from 'antd'
 import { useHistory } from 'react-router'
 import CreateForm from '../studyList/CreateForm'
-import { NavLink } from 'react-router-dom'
-import studyDetailStore from '../../stores/StudyDetailStore'
 
 const StudyDetails = () => {
   useEffect(() => {
@@ -133,10 +129,22 @@ const StudyDetails = () => {
                 {StudyDetailStore.data.hits}
               </div>
               <div css={title}>
-                <NavLink css={link} to={`/study/${studyDetailStore.data.id}`}>
-                  {StudyDetailStore.data.title}
-                </NavLink>
-                {StudyDetailStore.isMember() && <button onClick={() => {StudyDetailStore.goStudyGroup(StudyDetailStore.data.id, history)}}> 스터디그룹 </button> }
+                {/* <NavLink css={link} to={`/study/${studyDetailStore.data.id}`}> */}
+                {StudyDetailStore.data.title}
+                {/* </NavLink> */}
+                {StudyDetailStore.isMember() && (
+                  <button
+                    onClick={() => {
+                      StudyDetailStore.goStudyGroup(
+                        StudyDetailStore.data.id,
+                        history
+                      )
+                    }}
+                  >
+                    {' '}
+                    스터디그룹{' '}
+                  </button>
+                )}
               </div>
             </div>
             <div>
@@ -248,7 +256,7 @@ const StudyDetails = () => {
                       title="스터디 수정"
                       visible={StudyDetailStore.modalVisible}
                       onCancel={handleCancel}
-                      footer={[<div></div>]}
+                      footer={[<div key={StudyDetailStore.data.id} />]}
                     >
                       <CreateForm />
                     </Modal>

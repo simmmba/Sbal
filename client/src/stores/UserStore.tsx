@@ -710,10 +710,16 @@ export const makeFilter = (cascaderOption: CascaderOptionType[]) => {
 }
 export const interests: { [key: string]: string[] } = {
   개발: [
-    '.NET',
+    'Web',
+    'Java',
+    'Python',
+    'Publisher',
+    'Front-End',
+    'Back-End',
     'C/C++',
     'Node.js',
     'PHP',
+    '.NET',
     'iOS',
     'UI/UX Design',
     'Ruby on rails',
@@ -723,12 +729,7 @@ export const interests: { [key: string]: string[] } = {
     'Server',
     'Android',
     'Algorithms',
-    '영상/음성처리',
-    'Web',
-    'Java',
-    'Python',
-    'Publisher',
-    'Front-End'
+    '영상/음성처리'
   ],
   어학: [
     'BCT',
@@ -821,7 +822,7 @@ const UserStore = observable<UserStoreType>({
         sessionStorage.setItem('id', id)
         this.token = token
         this.isLoggingIn = false
-        message.info('회원 가입 되었습니다!', 2);
+        message.info('회원 가입 되었습니다!', 2)
       } else {
         message.info('이제 로그인 해주세요', 2)
       }
@@ -868,7 +869,7 @@ const UserStore = observable<UserStoreType>({
     }
   },
 
-  logout() {
+  logout(history: H.History) {
     sessionStorage.removeItem('token')
     this.loginUser = {
       id: 0,
@@ -877,6 +878,7 @@ const UserStore = observable<UserStoreType>({
     sessionStorage.removeItem('id')
     this.token = null
     StudyStore.myStudy = []
+    history.push('/')
   },
 
   async edit(data: UpdateData, history: H.History) {
@@ -888,9 +890,8 @@ const UserStore = observable<UserStoreType>({
       this.token = token
       this.isLoggingIn = false
       message.info('회원 정보가 수정되었습니다.', 2)
-
     } catch (e) {
-      alert('정보 수정 실패')
+      message.error('정보 수정 실패')
       this.isLoggingIn = false
     }
     history.push('/mypage')
@@ -902,7 +903,7 @@ const UserStore = observable<UserStoreType>({
     try {
       const res = await userAPI.getMyInfoDetailsForModify()
     } catch (e) {
-      alert('정보 조회에 실패했습니다.')
+      message.error('정보 조회에 실패했습니다.')
     }
   }
 })

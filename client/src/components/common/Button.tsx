@@ -15,20 +15,22 @@ const Button = ({ children, onClick, ...props }: ButtonProps) => (
 
 const style = css`
   outline: none;
-  border: none;
   border-radius: 4px;
   font-size: 1rem;
   font-weight: bold;
   padding: 0.3rem 1rem;
-  color: black;
   outline: none;
   cursor: pointer;
   max-height: 40px;
   margin: 13px 0 15px 0;
-
-  background: #d9e5ff;
+  border: none;
+  /* border: 2px solid #e5dbff; */
+  background: #e5dbff;
+  color: #5f3dc4;
+  
   &:hover {
-    background-color: #b2ccff;
+    background-color: #f3f0ff;
+    color: #6741d9;
   }
 `
 

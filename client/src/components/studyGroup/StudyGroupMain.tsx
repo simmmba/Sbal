@@ -11,8 +11,6 @@ import StudyGroupBoardInsert from './StudyGroupBoardInsert'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
 import { useEffect } from 'react'
-import { StudyGroupType, StudyMember, StudySchedule } from './StudyGroupType'
-import { getStudyGroup } from '../../lib/api/study'
 import { useLocalStore, useObserver } from 'mobx-react'
 import StudyStore from '../../stores/StudyStore'
 import ScrollToTop from '../ScrollToTop'
@@ -55,7 +53,7 @@ const StudyGroupMain = ({ id }: { id: number }) => {
   useEffect(() => {
     StudyStore.fetchStudyGroup(Number(id))
   }, [])
-  const bid = 1
+  // const bid = 1
 
   const title = css`
     padding: 15px 10px 10px 23px;
@@ -82,6 +80,9 @@ const StudyGroupMain = ({ id }: { id: number }) => {
 
   const total = css`
     display: flex;
+    @media screen and (max-width: 815px) {
+      flex-direction: column;
+    }
   `
 
   const top = css`
@@ -99,7 +100,20 @@ const StudyGroupMain = ({ id }: { id: number }) => {
 
   const menu = css`
     margin-top: 50px;
+    @media screen and (max-width: 815px) {
+      margin-top: 0;
+    }
   `
+  const state = useLocalStore(() => ({
+    width: window.innerWidth,
+    updateWidth() {
+      this.width = window.innerWidth
+    }
+  }))
+  useEffect(() => {
+    window.addEventListener('resize', state.updateWidth)
+    return () => window.removeEventListener('resize', state.updateWidth)
+  })
 
   return useObserver(() => (
     <Display>
@@ -112,10 +126,18 @@ const StudyGroupMain = ({ id }: { id: number }) => {
         <div css={total}>
           <div css={menu}>
             <Menu
-              style={{ width: 145 }}
+              style={
+                state.width >= 815
+                  ? { width: 145 }
+                  : {
+                      height: 50,
+                      display: 'flex',
+                      flexWrap: 'wrap'
+                    }
+              }
               // defaultSelectedKeys={['schedule']}
               // defaultOpenKeys={['sub1']}
-              mode="inline"
+              mode={state.width >= 815 ? 'inline' : 'horizontal'}
               selectable={false}
             >
               <Menu.Item key="schedule">

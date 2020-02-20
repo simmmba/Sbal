@@ -244,13 +244,6 @@ const StudyGroupMember = () => {
                     </span>
                   )
                 )}
-                {UserDetailStore.data.interestDTOList.map(
-                  (interest: Interest, index: number) => (
-                    <span key={index}>
-                      <b>#{interest.scategory}&nbsp;&nbsp;</b>
-                    </span>
-                  )
-                )}
               </div>
             </div>
             <span css={comment}>

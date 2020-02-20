@@ -2,6 +2,7 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { css, jsx } from '@emotion/core'
+import styled from '@emotion/styled'
 
 import NavBar from './components/NavBar'
 import HomePage from './pages/HomePage'
@@ -19,12 +20,19 @@ import './App.css'
 import ScrollToTop from './components/ScrollToTop'
 import NavBarBottom from './components/NavBarBottom'
 
+const PaddingBottom = styled.div`
+  @media screen and (max-width: 815px) {
+    height: 67px;
+  }
+`
+
 const App: React.FC = () => {
   return (
     <div className="App">
       <NavBar />
 
       <ScrollToTop />
+
       <Switch>
         {/* 랜딩페이지 & 홈페이지 */}
         <Route path="/" component={HomePage} exact />
@@ -50,7 +58,10 @@ const App: React.FC = () => {
         <Route path="/map" component={MapPage} />
         <Route path="/mypage/update" component={SignupPage} />
       </Switch>
+
       <Footer />
+
+      <PaddingBottom />
       <NavBarBottom />
     </div>
   )

@@ -120,12 +120,12 @@ const StudyGroupBoard = () => {
     color: #353535;
   `
 
-  const comment = css`
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    color: #ff5e00;
-  `
+  // const comment = css`
+  //   display: flex;
+  //   align-items: center;
+  //   font-size: 12px;
+  //   color: #ff5e00;
+  // `
   const pageNation = css`
     margin-top: 30px;
     margin-bottom: 30px;
