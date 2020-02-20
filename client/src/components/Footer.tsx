@@ -26,6 +26,10 @@ const FooterStyle = css`
   }
 `
 
+const link = css`
+  color: #d0bfff;
+`
+
 const Footer = () => {
   return (
     <div css={FooterStyle}>
@@ -45,10 +49,30 @@ const Footer = () => {
         </NormalP>
         <small>
           {/* <StressedSpan><Link to = "/">박준성</Link></StressedSpan> */}
-          <StressedSpan>박준성</StressedSpan>
-          <StressedSpan>배성호</StressedSpan>
-          <StressedSpan>임선우</StressedSpan>
-          <StressedSpan>조서원</StressedSpan>
+          <StressedSpan>
+            <a css={link} href="https://github.com/JunSeongA" target="_blank">
+              박준성
+            </a>
+          </StressedSpan>
+          <StressedSpan>
+            <a css={link} href="https://github.com/hackthegist" target="_blank">
+              배성호
+            </a>
+          </StressedSpan>
+          <StressedSpan>
+            <a
+              css={link}
+              href="https://github.com/Imsunwoo-hub"
+              target="_blank"
+            >
+              임선우
+            </a>
+          </StressedSpan>
+          <StressedSpan>
+            <a css={link} href="https://github.com/simmmba" target="_blank">
+              조서원
+            </a>
+          </StressedSpan>
         </small>
         <NormalP>
           <small>
