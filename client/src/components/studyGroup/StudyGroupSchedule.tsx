@@ -193,8 +193,8 @@ const StudyGroupSchedule = () => {
       })
     })
 
-    setScoreVisible(true);
-    setAttendanceIndex(scheduleIndex);
+    setScoreVisible(true)
+    setAttendanceIndex(scheduleIndex)
   }
 
   const handleScoreOk = () => {
@@ -292,12 +292,19 @@ const StudyGroupSchedule = () => {
 
                 {StudyStore.loginUser.id === StudyStore.studyGroup.leader.id ? (
                   <div css={right}>
-                    <ScheduleEdit sIndex={Number(pageSize * (pageNumber - 1) + scheduleIndex)} />
+                    <ScheduleEdit
+                      sIndex={Number(
+                        pageSize * (pageNumber - 1) + scheduleIndex
+                      )}
+                    />
                     &nbsp;&nbsp;
                     <button
                       css={btn}
                       onClick={() =>
-                        clickDeleteSchedule(s.id, Number(pageSize * (pageNumber - 1) + scheduleIndex))
+                        clickDeleteSchedule(
+                          s.id,
+                          Number(pageSize * (pageNumber - 1) + scheduleIndex)
+                        )
                       }
                     >
                       삭제
