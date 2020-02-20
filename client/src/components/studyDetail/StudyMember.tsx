@@ -208,81 +208,84 @@ const StudyMember = () => {
     <div css={top}>
       <table css={table}>
         <tbody>
-        <tr>
-          <td colSpan={2} css={title}>
-            스터디 멤버 ( {StudyDetailStore.studyMember} )
-          </td>
-        </tr>
-        <tr>
-          <th css={w70}>닉네임</th>
-          <th css={w30}></th>
-        </tr>
+          <tr>
+            <td colSpan={2} css={title}>
+              스터디 멤버 ( {StudyDetailStore.studyMember} )
+            </td>
+          </tr>
+          <tr>
+            <th css={w70}>닉네임</th>
+            <th css={w30}></th>
+          </tr>
 
-        {StudyDetailStore.data.studyMemberDTOList.map(
-          (studyMember: studyMember, index: number) => (
-            <tr key={index}>
-              {/* 본인일 때 */}
-              {studyMember.state === 1 &&
-                studyMember.user.id + '' === sessionStorage.getItem('id') && (
-                  <td css={td}>
-                    {/* 본인이 리더일 때 */}
-                    {studyMember.user.id ===
-                      StudyDetailStore.data.leader.id && <span>👑&nbsp;</span>}
-                    🙋‍♂️&nbsp;{studyMember.user.nickname}
-                  </td>
-                )}
-
-              {studyMember.state === 1 &&
-                studyMember.user.id + '' === sessionStorage.getItem('id') && (
-                  <td css={td}></td>
-                )}
-            </tr>
-          )
-        )}
-        {StudyDetailStore.data.studyMemberDTOList.map(
-          (studyMember: studyMember, index: number) => (
-            <tr key={index}>
-              {/* 본인이 아닐 때 */}
-              {studyMember.state === 1 &&
-                studyMember.user.id + '' !== sessionStorage.getItem('id') && (
-                  <td css={td}>
-                    <button
-                      css={memberInfoBtn}
-                      onClick={() => showModal(studyMember.user.id)}
-                    >
-                      {/* 본인이 아닌 사람이 리더일 때 */}
+          {StudyDetailStore.data.studyMemberDTOList.map(
+            (studyMember: studyMember, index: number) => (
+              <tr key={index}>
+                {/* 본인일 때 */}
+                {studyMember.state === 1 &&
+                  studyMember.user.id + '' === sessionStorage.getItem('id') && (
+                    <td css={td}>
+                      {/* 본인이 리더일 때 */}
                       {studyMember.user.id ===
                         StudyDetailStore.data.leader.id && (
                         <span>👑&nbsp;</span>
                       )}
-                      {studyMember.user.nickname}
-                    </button>
-                  </td>
-                )}
-              {studyMember.state === 1 &&
-                studyMember.user.id + '' !== sessionStorage.getItem('id') && (
-                  <td css={td}>
-                    {studyMember.user.id !== StudyDetailStore.data.leader.id &&
-                      StudyDetailStore.data.leader.id + '' ===
-                        sessionStorage.getItem('id') && (
-                        <button
-                          css={btn}
-                          onClick={() => {
-                            StudyDetailStore.updateStudyMember(
-                              StudyDetailStore.data.id,
-                              studyMember.user.id,
-                              3
-                            )
-                          }}
-                        >
-                          내보내기
-                        </button>
-                      )}
-                  </td>
-                )}
-            </tr>
-          )
-        )}
+                      🙋‍♂️&nbsp;{studyMember.user.nickname}
+                    </td>
+                  )}
+
+                {studyMember.state === 1 &&
+                  studyMember.user.id + '' === sessionStorage.getItem('id') && (
+                    <td css={td}></td>
+                  )}
+              </tr>
+            )
+          )}
+          {StudyDetailStore.data.studyMemberDTOList.map(
+            (studyMember: studyMember, index: number) => (
+              <tr key={index}>
+                {/* 본인이 아닐 때 */}
+                {studyMember.state === 1 &&
+                  studyMember.user.id + '' !== sessionStorage.getItem('id') && (
+                    <td css={td}>
+                      <button
+                        css={memberInfoBtn}
+                        onClick={() => showModal(studyMember.user.id)}
+                      >
+                        {/* 본인이 아닌 사람이 리더일 때 */}
+                        {studyMember.user.id ===
+                          StudyDetailStore.data.leader.id && (
+                          <span>👑&nbsp;</span>
+                        )}
+                        {studyMember.user.nickname}
+                      </button>
+                    </td>
+                  )}
+                {studyMember.state === 1 &&
+                  studyMember.user.id + '' !== sessionStorage.getItem('id') && (
+                    <td css={td}>
+                      {studyMember.user.id !==
+                        StudyDetailStore.data.leader.id &&
+                        StudyDetailStore.data.leader.id + '' ===
+                          sessionStorage.getItem('id') && (
+                          <button
+                            css={btn}
+                            onClick={() => {
+                              StudyDetailStore.updateStudyMember(
+                                StudyDetailStore.data.id,
+                                studyMember.user.id,
+                                3
+                              )
+                            }}
+                          >
+                            내보내기
+                          </button>
+                        )}
+                    </td>
+                  )}
+              </tr>
+            )
+          )}
         </tbody>
       </table>
 
@@ -295,7 +298,11 @@ const StudyMember = () => {
       >
         <div css={modalTop}>
           <div css={left}>
-            <img css={img} src="/images/default1.png" alt="프로필" />
+            <img
+              css={img}
+              src="http://i02a306.p.ssafy.io/images/default.png"
+              alt="프로필"
+            />
           </div>
           <div css={right}>
             <div css={first}>
