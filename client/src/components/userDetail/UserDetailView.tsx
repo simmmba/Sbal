@@ -7,12 +7,11 @@ import { css, jsx } from '@emotion/core'
 import { Display } from '../Display'
 // import Button from '../common/Button'
 
-import {useHistory} from 'react-router'
-import {Progress, message} from 'antd'
+import { useHistory } from 'react-router'
+import { Progress, message } from 'antd'
 
 import UserStore from '../../stores/UserStore'
 import palette from '../../lib/styles/palette'
-
 
 const btn = css`
   color: #747474;
@@ -244,26 +243,31 @@ const UserDetail = () => {
     inputFile?.click()
   }
 
-
-    const state = useLocalStore(() => ({
-        //filename : "http://13.124.98.149/images/"+ UserDetailStore.data.profilePhotoDir,
-        //http://13.124.98.149/images/default.png
-        //file : 'http://13.124.98.149/images/default.png',
-        onChange(f:any){
-            //this.filename  = "images/"+f[0].name;
-            //this.file = e.target.files[0];
-            //alert(f[0].type)
-            let type = f[0].name.substring(f[0].name.lastIndexOf(".")+1);
-            type = type.toLowerCase()
-            if(type != "jpg"&& type !="jpeg" && type != "gif" && type != "png" && type !="bmp") {
-              message.error("이미지 형식만 업로드 가능합니다.");
-              return;
-            }
-            const formData = new FormData();
-            formData.append('file', f[0])
-            UserDetailStore.upload(formData)
-        }
-    }))
+  const state = useLocalStore(() => ({
+    //filename : "http://13.124.98.149/images/"+ UserDetailStore.data.profilePhotoDir,
+    //http://13.124.98.149/images/default.png
+    //file : 'http://13.124.98.149/images/default.png',
+    onChange(f: any) {
+      //this.filename  = "images/"+f[0].name;
+      //this.file = e.target.files[0];
+      //alert(f[0].type)
+      let type = f[0].name.substring(f[0].name.lastIndexOf('.') + 1)
+      type = type.toLowerCase()
+      if (
+        type != 'jpg' &&
+        type != 'jpeg' &&
+        type != 'gif' &&
+        type != 'png' &&
+        type != 'bmp'
+      ) {
+        message.error('이미지 형식만 업로드 가능합니다.')
+        return
+      }
+      const formData = new FormData()
+      formData.append('file', f[0])
+      UserDetailStore.upload(formData)
+    }
+  }))
 
   return useObserver(() => (
     <Display>
@@ -366,6 +370,14 @@ const UserDetail = () => {
                 `}
               >
                 내 스터디
+                <span
+                  css={css`
+                    font-size: 12px;
+                    color: #5d5d5d;
+                  `}
+                >
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;👑내가 개설한 스터디
+                </span>
               </h2>
               {UserDetailStore.data.ledStudyList.length === 0 ? (
                 <div>&nbsp;&nbsp;&nbsp;&nbsp;현재 스터디가 없습니다.</div>
