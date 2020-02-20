@@ -149,6 +149,7 @@ function StudyCard({
             css={css`
               margin-right: 5px;
             `}
+            src={study.leader.profilePhotoDir}
           />
           <span>{study.leader.nickname} (리더)</span>
         </div>
