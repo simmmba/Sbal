@@ -5,6 +5,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { useObserver } from 'mobx-react'
 import UserStore from '../stores/UserStore'
 import { useHistory } from 'react-router'
+import palette from '../lib/styles/palette'
 
 const Spacer = styled.div`
   height: 4rem;
@@ -14,13 +15,20 @@ const Logo = styled(Link)`
   display: flex;
   align-items: center;
   font-weight: bold;
-  font-size: 21px;
+  font-size: 25px;
   margin-right: auto;
+  color: ${palette.violet[0]};
+  transition: 0.3s;
+
+  &:hover {
+    color: ${palette.violet[1]};
+    font-size: 21px;
+  }
 `
 
 const NavFixBlock = styled.div`
   position: fixed;
-  background: white;
+  background: ${palette.violet[5]};
   width: 100%;
   z-index: 10;
 
@@ -47,7 +55,12 @@ const Navbar = styled.nav`
 const StyledLink = styled(NavLink)`
   margin-left: 10px;
   padding: 20px;
-  /* color: black; */
+  color: white;
+
+  &:hover {
+    color: ${palette.violet[1]};
+  }
+
   @media (max-width: 815px) {
     display: none;
   }
@@ -55,7 +68,13 @@ const StyledLink = styled(NavLink)`
 const StyledLinkPhone = styled(NavLink)`
   margin-left: 10px;
   padding: 20px;
-  /* color: black; */
+  color: white;
+  transition: 0.4s;
+
+  &:hover {
+    color: ${palette.violet[1]};
+    text-decoration: underline;
+  }
   @media (max-width: 815px) {
     display: none;
   }
@@ -64,6 +83,11 @@ const StyledLinkPhone = styled(NavLink)`
 const StyledButton = styled(Button)`
   padding: auto 0;
   transition: 0.3s;
+  background-color: ${palette.violet[1]};
+
+  &:hover {
+    background-color: ${palette.violet[2]};
+  }
   @media (max-width: 815px) {
     display: none;
   }

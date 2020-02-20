@@ -58,15 +58,15 @@ function AuthForm({ type, history }: RouteComponentProps & AuthFormProps) {
   return useObserver(() => (
     <AuthFormBlock>
       <h2
-          css={css`
-            text-align: center;
-            font-weight: bold;
-            color: #6741d9;
-            padding-bottom: 10px;
-          `}
-        >
-          {headerText}
-        </h2>
+        css={css`
+          text-align: center;
+          font-weight: bold;
+          color: #6741d9;
+          padding-bottom: 10px;
+        `}
+      >
+        {headerText}
+      </h2>
       {type === 'login' && (
         <form onSubmit={handleSubmit}>
           <StyledLabel htmlFor="email">이메일 아이디</StyledLabel>
@@ -88,11 +88,13 @@ function AuthForm({ type, history }: RouteComponentProps & AuthFormProps) {
             onChange={state.onChange}
           />
           <FlexBetween>
-            <div css={css`
-                  display: flex;
-                  justify-content: center;
-                  align-content: center;
-                `}>
+            <div
+              css={css`
+                display: flex;
+                justify-content: center;
+                align-content: center;
+              `}
+            >
               <ToggleSwitch />
               <span
                 css={css`
