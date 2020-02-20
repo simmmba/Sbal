@@ -51,6 +51,18 @@ const UserDetailStore: UserDetailStoreType = observable({
     }
   },
 
+  async upload(formdata : FormData){
+    try{
+      console.log(formdata.get('file'))
+      const res = await userDetail.upload(formdata)
+      console.log(res)
+      this.mypage()
+    } catch(error){
+
+    }
+  },
+
+
   goUserInfo(userId: number, history:H.History){
     history.push(`/UserInfopage/${userId}`)
   },
