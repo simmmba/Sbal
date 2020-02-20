@@ -9,7 +9,7 @@ const MyInfoPage = () => {
 
   UserDetailStore.mypage()
   useEffect(() => {
-    loadToken()
+    loadToken(history)
     authCheck(history)
   }, [history])
   return (
