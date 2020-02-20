@@ -1,3 +1,4 @@
+/**@jsx jsx */
 import React, { useCallback } from 'react'
 import styled from '@emotion/styled'
 import Button from './common/Button'
@@ -6,6 +7,7 @@ import { useObserver } from 'mobx-react'
 import UserStore from '../stores/UserStore'
 import { useHistory } from 'react-router'
 import palette from '../lib/styles/palette'
+import { css, jsx } from '@emotion/core'
 
 const Spacer = styled.div`
   height: 4rem;
@@ -56,9 +58,11 @@ const StyledLink = styled(NavLink)`
   margin-left: 10px;
   padding: 20px;
   color: white;
+  transition: 0.3s;
 
   &:hover {
     color: ${palette.violet[1]};
+    font-size: 15px;
   }
 
   @media (max-width: 815px) {
@@ -93,6 +97,23 @@ const StyledButton = styled(Button)`
   }
 `
 
+const statu = css`
+  margin-left: 10px;
+  margin-top: 2px;
+  padding: 20px;
+  color: white;
+  width: 100px;
+  transition: 0.3s;
+
+  &:hover {
+    width: 105px;
+  }
+
+  @media (max-width: 815px) {
+    display: none;
+  }
+`
+
 const NavBar = () => {
   const history = useHistory()
   const logout = useCallback(() => {
@@ -100,7 +121,7 @@ const NavBar = () => {
   }, [history])
 
   return useObserver(() => (
-    <>
+    <div>
       <NavFixBlock>
         <Navbar>
           <Logo to="/">
@@ -109,6 +130,13 @@ const NavBar = () => {
           <StyledLink to="/study/create">스터디 개설</StyledLink>
           <StyledLink to="/study">스터디 목록</StyledLink>
           <StyledLink to="/map">나와 가까운 장소</StyledLink>
+          <a href="http://i02a302.p.ssafy.io/">
+            <img
+              css={statu}
+              src="http://i02a306.p.ssafy.io/images/index/statu.png"
+              alt="statu페이지"
+            />
+          </a>
           {/* <StyledLink to="/study/1">ㅋㅋ</StyledLink> */}
           {!UserStore.token ? (
             <div>
@@ -126,7 +154,7 @@ const NavBar = () => {
         </Navbar>
       </NavFixBlock>
       <Spacer />
-    </>
+    </div>
   ))
 }
 

@@ -7,11 +7,11 @@ import StudyRequest from './StudyRequest'
 import { css, jsx } from '@emotion/core'
 // import styled from '@emotion/styled'
 import { Display } from '../Display'
-import { FaEye } from 'react-icons/fa'
 import StudyDetailStore from '../../stores/StudyDetailStore'
 import { Descriptions, Modal } from 'antd'
 import { useHistory } from 'react-router'
 import CreateForm from '../studyList/CreateForm'
+import palette from '../../lib/styles/palette'
 
 const StudyDetails = () => {
   useEffect(() => {
@@ -94,7 +94,7 @@ const StudyDetails = () => {
 
   const move = css`
     color: #4c4c4c;
-    background: #e4f7ba;
+    background: ${palette.violet[1]};
     font-weight: bold;
     font-size: 14px;
     border-radius: 4px;
@@ -107,9 +107,10 @@ const StudyDetails = () => {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: 0.3s;
 
     &:hover {
-      background-color: #cef279;
+      background-color: ${palette.violet[2]};
     }
   `
 

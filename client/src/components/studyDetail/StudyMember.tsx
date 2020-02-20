@@ -189,6 +189,10 @@ const StudyMember = () => {
     margin: 0px 10px 0px 0px;
   `
 
+  const explain = css`
+    font-size: 12px;
+  `
+
   // 멤버 이름 클릭시
   const [visible, setVisible] = useState(false)
 
@@ -208,6 +212,9 @@ const StudyMember = () => {
           <tr>
             <td colSpan={2} css={title}>
               스터디 멤버 ( {StudyDetailStore.studyMember} )
+              <span css={explain}>
+                &nbsp;&nbsp;&nbsp;&nbsp;👑리더&nbsp;&nbsp; 🙋‍♂️본인
+              </span>
             </td>
           </tr>
           <tr>
