@@ -1,14 +1,12 @@
 import { observable } from 'mobx'
 import * as userDetail from '../lib/api/userDetail'
-import {
-  UserDetailStoreType,
-} from '../components/userDetail/UserDetailTypes'
+import { UserDetailStoreType } from '../components/userDetail/UserDetailTypes'
 import * as studyAPI from '../lib/api/study'
 import * as H from 'history'
 
 const UserDetailStore: UserDetailStoreType = observable({
   // isLoggingIn : false,
-  joinCount : 0,
+  joinCount: 0,
   data: {
     id: 0,
     email: '',
@@ -37,9 +35,9 @@ const UserDetailStore: UserDetailStoreType = observable({
       this.joinCount = 0
       const res = await userDetail.myInfo()
       this.data = res.data.value
-      if(this.data.joinedStudyList !== null){
-        for(let i=0; i<this.data.joinedStudyList.length; i++){
-          if(this.data.joinedStudyList[i]['state']==1){
+      if (this.data.joinedStudyList !== null) {
+        for (let i = 0; i < this.data.joinedStudyList.length; i++) {
+          if (this.data.joinedStudyList[i]['state'] == 1) {
             this.joinCount++
           }
         }
@@ -49,25 +47,32 @@ const UserDetailStore: UserDetailStoreType = observable({
     }
   },
 
-  goUserInfo(userId: number, history:H.History){
+  async upload(formdata: FormData) {
+    try {
+      console.log(formdata.get('file'))
+      const res = await userDetail.upload(formdata)
+      console.log(res)
+      this.mypage()
+    } catch (error) {}
+  },
+
+  goUserInfo(userId: number, history: H.History) {
     history.push(`/UserInfopage/${userId}`)
   },
 
-  async userInfo(userId : number){
-    try{
+  async userInfo(userId: number) {
+    try {
       this.joinCount = 0
       const res = await userDetail.userInfo(userId)
       this.data = res.data.value
-      if(this.data.joinedStudyList !== null){
-        for(let i=0; i<this.data.joinedStudyList.length; i++){
-          if(this.data.joinedStudyList[i]['state']==1){
+      if (this.data.joinedStudyList !== null) {
+        for (let i = 0; i < this.data.joinedStudyList.length; i++) {
+          if (this.data.joinedStudyList[i]['state'] == 1) {
             this.joinCount++
           }
         }
       }
-    } catch(error){
-
-    }
+    } catch (error) {}
   }
 })
 

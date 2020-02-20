@@ -63,7 +63,9 @@ const studyDetailStore: StudyDetailStoreType = observable({
     return false
   },
 
+
   goStudyGroup(studyId: number, history: H.History) {
+
     history.push(`/study/${studyId}`)
   },
 
