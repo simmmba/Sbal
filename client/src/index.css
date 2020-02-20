@@ -1,0 +1,53 @@
+body {
+  margin: 0;
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif; */
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  /* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace; */
+}
+
+#root {
+  min-height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  font-family: 'MapoPeacefull';
+}
+
+html {
+  height: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+}
+
+button {
+  outline: none;
+}
+
+nav {
+  box-sizing: inherit;
+  color: #5f3dc4;
+  /* font-family: 'GodoM'; */
+}
+
+@font-face {
+  font-family: 'GodoM';
+  src: url('./assets/GodoM.ttf');
+}
+@font-face {
+  font-family: 'MapoPeacefull';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoPeacefullA.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
