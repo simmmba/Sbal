@@ -111,6 +111,8 @@ const UserDetail = () => {
     cursor: pointer;
     transition: 0.3s;
     margin-top: 10px;
+    margin-left : 5px;
+    margin-right: 5px;
 
     &:hover {
       background: #ffe08c;
@@ -166,29 +168,36 @@ const UserDetail = () => {
     }
 
     const state = useLocalStore(() => ({
-        //filename : "http://13.124.98.149/images/"+ UserDetailStore.data.profilePhotoDir,
-        //http://13.124.98.149/images/default.png
-        //file : 'http://13.124.98.149/images/default.png',
+        // filename : "http://13.124.98.149/images/"+ UserDetailStore.data.profilePhotoDir,
+        // http://13.124.98.149/images/default.png
+        // file : 'http://13.124.98.149/images/default.png',
         onChange(f:any){
-            //this.filename  = "images/"+f[0].name;
-            //this.file = e.target.files[0];
-            //alert(f[0].type)
+            // this.filename  = "images/"+f[0].name;
+            // this.file = e.target.files[0];
+            // alert(f[0].type)
             const formData = new FormData();
             formData.append('file', f[0])
             UserDetailStore.upload(formData)
         }
     }))
 
+    // const changeDefaultImage = () => {
+    //
+    // }
+
     return useObserver(() => (
         <Display>
             <div css={top}>
                 <div css={left}>
                     <form id="form">
-                    <label onClick={()=> {inputFile()}}><img css={img} src={"http://13.124.98.149/images/" + UserDetailStore.data.profilePhotoDir} /></label>
-                    <input id = "inputFile" css={dis} name="file" type="file" onChange={e => state.onChange(e.target.files)}></input>
+                    <label><img alt='사진이 없습니다.' css={img} src={"http://13.124.98.149/images/" + UserDetailStore.data.profilePhotoDir} /></label>
+                    <input id = "inputFile" css={dis} name="file" type="file" onChange={e => state.onChange(e.target.files)}/>
                     </form>
                     {UserDetailStore.data.id + '' === sessionStorage.getItem('id') && (
                         <div css={btnBox}>
+                            <button css={editBtn} onClick={() => inputFile()}>
+                                사진 수정
+                            </button>
                             <button css={editBtn} onClick={() => clickedUpdateButton()}>
                                 정보 수정
                             </button>
