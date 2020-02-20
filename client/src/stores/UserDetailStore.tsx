@@ -27,8 +27,11 @@ const UserDetailStore: UserDetailStoreType = observable({
   //city, town, evaluation, profilePhotoDir, socialLogin, interestDTOList, ledStudyList, joinedStudyList}
   async deleteStudyMember(studyId: number, idx: number) {
     try {
-      const res = await studyAPI.studyDelete(studyId)
-      this.data.joinedStudyList.splice(idx, 1)
+      if(window.confirm("목록에서 삭제 하시겠습니까?")){
+        const res = await studyAPI.studyDelete(studyId)
+        this.data.joinedStudyList.splice(idx, 1)
+      } else return;
+      
     } catch (error) {}
   },
   async mypage() {
