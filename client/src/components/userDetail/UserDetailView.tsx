@@ -297,6 +297,24 @@ const UserDetail = () => {
           </form>
           {UserDetailStore.data.id + '' === sessionStorage.getItem('id') && (
             <div css={btnBox}>
+              {UserDetailStore.data.id + '' ===
+                sessionStorage.getItem('id') && (
+                <div
+                  css={css`
+                    color: grey;
+                    font-size: 12px;
+                    margin-top: 7px;
+                    width: 180px;
+                    text-align: center;
+
+                    @media (max-width: 815px) {
+                      width: 100px;
+                    }
+                  `}
+                >
+                  * 프로필사진 클릭 → 사진 변경
+                </div>
+              )}
               <button css={editBtn} onClick={() => clickedUpdateButton()}>
                 정보 수정
               </button>
@@ -425,14 +443,7 @@ const UserDetail = () => {
                     )}
                     {UserDetailStore.data.joinedStudyList.map(
                       (joinedStudy: JoinedStudy, index: number) => (
-                        <tr
-                          key={index}
-                          onClick={() => {
-                            history.push(
-                              `study/details/${joinedStudy.study.id}`
-                            )
-                          }}
-                        >
+                        <tr css={hoverTr} key={index}>
                           {joinedStudy.state === 1 &&
                             joinedStudy.study.state === 0 && (
                               <td css={td}> 모집 중 </td>
@@ -446,7 +457,17 @@ const UserDetail = () => {
                               <td css={td}> 종 료 </td>
                             )}
                           {joinedStudy.state === 1 && (
-                            <td css={td}> {joinedStudy.study.title} </td>
+                            <td
+                              css={hover}
+                              onClick={() => {
+                                history.push(
+                                  `study/details/${joinedStudy.study.id}`
+                                )
+                              }}
+                            >
+                              {' '}
+                              {joinedStudy.study.title}{' '}
+                            </td>
                           )}
                           {joinedStudy.state === 1 && (
                             <td css={td}>
