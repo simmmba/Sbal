@@ -224,7 +224,7 @@ public class UserController {
             user.setProfilePhotoDir(fileName);
 
             //System.out.println(fileName);
-            UserDTO userDTO = userService.update(user).myPageDTO();
+            UserDTO userDTO = userService.profile(user).myPageDTO();
             return new ResponseEntity<>(new CommonResponse(userDTO,"profileUpload", "SUCCESS", "프로필 사진 변경 완료."), HttpStatus.OK);
         } catch (RuntimeException e) {
             e.printStackTrace();
