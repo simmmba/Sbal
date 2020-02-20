@@ -1,9 +1,13 @@
 import React, { useEffect } from 'react'
 import MapView from '../components/map/MapView'
-import { useHistory } from 'react-router'
+import { useHistory ,useParams} from 'react-router'
 import { loadToken, authCheck } from '../utils/authCheck'
+import UserDetailStore from '../stores/UserDetailStore'
+import StudyDetailStore from '../stores/StudyDetailStore'
+
 
 const MapPage = () => {
+
   const history = useHistory()
   useEffect(() => {
     loadToken(history)
@@ -15,5 +19,5 @@ const MapPage = () => {
     </>
   )
 }
-
 export default MapPage
+

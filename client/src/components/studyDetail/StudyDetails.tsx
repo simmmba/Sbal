@@ -146,13 +146,6 @@ const StudyDetails = () => {
     width: 100%;
   `
 
-  // const link = css`
-  //   color: navy;
-  //
-  //   &:hover {
-  //     color: navy;
-  //   }
-  // `
 
   return useObserver(() => (
     <div>
@@ -162,14 +155,9 @@ const StudyDetails = () => {
           <br />
           <div css={top}>
             <div css={main}>
-              {/* <div css={hit}>
-                <FaEye size="18" color="#747474" />
-                {StudyDetailStore.data.hits}
-              </div> */}
+              
               <div css={title}>
-                {/* <NavLink css={link} to={`/study/${studyDetailStore.data.id}`}> */}
                 {StudyDetailStore.data.title}&nbsp;&nbsp;
-                {/* </NavLink> */}
                 {StudyDetailStore.isMember() && (
                   <button
                     css={move}
@@ -195,7 +183,6 @@ const StudyDetails = () => {
                 )}
               </div>
             </div>
-            {/* <div> */}
             <div css={btnBox}>
               {!StudyDetailStore.isJoin() &&
               sessionStorage.getItem('id') !==
@@ -210,110 +197,87 @@ const StudyDetails = () => {
                   가입신청
                   {/* {StudyDetailStore.data.state === 0 ? '모집' : '신청'} */}
                 </button>
-              ) : (
-                StudyDetailStore.isJoin() &&
-                sessionStorage.getItem('id') !==
-                  StudyDetailStore.data.leader.id + '' &&
-                StudyDetailStore.isMember() && (
-                  // <button css={btn} onClick={() => alert('신청되었습니다.')}>
-                  <button
-                    css={btn}
-                    onClick={() => {
-                      StudyDetailStore.deleteStudyMember(
-                        StudyDetailStore.data.id,
-                        2
-                      )
-                    }}
-                  >
-                    탈퇴요청
-                    {/* {StudyDetailStore.data.state === 0 ? '모집' : '신청'} */}
-                  </button>
-                )
-              )}
-              {StudyDetailStore.isJoin() &&
-                sessionStorage.getItem('id') !==
-                  StudyDetailStore.data.leader.id + '' &&
-                !StudyDetailStore.isMember() && (
-                  <button
-                    css={btn}
-                    onClick={() => {
-                      StudyDetailStore.deleteStudyMember(
-                        //           StudyDetailStore.data.id
-                        //         )
-                        //       }}
-                        //     >
-                        //       신청 취소
-                        //       {/* {StudyDetailStore.data.state === 0 ? '모집' : '신청'} */}
-                        //     </button>
-                        //   )}
-                        // {sessionStorage.getItem('id') ===
-                        //   StudyDetailStore.data.leader.id + '' &&
-                        //   StudyDetailStore.data.state !== 1 && (
-                        //     <button
-                        //       css={btn}
-                        //       onClick={() => {
-                        //         StudyDetailStore.studyTodo()
-                        //       }}
-                        //     >
-                        //       진행
-                        //     </button>
-                        //   )}
-                        // {sessionStorage.getItem('id') ===
-                        //   StudyDetailStore.data.leader.id + '' && (
-                        //   <div>
-                        //     <button css={btn} onClick={openModal}>
-                        //       수정
-                        //     </button>
-                        //     <Modal
-                        //       title="스터디 수정"
-                        //       visible={StudyDetailStore.modalVisible}
-                        //       onCancel={handleCancel}
-                        //       footer={[<div></div>]}
-                        //     >
-                        //       <CreateForm />
-                        //     </Modal>
-                        //   </div>
-                        StudyDetailStore.data.id,
-                        1
-                      )
-                    }}
-                  >
-                    신청취소
-                    {/* {StudyDetailStore.data.state === 0 ? '모집' : '신청'} */}
-                  </button>
+                ) : (
+                  StudyDetailStore.isJoin() &&
+                  sessionStorage.getItem('id') !==
+                    StudyDetailStore.data.leader.id + '' &&
+                  StudyDetailStore.isMember() && (
+                    // <button css={btn} onClick={() => alert('신청되었습니다.')}>
+                    <button
+                      css={btn}
+                      onClick={() => {
+                        StudyDetailStore.deleteStudyMember(
+                          StudyDetailStore.data.id,
+                          2
+                        )
+                      }}
+                    >
+                      탈퇴 요청
+                      {/* {StudyDetailStore.data.state === 0 ? '모집' : '신청'} */}
+                    </button>
+                  )
                 )}
-              {sessionStorage.getItem('id') ===
-                StudyDetailStore.data.leader.id + '' &&
-                StudyDetailStore.data.state !== 1 && (
-                  <button
-                    css={btn}
-                    onClick={() => {
-                      if (window.confirm('스터디를 진행하시겠습니까?')) {
-                        StudyDetailStore.studyTodo()
-                      }
-                    }}
-                  >
-                    진행
-                  </button>
+                {StudyDetailStore.isJoin() &&
+                  sessionStorage.getItem('id') !==
+                    StudyDetailStore.data.leader.id + '' &&
+                  !StudyDetailStore.isMember() && (
+                    <button
+                      css={btn}
+                      onClick={() => {
+                        StudyDetailStore.deleteStudyMember(
+                       
+                          StudyDetailStore.data.id,
+                          1
+                        )
+                      }}
+                    >
+                      신청 취소
+                      {/* {StudyDetailStore.data.state === 0 ? '모집' : '신청'} */}
+                    </button>
+                  )}
+                {sessionStorage.getItem('id') ===
+                  StudyDetailStore.data.leader.id + '' &&
+                  StudyDetailStore.data.state === 0  && (
+                    <button
+                      css={btn}
+                      onClick={() => {
+                        StudyDetailStore.studyTodo(1)
+                      }}
+                    >
+                      진행
+                    </button>
+                  )}
+                  {sessionStorage.getItem('id') ===
+                  StudyDetailStore.data.leader.id + '' &&
+                  StudyDetailStore.data.state === 1  && (
+                    <button
+                      css={btn}
+                      onClick={() => {
+                        StudyDetailStore.studyTodo(2)
+                      }}
+                    >
+                      종료
+                    </button>
+                  )}
+
+                {sessionStorage.getItem('id') ===
+                  StudyDetailStore.data.leader.id + '' && (
+                  <div>
+                    <button css={btn} onClick={openModal}>
+                      수정
+                    </button>
+                    <Modal
+                      title="스터디 수정"
+                      visible={StudyDetailStore.modalVisible}
+                      onCancel={handleCancel}
+                      footer={[<div key={StudyDetailStore.data.id} />]}
+                    >
+                      <CreateForm />
+                    </Modal>
+                  </div>
                 )}
-              {sessionStorage.getItem('id') ===
-                StudyDetailStore.data.leader.id + '' && (
-                <div>
-                  <button css={btn} onClick={openModal}>
-                    수정
-                  </button>
-                  <Modal
-                    width={550}
-                    visible={StudyDetailStore.modalVisible}
-                    onCancel={handleCancel}
-                    footer={[<div key={StudyDetailStore.data.id} />]}
-                  >
-                    <CreateForm />
-                  </Modal>
-                </div>
-              )}
-              {sessionStorage.getItem('id') ===
-                StudyDetailStore.data.leader.id + '' && (
+                {sessionStorage.getItem('id') ===
+                  StudyDetailStore.data.leader.id + '' && (
                 <button
                   css={btn}
                   onClick={() => {

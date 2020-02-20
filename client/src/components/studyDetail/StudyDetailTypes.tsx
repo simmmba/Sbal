@@ -31,7 +31,7 @@ export type StudyDetailStoreType = {
   modalVisible: boolean
   studyDetail: () => void
   deleteStudy: (studyId: number, history: H.History) => void
-  studyTodo: () => void
+  studyTodo: (state : number) => void
   insertMember: (studyId: number) => void
   goStudyGroup: (studyId: number, history:H.History) => void
   //   deleteStudyMember: (studyId: number) => void

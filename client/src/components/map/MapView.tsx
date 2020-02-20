@@ -5,9 +5,8 @@ import { css, jsx } from '@emotion/core'
 import { Display } from '../Display'
 import { message } from 'antd'
 import palette from '../../lib/styles/palette'
-
-import UserDetailStore from '../../stores/UserDetailStore'
 import './map.css'
+import UserDetailStore from '../../stores/UserDetailStore'
 
 declare global {
   interface Window {
@@ -18,6 +17,7 @@ let map: any
 
 const MapView = () => {
   useEffect(() => {
+    UserDetailStore.mypage()
     let container = document.getElementById('map')
     let option = {
       center: new window.kakao.maps.LatLng(33.450701, 126.570667),
@@ -54,8 +54,7 @@ const MapView = () => {
         }
       }
     )
-    UserDetailStore.mypage()
-  }, [UserDetailStore.data.city, UserDetailStore.data.city])
+  }, [UserDetailStore.data.city, UserDetailStore.data.town])
 
   let markers: any[] = []
 
@@ -278,7 +277,7 @@ const MapView = () => {
   const searchStyle = css`
     display: flex;
     justidy-content: space-around;
-    margin: 10px 0;
+    margin: 50px 0 10px 0;
   `
   const buttonStyle = css`
     width: 59%;

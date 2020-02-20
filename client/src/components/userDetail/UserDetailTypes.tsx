@@ -1,15 +1,15 @@
 import * as H from 'history'
 export type UserInfoType = {
     id : number
-    email : String
-    phoneNum : String
-    nickname : String
+    email : string
+    phoneNum : string
+    nickname : string
     gender : number
-    introduction : String
-    city : String
-    town : String
+    introduction : string
+    city : string
+    town : string
     evaluation : number
-    profilePhotoDir : String 
+    profilePhotoDir : string 
     interestDTOList : Interest[]
     ledStudyList : LedStudy[]
     joinedStudyList : JoinedStudy[]
@@ -30,12 +30,12 @@ export type Interest = {
 
  export type LedStudy = {
     id : number
-    title : String 
+    title : string 
     state : number
     maxParticipants : number
     isOnline : boolean
-    startDate : String
-    endDate : String
+    startDate : string
+    endDate : string
     joinedMemberCount : number
  }
 
@@ -46,11 +46,11 @@ export type Interest = {
 
  export type study = {
     id : number
-    title : String 
+    title : string 
     state : number
     maxParticipants : number
     isOnline : boolean
-    startDate: String 
-    endDate : String 
+    startDate: string 
+    endDate : string 
     joinedMemberCount : number
  }
