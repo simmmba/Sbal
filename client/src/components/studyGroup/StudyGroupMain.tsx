@@ -14,6 +14,7 @@ import { useEffect } from 'react'
 import { useLocalStore, useObserver } from 'mobx-react'
 import StudyStore from '../../stores/StudyStore'
 import ScrollToTop from '../ScrollToTop'
+import MapView from "../map/MapView";
 
 const StudyGroupMain = ({ id }: { id: number }) => {
   useEffect(() => {
