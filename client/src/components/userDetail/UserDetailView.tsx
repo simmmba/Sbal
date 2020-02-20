@@ -435,7 +435,7 @@ const UserDetail = () => {
                           </td>
                           <td css={td}>
                             {' '}
-                            {ledStudy.joinedMemberCount}/
+                            {ledStudy.joinedMemberCount} /{' '}
                             {ledStudy.maxParticipants}{' '}
                           </td>
                         </tr>
