@@ -1,8 +1,6 @@
 import { observable } from 'mobx'
 import * as studyAPI from '../lib/api/study'
 import { StudyDetailStoreType } from '../components/studyDetail/StudyDetailTypes'
-import { timingSafeEqual } from 'crypto'
-import { FaTintSlash } from 'react-icons/fa'
 import * as H from 'history'
 import { message } from 'antd'
 
@@ -71,9 +69,11 @@ const studyDetailStore: StudyDetailStoreType = observable({
 
   async updateStudyMember(studyId: number, userId: number, state: number) {
     try {
-      const res = await studyAPI.studyMemberUpdate(studyId, userId, state)
+      await studyAPI.studyMemberUpdate(studyId, userId, state)
       this.studyDetail()
-    } catch (error) {}
+    } catch (error) {
+      alert('수정 중 오류가 발생하였습니다.')
+    }
   },
 
   // async down(studyId: number, userId: number) {
@@ -86,7 +86,7 @@ const studyDetailStore: StudyDetailStoreType = observable({
   async studyTodo() {
     try {
       this.data.state = 1
-      const res = await studyAPI.studyUpdate(this.data)
+      await studyAPI.studyUpdate(this.data)
       this.studyDetail()
     } catch (error) {
       message.error('스터디 진행에 실패하였습니다.')
@@ -95,7 +95,7 @@ const studyDetailStore: StudyDetailStoreType = observable({
 
   async insertMember(studyId: number) {
     try {
-      const res = await studyAPI.insertMember(studyId)
+      await studyAPI.insertMember(studyId)
       message.info('신청 되었습니다.')
       this.studyDetail()
     } catch (error) {
@@ -105,7 +105,7 @@ const studyDetailStore: StudyDetailStoreType = observable({
 
   async deleteStudy(studyId: number, history: H.History) {
     try {
-      const res = await studyAPI.deleteStudy(studyId)
+      await studyAPI.deleteStudy(studyId)
       message.info('스터디가 삭제 되었습니다.')
       history.push('/')
     } catch {
@@ -115,9 +115,12 @@ const studyDetailStore: StudyDetailStoreType = observable({
 
   async deleteStudyMember(studyId: number, state: number) {
     try {
-      const res = await studyAPI.studyDelete(studyId)
-      if (state === 1) alert('신청이 취소 되었습니다.')
-      else if (state === 2) alert('탈퇴 되었습니다.')
+      await studyAPI.studyDelete(studyId)
+      if (state === 1) {
+        alert('신청이 취소 되었습니다.')
+      } else if (state === 2) {
+        alert('탈퇴 되었습니다.')
+      }
       this.studyDetail()
     } catch (error) {
       message.error('요청에 실패하였습니다.')
@@ -128,14 +131,10 @@ const studyDetailStore: StudyDetailStoreType = observable({
     try {
       this.studyMember = 0
       this.studyRequest = 0
-      const res = await studyAPI.studyDetail(this.studyId)
-      console.log(res)
-      //const token = res.headers['jwt-auth-token']
-      //sessionStorage.setItem('token', token)
+      const res = await studyAPI.studyDetail(this.studyId);
       this.data = res.data.value
       if (this.data.studyMemberDTOList !== null) {
-        for (var i = 0; i < this.data.studyMemberDTOList.length; i++) {
-          //alert(this.data.studyMemberDTOList[i]['state'] )
+        for (let i = 0; i < this.data.studyMemberDTOList.length; i++) {
           if (this.data.studyMemberDTOList[i]['state'] === 1) {
             this.studyMember++
           } else if (this.data.studyMemberDTOList[i]['state'] === 0) {

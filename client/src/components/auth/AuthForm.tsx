@@ -39,7 +39,7 @@ function AuthForm({ type, history }: RouteComponentProps & AuthFormProps) {
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       history.push('/signup/form')
     },
-    []
+    [history]
   )
 
   const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
@@ -50,7 +50,7 @@ function AuthForm({ type, history }: RouteComponentProps & AuthFormProps) {
     UserStore.login(dataToSend, history)
     e.preventDefault()
     // history.push('/mypage')
-  }, [])
+  }, [state, history])
 
   const headerText = textMapForHeader[type]
   const footerText = textMapForFooter[type]

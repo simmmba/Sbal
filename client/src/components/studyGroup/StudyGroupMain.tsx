@@ -18,7 +18,7 @@ import ScrollToTop from '../ScrollToTop'
 const StudyGroupMain = ({ id }: { id: number }) => {
   useEffect(() => {
     StudyStore.fetchStudyGroup(Number(id))
-  }, [])
+  }, [id])
 
   const title = css`
     padding: 15px 10px 10px 23px;

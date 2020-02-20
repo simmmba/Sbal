@@ -2,7 +2,7 @@
 import { css, jsx } from '@emotion/core'
 import styled from '@emotion/styled'
 import palette from '../../lib/styles/palette'
-import { Card, Avatar } from 'antd'
+import { Avatar } from 'antd'
 import { Study } from './StudyTypes'
 import moment from 'moment'
 import { CalenderIcon, PlaceIcon, StarIcon } from '../common/Icons'

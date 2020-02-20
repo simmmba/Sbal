@@ -63,25 +63,6 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
   `
 
   const history = useHistory()
-  useEffect(() => {
-    if (type === 'mypage/update') {
-      UserDetailStore.mypage()
-      getMyInfoDetailsForModify()
-        .then(res => {
-          const data = res.data.value
-          state.email = data.email
-          state.nickname = data.nickname
-          state.phoneNumber = data.phoneNum
-          state.city = data.city.substr(0, 2)
-          state.town = data.town
-          state.introduction = data.introduction
-          state.interestList = data.interestDTOList
-        })
-        .catch(e => {
-          message.error(e)
-        })
-    }
-  }, [])
   const state: SignupState = useLocalStore<SignupState>(() => ({
     email: '',
     emailState: false,
@@ -172,6 +153,26 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
     }
   }))
 
+  useEffect(() => {
+    if (type === 'mypage/update') {
+      UserDetailStore.mypage()
+      getMyInfoDetailsForModify()
+          .then(res => {
+            const data = res.data.value
+            state.email = data.email
+            state.nickname = data.nickname
+            state.phoneNumber = data.phoneNum
+            state.city = data.city.substr(0, 2)
+            state.town = data.town
+            state.introduction = data.introduction
+            state.interestList = data.interestDTOList
+          })
+          .catch(e => {
+            message.error(e)
+          })
+    }
+  }, [state, type])
+
   const fetchSocialData = async () => {
     const query = qs.parse(location.search, { ignoreQueryPrefix: true })
     const kakaoAccessToken = query.code
@@ -183,6 +184,9 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
     }
     if (nickname) {
       // dispatch({ type: 'CREATE', field: 'nickname', value: nickname })
+    }
+    if(socialLogin) {
+      // something
     }
   }
   if (type === 'signup/oauth') {

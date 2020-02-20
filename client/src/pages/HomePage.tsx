@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 /***@jsx jsx */
-import { jsx, css } from '@emotion/core'
+import { css, jsx } from '@emotion/core'
 import MainStudylist from '../components/main/MainStudyList'
 import { loadToken } from '../utils/authCheck'
 import { useObserver } from 'mobx-react'
@@ -12,12 +12,12 @@ const HomePage = () => {
   }, [])
 
   const images = [
-    'images/1080_360_2.jpg',
-    'images/1080_360_3.jpg',
-    'images/1080_360_4.jpg',
-    'images/1080_360_5.jpg',
-    'images/1080_360_6.jpg',
-    'images/1080_360_1.jpeg'
+    'http://i02a306.p.ssafy.io/images/index/1080_360_2.jpg',
+    'http://i02a306.p.ssafy.io/images/index/1080_360_3.jpg',
+    'http://i02a306.p.ssafy.io/images/index/1080_360_4.jpg',
+    'http://i02a306.p.ssafy.io/images/index/1080_360_5.jpg',
+    'http://i02a306.p.ssafy.io/images/index/1080_360_6.jpg',
+    'http://i02a306.p.ssafy.io/images/index/1080_360_1.jpeg'
   ]
 
   const back = css`

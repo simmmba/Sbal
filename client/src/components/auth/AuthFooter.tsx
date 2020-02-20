@@ -2,7 +2,7 @@ import React from 'react'
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
 import palette from '../../lib/styles/palette'
-import { SocialButton, FbIcon, KakaoIcon, NaverIcon } from './AuthStyled'
+import { SocialButton, KakaoIcon } from './AuthStyled'
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -15,8 +15,8 @@ function AuthFooter() {
   const clientId = process.env.REACT_APP_KAKAO_REST_KEY
   const redirectURI = 'http://70.12.247.80:3000/signup/oauth'
   const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectURI}&response_type=code`
-  const naverURL =
-    'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=ZaZ22Ro1uzKMK_w_pbkX&redirect_uri=http%3A%2F%2F70.12.247.32%3A8080%2Fuser%2Fauth%2Fnaver%2Fcallback&scope=profile'
+  // const naverURL =
+  //   'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=ZaZ22Ro1uzKMK_w_pbkX&redirect_uri=http%3A%2F%2F70.12.247.32%3A8080%2Fuser%2Fauth%2Fnaver%2Fcallback&scope=profile'
   return (
     <div>
       <h4 css={css`

@@ -9,7 +9,7 @@ import { css, jsx } from '@emotion/core'
 import { Display } from '../Display'
 import { FaEye } from 'react-icons/fa'
 import StudyDetailStore from '../../stores/StudyDetailStore'
-import { Descriptions, Modal, message } from 'antd'
+import { Descriptions, Modal } from 'antd'
 import { useHistory } from 'react-router'
 import CreateForm from '../studyList/CreateForm'
 
@@ -108,13 +108,13 @@ const StudyDetails = () => {
     width: 100%;
   `
 
-  const link = css`
-    color: navy;
-
-    &:hover {
-      color: navy;
-    }
-  `
+  // const link = css`
+  //   color: navy;
+  //
+  //   &:hover {
+  //     color: navy;
+  //   }
+  // `
 
   return useObserver(() => (
     <div>
@@ -304,7 +304,7 @@ const StudyDetails = () => {
                   {StudyDetailStore.data.endDate}
                 </Descriptions.Item>
                 <Descriptions.Item label="장소">
-                  {StudyDetailStore.data.isOnline === false
+                  {!StudyDetailStore.data.isOnline
                     ? StudyDetailStore.data.city +
                       ' ' +
                       StudyDetailStore.data.town

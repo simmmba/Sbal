@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useObserver } from 'mobx-react'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'

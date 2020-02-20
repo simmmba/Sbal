@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
-import palette from '../../lib/styles/palette'
 
 type ButtonProps = {
   children: React.ReactNode

@@ -1,6 +1,6 @@
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useObserver } from 'mobx-react'
 import StudyList from '../components/studyList/StudyList'
 import { useHistory } from 'react-router'
