@@ -80,8 +80,9 @@ public class Study {
     }
 
     public StudyDTO mainPageDTO() {
-        StudyDTO studyDTO = new StudyDTO(id, title, null, new UserDTO(leader.getId(), leader.getNickname()),
-
+        UserDTO leaderDTO = new UserDTO(leader.getId(), leader.getNickname());
+        leaderDTO.setProfilePhotoDir(leader.getProfilePhotoDir());
+        StudyDTO studyDTO = new StudyDTO(id, title, null, leaderDTO,
                 lCategory, sCategory, city, town, state, maxParticipants, hits, isOnline, monthOrWeek,
                 frequency, weekdayOrWeekend, timeslot, evaluationLimit, enrollDate,
                 startDate, endDate, null, null, null, null);
