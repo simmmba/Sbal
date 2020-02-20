@@ -4,6 +4,7 @@ export type Study = {
     leader: {
         id: number,
         nickname: string,
+        profilePhotoDir: string
     },
     city: string,
     town: string,
