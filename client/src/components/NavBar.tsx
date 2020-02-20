@@ -21,8 +21,8 @@ const Logo = styled(Link)`
   margin-right: auto;
   color: ${palette.violet[0]};
   transition: 0.3s;
-  text-shadow: -2px 0 ${palette.violet[9]}, 0 2px ${palette.violet[9]},
-    2px 0 ${palette.violet[9]}, 0 -2px ${palette.violet[9]};
+  text-shadow: -1px 0 ${palette.violet[4]}, 0 1px ${palette.violet[4]},
+    1px 0 ${palette.violet[4]}, 0 -1px ${palette.violet[4]};
 
   &:hover {
     color: ${palette.violet[1]};

@@ -17,6 +17,7 @@ const cardStyle = css`
   border-radius: 30px;
   padding: 15px;
   color: white;
+  
   background: ${palette.violet[3]};
   margin: 10px;
   cursor: pointer;
@@ -36,7 +37,7 @@ const titleContainer = css`
   justify-content: space-between;
   align-items: center;
   padding: 5px;
-
+  text-shadow: 1px 1px 2px ${palette.violet[9]};
   margin-bottom: 20px;
 `
 const marginThree = css`
@@ -65,6 +66,7 @@ const footerContainerLeft = css`
   justify-content: flex-start;
   align-items: center;
   margin-top: 20px;
+  text-shadow: 1px 1px 2px ${palette.violet[9]};
 `
 const categoryStyle = css`
   background: ${palette.yellow[3]};
@@ -78,6 +80,7 @@ const footerContainerRight = css`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  text-shadow: 1px 1px 2px ${palette.violet[9]};
 `
 const containerRight = css`
   display: flex;
