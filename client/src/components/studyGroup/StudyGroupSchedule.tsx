@@ -235,7 +235,6 @@ const StudyGroupSchedule = () => {
         okText="확인"
         destroyOnClose={true}
         width={500}
-        footer={null}
       >
         <Score scheduleIndex={attendanceIndex} />
       </Modal>
