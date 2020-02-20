@@ -210,16 +210,28 @@ public class UserController {
         }
     }
 
-    @PutMapping("/profileUpload")
-    public User profileUpload(@RequestParam("file") MultipartFile file, @RequestParam("userid") int userid) {
-        User user = userService.findById(userid);
-        if (!user.getProfilePhotoDir().equals("default")) {
-            profileService.deleteFile(user.getProfilePhotoDir());
+    @PostMapping("/profileUpload")
+    public ResponseEntity<CommonResponse> profileUpload(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+        try {
+            int loginUserId = jwtService.getLoginUserId(request);
+            User user = userService.findById(loginUserId);
+            if (!user.getProfilePhotoDir().equals("default.png")) {
+                profileService.deleteFile(user.getProfilePhotoDir());
+            }
+            String fileName = profileService.saveFile(file, user.getId() + "");
+            if(fileName != null) {
+                user.setProfilePhotoDir(fileName);
+            }
+            //System.out.println(fileName);
+            UserDTO userDTO = userService.update(user).myPageDTO();
+
+            return new ResponseEntity<>(new CommonResponse(userDTO,"profileUpload", "SUCCESS", "프로필 사진 변경 완료."), HttpStatus.OK);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            throw new RuntimeException("profileUpload");
+            //return new ResponseEntity<>(new CommonResponse("profileUpload", "FAIL", "사용할 수 없는 이메일입니다."), HttpStatus.OK);
         }
-        String fileName = profileService.saveFile(file, user.getId() + "");
-        user.setProfilePhotoDir(fileName);
-        user = userService.update(user);
-        return user;
+
     }
 
     @PostMapping(value = "/auth")

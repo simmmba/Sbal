@@ -30,7 +30,7 @@ public class UserService {
 
         user.setPw(passwordEncoder.encode(user.getPw()));
         user.setEvaluation(100.0);
-        user.setProfilePhotoDir("/profile_images/default.jpg");
+        user.setProfilePhotoDir("default.png");
         //user.setSocialLogin(null);
         user = uRepo.save(user);
 
