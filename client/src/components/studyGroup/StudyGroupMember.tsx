@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
-import { Icon, Empty, Modal, Progress } from 'antd'
+import { Icon, Empty, Modal, Progress, Avatar } from 'antd'
 import { StudyMember } from './StudyGroupType'
 import { useObserver } from 'mobx-react'
 import StudyStore from '../../stores/StudyStore'
@@ -9,7 +9,6 @@ import UserDetailStore from '../../stores/UserDetailStore'
 import { Interest } from '../userDetail/UserDetailTypes'
 
 const StudyGroupMember = () => {
-
   const main = css`
     display: flex;
     flex-direction: column;
@@ -113,7 +112,7 @@ const StudyGroupMember = () => {
     justify-content: center;
     align-items: center;
     width: 150px;
-    height: auto;
+    height: 150px;
 
     @media (max-width: 415px) {
       width: 200px;
@@ -149,7 +148,6 @@ const StudyGroupMember = () => {
   const top = css`
     display: flex;
     justify-content: center;
-    align-items: center;
     font-weight: bold;
     padding-top: 20px;
     margin-bottom: 20px;
@@ -205,9 +203,12 @@ const StudyGroupMember = () => {
       >
         <div css={top}>
           <div css={left}>
-            <img
+            <Avatar
               css={img}
-              src="http://i02a306.p.ssafy.io/images/default.png"
+              src={
+                'http://13.124.98.149/images/' +
+                UserDetailStore.data.profilePhotoDir
+              }
               alt="프로필"
             />
           </div>
@@ -271,7 +272,7 @@ const StudyGroupMember = () => {
         <div css={list}>
           <div css={num}>순번</div>
           <div css={listNickname}>닉네임</div>
-          <div css={attendance}>아이디</div>
+          <div css={attendance}>성실도</div>
           <div css={date}>상태</div>
         </div>
       ) : (

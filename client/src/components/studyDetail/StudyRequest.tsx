@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
-import { Modal, Progress } from 'antd'
+import { Modal, Progress, Avatar } from 'antd'
 import { studyMember } from '../studyDetail/StudyDetailTypes'
 import StudyDetailStore from '../../stores/StudyDetailStore'
 import UserDetailStore from '../../stores/UserDetailStore'
@@ -201,7 +201,7 @@ const StudyRequest = () => {
     justify-content: center;
     align-items: center;
     width: 150px;
-    height: auto;
+    height: 150px;
 
     @media (max-width: 415px) {
       width: 200px;
@@ -321,9 +321,12 @@ const StudyRequest = () => {
       >
         <div css={modalTop}>
           <div css={left}>
-            <img
+            <Avatar
               css={img}
-              src="http://i02a306.p.ssafy.io/images/default.png"
+              src={
+                'http://13.124.98.149/images/' +
+                UserDetailStore.data.profilePhotoDir
+              }
               alt="프로필"
             />
           </div>

@@ -145,11 +145,14 @@ function StudyCard({
       <div>
         <div css={footerContainerLeft}>
           <Avatar
+            // src={
+            //   'http://13.124.98.149/images/' +
+            //   UserDetailStore.data.profilePhotoDir
+            // }
             icon="user"
             css={css`
               margin-right: 5px;
             `}
-            src={study.leader.profilePhotoDir}
           />
           <span>{study.leader.nickname} (리더)</span>
         </div>
