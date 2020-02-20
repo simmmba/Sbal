@@ -17,7 +17,7 @@ const NavButtonStyle = css`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center
+  align-items: center;
   height: 100%;
   padding: 5px;
   background: none;

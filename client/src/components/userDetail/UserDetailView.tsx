@@ -77,12 +77,13 @@ const img = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 150px;
-  height: auto;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
 
-  @media (max-width: 415px) {
+  @media (max-width: 815px) {
     width: 100px;
-    height: auto;
+    height: 100px;
   }
 `
 
@@ -170,6 +171,9 @@ const link = css`
   &:hover {
     background-color: #f3f0ff;
   }
+  @media screen and (min-width: 815px) {
+    display: none;
+  }
 `
 const UserDetail = () => {
   const history = useHistory()
@@ -240,7 +244,6 @@ const UserDetail = () => {
             <div css={nickname}>{UserDetailStore.data.nickname}</div>
           </div>
           <div css={second}>
-            }))
             <span css={text}>
               참여중인 스터디&nbsp;&nbsp;
               <b>

@@ -5,10 +5,12 @@ import MainStudylist from '../components/main/MainStudyList'
 import { loadToken } from '../utils/authCheck'
 import { useObserver } from 'mobx-react'
 import { Carousel } from 'antd'
+import { useHistory } from 'react-router'
 
 const HomePage = () => {
+  const history = useHistory()
   useEffect(() => {
-    loadToken()
+    loadToken(history)
   }, [])
 
   const images = [

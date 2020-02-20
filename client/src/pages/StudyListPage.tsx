@@ -15,10 +15,9 @@ const StudyListPage = () => {
   // }))
 
   useEffect(() => {
-    loadToken()
-    authCheck(history)
+    loadToken(history)
     StudyStore.getStudyList()
-  }, [history])
+  }, [])
   return useObserver(() => (
     <div>
       <SearchForm

@@ -10,7 +10,7 @@ const UserInfoPage = () => {
   const { id } = useParams()
   UserDetailStore.userInfo(Number(id))
   useEffect(() => {
-    loadToken()
+    loadToken(history)
     authCheck(history)
   }, [history])
   return (

@@ -15,7 +15,7 @@ const StyledContainer = styled.div`
 const CreatePage = () => {
   const history = useHistory()
   useEffect(() => {
-    loadToken()
+    loadToken(history)
     authCheck(history)
   }, [history])
 
