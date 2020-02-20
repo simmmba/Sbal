@@ -115,7 +115,7 @@ const StudyMember = () => {
     &:hover {
       font-weight: bold;
     }
-  `
+`
 
   const detailNickname = css`
     font-size: 25px;
@@ -229,6 +229,7 @@ const StudyMember = () => {
                     🙋‍♂️&nbsp;{studyMember.user.nickname}
                   </td>
                 )}
+
 
               {studyMember.state === 1 &&
                 studyMember.user.id + '' === sessionStorage.getItem('id') && (
