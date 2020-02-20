@@ -9,6 +9,7 @@ import { useHistory } from 'react-router'
 import palette from '../lib/styles/palette'
 
 const HomePage = () => {
+  
   const history = useHistory()
   useEffect(() => {
     loadToken(history)

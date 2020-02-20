@@ -833,19 +833,7 @@ const UserStore = observable<UserStoreType>({
     }
   },
 
-  // async mypage() {
-  //   this.isLoggingIn = true
-  //   try {
-  //     const res = await userDetail.userInfo()
-  //     this.isLoggingIn = false
-  //     // this.data = res.data.value.nickname
-  //     this.data = res.data
-  //     alert(this.data)
-  //   } catch (error) {
-  //     alert('사용자 정보를 가져오지 못했습니다.')
-  //     this.isLoggingIn = false
-  //   }
-  // },
+
 
   async login(data: LoginData, history: H.History) {
     this.isLoggingIn = true
@@ -897,15 +885,6 @@ const UserStore = observable<UserStoreType>({
     history.push('/mypage')
   },
 
-  // signout() {},
-  //
-  // async getMyInfoDetails() {
-  //   try {
-  //     const res = await userAPI.getMyInfoDetailsForModify()
-  //   } catch (e) {
-  //     message.error('정보 조회에 실패했습니다.')
-  //   }
-  // }
 })
 
 export default UserStore

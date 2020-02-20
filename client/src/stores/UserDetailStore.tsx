@@ -3,6 +3,7 @@ import * as userDetail from '../lib/api/userDetail'
 import { UserDetailStoreType } from '../components/userDetail/UserDetailTypes'
 import * as studyAPI from '../lib/api/study'
 import * as H from 'history'
+import { message } from 'antd'
 
 const UserDetailStore: UserDetailStoreType = observable({
   // isLoggingIn : false,
@@ -43,7 +44,7 @@ const UserDetailStore: UserDetailStoreType = observable({
         }
       }
     } catch (error) {
-      alert('사용자 정보를 가져오지 못했습니다.')
+      message.error('사용자 정보를 가져오지 못했습니다.')
     }
   },
 

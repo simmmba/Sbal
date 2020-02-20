@@ -71,34 +71,58 @@ const studyDetailStore: StudyDetailStoreType = observable({
 
   async updateStudyMember(studyId: number, userId: number, state: number) {
     try {
-      await studyAPI.studyMemberUpdate(studyId, userId, state)
+      if(state===1){
+        if(window.confirm("수락 하시겠습니까?")){
+          await studyAPI.studyMemberUpdate(studyId, userId, state)
+          message.info("수락 되었습니다.")
+        } else return;
+      } else if(state ===2){
+        if(window.confirm("거절 하시겠습니까?")){
+          await studyAPI.studyMemberUpdate(studyId, userId, state)
+          message.info("거절 되었습니다.")
+        } else return;
+      }
+      else if(state===3){
+        if(window.confirm("정말 내보내시겠습니까?")){
+          await studyAPI.studyMemberUpdate(studyId, userId, state)
+          message.info("완료 되었습니다.")
+        } else return;
+      }
       this.studyDetail()
     } catch (error) {
       alert('수정 중 오류가 발생하였습니다.')
     }
   },
 
-  // async down(studyId: number, userId: number) {
-  //   try {
-  //     const res = await studyAPI.studyMemberUpdate(studyId, userId, 2)
-  //     this.studyDetail()
-  //   } catch (error) {}
-  // },
 
   async studyTodo(state : number) {
     try {
-      this.data.state = state
-      await studyAPI.studyUpdate(this.data)
+      if(state==1){
+        if(window.confirm("스터디를 진행 하시겠습니까?")){
+          this.data.state = state
+          await studyAPI.studyUpdate(this.data)
+          message.info('스터디가 시작 되었습니다.')
+        } else return
+        
+      }else if(state == 2) {
+        if(window.confirm("스터디를 종료 하시겠습니까?")){
+          this.data.state = state
+          await studyAPI.studyUpdate(this.data)
+          message.info('스터디가 종료 되었습니다.')
+        } else return
+      }   
       this.studyDetail()
     } catch (error) {
-      message.error('스터디 진행에 실패하였습니다.')
+      message.error('실패하였습니다.')
     }
   },
 
   async insertMember(studyId: number) {
     try {
-      await studyAPI.insertMember(studyId)
-      message.info('신청 되었습니다.')
+      if(window.confirm("스터디를 신청 하시겠습니까?")){
+        await studyAPI.insertMember(studyId)
+        message.info('신청 되었습니다.')
+      } else return  
       this.studyDetail()
     } catch (error) {
       message.error('요청에 실패하였습니다.')
@@ -107,9 +131,12 @@ const studyDetailStore: StudyDetailStoreType = observable({
 
   async deleteStudy(studyId: number, history: H.History) {
     try {
-      await studyAPI.deleteStudy(studyId)
-      message.info('스터디가 삭제 되었습니다.')
-      history.push('/')
+      if(window.confirm("스터디를 삭제 하시겠습니까?")){
+        await studyAPI.deleteStudy(studyId)
+        message.info('스터디가 삭제 되었습니다.')
+        history.push('/')
+      } else return;
+      
     } catch {
       message.error('스터디 삭제에 실패하였습니다.')
     }
@@ -117,11 +144,19 @@ const studyDetailStore: StudyDetailStoreType = observable({
 
   async deleteStudyMember(studyId: number, state: number) {
     try {
-      await studyAPI.studyDelete(studyId)
+     
       if (state === 1) {
-        alert('신청이 취소 되었습니다.')
+        if(window.confirm("신청을 취소 하시겠습니까?")){
+          await studyAPI.studyDelete(studyId)
+          message.info('신청이 취소 되었습니다.')
+        }else return
+        
       } else if (state === 2) {
-        alert('탈퇴 되었습니다.')
+        if(window.confirm("탈퇴 하시겠습니까?")){
+          await studyAPI.studyDelete(studyId)
+          message.info('탈퇴 되었습니다.')
+        }else return
+        
       }
       this.studyDetail()
     } catch (error) {

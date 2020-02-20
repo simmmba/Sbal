@@ -57,7 +57,6 @@ const StudyGroupMain = ({ id }: { id: number }) => {
       margin-left: 0;
     }
   `
-
   const menu = css`
     margin-top: 50px;
     display: flex;
@@ -97,8 +96,6 @@ const StudyGroupMain = ({ id }: { id: number }) => {
                       flexWrap: 'wrap'
                     }
               }
-              // defaultSelectedKeys={['schedule']}
-              // defaultOpenKeys={['sub1']}
               mode={state.width >= 815 ? 'inline' : 'horizontal'}
               selectable={false}
             >
