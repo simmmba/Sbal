@@ -4,11 +4,12 @@ import { jsx, css } from '@emotion/core'
 import StudyStore from '../../stores/StudyStore'
 import { useObserver } from 'mobx-react'
 import StudyRank from './StudyRank'
+import palette from '../../lib/styles/palette'
 
 const studyRank = css`
   display: flex;
   justify-content: space-around;
-  background: #e5dbff;
+  background: ${palette.violet[0]};
   flex-wrap: wrap;
   padding: 20px 20px 100px 20px;
 `

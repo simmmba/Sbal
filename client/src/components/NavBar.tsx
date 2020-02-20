@@ -28,7 +28,7 @@ const Logo = styled(Link)`
 
 const NavFixBlock = styled.div`
   position: fixed;
-  background: ${palette.violet[5]};
+  background: ${palette.violet[4]};
   width: 100%;
   z-index: 10;
   height: 4rem;
