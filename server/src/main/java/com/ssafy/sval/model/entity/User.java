@@ -44,10 +44,11 @@ public class User {
         if(interestList != null) for (UserInterest ui : interestList) userInterestDTOList.add(ui.toDTO());
         user.setInterestDTOList(userInterestDTOList);
 
+
         List<StudyMemberDTO> joinedStudyDTOList = new ArrayList<>();
         if(joinedStudyList != null) {
             for (StudyMember sm : joinedStudyList)
-                if(sm.state==1) joinedStudyDTOList.add(sm.toStudiesDTO());
+                if(sm.state==1 && sm.getStudy().getState() != 2) joinedStudyDTOList.add(sm.toStudiesDTO());
         }
         user.setJoinedStudyList(joinedStudyDTOList);
         return user;
