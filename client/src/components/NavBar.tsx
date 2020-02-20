@@ -89,10 +89,10 @@ const StyledLinkPhone = styled(NavLink)`
 const StyledButton = styled(Button)`
   padding: auto 0;
   transition: 0.3s;
-  background-color: ${palette.violet[1]};
+  background-color: ${palette.violet[2]};
 
   &:hover {
-    background-color: ${palette.violet[2]};
+    background-color: ${palette.violet[1]};
   }
   @media (max-width: 815px) {
     display: none;

@@ -283,7 +283,7 @@ const MapView = () => {
     width: 59%;
     font-size: 18px;
     font-weight: bold;
-    border: 1px solid white;
+    border: 2px solid white;
     border-radius: 5px;
     background: ${palette.violet[4]};
     padding: 10px 0;
