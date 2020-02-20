@@ -42,7 +42,7 @@ const marginThree = css`
 
 const titleStyle = css`
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.08rem;
 `
 
 const Row = styled.div`
@@ -63,8 +63,19 @@ const footerContainerLeft = css`
   align-items: center;
   margin-top: 20px;
 `
+const categoryStyle = css`
+  background: ${palette.yellow[3]};
+  border-left: 10px solid ${palette.yellow[6]};
+  padding: 0 5px;
+  color: black;
+`
 
-const footerContainerRigth = css`
+const footerContainerRight = css`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+`
+const containerRight = css`
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -86,10 +97,15 @@ function StudyCard({
 
   return (
     <button css={cardStyle} onClick={onClick}>
+      <div css={containerRight}>
+        <span css={categoryStyle}>
+          {study.lcategory} > {study.scategory}
+        </span>
+      </div>
       <div css={titleContainer}>
         <span css={titleStyle}>
-          {study.title.length > 11
-            ? study.title.slice(0, 12) + '...'
+          {study.title.length > 10
+            ? study.title.slice(0, 11) + '...'
             : study.title}
         </span>
         <span>
@@ -130,7 +146,7 @@ function StudyCard({
           <span>{study.leader.nickname} (리더)</span>
         </div>
       </div>
-      <div css={footerContainerRigth}>
+      <div css={footerContainerRight}>
         <span>{moment(study.enrollDate, 'YYYY-MM-DD').fromNow()}...</span>
       </div>
     </button>

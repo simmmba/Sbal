@@ -15,7 +15,7 @@ const listBox = css`
 const listTitle = css`
   font-size: 16px;
   font-weight: 900;
-  color: grey;
+  color: black;
   margin-bottom: 10px;
   margin-left: 10px;
 `
@@ -72,10 +72,10 @@ const link = css`
   height: 30px;
   transition: 0.3s;
   /* border: 2px solid #e5dbff; */
-    background: #e5dbff;
-  
+  background: #e5dbff;
+
   &:hover {
-  background-color: #f3f0ff;
+    background-color: #f3f0ff;
   }
 `
 
