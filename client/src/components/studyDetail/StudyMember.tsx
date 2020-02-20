@@ -240,36 +240,7 @@ const StudyMember = () => {
               </tr>
             )
           )}
-          {StudyDetailStore.data.studyMemberDTOList.map(
-            (studyMember: studyMember, index: number) => (
-              <tr key={index}>
-                {/* 본인이 아닐 때 */}
-                {studyMember.state === 1 &&
-                  studyMember.user.id + '' !== sessionStorage.getItem('id') && (
-                    <td css={td}>
-                      <button
-                        css={memberInfoBtn}
-                        onClick={() => showModal(studyMember.user.id)}
-                      >
-                        {/* 본인이 아닌 사람이 리더일 때 */}
-                        {studyMember.user.id ===
-                          StudyDetailStore.data.leader.id && (
-                          <span role="img" aria-label={''}>
-                            👑&nbsp;
-                          </span>
-                        )}
-                        🙋‍♂️&nbsp;{studyMember.user.nickname}
-                      </button>
-                    </td>
-                  )}
 
-                {studyMember.state === 1 &&
-                  studyMember.user.id + '' === sessionStorage.getItem('id') && (
-                    <td css={td}></td>
-                  )}
-              </tr>
-            )
-          )}
           {StudyDetailStore.data.studyMemberDTOList.map(
             (studyMember: studyMember, index: number) => (
               <tr key={index}>
