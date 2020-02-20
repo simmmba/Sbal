@@ -59,7 +59,6 @@ const Attendance = ({ scheduleIndex }: { scheduleIndex: number }) => {
   `
 
   const empty = css`
-    /* border: 1px solid black; */
     height: 300px;
     display: flex;
     flex-direction: column;

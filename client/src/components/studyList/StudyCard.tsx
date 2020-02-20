@@ -10,7 +10,7 @@ import { CalenderIcon, PlaceIcon, StarIcon } from '../common/Icons'
 moment.locale('ko')
 
 const cardStyle = css`
-  width: 260px;
+  width: 280px;
   min-width: 250px;
   /* border: 1px solid ${palette.violet[3]}; */
   /* border: none; */
