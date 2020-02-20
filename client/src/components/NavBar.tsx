@@ -139,7 +139,6 @@ const NavBar = () => {
               alt="statu페이지"
             />
           </a>
-          {/* <StyledLink to="/study/1">ㅋㅋ</StyledLink> */}
           {!UserStore.token ? (
             <div>
               <StyledLinkPhone to="/signup">회원가입</StyledLinkPhone>
