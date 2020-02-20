@@ -14,7 +14,7 @@ import AuthFooter from '../components/auth/AuthFooter'
 function LoginPage({ location }: RouteComponentProps) {
   const history = useHistory()
   useEffect(() => {
-    loadToken()
+    loadToken(history)
     loggedIn(history)
   }, [history])
 
@@ -24,14 +24,17 @@ function LoginPage({ location }: RouteComponentProps) {
     <div>
       <AuthTemplate>
         {UserStore.isLoggingIn ? (
-          <div css={css`
-            text-align: center;
-            min-height: 300px;
-            font-size: 20px;
-            color: #5f3dc4;
-          `
-
-          }><br />로그인 중입니다...</div>
+          <div
+            css={css`
+              text-align: center;
+              min-height: 300px;
+              font-size: 20px;
+              color: #5f3dc4;
+            `}
+          >
+            <br />
+            로그인 중입니다...
+          </div>
         ) : (
           <div>
             <AuthForm type={path} />

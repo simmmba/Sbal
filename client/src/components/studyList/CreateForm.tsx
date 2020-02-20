@@ -2,7 +2,7 @@
 import React from 'react'
 import { useLocalStore, useObserver } from 'mobx-react'
 import { css, jsx } from '@emotion/core'
-import "../../css/custom-antd.css"
+import '../../css/custom-antd.css'
 import {
   Form,
   Radio,
@@ -211,7 +211,7 @@ function CreateForm({ form }: FormComponentProps) {
       `}
       onSubmit={handleSubmit}
     >
-      {pathname === '/study/create' && (
+      {pathname === '/study/create' ? (
         <h2
           css={css`
             text-align: center;
@@ -220,6 +220,16 @@ function CreateForm({ form }: FormComponentProps) {
           `}
         >
           스터디 개설하기
+        </h2>
+      ) : (
+        <h2
+          css={css`
+            text-align: center;
+            font-weight: bold;
+            color: #6741d9;
+          `}
+        >
+          스터디 수정하기
         </h2>
       )}
       <br />
@@ -269,7 +279,7 @@ function CreateForm({ form }: FormComponentProps) {
               <Radio.Group disabled={state.isOnlineDisabled}>
                 {isOnline.map(
                   (iO: { value: number; label: string }, index: number) => (
-                    <Radio.Button value={iO.value} key={index}>
+                    <Radio.Button value={Boolean(iO.value)} key={index}>
                       {iO.label}
                     </Radio.Button>
                   )
@@ -424,7 +434,8 @@ function CreateForm({ form }: FormComponentProps) {
                   disabled={state.checked}
                 />
               )}
-              &nbsp;&nbsp;<Checkbox
+              &nbsp;&nbsp;
+              <Checkbox
                 checked={state.checked}
                 onChange={() => {
                   state.checked = !state.checked
@@ -457,7 +468,7 @@ function CreateForm({ form }: FormComponentProps) {
           type="primary"
           htmlType="submit"
         >
-          {pathname !== '/study' ? '스터디 개설' : '필터 적용'}
+          {pathname === '/study/create' ? '스터디 개설' : '수정 완료'}
         </Button>
       </Col>
       <br />

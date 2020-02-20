@@ -60,7 +60,10 @@ const StudyStore = observable({
       await studyAPI.createStudy(studyData)
       history.push('/study')
     } catch (error) {
-      message.error('스터디 생성 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.', 2)
+      message.error(
+        '스터디 생성 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.',
+        2
+      )
     }
   },
 
@@ -69,7 +72,10 @@ const StudyStore = observable({
       await studyAPI.updateStudy(studyData)
       history.push('/study')
     } catch (error) {
-      message.error('스터디 수정 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.', 2)
+      message.error(
+        '스터디 수정 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.',
+        2
+      )
     }
   },
 
@@ -164,6 +170,14 @@ const StudyStore = observable({
     try {
       const res = await studyAPI.getStudyList()
       this.studyList = res.data.value
+      this.filterData.searchBy = 'title'
+      this.filterData.searchText = null
+      this.filterData.lcategory = null
+      this.filterData.scategory = null
+      this.filterData.city = null
+      this.filterData.town = null
+      this.filterData.weekdayOrWeekend = null
+      this.filterData.isOnline = null
     } catch (error) {
       message.error('데이터 로드에 실패했습니다. 새로고침 후 다시 이용해주세요')
     }

@@ -10,7 +10,7 @@ const StudyDetailPage = () => {
   StudyDetailStore.studyId = Number(id)
   const history = useHistory()
   useEffect(() => {
-    loadToken()
+    loadToken(history)
     authCheck(history)
   }, [history])
   return (

@@ -28,7 +28,7 @@ import {
 import { useEffect } from 'react'
 import { useHistory } from 'react-router'
 import UserDetailStore from '../../stores/UserDetailStore'
-import { message } from 'antd'
+import { message, Spin, Icon } from 'antd'
 
 function ListItem({
   interest,
@@ -56,10 +56,10 @@ function ListItem({
 
 function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
   const title = css`
-      text-align: center;
-      font-weight: bold;
-      color: #6741d9;
-      padding-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+    color: #6741d9;
+    padding-bottom: 15px;
   `
 
   const history = useHistory()
@@ -86,6 +86,8 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
     equalsOfPasswords: '',
     emailValidationCode: '',
     emailValidationInput: '',
+    emailCheckLoading: false,
+    nicknameCheckloading: false,
     onChange(e: React.ChangeEvent<HTMLInputElement>) {
       state[e.target.name] = e.target.value
       if (e.target.name === 'pw' || e.target.name === 'pw2') {
@@ -123,8 +125,10 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
         this.emailDupMessage = `올바르지 않은 이메일 양식입니다. (abc@def.com)`
         return
       }
+      this.emailCheckLoading = true
       try {
         const res = await validateEmail(state.email)
+        this.emailCheckLoading = false
         this.emailState = res.data.state === 'SUCCESS'
         if (this.emailState) {
           this.emailValidationCode = res.data.value.dice
@@ -132,6 +136,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
         this.isCheckedEmail = true
         this.emailDupMessage = res.data.message
       } catch (error) {
+        this.emailCheckLoading = false
         message.error(error)
       }
     },
@@ -142,12 +147,15 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
         this.nicknameDupMessage = '닉네임을 입력해주세요.'
         return
       }
+      this.nicknameCheckloading = true
       try {
         const res = await validateNickname(this.nickname)
+        this.nicknameCheckloading = false
         this.isCheckedNickname = true
         this.nicknameState = res.data.state === 'SUCCESS'
         this.nicknameDupMessage = res.data.message
       } catch (error) {
+        this.nicknameCheckloading = false
         message.error(error)
       }
     }
@@ -157,19 +165,19 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
     if (type === 'mypage/update') {
       UserDetailStore.mypage()
       getMyInfoDetailsForModify()
-          .then(res => {
-            const data = res.data.value
-            state.email = data.email
-            state.nickname = data.nickname
-            state.phoneNumber = data.phoneNum
-            state.city = data.city.substr(0, 2)
-            state.town = data.town
-            state.introduction = data.introduction
-            state.interestList = data.interestDTOList
-          })
-          .catch(e => {
-            message.error(e)
-          })
+        .then(res => {
+          const data = res.data.value
+          state.email = data.email
+          state.nickname = data.nickname
+          state.phoneNumber = data.phoneNum
+          state.city = data.city.substr(0, 2)
+          state.town = data.town
+          state.introduction = data.introduction
+          state.interestList = data.interestDTOList
+        })
+        .catch(e => {
+          message.error(e)
+        })
     }
   }, [state, type])
 
@@ -185,7 +193,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
     if (nickname) {
       // dispatch({ type: 'CREATE', field: 'nickname', value: nickname })
     }
-    if(socialLogin) {
+    if (socialLogin) {
       // something
     }
   }
@@ -234,7 +242,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
         state.isEqualPassword &&
         state.emailState &&
         state.nicknameState &&
-        // state.emailValidationCode === state.emailValidationInput &&
+        state.emailValidationCode === state.emailValidationInput &&
         state.interestList.length !== 0
       ) {
         const dataToSend = {
@@ -292,7 +300,15 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
               e.preventDefault()
             }}
           >
-            중복 확인
+            {state.emailCheckLoading ? (
+              <Spin
+                indicator={
+                  <Icon type="loading" style={{ color: 'white' }} spin />
+                }
+              />
+            ) : (
+              '중복 확인'
+            )}
           </StyledButton>
           <div hidden={!state.isCheckedEmail}>
             <Guide color={state.emailState ? 'green' : 'red'}>
@@ -349,7 +365,15 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
             e.preventDefault()
           }}
         >
-          중복 확인
+          {state.nicknameCheckLoading ? (
+            <Spin
+              indicator={
+                <Icon type="loading" style={{ color: 'white' }} spin />
+              }
+            />
+          ) : (
+            '중복 확인'
+          )}
         </StyledButton>
         <div hidden={!state.isCheckedNickname}>
           <Guide color={state.nicknameState ? 'green' : 'red'}>
@@ -389,7 +413,9 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
             </div>
           </div>
         )}
-        <Guide marginTop="20px"  color="#6741d9">* 아래는 추가 입력사항입니다</Guide>
+        <Guide marginTop="20px" color="#6741d9">
+          * 아래는 추가 입력사항입니다
+        </Guide>
         <StyledLabel htmlFor="email">연락처</StyledLabel>
         <StyledInput
           placeholder="휴대폰 번호를 입력하세요"
@@ -445,10 +471,11 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
           </div>
         </FlexBetween>
         <StyledLabel htmlFor="interest">관심사</StyledLabel>
-        <div 
-                css={css`
-                  margin-left: 5px;
-                `}>
+        <div
+          css={css`
+            margin-left: 5px;
+          `}
+        >
           {state.interestList.map((interest: Interest, index: number) => (
             <ListItem
               interest={interest}
@@ -494,8 +521,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
           cols={37}
           rows={7}
           onChange={state.onChangeTextarea}
-        >
-        </StyledTextarea>
+        ></StyledTextarea>
         <StyledButton width={100} marginTop={15}>
           {type === 'mypage/update' ? '수정' : '가입'}
         </StyledButton>

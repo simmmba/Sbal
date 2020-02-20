@@ -8,15 +8,17 @@ import {
   MapIcon,
   MapColorIcon,
   MyinfoIcon,
-  MyinfoColorIcon
+  MyinfoColorIcon,
+  RegisterIcon
 } from '../components/common/Icons'
 import { useHistory, useLocation } from 'react-router'
+import palette from '../lib/styles/palette'
 
 const NavButtonStyle = css`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center
+  align-items: center;
   height: 100%;
   padding: 5px;
   background: none;
@@ -30,9 +32,10 @@ const NavStyle = css`
   bottom: 0;
   width: 100%;
   height: 65px;
-  background-color: white;
+  background-color: ${palette.violet[0]};
   z-index: 30;
-  border-top: 0.5px solid gray;
+  /* border-top: 0.5px solid gray; */
+
   @media screen and (min-width: 815px) {
     display: none;
   }
@@ -111,7 +114,7 @@ function NavBarBottom() {
             handleClick('/signup/form')
           }}
         >
-          {pathname === '/map' ? <MapColorIcon /> : <MapIcon />}
+          <RegisterIcon />
         </NavButton>
       )}
       {sessionStorage.token ? (

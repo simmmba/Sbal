@@ -59,7 +59,6 @@ const Attendance = ({ scheduleIndex }: { scheduleIndex: number }) => {
   `
 
   const empty = css`
-    /* border: 1px solid black; */
     height: 300px;
     display: flex;
     flex-direction: column;
@@ -122,6 +121,7 @@ const Attendance = ({ scheduleIndex }: { scheduleIndex: number }) => {
                 <Rate
                   css={score}
                   defaultValue={sm.state / 20}
+                  allowClear={false}
                   character={<Icon type="star" theme="filled" />}
                   onChange={(value: number) => {
                     scoreChanged(value, index)

@@ -205,7 +205,11 @@ const StudyGroupMember = () => {
       >
         <div css={top}>
           <div css={left}>
-            <img css={img} src="/images/default1.png" alt="프로필" />
+            <img
+              css={img}
+              src="http://i02a306.p.ssafy.io/images/default.png"
+              alt="프로필"
+            />
           </div>
           <div css={right}>
             <div css={first}>

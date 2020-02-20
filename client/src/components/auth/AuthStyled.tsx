@@ -45,6 +45,7 @@ export const StyledLabel = styled.label`
   font-weight: bold;
   display: block;
   margin-top: 7px;
+  margin-bottom: 2px;
   color: ${palette.violet[7]};
 `
 export const StyledInput = styled.input<{ width?: number | undefined }>`
@@ -52,7 +53,7 @@ export const StyledInput = styled.input<{ width?: number | undefined }>`
   border: none;
   border-bottom: 1px solid ${palette.violet[7]};
   margin: 0px 0px 8px 0px;
-  padding: 0.4rem  0.5rem  0.2rem  0.5rem;
+  padding: 0.4rem 0.5rem 0.2rem 0.5rem;
   outline: none;
   width: ${props => (props.width ? props.width : 98)}%;
 
@@ -111,7 +112,7 @@ export const SocialButton = ({
       justify-content: center;
       margin-top: 10px;
       cursor: pointer;
-      &:hover{
+      &:hover {
         opacity: 0.7;
       }
     `}

@@ -6,19 +6,18 @@ import UserDetailStore from '../stores/UserDetailStore'
 import StudyDetailStore from '../stores/StudyDetailStore'
 
 
-
 const MapPage = () => {
 
-    const history = useHistory()
-    useEffect(() => {
-      loadToken()
-      authCheck(history)
-    }, [history])
-    return (
-      <>
-        <MapView />
-      </>
-    )
-  }
-  
-  export default MapPage
+  const history = useHistory()
+  useEffect(() => {
+    loadToken(history)
+    authCheck(history)
+  }, [history])
+  return (
+    <>
+      <MapView />
+    </>
+  )
+}
+export default MapPage
+

@@ -9,16 +9,12 @@ import SearchForm from '../components/studyList/SearchForm'
 import StudyStore from '../stores/StudyStore'
 
 const StudyListPage = () => {
-  const history = useHistory()
-  // const state = useLocalStore(() => ({
-  //   list: []
-  // }))
+  const history = useHistory();
 
   useEffect(() => {
-    loadToken()
-    authCheck(history)
+    loadToken(history)
     StudyStore.getStudyList()
-  }, [history])
+  }, [])
   return useObserver(() => (
     <div>
       <SearchForm
