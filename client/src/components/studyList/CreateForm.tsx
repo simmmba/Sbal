@@ -29,7 +29,6 @@ import { FormComponentProps } from 'antd/lib/form/Form'
 import { CheckboxChangeEvent } from 'antd/lib/checkbox/Checkbox'
 import { useHistory, useLocation } from 'react-router'
 import moment from 'moment'
-import { format } from 'path'
 
 function CreateForm({ form }: FormComponentProps) {
   const { getFieldDecorator } = form

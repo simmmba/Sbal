@@ -1,7 +1,7 @@
 /**@jsx jsx */
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { css, jsx } from '@emotion/core'
+import { jsx, css } from '@emotion/core'
 import styled from '@emotion/styled'
 
 import NavBar from './components/NavBar'

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 /***@jsx jsx */
-import { jsx, css } from '@emotion/core'
+import { css, jsx } from '@emotion/core'
 import MainStudylist from '../components/main/MainStudyList'
 import { loadToken } from '../utils/authCheck'
 import { useObserver } from 'mobx-react'

@@ -84,21 +84,21 @@ const StudyGroupBoardDetail = () => {
     align-items: center;
   `
 
-    const btn = css`
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-weight: bold;
-    color: navy;
-
-    background: #d9e5ff;
-    border-radius: 7px;
-    width: 100px;
-    height: 30px;
-  `
+  //   const btn = css`
+  //   border: none;
+  //   cursor: pointer;
+  //   display: flex;
+  //   align-items: center;
+  //   justify-content: center;
+  //   font-size: 14px;
+  //   font-weight: bold;
+  //   color: navy;
+  //
+  //   background: #d9e5ff;
+  //   border-radius: 7px;
+  //   width: 100px;
+  //   height: 30px;
+  // `
 
     const detail = css`
     display: flex;

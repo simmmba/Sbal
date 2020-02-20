@@ -1,4 +1,3 @@
-import {useEffect} from 'react'
 import {useObserver} from 'mobx-react'
 import UserDetailStore from '../../stores/UserDetailStore'
 import {Interest, LedStudy, JoinedStudy} from './UserDetailTypes'
@@ -137,12 +136,12 @@ const UserDetail = () => {
     flex-wrap: wrap;
   `
 
-    const third = css`
-    display: flex;
-    font-size: 16px;
-    flex-wrap: wrap;
-    margin-bottom: 10px;
-  `
+  //   const third = css`
+  //   display: flex;
+  //   font-size: 16px;
+  //   flex-wrap: wrap;
+  //   margin-bottom: 10px;
+  // `
 
     const comment = css`
     display: flex;
@@ -160,7 +159,7 @@ const UserDetail = () => {
         <Display>
             <div css={top}>
                 <div css={left}>
-                    <img css={img} src="/images/default1.png"/>
+                    <img alt='' css={img} src="/images/default1.png"/>
                     {UserDetailStore.data.id + '' === sessionStorage.getItem('id') && (
                         <div css={btnBox}>
                             <button css={editBtn} onClick={() => clickedUpdateButton()}>
