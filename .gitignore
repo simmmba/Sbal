@@ -33,7 +33,6 @@ build/
 .vscode/
 
 ###### react ######
-/client
 # dependencies
 /client/node_modules
 /client/.pnp
