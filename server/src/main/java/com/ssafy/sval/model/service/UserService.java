@@ -65,6 +65,7 @@ public class UserService {
     @Transactional
     public User update(User user) {
         interestRepo.deleteAllByUserId(user.getId());
+        interestRepo.flush();
         interestRepo.saveAll(user.getInterestList());
         user = uRepo.save(user);
         return user;

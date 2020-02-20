@@ -31,6 +31,7 @@ public class UserProfileService {
         fileName  = userId + fileName;
         try {
             if (fileName.contains("..")) return null;
+
             Path targetLocation = this.fileLocation.resolve(fileName);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
             return fileName;

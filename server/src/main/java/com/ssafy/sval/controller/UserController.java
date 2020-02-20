@@ -215,16 +215,16 @@ public class UserController {
         try {
             int loginUserId = jwtService.getLoginUserId(request);
             User user = userService.findById(loginUserId);
+            System.out.println(user);
             if (!user.getProfilePhotoDir().equals("default.png")) {
                 profileService.deleteFile(user.getProfilePhotoDir());
             }
             String fileName = profileService.saveFile(file, user.getId() + "");
-            if(fileName != null) {
-                user.setProfilePhotoDir(fileName);
-            }
+            if(fileName == null) fileName = "default.png";
+            user.setProfilePhotoDir(fileName);
+
             //System.out.println(fileName);
             UserDTO userDTO = userService.update(user).myPageDTO();
-
             return new ResponseEntity<>(new CommonResponse(userDTO,"profileUpload", "SUCCESS", "프로필 사진 변경 완료."), HttpStatus.OK);
         } catch (RuntimeException e) {
             e.printStackTrace();
