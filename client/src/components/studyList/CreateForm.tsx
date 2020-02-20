@@ -221,6 +221,16 @@ function CreateForm({ form }: FormComponentProps) {
         >
           스터디 개설하기
         </h2>
+      ) : pathname === '/study' ? (
+        <h2
+          css={css`
+            text-align: center;
+            font-weight: bold;
+            color: #6741d9;
+          `}
+        >
+          스터디 검색 필터
+        </h2>
       ) : (
         <h2
           css={css`
@@ -458,6 +468,7 @@ function CreateForm({ form }: FormComponentProps) {
             </Form.Item>
           </Row>
         )}
+        <br />
 
         <Button
           css={css`
@@ -468,7 +479,11 @@ function CreateForm({ form }: FormComponentProps) {
           type="primary"
           htmlType="submit"
         >
-          {pathname === '/study/create' ? '스터디 개설' : '수정 완료'}
+          {pathname === '/study/create'
+            ? '스터디 개설'
+            : pathname === '/study'
+            ? '설정 완료'
+            : '수정 완료'}
         </Button>
       </Col>
       <br />

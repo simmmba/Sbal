@@ -89,7 +89,6 @@ const SearchForm = () => {
           />
         </Button>
         <Modal
-          title="검색 필터"
           visible={StudyStore.modalVisible}
           onCancel={handleCancel}
           footer={[<div></div>]}
