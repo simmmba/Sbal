@@ -1,3 +1,4 @@
+
 import {useEffect} from 'react'
 import {useObserver, useLocalStore} from 'mobx-react'
 import UserDetailStore from '../../stores/UserDetailStore'
@@ -137,12 +138,12 @@ const UserDetail = () => {
     flex-wrap: wrap;
   `
 
-    const third = css`
-    display: flex;
-    font-size: 16px;
-    flex-wrap: wrap;
-    margin-bottom: 10px;
-  `
+  //   const third = css`
+  //   display: flex;
+  //   font-size: 16px;
+  //   flex-wrap: wrap;
+  //   margin-bottom: 10px;
+  // `
 
     const comment = css`
     display: flex;

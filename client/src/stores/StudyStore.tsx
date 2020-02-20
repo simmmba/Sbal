@@ -57,19 +57,19 @@ const StudyStore = observable({
 
   async createStudy(studyData: Study, history: H.History) {
     try {
-      const res = await studyAPI.createStudy(studyData)
+      await studyAPI.createStudy(studyData)
       history.push('/study')
     } catch (error) {
-      message.error(error)
+      message.error('스터디 생성 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.', 2)
     }
   },
 
   async updateStudy(studyData: Study, history: H.History) {
     try {
-      const res = await studyAPI.updateStudy(studyData)
+      await studyAPI.updateStudy(studyData)
       history.push('/study')
     } catch (error) {
-      message.error(error)
+      message.error('스터디 수정 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.', 2)
     }
   },
 

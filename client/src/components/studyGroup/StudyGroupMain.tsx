@@ -16,44 +16,9 @@ import StudyStore from '../../stores/StudyStore'
 import ScrollToTop from '../ScrollToTop'
 
 const StudyGroupMain = ({ id }: { id: number }) => {
-  // const study = [
-  //   {
-  //     id: 1,
-  //     name: 'React 스터디'
-  //   }
-  // ]
-  // let study: StudyGroupType = useLocalStore(() => ({
-  //     id: 0,
-  //     title: "",
-  //     contents: "",
-  //     leader: {
-  //         id: 0,
-  //         nickname: ""
-  //     },
-  //     city: "",
-  //     town: "",
-  //     state: 0,
-  //     maxParticipants: 0,
-  //     hits: 0,
-  //     isOnline: false,
-  //     monthOrWeek: 0,
-  //     timeslot: 0,
-  //     evaluationLimit: 0,
-  //     enrollDate: "",
-  //     startDate: "",
-  //     endDate: "",
-  //     joinedMemberCount: 0,
-  //     lcategory: "",
-  //     scategory: "",
-  //
-  //     studyMemberDTOList: [],
-  //     studyScheduleDTOList: [],
-  //
-  // }));
   useEffect(() => {
     StudyStore.fetchStudyGroup(Number(id))
-  }, [])
-  // const bid = 1
+  }, [id])
 
   const title = css`
     padding: 15px 10px 10px 23px;

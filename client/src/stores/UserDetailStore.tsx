@@ -2,10 +2,8 @@ import { observable } from 'mobx'
 import * as userDetail from '../lib/api/userDetail'
 import {
   UserDetailStoreType,
-  UserInfoType
 } from '../components/userDetail/UserDetailTypes'
 import * as studyAPI from '../lib/api/study'
-import { userInfo } from 'os'
 import * as H from 'history'
 
 const UserDetailStore: UserDetailStoreType = observable({

@@ -1,9 +1,7 @@
 /**@jsx jsx */
-import { useCallback } from 'react'
 import { css, jsx } from '@emotion/core'
 import { useObserver } from 'mobx-react'
 import { Input, Modal, Button, Icon, Select } from 'antd'
-import { FieldFormStoreType } from './ListTypes'
 import CreateForm from './CreateForm'
 import StudyStore from '../../stores/StudyStore'
 

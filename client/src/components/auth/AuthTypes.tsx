@@ -147,6 +147,6 @@ export type UserStoreType = {
   login: (data: LoginData, history: H.History) => void
   logout: (history: H.History) => void
   edit: (data: UpdateData, history: H.History) => void
-  signout: () => void
-  getMyInfoDetails: () => void
+  // signout: () => void
+  // getMyInfoDetails: () => void
 }

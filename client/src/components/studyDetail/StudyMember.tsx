@@ -6,11 +6,9 @@ import StudyDetailStore from '../../stores/StudyDetailStore'
 import UserDetailStore from '../../stores/UserDetailStore'
 import { studyMember } from './StudyDetailTypes'
 import { useObserver } from 'mobx-react'
-import { useHistory } from 'react-router'
 import { Interest } from '../userDetail/UserDetailTypes'
 
 const StudyMember = () => {
-  const history = useHistory()
 
   const btn = css`
     color: #5d5d5d;
@@ -74,12 +72,12 @@ const StudyMember = () => {
     justify-content: center; */
   `
 
-  const nickname = css`
-    padding-left: 30px;
-    border-top: 2px solid grey;
-    border-bottom: 2px solid #ddd;
-    color: #353535;
-  `
+  // const nickname = css`
+  //   padding-left: 30px;
+  //   border-top: 2px solid grey;
+  //   border-bottom: 2px solid #ddd;
+  //   color: #353535;
+  // `
 
   const top = css`
     padding-bottom: 30px;
@@ -227,7 +225,7 @@ const StudyMember = () => {
                   <td css={td}>
                     {/* 본인이 리더일 때 */}
                     {studyMember.user.id ===
-                      StudyDetailStore.data.leader.id && <span>👑&nbsp;</span>}
+                      StudyDetailStore.data.leader.id && <span role='img' aria-label={''}>👑&nbsp;</span>}
                     🙋‍♂️&nbsp;{studyMember.user.nickname}
                   </td>
                 )}
@@ -235,7 +233,7 @@ const StudyMember = () => {
 
               {studyMember.state === 1 &&
                 studyMember.user.id + '' === sessionStorage.getItem('id') && (
-                  <td css={td}></td>
+                  <td css={td}/>
                 )}
             </tr>
           )
@@ -254,7 +252,7 @@ const StudyMember = () => {
                       {/* 본인이 아닌 사람이 리더일 때 */}
                       {studyMember.user.id ===
                         StudyDetailStore.data.leader.id && (
-                        <span>👑&nbsp;</span>
+                        <span role='img' aria-label={''}>👑&nbsp;</span>
                       )}
                       {studyMember.user.nickname}
                     </button>
