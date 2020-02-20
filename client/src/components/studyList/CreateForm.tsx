@@ -211,7 +211,7 @@ function CreateForm({ form }: FormComponentProps) {
       `}
       onSubmit={handleSubmit}
     >
-      {pathname === '/study/create' && (
+      {pathname === '/study/create' ? (
         <h2
           css={css`
             text-align: center;
@@ -220,6 +220,16 @@ function CreateForm({ form }: FormComponentProps) {
           `}
         >
           스터디 개설하기
+        </h2>
+      ) : (
+        <h2
+          css={css`
+            text-align: center;
+            font-weight: bold;
+            color: #6741d9;
+          `}
+        >
+          스터디 수정하기
         </h2>
       )}
       <br />
@@ -458,7 +468,7 @@ function CreateForm({ form }: FormComponentProps) {
           type="primary"
           htmlType="submit"
         >
-          {pathname !== '/study' ? '스터디 개설' : '필터 적용'}
+          {pathname === '/study/create' ? '스터디 개설' : '수정 완료'}
         </Button>
       </Col>
       <br />

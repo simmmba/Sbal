@@ -7,11 +7,12 @@ import StudyDetailStore from '../../stores/StudyDetailStore'
 import UserDetailStore from '../../stores/UserDetailStore'
 import { useObserver } from 'mobx-react'
 import { Interest } from '../userDetail/UserDetailTypes'
+import palette from '../../lib/styles/palette'
 
 const StudyRequest = () => {
   const approveBtn = css`
     color: #5d5d5d;
-    background: #d9e5ff;
+    background: ${palette.violet[1]};
     font-weight: bold;
     font-size: 12px;
     border-radius: 30px;
@@ -24,15 +25,16 @@ const StudyRequest = () => {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: 0.3s;
 
     &:hover {
-      background-color: #b2ccff;
+      background: ${palette.violet[2]};
     }
   `
 
   const denyBtn = css`
     color: #5d5d5d;
-    background: #ffd8d8;
+    background: ${palette.yellow[1]};
     font-weight: bold;
     font-size: 12px;
     border-radius: 30px;
@@ -47,7 +49,7 @@ const StudyRequest = () => {
     cursor: pointer;
 
     &:hover {
-      background-color: #ffa7a7;
+      background: ${palette.yellow[2]};
     }
   `
 
@@ -244,7 +246,13 @@ const StudyRequest = () => {
         <tbody>
           <tr>
             <td colSpan={3} css={title}>
-              참여 요청 ( {StudyDetailStore.studyRequest} )
+              <span
+                css={css`
+                  color: ${palette.violet[9]};
+                `}
+              >
+                참여 요청 ( {StudyDetailStore.studyRequest} )
+              </span>
             </td>
           </tr>
           <tr>
@@ -272,18 +280,6 @@ const StudyRequest = () => {
                   <td css={td}>
                     <div css={btnBox}>
                       <button
-                        css={approveBtn}
-                        onClick={() => {
-                          StudyDetailStore.updateStudyMember(
-                            StudyDetailStore.data.id,
-                            sm.user.id,
-                            1
-                          )
-                        }}
-                      >
-                        수락
-                      </button>
-                      <button
                         css={denyBtn}
                         onClick={() => {
                           StudyDetailStore.updateStudyMember(
@@ -294,6 +290,18 @@ const StudyRequest = () => {
                         }}
                       >
                         거절
+                      </button>
+                      <button
+                        css={approveBtn}
+                        onClick={() => {
+                          StudyDetailStore.updateStudyMember(
+                            StudyDetailStore.data.id,
+                            sm.user.id,
+                            1
+                          )
+                        }}
+                      >
+                        수락
                       </button>
                     </div>
                   </td>

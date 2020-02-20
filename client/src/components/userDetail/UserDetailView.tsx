@@ -191,13 +191,7 @@ const UserDetail = () => {
   }
 
   const state = useLocalStore(() => ({
-    //filename : "http://13.124.98.149/images/"+ UserDetailStore.data.profilePhotoDir,
-    //http://13.124.98.149/images/default.png
-    //file : 'http://13.124.98.149/images/default.png',
     onChange(f: any) {
-      //this.filename  = "images/"+f[0].name;
-      //this.file = e.target.files[0];
-      //alert(f[0].type)
       const formData = new FormData()
       formData.append('file', f[0])
       UserDetailStore.upload(formData)
@@ -228,7 +222,7 @@ const UserDetail = () => {
               name="file"
               type="file"
               onChange={e => state.onChange(e.target.files)}
-            ></input>
+            />
           </form>
           {UserDetailStore.data.id + '' === sessionStorage.getItem('id') && (
             <div css={btnBox}>
@@ -304,7 +298,7 @@ const UserDetail = () => {
               <table css={table}>
                 <tbody>
                   <tr>
-                    <th css={th}></th>
+                    <th css={th} />
                     <th css={th}> 스터디명</th>
                     <th css={th}> 진행 기간</th>
                     <th css={th}> 인원</th>
@@ -382,7 +376,7 @@ const UserDetail = () => {
             <table css={table}>
               <tbody>
                 <tr>
-                  <th css={th}></th>
+                  <th css={th} />
                   <th css={th}> 스터디명</th>
                   <th css={th}> 진행 기간</th>
                   <th css={th} />
