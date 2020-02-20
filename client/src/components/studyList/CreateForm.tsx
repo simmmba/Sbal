@@ -2,7 +2,7 @@
 import React from 'react'
 import { useLocalStore, useObserver } from 'mobx-react'
 import { css, jsx } from '@emotion/core'
-import "../../css/custom-antd.css"
+import '../../css/custom-antd.css'
 import {
   Form,
   Radio,
@@ -270,7 +270,7 @@ function CreateForm({ form }: FormComponentProps) {
               <Radio.Group disabled={state.isOnlineDisabled}>
                 {isOnline.map(
                   (iO: { value: number; label: string }, index: number) => (
-                    <Radio.Button value={iO.value} key={index}>
+                    <Radio.Button value={Boolean(iO.value)} key={index}>
                       {iO.label}
                     </Radio.Button>
                   )
@@ -425,7 +425,8 @@ function CreateForm({ form }: FormComponentProps) {
                   disabled={state.checked}
                 />
               )}
-              &nbsp;&nbsp;<Checkbox
+              &nbsp;&nbsp;
+              <Checkbox
                 checked={state.checked}
                 onChange={() => {
                   state.checked = !state.checked

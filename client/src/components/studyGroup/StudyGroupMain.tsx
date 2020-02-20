@@ -16,44 +16,9 @@ import StudyStore from '../../stores/StudyStore'
 import ScrollToTop from '../ScrollToTop'
 
 const StudyGroupMain = ({ id }: { id: number }) => {
-  // const study = [
-  //   {
-  //     id: 1,
-  //     name: 'React 스터디'
-  //   }
-  // ]
-  // let study: StudyGroupType = useLocalStore(() => ({
-  //     id: 0,
-  //     title: "",
-  //     contents: "",
-  //     leader: {
-  //         id: 0,
-  //         nickname: ""
-  //     },
-  //     city: "",
-  //     town: "",
-  //     state: 0,
-  //     maxParticipants: 0,
-  //     hits: 0,
-  //     isOnline: false,
-  //     monthOrWeek: 0,
-  //     timeslot: 0,
-  //     evaluationLimit: 0,
-  //     enrollDate: "",
-  //     startDate: "",
-  //     endDate: "",
-  //     joinedMemberCount: 0,
-  //     lcategory: "",
-  //     scategory: "",
-  //
-  //     studyMemberDTOList: [],
-  //     studyScheduleDTOList: [],
-  //
-  // }));
   useEffect(() => {
     StudyStore.fetchStudyGroup(Number(id))
   }, [])
-  // const bid = 1
 
   const title = css`
     padding: 15px 10px 10px 23px;
@@ -67,16 +32,6 @@ const StudyGroupMain = ({ id }: { id: number }) => {
       color: navy;
     }
   `
-
-  // const title = css`
-  //   /* width: 100%; */
-  //   font-weight: bold;
-  //   font-size: 30px;
-  //   color: #113000;
-  //   text-align: left;
-  //   /* border: 1px solid black; */
-  //   margin-left: 10px;
-  // `
 
   const total = css`
     display: flex;
@@ -96,10 +51,15 @@ const StudyGroupMain = ({ id }: { id: number }) => {
     width: 100%;
     margin-left: 25px;
     min-height: 360px;
+    @media screen and (max-width: 815px) {
+      margin-left: 0;
+    }
   `
 
   const menu = css`
     margin-top: 50px;
+    display: flex;
+    justify-content: center;
     @media screen and (max-width: 815px) {
       margin-top: 0;
     }
@@ -147,7 +107,7 @@ const StudyGroupMain = ({ id }: { id: number }) => {
                     style={{ fontSize: 19 }}
                     theme="twoTone"
                   />
-                  스케줄
+                  {state.width >= 815 ? '스케줄' : ''}
                 </NavLink>
               </Menu.Item>
               <Menu.Item key="board">
@@ -157,13 +117,13 @@ const StudyGroupMain = ({ id }: { id: number }) => {
                     style={{ fontSize: 19 }}
                     theme="twoTone"
                   />
-                  게시판
+                  {state.width >= 815 ? '게시판' : ''}
                 </NavLink>
               </Menu.Item>
               <Menu.Item key="memberinfo">
                 <NavLink to={`/study/${StudyStore.studyGroup.id}/member`}>
                   <Icon type="smile" style={{ fontSize: 19 }} theme="twoTone" />
-                  멤버 정보
+                  {state.width >= 815 ? '멤버 정보' : ''}
                 </NavLink>
               </Menu.Item>
               <Menu.Item key="studyinfo">
@@ -173,7 +133,7 @@ const StudyGroupMain = ({ id }: { id: number }) => {
                     style={{ fontSize: 19 }}
                     theme="twoTone"
                   />
-                  스터디 정보
+                  {state.width >= 815 ? '스터디 정보' : ''}
                 </NavLink>
               </Menu.Item>
             </Menu>
