@@ -7,11 +7,12 @@ import UserDetailStore from '../../stores/UserDetailStore'
 import { studyMember } from './StudyDetailTypes'
 import { useObserver } from 'mobx-react'
 import { Interest } from '../userDetail/UserDetailTypes'
+import palette from '../../lib/styles/palette'
 
 const StudyMember = () => {
   const btn = css`
     color: #5d5d5d;
-    background: #faecc5;
+    background: ${palette.violet[1]};
     font-weight: bold;
     font-size: 12px;
     border-radius: 30px;
@@ -24,9 +25,10 @@ const StudyMember = () => {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: 0.3s;
 
     &:hover {
-      background: #ffe08c;
+      background: ${palette.violet[2]};
     }
   `
 
@@ -211,7 +213,13 @@ const StudyMember = () => {
         <tbody>
           <tr>
             <td colSpan={2} css={title}>
-              스터디 멤버 ( {StudyDetailStore.studyMember} )
+              <span
+                css={css`
+                  color: ${palette.violet[9]};
+                `}
+              >
+                스터디 멤버 ( {StudyDetailStore.studyMember} )
+              </span>
               <span css={explain}>
                 &nbsp;&nbsp;&nbsp;&nbsp;👑리더&nbsp;&nbsp; 🙋‍♂️본인
               </span>

@@ -17,14 +17,16 @@ const Logo = styled(Link)`
   display: flex;
   align-items: center;
   font-weight: bold;
-  font-size: 25px;
+  font-size: 27px;
   margin-right: auto;
   color: ${palette.violet[0]};
   transition: 0.3s;
+  text-shadow: -2px 0 ${palette.violet[9]}, 0 2px ${palette.violet[9]},
+    2px 0 ${palette.violet[9]}, 0 -2px ${palette.violet[9]};
 
   &:hover {
     color: ${palette.violet[1]};
-    font-size: 21px;
+    font-size: 25px;
   }
 `
 
@@ -130,7 +132,7 @@ const NavBar = () => {
           <StyledLink to="/study/create">스터디 개설</StyledLink>
           <StyledLink to="/study">스터디 목록</StyledLink>
           <StyledLink to="/map">나와 가까운 장소</StyledLink>
-          <a href="http://i02a302.p.ssafy.io/">
+          <a href="http://i02a302.p.ssafy.io/" target="_blank">
             <img
               css={statu}
               src="http://i02a306.p.ssafy.io/images/index/statu.png"

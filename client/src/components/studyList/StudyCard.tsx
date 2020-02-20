@@ -10,15 +10,18 @@ import { CalenderIcon, PlaceIcon, StarIcon } from '../common/Icons'
 moment.locale('ko')
 
 const cardStyle = css`
-  width: 250px;
+  width: 260px;
   min-width: 250px;
-  border: 1px solid ${palette.violet[6]};
+  /* border: 1px solid ${palette.violet[3]}; */
+  /* border: none; */
   border-radius: 30px;
   padding: 15px;
   color: white;
-  background: ${palette.violet[6]};
+  background: ${palette.violet[3]};
   margin: 10px;
   cursor: pointer;
+  transition: 0.5s;
+
   &:hover {
     transform: scale(1.05);
   }
@@ -67,6 +70,7 @@ const categoryStyle = css`
   background: ${palette.yellow[3]};
   border-left: 10px solid ${palette.yellow[6]};
   padding: 0 5px;
+  margin-bottom: 3px;
   color: black;
 `
 
