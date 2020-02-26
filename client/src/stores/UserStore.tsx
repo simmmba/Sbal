@@ -11,6 +11,7 @@ import StudyStore from './StudyStore'
 import { CascaderOptionType } from 'antd/lib/cascader'
 import { message } from 'antd'
 import * as H from 'history'
+import setAuthToken from '../utils/setAuthToken'
 
 export const cityAndTowns: { [key: string]: string[] } = {
   서울: [
@@ -866,6 +867,7 @@ const UserStore = observable<UserStoreType>({
     sessionStorage.removeItem('id')
     this.token = null
     StudyStore.myStudy = []
+    setAuthToken("")
     history.push('/')
   },
 
