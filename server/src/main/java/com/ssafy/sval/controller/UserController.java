@@ -271,6 +271,7 @@ public class UserController {
             userDTO.setEmail(user.getEmail());
             userDTO.setNickname(user.getNickname());
             userDTO.setSocialLogin(user.getSocialLogin());
+            userDTO.setCity("서울");
             //return new ResponseEntity<>(new CommonResponse(userDTO, "SocialLogin", "FAIL", "필수 정보가 필요합니다."), HttpStatus.OK);
             return signIn(userDTO);
         }
