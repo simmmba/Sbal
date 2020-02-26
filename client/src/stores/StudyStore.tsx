@@ -34,6 +34,10 @@ const StudyStore = observable({
 
   userScores: [] as any,
 
+  toStudyDetail(studyId: number, history: H.History) {
+    history.push(`study/details/${studyId}`)
+  },
+
   async fetchMainStudyList() {
     try {
       const res = await studyAPI.getMainStudyList()

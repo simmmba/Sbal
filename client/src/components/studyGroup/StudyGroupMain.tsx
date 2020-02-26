@@ -12,6 +12,7 @@ import StudyGroupBoardInsert from './StudyGroupBoardInsert'
 import { css, jsx } from '@emotion/core'
 import { useEffect } from 'react'
 import { useLocalStore, useObserver } from 'mobx-react'
+import { useHistory } from 'react-router'
 import StudyStore from '../../stores/StudyStore'
 import ScrollToTop from '../ScrollToTop'
 import StudyMap from './StudyMap'
@@ -21,6 +22,8 @@ const StudyGroupMain = ({ id }: { id: number }) => {
   useEffect(() => {
     StudyStore.fetchStudyGroup(Number(id))
   }, [id])
+
+  const history = useHistory()
 
   const title = css`
     font-weight: bold;
@@ -120,7 +123,7 @@ const StudyGroupMain = ({ id }: { id: number }) => {
           <div css={main}>
             <div css={title}>
               {StudyStore.studyGroup.title}&nbsp;
-              <NavLink css={move} to={`/study/${StudyStore.studyGroup.id}`}>
+              <NavLink css={move} to={`/study/details/${StudyStore.studyGroup.id}`}> 
                 <span
                   css={css`
                     transition: 0.3s;
@@ -131,6 +134,7 @@ const StudyGroupMain = ({ id }: { id: number }) => {
                 >
                   🚴‍♀️
                 </span>
+                
                 &nbsp; 상세정보 페이지로 이동&nbsp;
                 <span
                   css={css`
