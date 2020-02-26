@@ -44,7 +44,7 @@ public class UserController {
     private UserProfileService profileService;
 
     private SnsValue naverSns = new SnsValue("naver", "ZaZ22Ro1uzKMK_w_pbkX", "QDpGVk3dcT", "http://70.12.247.32:8080/user/auth/naver/callback");
-    private SnsValue kakaoSns = new SnsValue("kakao", "ce49043bfba892ce8fbe1dc2de3e6761", null, "http://70.12.247.80:3000/signup/oauth");
+    private SnsValue kakaoSns = new SnsValue("kakao", "65c8c65086b415b91d2decea051f2765", null, "http://localhost:3000/signup/oauth");
 
     @ExceptionHandler
     @ApiOperation(value = "모든 INTERNAL SERVER ERROR 상태를 처리한다. message를 화면에 출력하고 작성한 ERROR PAGE로 이동시킨다.")
