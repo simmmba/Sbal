@@ -4,32 +4,24 @@ import { css, jsx } from '@emotion/core'
 import { Icon, Empty, Rate, message } from 'antd'
 import { StudyMember } from './StudyGroupType'
 import StudyStore from '../../stores/StudyStore'
+import palette from '../../lib/styles/palette'
 
 const Attendance = ({ scheduleIndex }: { scheduleIndex: number }) => {
   const content = css`
     display: flex;
-    background: #f4fcff;
+    background: ${palette.violet[0]};
     border-radius: 10px;
     margin-bottom: 2px;
     /* height: 50px; */
     /* cursor: pointer; */
+    transition: 0.3s;
 
     &:hover {
-      background-color: #e6f7ff;
+      background-color: ${palette.gray[0]};
+      /* border: 1px solid ${palette.violet[1]}; */
     }
   `
-  //   const list = css`
-  //   display: flex;
-  //   margin-bottom: 2px;
-  // `
-  //   const listNickname = css`
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  //   font-size: 14px;
-  //   border-right: 2px dashed #fff;
-  //   width: 100%;
-  // `
+
   const num = css`
     display: flex;
     justify-content: center;

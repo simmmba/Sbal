@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
-import { Icon } from 'antd'
 import { NavLink } from 'react-router-dom'
 import StudyStore from '../../stores/StudyStore'
 import { StudyNotice } from './StudyGroupType'
-import { Pagination } from 'antd'
+import { Pagination, Empty } from 'antd'
 import palette from '../../lib/styles/palette'
 
 const StudyGroupBoard = () => {
@@ -18,14 +17,17 @@ const StudyGroupBoard = () => {
     display: flex;
     justify-content: space-between;
     padding: 8px 0px 10px 20px;
+
+    @media (max-width: 815px){
+      margin-bottom: 10px;
+    }
   `
 
   const title = css`
     display: flex;
     font-weight: bold;
     font-size: 21px;
-    color: #5f3dc4;
-    /* padding: 0px 17px 0px 5px; */
+    color: ${palette.violet[9]};
   `
 
   const content = css`
@@ -41,8 +43,10 @@ const StudyGroupBoard = () => {
 
   const contentTop = css`
     display: flex;
-    /* border-radius: 10px; */
-    /* margin-bottom: 2px; */
+
+    @media (max-width: 815px){
+      display: none;
+    }
   `
 
   const num = css`
@@ -91,12 +95,6 @@ const StudyGroupBoard = () => {
     width: 120px;
   `
 
-  const icon = css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  `
-
   const btn = css`
     border: none;
     cursor: pointer;
@@ -106,14 +104,16 @@ const StudyGroupBoard = () => {
     font-size: 14px;
     font-weight: bold;
     color: ${palette.violet[9]};
-    background-color: ${palette.violet[1]};
+    /* background-color: ${palette.violet[1]}; */
+    border: 2px solid ${palette.violet[1]};
     border-radius: 7px;
-    width: 100px;
-    height: 30px;
+    width: 90px;
+    height: 35px;
+    padding-left: 5px;
     transition: 0.3s;
 
     &:hover {
-      background-color: ${palette.violet[0]};
+      box-shadow: 2px 2px 3px inset;
     }
   `
 
@@ -126,6 +126,13 @@ const StudyGroupBoard = () => {
     align-items: center;
     font-size: 12px;
     color: #ff5e00;
+  `
+  const empty = css`
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   `
 
   const pageNation = css`
@@ -146,26 +153,18 @@ const StudyGroupBoard = () => {
     <div css={main}>
       <div css={upper}>
         <div css={title}>
-          <Icon
-            css={icon}
-            type="snippets"
-            style={{ fontSize: 24 }}
-            theme="twoTone"
-            twoToneColor="#5f3dc4"
-          />
-          &nbsp;스터디 게시판
+          📝&nbsp;스터디 게시판
         </div>
-        <NavLink css={btn} to={`/study/${StudyStore.studyGroup.id}/newBoard`}>
-          글쓰기&nbsp;&nbsp;
-          <Icon
-            css={icon}
-            type="edit"
-            style={{ fontSize: 20 }}
-            theme="twoTone"
-            twoToneColor="#5f3dc4"
-          />
-        </NavLink>
+        {noticeList.length > 0 && 
+          <NavLink css={btn} to={`/study/${StudyStore.studyGroup.id}/newBoard`}>
+            글쓰기&nbsp;✒️
+          </NavLink>
+        }
       </div>
+      
+      {noticeList.length > 0 ? ( 
+        <div>
+        
       <div css={contentTop}>
         <div css={num}>번호</div>
         <div
@@ -173,8 +172,7 @@ const StudyGroupBoard = () => {
             display: flex;
             align-items: center;
             justify-content: center;
-            /* padding: 10px 20px 10px 22px; */
-            font-weight: bold;
+            padding: 10px 20px 10px 22px;
             font-size: 14px;
             border-right: 2px dashed #fff;
             width: 100%;
@@ -237,7 +235,7 @@ const StudyGroupBoard = () => {
                 </span>
               )}
             </div>
-            <div css={writer}>{notice.writer.nickname}</div>
+              <div css={writer}>{StudyStore.studyGroup.leader.id === notice.writer.id && <span>👑&nbsp;</span>}{notice.writer.nickname}</div>
             <div css={date}>{notice.date.substr(0, 10)}</div>
             <div css={hit}>{notice.hits}</div>
           </div>
@@ -253,6 +251,21 @@ const StudyGroupBoard = () => {
         />
       ) : (
         <div />
+      )}
+      </div>) : (
+        <Empty
+          css={empty}
+          description={
+            <h3>
+              <br />
+              등록된 글이 없습니다 😮
+            </h3>
+          }
+        >
+          <NavLink css={btn} to={`/study/${StudyStore.studyGroup.id}/newBoard`}>
+            글쓰기&nbsp;✒️
+          </NavLink>
+        </Empty>
       )}
     </div>
   )
