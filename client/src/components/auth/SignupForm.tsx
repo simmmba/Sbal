@@ -185,7 +185,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
     const query = qs.parse(location.search, { ignoreQueryPrefix: true })
     const kakaoAccessToken = query.code
     const res = await getSocialData(kakaoAccessToken, 'kakao')
-    alert(res)
+    //console.log(res)
     if (res.data.value.token) {
       UserStore.isLoggingIn = true
       UserStore.loginUser = {
@@ -201,8 +201,8 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
       message.info('로그인 되었습니다.', 2)
       history.push('/')
     } else {
+      alert("yyyyyyy")
       const { email, nickname, socialLogin } = res.data.value
-
       if (email) {
         state.email = email
       }
@@ -213,6 +213,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
       }
     }
   }
+
   if (type === 'signup/oauth') {
     fetchSocialData()
   }
