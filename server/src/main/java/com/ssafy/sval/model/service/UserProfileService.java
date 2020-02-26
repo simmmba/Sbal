@@ -43,7 +43,7 @@ public class UserProfileService {
     }
 
     public void deleteFile(String fileName) {
-        File file = new File(fileName);
+        File file = new File(this.fileLocation+"/"+fileName);
         if(file.exists()){
             file.delete();
         }

@@ -27,8 +27,7 @@ public class UserService {
     public User signUp(User user) {
         List<UserInterest> userInterestList = user.getInterestList();
         user.setInterestList(null);
-
-        user.setPw(passwordEncoder.encode(user.getPw()));
+        if(user.getPw != null) user.setPw(passwordEncoder.encode(user.getPw()));
         user.setEvaluation(100.0);
         user.setProfilePhotoDir("default.png");
         //user.setSocialLogin(null);
