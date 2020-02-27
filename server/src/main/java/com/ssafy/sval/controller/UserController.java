@@ -5,6 +5,7 @@ import com.ssafy.sval.model.dto.SocialParam;
 import com.ssafy.sval.model.dto.UserDTO;
 import com.ssafy.sval.model.entity.User;
 import com.ssafy.sval.model.service.CommonService;
+import com.ssafy.sval.model.service.EmailService;
 import com.ssafy.sval.model.service.UserProfileService;
 import com.ssafy.sval.model.service.UserService;
 import com.ssafy.sval.responseType.CommonResponse;
@@ -17,10 +18,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 @RestController
 @RequestMapping("/user")
@@ -38,7 +43,7 @@ public class UserController {
     private UserProfileService profileService;
 
     private SnsValue naverSns = new SnsValue("naver", "ZaZ22Ro1uzKMK_w_pbkX", "QDpGVk3dcT", "http://70.12.247.32:8080/user/auth/naver/callback");
-    private SnsValue kakaoSns = new SnsValue("kakao", "ce49043bfba892ce8fbe1dc2de3e6761", null, "http://70.12.247.80:3000/signup/oauth");
+    private SnsValue kakaoSns = new SnsValue("kakao", "65c8c65086b415b91d2decea051f2765", null, "http://localhost:3000/signup/oauth");
 
     @ExceptionHandler
     @ApiOperation(value = "모든 INTERNAL SERVER ERROR 상태를 처리한다. message를 화면에 출력하고 작성한 ERROR PAGE로 이동시킨다.")
@@ -65,7 +70,6 @@ public class UserController {
     @ApiOperation(value = "회원가입을 처리하고 성공 시 res.data.state에 SUCCESS, 실패 시 FAIL, 에러 발생 시 ERROR를 리턴한다.", response = CommonResponse.class)
     public ResponseEntity<CommonResponse> signUp(@RequestBody UserDTO signUpUser, HttpServletResponse response) {
         try {
-            System.out.println(signUpUser.getSocialLogin());
             User user = userService.signUp(signUpUser.insertOrUpdateEntity(signUpUser.getPw()));
             if (user != null) {
                 response.setHeader("jwt-auth-token", jwtService.create(user.getId()));
@@ -81,9 +85,7 @@ public class UserController {
     @PostMapping("/signIn")
     @ApiOperation(value = "로그인 성공 시 main page를 구성할 데이터와 JWT 전송 실패 시 CommonResponse 확인", response = CommonResponse.class)
     public ResponseEntity<CommonResponse> signIn(@RequestBody UserDTO user, HttpServletResponse response) {
-        //System.out.println(user.getEmail());
         try {
-            //System.out.println(user.getEmail()+" "+user.getPw());
             User loginUser = userService.signIn(user.getEmail(), user.getPw());
             if (loginUser != null) {
                 response.setHeader("jwt-auth-token", jwtService.create(loginUser.getId()));
@@ -96,14 +98,27 @@ public class UserController {
         }
     }
 
+
     @GetMapping("/myPage")
     @ApiOperation(value = "마이 페이지에 제공할 정보를 구성하여 전달한다.", response = CommonResponse.class)
     public ResponseEntity<CommonResponse> getMyInfo(HttpServletRequest request) {
         try {
             int loginUserId = jwtService.getLoginUserId(request);
-            System.out.println(loginUserId);
-            System.out.println(loginUserId);
             UserDTO loginUser = userService.findById(loginUserId).myPageDTO();
+            loginUser = commonService.manufactureMyInfo(loginUser);
+            return new ResponseEntity<>(new CommonResponse(loginUser, "getMyInfo", "SUCCESS", "조회 성공"), HttpStatus.OK);
+        } catch(RuntimeException e) {
+            e.printStackTrace();
+            throw new RuntimeException("getMyInfo");
+        }
+    }
+
+    @GetMapping("/userInfo/{userId}")
+    @ApiOperation(value = "마이 페이지에 제공할 정보를 구성하여 전달한다.", response = CommonResponse.class)
+    public ResponseEntity<CommonResponse> getMyInfo(@PathVariable String userId, HttpServletRequest request) {
+        try {
+            int loginUserId = jwtService.getLoginUserId(request);
+            UserDTO loginUser = userService.findById(Integer.parseInt(userId)).myPageDTO();
             loginUser = commonService.manufactureMyInfo(loginUser);
             return new ResponseEntity<>(new CommonResponse(loginUser, "getMyInfo", "SUCCESS", "조회 성공"), HttpStatus.OK);
         } catch(RuntimeException e) {
@@ -163,7 +178,14 @@ public class UserController {
             "이미 가입된 이메일이라면 FAIL 문자열을 리턴한다.", response = CommonResponse.class)
     public ResponseEntity<CommonResponse> validateEmail(@PathVariable String email) {
         if (userService.isExistEmail(email)) {
-            return new ResponseEntity<>(new CommonResponse("validateEmail", "SUCCESS", "사용할 수 있는 이메일입니다."), HttpStatus.OK);
+            EmailService emailService = new EmailService();
+            String sub = "스터디의 발견 이메일 인증입니다.";
+            int ran = new Random().nextInt(100000) + 10000;
+            String dice = ran+"";
+            Map<String, String> result = new HashMap<>();
+            emailService.sendMail(email, sub, dice);
+            result.put("dice", dice);
+            return new ResponseEntity<>(new CommonResponse(result,"validateEmail", "SUCCESS", "사용할 수 있는 이메일입니다."), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(new CommonResponse("validateEmail", "FAIL", "사용할 수 없는 이메일입니다."), HttpStatus.OK);
         }
@@ -180,24 +202,31 @@ public class UserController {
         }
     }
 
-    @PutMapping("/profileUpload")
-    public User profileUpload(@RequestParam("file") MultipartFile file, @RequestParam("userid") int userid) {
-        User user = userService.findById(userid);
-        if (!user.getProfilePhotoDir().equals("default")) {
-            profileService.deleteFile(user.getProfilePhotoDir());
+    @PostMapping("/profileUpload")
+    public ResponseEntity<CommonResponse> profileUpload(@RequestBody MultipartFile file, HttpServletRequest request) {
+        try {
+            int loginUserId = jwtService.getLoginUserId(request);
+            User user = userService.findById(loginUserId);
+            if (!user.getProfilePhotoDir().equals("default.png")) {
+                profileService.deleteFile(user.getProfilePhotoDir());
+            }
+            String fileName = profileService.saveFile(file, user.getId() + "");
+            if(fileName == null) fileName = "default.png";
+            user.setProfilePhotoDir(fileName);
+
+            UserDTO userDTO = userService.profile(user).myPageDTO();
+            return new ResponseEntity<>(new CommonResponse(userDTO,"profileUpload", "SUCCESS", "프로필 사진 변경 완료."), HttpStatus.OK);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            throw new RuntimeException("profileUpload");
         }
-        String fileName = profileService.saveFile(file, user.getId() + "");
-        user.setProfilePhotoDir(fileName);
-        user = userService.update(user);
-        return user;
+
     }
 
     @PostMapping(value ="/auth")
     public ResponseEntity<CommonResponse> snsLoginCallBack(HttpServletResponse response, @RequestBody SocialParam param) throws Exception {
         String code = param.getCode();
-        System.out.println(code);
         String service = param.getService();
-
         SnsValue sns = null;
         SnsLogin sl = null;
         User user = null;
@@ -227,7 +256,9 @@ public class UserController {
             userDTO.setEmail(user.getEmail());
             userDTO.setNickname(user.getNickname());
             userDTO.setSocialLogin(user.getSocialLogin());
-            return new ResponseEntity<>(new CommonResponse(userDTO,"SocialLogin", "FAIL", "필수 정보가 필요합니다."),HttpStatus.OK);
+            userDTO.setCity("서울");
+            //return new ResponseEntity<>(new CommonResponse(userDTO, "SocialLogin", "FAIL", "필수 정보가 필요합니다."), HttpStatus.OK);
+            return signIn(userDTO, response);
         }
     }
 }

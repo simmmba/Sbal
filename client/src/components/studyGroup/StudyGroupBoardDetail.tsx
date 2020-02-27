@@ -1,47 +1,46 @@
 import React from 'react'
-import {NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 /**@jsx jsx */
-import {css, jsx} from '@emotion/core'
-import {Icon} from 'antd'
+import { css, jsx } from '@emotion/core'
+import { Icon } from 'antd'
 import Reply from './Reply'
 import StudyStore from '../../stores/StudyStore'
-import {useParams, useHistory} from 'react-router'
-import {StudyNotice} from "./StudyGroupType";
-import {useEffect} from 'react'
+import { useParams, useHistory } from 'react-router'
+import { StudyNotice } from './StudyGroupType'
+import { useEffect } from 'react'
+import palette from '../../lib/styles/palette'
 
 const StudyGroupBoardDetail = () => {
-    const {index} = useParams();
-    const notice: StudyNotice = StudyStore.studyGroup.noticeDTOList[Number(index)];
-    const main = css`
+  const { index } = useParams()
+  const notice: StudyNotice = StudyStore.studyGroup.noticeDTOList[Number(index)]
+  const main = css`
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
-    /* align-content: center; */
-    /* border: 1px solid black; */
   `
 
-    const upper = css`
+  const upper = css`
     display: flex;
     padding: 8px 0px 10px 20px;
   `
 
-    const title = css`
+  const title = css`
     display: flex;
     font-weight: bold;
     font-size: 21px;
-    color: #004584;
-    /* padding: 0px 17px 0px 5px; */
+    color: ${palette.violet[9]};
   `
 
-    const content = css`
+  const content = css`
     display: flex;
     flex-direction: column;
-    background: #eef7ff;
-    border-radius: 5px;
+    /* background: ${palette.violet[0]}; */
+    border: 3px solid ${palette.violet[0]};
+    border-radius: 7px;
     margin-bottom: 2px;
+    margin-top: 10px;
   `
 
-    const btitle = css`
+  const btitle = css`
     display: flex;
     align-items: center;
     padding: 10px 0px 2px 22px;
@@ -50,153 +49,134 @@ const StudyGroupBoardDetail = () => {
     width: 100%;
   `
 
-    const writer = css`
+  const writer = css`
     display: flex;
-    /* justify-content: center; */
     align-items: center;
     font-size: 14px;
-    /* border-right: 2px dashed #fff; */
   `
 
-    const date = css`
+  const date = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    /* padding: 10px 20px 10px 20px; */
     font-size: 13px;
     padding-left: 10px;
-    /* width: 200px; */
-    /* border-right: 2px dashed #fff; */
   `
-    const hit = css`
+  const hit = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    /* padding: 10px 20px 10px 20px; */
     font-size: 13px;
-    /* width: 100px; */
     padding-left: 10px;
   `
 
-    const icon = css`
+  const icon = css`
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+    color: #747474;
+
+    &:hover {
+      font-weight: bold;
+      color: #747474;
+    }
   `
 
-  //   const btn = css`
-  //   border: none;
-  //   cursor: pointer;
-  //   display: flex;
-  //   align-items: center;
-  //   justify-content: center;
-  //   font-size: 14px;
-  //   font-weight: bold;
-  //   color: navy;
-  //
-  //   background: #d9e5ff;
-  //   border-radius: 7px;
-  //   width: 100px;
-  //   height: 30px;
-  // `
-
-    const detail = css`
+  const detail = css`
     display: flex;
-    /* justify-content: center; */
-    /* align-items: center; */
     justify-content: space-between;
-    padding: 3px 50px 30px 27px;
+    padding: 3px 50px 12px 27px;
     color: #747474;
     flex-wrap: wrap;
   `
 
-    const top = css`
+  const top = css`
     display: flex;
     flex-direction: column;
-    background: #d1e9ff;
+    background: ${palette.violet[0]};
     border-radius: 5px;
     margin-bottom: 2px;
   `
-    const bottom = css`
+  const bottom = css`
     display: flex;
     padding: 20px;
     min-height: 150px;
   `
 
-    const left = css`
+  const left = css`
     display: flex;
   `
-    const right = css`
+  const right = css`
     display: flex;
   `
 
-    const navLink = css`
+  const navLink = css`
     display: flex;
     color: #747474;
     padding-right: 15px;
 
     &:hover {
-      color: #4c4c4c;
+      font-weight: bold;
+      color: #747474;
     }
   `
-    const history = useHistory();
-    const clickDeleteIcon = (id: number, deleteIndex: number) => {
-        if (window.confirm("게시물을 삭제하시겠습니까?")) {
-            StudyStore.deleteNotice(id);
-            StudyStore.studyGroup.noticeDTOList.splice(deleteIndex, 1);
-            history.goBack();
-        }
+  const history = useHistory()
+  const clickDeleteIcon = (id: number, deleteIndex: number) => {
+    if (window.confirm('게시물을 삭제하시겠습니까?')) {
+      StudyStore.deleteNotice(id)
+      StudyStore.studyGroup.noticeDTOList.splice(deleteIndex, 1)
+      history.goBack()
     }
+  }
 
-    useEffect(() => {
-        StudyStore.increaseNoticeHits(Number(notice.id), Number(index));
-    })
+  useEffect(() => {
+    StudyStore.increaseNoticeHits(Number(notice.id), Number(index))
+  })
 
-    return (
-        <div css={main}>
-            <div css={upper}>
-                <div css={title}>
-                    <Icon
-                        css={icon}
-                        type="snippets"
-                        style={{fontSize: 24}}
-                        theme="twoTone"
-                        twoToneColor="navy"
-                    />
-                    &nbsp;게시글 읽기
+  return (
+    <div css={main}>
+      <div css={upper}>
+        <div css={title}>📝&nbsp;스터디 게시판</div>
+      </div>
+      <div>
+        <div css={content}>
+          <div css={top}>
+            <div css={btitle}>{notice.title}</div>
+            <div css={detail}>
+              <div css={left}>
+                <div css={writer}>{notice.writer.nickname}&nbsp;&nbsp; |</div>
+                <div css={date}>{notice.date.substr(0, 16)}&nbsp;&nbsp; |</div>
+                <div css={hit}>조회 {notice.hits}</div>
+              </div>
+              {notice.writer.id === StudyStore.loginUser.id ? (
+                <div css={right}>
+                  <NavLink
+                    css={navLink}
+                    to={`/study/${StudyStore.studyGroup.id}/editBoard/${Number(
+                      index
+                    )}`}
+                  >
+                    <u>수정✏️</u>
+                  </NavLink>
+                  <span
+                    css={icon}
+                    onClick={() => clickDeleteIcon(notice.id, Number(index))}
+                  >
+                    <u>삭제✂️</u>
+                  </span>
                 </div>
+              ) : (
+                <div />
+              )}
             </div>
-            <div>
-                <div css={content}>
-                    <div css={top}>
-                        <div css={btitle}>{notice.title}</div>
-                        <div css={detail}>
-                            <div css={left}>
-                                <div css={writer}>{notice.writer.nickname}&nbsp;&nbsp; |</div>
-                                <div css={date}>{notice.date.substr(0, 16)}&nbsp;&nbsp; |</div>
-                                <div css={hit}>조회 {notice.hits}</div>
-                            </div>
-                            {notice.writer.id === StudyStore.loginUser.id ? (
-                                <div css={right}>
-                                    <NavLink
-                                        css={navLink}
-                                        to={`/study/${StudyStore.studyGroup.id}/editBoard/${Number(index)}`}
-                                    >
-                                        <Icon css={icon} type="edit" theme="filled"/>
-                                    </NavLink>
-                                    <Icon css={icon} type="delete" theme="filled"
-                                          onClick={() => clickDeleteIcon(notice.id, Number(index))}/>
-
-                                </div>
-                            ) : (<div/>)}
-                        </div>
-                    </div>
-                    <div css={bottom}>{notice.content}</div>
-                </div>
-            </div>
-            <Reply index={Number(index)}/>
+          </div>
+          <div css={bottom}>{notice.content}</div>
         </div>
-    )
+      </div>
+      <Reply index={Number(index)} />
+    </div>
+  )
 }
 
 export default StudyGroupBoardDetail

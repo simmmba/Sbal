@@ -56,8 +56,8 @@ public class Study {
     public StudyDTO toDTO() {
         StudyDTO studyDTO = new StudyDTO(id, title, contents, new UserDTO(leader.getId(), leader.getNickname()),
                 lCategory, sCategory, city, town, state, maxParticipants, hits, isOnline, monthOrWeek,
-                frequency, weekdayOrWeekend, timeslot, evaluationLimit, enrollDate, startDate, endDate,
-                null, null, null,null);
+                frequency, weekdayOrWeekend, timeslot, evaluationLimit, enrollDate, startDate, endDate, null,null, null, null,null);
+
 
         if(memberList != null) {
             List<StudyMemberDTO> memberDTOList = new ArrayList<>();
@@ -71,9 +71,9 @@ public class Study {
             studyDTO.setStudyScheduleDTOList(scheduleDTOList);
         }
 
-        if(noticeList != null){
+        if(noticeList!=null) {
             List<NoticeDTO> noticeDTOList = new ArrayList<>();
-            for(Notice n : noticeList) noticeDTOList.add(n.toDTO());
+            for (Notice n : noticeList) noticeDTOList.add(n.toDTO());
             studyDTO.setNoticeDTOList(noticeDTOList);
         }
 
@@ -81,17 +81,20 @@ public class Study {
     }
 
     public StudyDTO mainPageDTO() {
-        StudyDTO studyDTO = new StudyDTO(id, title, null, new UserDTO(leader.getId(), leader.getNickname()),
+        UserDTO leaderDTO = new UserDTO(leader.getId(), leader.getNickname());
+        leaderDTO.setProfilePhotoDir(leader.getProfilePhotoDir());
+        StudyDTO studyDTO = new StudyDTO(id, title, null, leaderDTO,
                 lCategory, sCategory, city, town, state, maxParticipants, hits, isOnline, monthOrWeek,
                 frequency, weekdayOrWeekend, timeslot, evaluationLimit, enrollDate,
-                startDate, endDate, null, null, null, null);
+                startDate, endDate, null, null, null, null, null);
+
         return studyDTO;
     }
 
     public StudyDTO myPageDTO() {
         StudyDTO studyDTO = new StudyDTO(id, title, null, null, null, null,
                 null, null, state, maxParticipants, null, isOnline, null, null,
-                null, null, null, null, startDate, endDate,
+                null, null, null, null, startDate, endDate, null,
                 null, null, null,null);
 
         return studyDTO;

@@ -63,30 +63,27 @@ const studyDetailStore: StudyDetailStoreType = observable({
     return false
   },
 
-
   goStudyGroup(studyId: number, history: H.History) {
-
     history.push(`/study/${studyId}`)
   },
 
   async updateStudyMember(studyId: number, userId: number, state: number) {
     try {
-      if(state===1){
-        if(window.confirm("수락 하시겠습니까?")){
+      if (state === 1) {
+        if (window.confirm('수락 하시겠습니까?')) {
           await studyAPI.studyMemberUpdate(studyId, userId, state)
-          message.info("수락 되었습니다.")
-        } else return;
-      } else if(state ===2){
-        if(window.confirm("거절 하시겠습니까?")){
+          message.info('수락 되었습니다.')
+        } else return
+      } else if (state === 2) {
+        if (window.confirm('거절 하시겠습니까?')) {
           await studyAPI.studyMemberUpdate(studyId, userId, state)
-          message.info("거절 되었습니다.")
-        } else return;
-      }
-      else if(state===3){
-        if(window.confirm("정말 내보내시겠습니까?")){
+          message.info('거절 되었습니다.')
+        } else return
+      } else if (state === 3) {
+        if (window.confirm('정말 내보내시겠습니까?')) {
           await studyAPI.studyMemberUpdate(studyId, userId, state)
-          message.info("완료 되었습니다.")
-        } else return;
+          message.info('완료 되었습니다.')
+        } else return
       }
       this.studyDetail()
     } catch (error) {
@@ -94,23 +91,21 @@ const studyDetailStore: StudyDetailStoreType = observable({
     }
   },
 
-
-  async studyTodo(state : number) {
+  async studyTodo(state: number) {
     try {
-      if(state==1){
-        if(window.confirm("스터디를 진행 하시겠습니까?")){
+      if (state == 1) {
+        if (window.confirm('스터디를 진행 하시겠습니까?')) {
           this.data.state = state
           await studyAPI.studyUpdate(this.data)
           message.info('스터디가 시작 되었습니다.')
         } else return
-        
-      }else if(state == 2) {
-        if(window.confirm("스터디를 종료 하시겠습니까?")){
+      } else if (state == 2) {
+        if (window.confirm('스터디를 종료 하시겠습니까?')) {
           this.data.state = state
           await studyAPI.studyUpdate(this.data)
           message.info('스터디가 종료 되었습니다.')
         } else return
-      }   
+      }
       this.studyDetail()
     } catch (error) {
       message.error('실패하였습니다.')
@@ -119,10 +114,10 @@ const studyDetailStore: StudyDetailStoreType = observable({
 
   async insertMember(studyId: number) {
     try {
-      if(window.confirm("스터디를 신청 하시겠습니까?")){
+      if (window.confirm('스터디를 신청 하시겠습니까?')) {
         await studyAPI.insertMember(studyId)
         message.info('신청 되었습니다.')
-      } else return  
+      } else return
       this.studyDetail()
     } catch (error) {
       message.error('요청에 실패하였습니다.')
@@ -131,12 +126,11 @@ const studyDetailStore: StudyDetailStoreType = observable({
 
   async deleteStudy(studyId: number, history: H.History) {
     try {
-      if(window.confirm("스터디를 삭제 하시겠습니까?")){
+      if (window.confirm('스터디를 삭제 하시겠습니까?')) {
         await studyAPI.deleteStudy(studyId)
         message.info('스터디가 삭제 되었습니다.')
         history.push('/')
-      } else return;
-      
+      } else return
     } catch {
       message.error('스터디 삭제에 실패하였습니다.')
     }
@@ -144,19 +138,16 @@ const studyDetailStore: StudyDetailStoreType = observable({
 
   async deleteStudyMember(studyId: number, state: number) {
     try {
-     
       if (state === 1) {
-        if(window.confirm("신청을 취소 하시겠습니까?")){
+        if (window.confirm('신청을 취소 하시겠습니까?')) {
           await studyAPI.studyDelete(studyId)
           message.info('신청이 취소 되었습니다.')
-        }else return
-        
+        } else return
       } else if (state === 2) {
-        if(window.confirm("탈퇴 하시겠습니까?")){
+        if (window.confirm('탈퇴 하시겠습니까?')) {
           await studyAPI.studyDelete(studyId)
           message.info('탈퇴 되었습니다.')
-        }else return
-        
+        } else return
       }
       this.studyDetail()
     } catch (error) {
@@ -168,7 +159,7 @@ const studyDetailStore: StudyDetailStoreType = observable({
     try {
       this.studyMember = 0
       this.studyRequest = 0
-      const res = await studyAPI.studyDetail(this.studyId);
+      const res = await studyAPI.studyDetail(this.studyId)
       this.data = res.data.value
       if (this.data.studyMemberDTOList !== null) {
         for (let i = 0; i < this.data.studyMemberDTOList.length; i++) {

@@ -7,6 +7,7 @@ import { useLocalStore } from 'mobx-react'
 import StudyStore from '../../stores/StudyStore'
 import { CreatedOrUpdatedSchedule } from './StudyGroupType'
 import moment from 'moment'
+import palette from '../../lib/styles/palette'
 
 const ScheduleAdd = () => {
   const icon = css`
@@ -24,15 +25,17 @@ const ScheduleAdd = () => {
     justify-content: center;
     font-size: 14px;
     font-weight: bold;
-    color: navy;
-
-    background: #d9e5ff;
+    color: ${palette.violet[9]};
+    padding-left: 5px;
+    /* background: ${palette.violet[1]}; */
+    border: 2px solid ${palette.violet[1]};
     border-radius: 7px;
     width: 130px;
-    height: 30px;
+    height: 35px;
 
     &:hover {
-      background-color: #b2ccff;
+      /* background-color: ${palette.violet[1]}; */
+      box-shadow: 2px 2px 3px inset;
     }
   `
 
@@ -117,13 +120,7 @@ const ScheduleAdd = () => {
     <div>
       <button css={btn} onClick={showModal}>
         스케줄 추가&nbsp;&nbsp;
-        <Icon
-          css={icon}
-          type="plus-circle"
-          style={{ fontSize: 20 }}
-          theme="twoTone"
-          twoToneColor="navy"
-        />
+        <big>⏰</big>
       </button>
       <Modal
         // title="스케줄 추가"

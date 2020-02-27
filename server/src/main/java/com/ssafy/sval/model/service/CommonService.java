@@ -29,8 +29,10 @@ public class CommonService {
 
     public UserDTO manufactureMyInfo(UserDTO user) {
         List<StudyDTO> ledStudyList = user.getLedStudyList();
-        for (StudyDTO s : ledStudyList)
+        for (StudyDTO s : ledStudyList) {
             s.setJoinedMemberCount(studyMemberRepository.countStudyMemberByStudyIdAndState(s.getId(), 1));
+            s.setJoinRequestCount(studyMemberRepository.countStudyMemberByStudyIdAndState(s.getId(), 0));
+        }
         for (StudyMemberDTO sm : user.getJoinedStudyList()) {
             StudyDTO s = sm.getStudy();
             s.setJoinedMemberCount(studyMemberRepository.countStudyMemberByStudyIdAndState(s.getId(), 1));
@@ -46,6 +48,9 @@ public class CommonService {
             for (StudyMemberDTO sm : joinedStudyList) {
                 StudyDTO s = sm.getStudy();
                 s.setJoinedMemberCount(studyMemberRepository.countStudyMemberByStudyIdAndState(s.getId(), 1));
+                if(s.getLeader().getId().equals(user.getId())) {
+                    s.setJoinRequestCount(studyMemberRepository.countStudyMemberByStudyIdAndState(s.getId(), 0));
+                }
             }
         }
         mainInfo.put("loginUser", user);

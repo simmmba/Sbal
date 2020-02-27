@@ -29,7 +29,7 @@ public class NoticeController {
 
     @ExceptionHandler
     public ResponseEntity<CommonResponse> errorHandler(Exception e) {
-        return new ResponseEntity<CommonResponse>(new CommonResponse(e.getMessage(), "ERROR",
+        return new ResponseEntity<>(new CommonResponse(e.getMessage(), "ERROR",
                 "현재 서버 상태가 불안정하여 정상적인 서비스 이용이 불가합니다. 잠시 후 다시 시도해주세요."), HttpStatus.OK);
     }
 
@@ -52,7 +52,6 @@ public class NoticeController {
             int userId = jwtService.getLoginUserId(request);
             Notice notice = noticeDTO.toEntity(userId);
             notice = noticeService.insert(notice);
-            //log.info("createdStudyDTO : {}", createdStudy.toDTO());
             return new ResponseEntity<>(new CommonResponse(notice.toDTO(), "enrollNewNotice", "SUCCESS", "공지사항이 등록되었습니다."), HttpStatus.OK);
         } catch (RuntimeException e) {
             e.printStackTrace();
@@ -91,7 +90,19 @@ public class NoticeController {
             e.printStackTrace();
             throw new RuntimeException("noticeDetails");
         }
+    }
 
+    @GetMapping("/increaseHits/{noticeId}")
+    @ApiOperation(value = "공지사항의 hits를 증가시킨다.", response = CommonResponse.class)
+    public ResponseEntity<CommonResponse> increaseHits(@PathVariable Integer noticeId, HttpServletRequest request) {
+        try {
+            int userId = jwtService.getLoginUserId(request);
+            noticeService.increaseHits(noticeId);
+            return new ResponseEntity<>(new CommonResponse("increaseHits", "SUCCESS", "조회 수 증가"), HttpStatus.OK);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            throw new RuntimeException("increaseHits");
+        }
     }
 
     @DeleteMapping("/{id}")

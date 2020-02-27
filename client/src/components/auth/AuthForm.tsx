@@ -42,15 +42,17 @@ function AuthForm({ type, history }: RouteComponentProps & AuthFormProps) {
     [history]
   )
 
-  const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
-    const dataToSend = {
-      email: state.email,
-      pw: state.password
-    }
-    UserStore.login(dataToSend, history)
-    e.preventDefault()
-    // history.push('/mypage')
-  }, [state, history])
+  const handleSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      const dataToSend = {
+        email: state.email,
+        pw: state.password
+      }
+      UserStore.login(dataToSend, history)
+      e.preventDefault()
+    },
+    [state, history]
+  )
 
   const headerText = textMapForHeader[type]
   const footerText = textMapForFooter[type]

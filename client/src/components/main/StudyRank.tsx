@@ -4,6 +4,7 @@ import { css, jsx } from '@emotion/core'
 import { NavLink } from 'react-router-dom'
 import { StudyRankprops, Study } from './MainTypes'
 import LoadingSpin from '../common/LoadingSpin'
+import React from 'react'
 
 const listBox = css`
   margin: 10px;
@@ -79,6 +80,11 @@ const link = css`
   }
 `
 
+const comment = css`
+  font-size: 12px;
+  color: #ff5e00;
+`
+
 const titleMap: { [key: string]: string } = {
   myStudy: '내 진행 중인 스터디',
   recentStudy: '최근 개설된 스터디',
@@ -98,7 +104,17 @@ const StudyRank = ({ title, list }: StudyRankprops) => {
               </div>
               <div css={listContainer}>
                 <div>
-                  <div css={listName}>{study.title}</div>
+                  <div css={listName}>
+                    {study.title}{' '}
+                    {study.joinRequestCount != null &&
+                    study.joinRequestCount > 0 ? (
+                      <span css={comment}>
+                        &nbsp;&nbsp;[{study.joinRequestCount}]
+                      </span>
+                    ) : (
+                      <span />
+                    )}
+                  </div>
                   <div css={listType}>{study.lcategory}</div>
                 </div>
               </div>

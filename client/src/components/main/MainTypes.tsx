@@ -20,6 +20,7 @@ export type Study = {
   startDate: string
   endDate: string
   joinedMemberCount?: number
+  joinRequestCount?: number
   studyMemberDTOList?: null
   studyScheduleDTOList?: null
   scategory: string

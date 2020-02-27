@@ -50,7 +50,6 @@ public class StudyController {
         return new ResponseEntity<>(new CommonResponse("JWT_EXPIRED", "ERROR",
                 "로그인 세션이 만료되었습니다. 다시 로그인 해주세요"), HttpStatus.OK);
     }
-
     @ExceptionHandler
     public ResponseEntity<CommonResponse> errorHandler(JwtException e) {
         return new ResponseEntity<>(new CommonResponse("JWT_FALSIFIED", "ERROR",
@@ -77,6 +76,7 @@ public class StudyController {
     @PutMapping
     @ApiOperation(value = "스터디를 수정한다.", response = CommonResponse.class)
     public ResponseEntity<CommonResponse> update(@RequestBody StudyDTO study, HttpServletRequest request) {
+        System.out.println(study);
         try {
             int leaderId = jwtService.getLoginUserId(request);
             if(study.getLeader().getId()!=leaderId)
@@ -128,12 +128,10 @@ public class StudyController {
             studyDTO.setStudyScheduleDTOList(null);
 
             for (StudyMemberDTO sm : smList) {
-                if(sm.getUser().getId()==loginUserId && (sm.getState()==1 || sm.getState()==0)) {
+                if (sm.getUser().getId() == loginUserId && (sm.getState() == 1 || sm.getState() == 0)) {
                     studyDTO.setStudyScheduleDTOList(ssList);
-                    if(loginUserId!=studyDTO.getLeader().getId())
-                        for (int i=0; i<smList.size(); i++) {
-                            if(smList.get(i).getState() !=1 && smList.get(i).getState() != 0   ) smList.remove(i--);
-                        }
+                    if (loginUserId != studyDTO.getLeader().getId())
+                        for (int i = 0; i < smList.size(); i++) if (smList.get(i).getState() != 1 && smList.get(i).getState() != 0) smList.remove(i--);
                     studyDTO.setStudyMemberDTOList(smList);
                     break;
                 }
@@ -166,6 +164,53 @@ public class StudyController {
         }
     }
 
+    // 필터 검색
+    @PostMapping("/list")
+    public ResponseEntity<CommonResponse> getStudiesUsingFileter(@RequestBody Map<String, Object> filter) {
+        try {
+
+            StudySpecs studySpecs = new StudySpecs();
+            Specification<Study> spec = studySpecs.init();
+
+            String value = (String) filter.get("searchBy");
+            if (value != null) {
+                String searchText = (String) filter.get("searchText");
+                if (searchText == null) searchText = "";
+                if (value.equals("leader")) {
+                    spec = spec.and(studySpecs.leaderIdIs(userService.findByNickname(searchText).getId()));
+                } else if (value.equals("title")) {
+                    spec = spec.and(studySpecs.titleLike(searchText));
+                }
+            }
+
+            value = (String) filter.get("lcategory");
+            if (value != null) spec = spec.and(studySpecs.lCategoryIs(value));
+            value = (String) filter.get("scategory");
+            if (value != null) spec = spec.and(studySpecs.sCategoryIs(value));
+            value = (String) filter.get("city");
+            if (value != null) spec = spec.and(studySpecs.cityIs(value));
+            value = (String) filter.get("town");
+            if (value != null) spec = spec.and(studySpecs.townIs(value));
+            Boolean isOnline = (Boolean) filter.get("isOnline");
+            if (isOnline != null) spec = spec.and(studySpecs.onlineStateIs(isOnline));
+            Integer weekdayOrWeekend = (Integer) filter.get("weekdayOrWeekend");
+            if (weekdayOrWeekend != null) spec = spec.and(studySpecs.dayStateIs(weekdayOrWeekend));
+
+            List<Study> studyList = studyService.findAllByFilterCondition(spec);
+            List<StudyDTO> studyDTOList = new ArrayList<>();
+            for (Study s : studyList) {
+                StudyDTO studyDTO = s.mainPageDTO();
+                studyDTO.setJoinedMemberCount(studyMemberService.getjoinedMemeberCount(studyDTO.getId()));
+                studyDTOList.add(studyDTO);
+            }
+            studyDTOList.sort((o1, o2) -> -(o1.getEnrollDate().compareTo(o2.getEnrollDate())));
+            return new ResponseEntity<>(new CommonResponse(studyDTOList, "getStudiesUsingFileter", "SUCCESS", "조회 성공"), HttpStatus.OK);
+
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            throw new RuntimeException("getStudiesUsingFileter");
+        }
+    }
     @GetMapping("/renew/{studyId}")
     @ApiOperation(value = "등록된 스터디의 등록 시간을 현재로 갱신한다.", response = CommonResponse.class)
     public ResponseEntity<CommonResponse> renewStudy(@PathVariable Integer studyId, HttpServletRequest request) {

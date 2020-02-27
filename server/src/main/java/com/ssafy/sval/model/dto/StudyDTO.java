@@ -31,6 +31,7 @@ public class StudyDTO {
     private String startDate;
     private String endDate;
     private Integer joinedMemberCount;
+    private Integer joinRequestCount;
     private List<StudyMemberDTO> studyMemberDTOList;
     private List<StudyScheduleDTO> studyScheduleDTOList;
     private List<NoticeDTO> noticeDTOList;
@@ -40,7 +41,7 @@ public class StudyDTO {
         leaderEntity.setId(leaderId);
         Study study = new Study(id, title, contents, leaderEntity, lCategory, sCategory, city, town, state,
                 maxParticipants, hits, isOnline, monthOrWeek, frequency, weekdayOrWeekend,
-                timeslot, evaluationLimit, enrollDate, startDate, endDate, null, null,null);
+                timeslot, evaluationLimit, enrollDate, startDate, endDate, null, null, null);
         return study;
     }
 }

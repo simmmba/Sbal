@@ -37,6 +37,7 @@ export type Interest = {
     startDate : string
     endDate : string
     joinedMemberCount : number
+    joinRequestCount: number
  }
 
  export type JoinedStudy ={

@@ -25,20 +25,25 @@ public class UserProfileService {
 
     public String saveFile(MultipartFile file, String userId) {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+
+        if(fileName.equals("default.png")) return fileName;
+
         fileName  = userId + fileName;
+        System.out.println(fileName);
+        System.out.println(this.fileLocation);
         try {
-            if (fileName.contains("..")) return "부적절한이름";
+            if (fileName.contains("..")) return null;
 
             Path targetLocation = this.fileLocation.resolve(fileName);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
-            return this.fileLocation+"/"+fileName;
+            return fileName;
         } catch (Exception e){
-            return "실패";
+            return null;
         }
     }
 
     public void deleteFile(String fileName) {
-        File file = new File(fileName);
+        File file = new File(this.fileLocation+"/"+fileName);
         if(file.exists()){
             file.delete();
         }

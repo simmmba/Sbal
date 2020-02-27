@@ -145,10 +145,7 @@ function StudyCard({
       <div>
         <div css={footerContainerLeft}>
           <Avatar
-            // src={
-            //   'http://13.124.98.149/images/' +
-            //   UserDetailStore.data.profilePhotoDir
-            // }
+            src={'http://13.124.98.149/images/' + study.leader.profilePhotoDir}
             icon="user"
             css={css`
               margin-right: 5px;

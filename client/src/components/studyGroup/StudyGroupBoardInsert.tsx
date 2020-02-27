@@ -7,16 +7,9 @@ import TextArea from 'antd/lib/input/TextArea'
 import { useLocalStore } from 'mobx-react'
 import StudyStore from '../../stores/StudyStore'
 import { CreatedNotice } from './StudyGroupType'
+import palette from '../../lib/styles/palette'
 
 const StudyGroupBoardInsert = () => {
-  //   const main = css`
-  //   display: flex;
-  //   flex-direction: column;
-  //   /* justify-content: center; */
-  //   /* align-content: center; */
-  //   /* border: 1px solid black; */
-  // `
-
   const upper = css`
     display: flex;
     padding: 8px 0px 10px 20px;
@@ -26,14 +19,14 @@ const StudyGroupBoardInsert = () => {
     display: flex;
     font-weight: bold;
     font-size: 21px;
-    color: #004584;
-    /* padding: 0px 17px 0px 5px; */
+    color: ${palette.violet[9]};
+    margin-bottom: 10px;
   `
 
   const content = css`
     display: flex;
     flex-direction: column;
-    background: #eef7ff;
+    background: ${palette.violet[0]};
     border-radius: 5px;
     margin-bottom: 2px;
   `
@@ -47,7 +40,7 @@ const StudyGroupBoardInsert = () => {
   const top = css`
     display: flex;
     flex-direction: column;
-    background: #d1e9ff;
+    background: ${palette.violet[1]};
     border-radius: 5px;
     padding: 10px;
   `
@@ -61,9 +54,10 @@ const StudyGroupBoardInsert = () => {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 5px;
   `
 
-  const btn = css`
+  const cancel = css`
     border: none;
     cursor: pointer;
     display: flex;
@@ -71,8 +65,8 @@ const StudyGroupBoardInsert = () => {
     justify-content: center;
     font-size: 14px;
     font-weight: bold;
-    color: navy;
-    background: #d9e5ff;
+    color: ${palette.gray[7]};
+    background: ${palette.yellow[1]};
     border-radius: 7px;
     width: 70px;
     height: 30px;
@@ -80,7 +74,28 @@ const StudyGroupBoardInsert = () => {
     transition: 0.3s;
 
     &:hover {
-      background-color: #b2ccff;
+      background-color: ${palette.yellow[2]};
+    }
+  `
+
+  const ok = css`
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: #353535;
+    background: ${palette.violet[1]};
+    border-radius: 7px;
+    width: 70px;
+    height: 30px;
+    margin: 6px 5px 0px 5px;
+    transition: 0.3s;
+
+    &:hover {
+      background-color: ${palette.violet[2]};
     }
   `
 
@@ -117,16 +132,7 @@ const StudyGroupBoardInsert = () => {
   return (
     <div>
       <div css={upper}>
-        <div css={title}>
-          <Icon
-            css={icon}
-            type="snippets"
-            style={{ fontSize: 24 }}
-            theme="twoTone"
-            twoToneColor="navy"
-          />
-          &nbsp;게시글 작성
-        </div>
+        <div css={title}>✏️&nbsp;게시글 작성</div>
       </div>
       <div css={content}>
         <div css={top}>
@@ -151,10 +157,10 @@ const StudyGroupBoardInsert = () => {
         </div>
       </div>
       <div css={btnGroup}>
-        <button css={btn} onClick={clickCancelBtn}>
+        <button css={cancel} onClick={clickCancelBtn}>
           취소
         </button>
-        <button css={btn} onClick={clickEnrollBtn}>
+        <button css={ok} onClick={clickEnrollBtn}>
           등록
         </button>
       </div>

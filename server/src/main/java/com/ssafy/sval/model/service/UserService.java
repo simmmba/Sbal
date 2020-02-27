@@ -27,10 +27,9 @@ public class UserService {
     public User signUp(User user) {
         List<UserInterest> userInterestList = user.getInterestList();
         user.setInterestList(null);
-
-        user.setPw(passwordEncoder.encode(user.getPw()));
+        if(user.getPw() != null) user.setPw(passwordEncoder.encode(user.getPw()));
         user.setEvaluation(100.0);
-        user.setProfilePhotoDir("/profile_images/default.jpg");
+        user.setProfilePhotoDir("default.png");
         //user.setSocialLogin(null);
         user = uRepo.save(user);
 
@@ -66,6 +65,11 @@ public class UserService {
     public User update(User user) {
         interestRepo.deleteAllByUserId(user.getId());
         interestRepo.saveAll(user.getInterestList());
+        user = uRepo.save(user);
+        return user;
+    }
+
+    public User profile(User user){
         user = uRepo.save(user);
         return user;
     }

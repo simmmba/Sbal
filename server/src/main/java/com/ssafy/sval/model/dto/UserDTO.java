@@ -34,6 +34,12 @@ public class UserDTO {
         this.id = id;
         this.nickname = nickname;
     }
+    public UserDTO(Integer id, String nickname, String profilePhotoDir) {
+        this.id = id;
+        this.nickname = nickname;
+        this.profilePhotoDir = profilePhotoDir;
+    }
+
     public User insertOrUpdateEntity(String password) {
         User updatedUser = new User(id, password, email, phoneNum, nickname, gender, introduction,
                 city, town, evaluation, profilePhotoDir, socialLogin, null, null, null);

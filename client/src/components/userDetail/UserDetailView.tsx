@@ -227,6 +227,10 @@ const hover = css`
     font-weight: bold;
   }
 `
+const joinRequestCount = css`
+  font-size: 12px;
+  color: #ff5e00;
+`
 
 const UserDetail = () => {
   const history = useHistory()
@@ -244,21 +248,15 @@ const UserDetail = () => {
   }
 
   const state = useLocalStore(() => ({
-    //filename : "http://13.124.98.149/images/"+ UserDetailStore.data.profilePhotoDir,
-    //http://13.124.98.149/images/default.png
-    //file : 'http://13.124.98.149/images/default.png',
     onChange(f: any) {
-      //this.filename  = "images/"+f[0].name;
-      //this.file = e.target.files[0];
-      //alert(f[0].type)
       let type = f[0].name.substring(f[0].name.lastIndexOf('.') + 1)
       type = type.toLowerCase()
       if (
-        type != 'jpg' &&
-        type != 'jpeg' &&
-        type != 'gif' &&
-        type != 'png' &&
-        type != 'bmp'
+        type !== 'jpg' &&
+        type !== 'jpeg' &&
+        type !== 'gif' &&
+        type !== 'png' &&
+        type !== 'bmp'
       ) {
         message.error('이미지 형식만 업로드 가능합니다.')
         return
@@ -427,7 +425,14 @@ const UserDetail = () => {
                             }}
                           >
                             {' '}
-                            👑&nbsp; {ledStudy.title}{' '}
+                            👑&nbsp; {ledStudy.title}
+                            {ledStudy.joinRequestCount > 0 ? (
+                              <span css={joinRequestCount}>
+                                &nbsp;&nbsp;[{ledStudy.joinRequestCount}]
+                              </span>
+                            ) : (
+                              <span />
+                            )}
                           </td>
                           <td css={td}>
                             {' '}
@@ -513,13 +518,7 @@ const UserDetail = () => {
 
                   {UserDetailStore.data.joinedStudyList.map(
                     (joinedStudy: JoinedStudy, index: number) => (
-                      <tr
-                        css={hoverTr}
-                        key={index}
-                        // onClick={() => {
-                        //   history.push(`study/details/${joinedStudy.study.id}`)
-                        // }}
-                      >
+                      <tr css={hoverTr} key={index}>
                         {joinedStudy.state === 0 && <td css={td}> 요청 중 </td>}
                         {joinedStudy.state === 2 && <td css={td}> 거절 </td>}
                         {(joinedStudy.state === 0 ||

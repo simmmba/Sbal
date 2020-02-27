@@ -123,17 +123,18 @@ public class SnsLogin {
         }
         JsonObject userinfo = (JsonObject) jsonObject.get("kakao_account");
 
-        String email = null;
+        String email;
         if(userinfo.get("email") != null){
             email = userinfo.get("email").toString().substring(1, userinfo.get("email").toString().length() - 1);
         }
-        JsonObject nickname = null;
+        else email = id;
+        JsonObject nickname;
         String name = null;
         if(userinfo.get("profile")!=null) {
             nickname = (JsonObject) (userinfo.get("profile"));
             if(nickname.get("nickname") != null){
-                name = nickname.get("nickname").toString().substring(1, nickname.get("nickname").toString().length() - 1);
-            }
+                name = id + nickname.get("nickname").toString().substring(1, nickname.get("nickname").toString().length() - 1);
+            } else name = id + "?";
         }
         // id, null, email,null, name, 0, null, null, 100.0, null
         // User user = new User(0, null, email, null, name, 0, null, null, null, null, null, id, null,null);

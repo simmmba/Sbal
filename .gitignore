@@ -33,12 +33,12 @@ build/
 .vscode/
 
 ###### react ######
-
 # dependencies
 /client/node_modules
 /client/.pnp
 /client/.env
-.history
+/client/.history
+/.history
 .pnp.js
 
 # testing

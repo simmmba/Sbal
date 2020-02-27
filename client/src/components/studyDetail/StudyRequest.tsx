@@ -280,18 +280,6 @@ const StudyRequest = () => {
                   <td css={td}>
                     <div css={btnBox}>
                       <button
-                        css={denyBtn}
-                        onClick={() => {
-                          StudyDetailStore.updateStudyMember(
-                            StudyDetailStore.data.id,
-                            sm.user.id,
-                            2
-                          )
-                        }}
-                      >
-                        거절
-                      </button>
-                      <button
                         css={approveBtn}
                         onClick={() => {
                           StudyDetailStore.updateStudyMember(
@@ -302,6 +290,18 @@ const StudyRequest = () => {
                         }}
                       >
                         수락
+                      </button>
+                      <button
+                        css={denyBtn}
+                        onClick={() => {
+                          StudyDetailStore.updateStudyMember(
+                            StudyDetailStore.data.id,
+                            sm.user.id,
+                            2
+                          )
+                        }}
+                      >
+                        거절
                       </button>
                     </div>
                   </td>
@@ -355,23 +355,33 @@ const StudyRequest = () => {
               percent={UserDetailStore.data.evaluation}
               status="active"
             />
-            <div css={comment}>
-              <div>관심사&nbsp;&nbsp;&nbsp;</div>
-              <div>
-                {UserDetailStore.data.interestDTOList.map(
-                  (interest: Interest, index: number) => (
-                    <span key={index}>
-                      <b>#{interest.scategory}&nbsp;&nbsp;</b>
-                    </span>
-                  )
-                )}
+            {UserDetailStore.data.interestDTOList.length > 0 && (
+              <div css={comment}>
+                <div>
+                  <b>
+                    <u>관심사</u>✍️&nbsp;&nbsp;&nbsp;
+                  </b>
+                </div>
+                <div>
+                  {UserDetailStore.data.interestDTOList.map(
+                    (interest: Interest, index: number) => (
+                      <span key={index}>#{interest.scategory}&nbsp;&nbsp;</span>
+                    )
+                  )}
+                </div>
               </div>
-            </div>
-            <span css={comment}>
-              <div>한마디</div>
-              &nbsp;&nbsp;&nbsp;
-              <div>{UserDetailStore.data.introduction}</div>
-            </span>
+            )}
+            {UserDetailStore.data.introduction !== '' && (
+              <span css={comment}>
+                <div>
+                  <b>
+                    <u>한마디</u>💬
+                  </b>
+                </div>
+                &nbsp;&nbsp;&nbsp;
+                <div>{UserDetailStore.data.introduction}</div>
+              </span>
+            )}
           </div>
         </div>
       </Modal>
