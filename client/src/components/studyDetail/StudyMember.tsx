@@ -16,8 +16,6 @@ const StudyMember = () => {
     font-weight: bold;
     font-size: 12px;
     border-radius: 30px;
-    /* padding: 5px 15px 5px 15px; */
-    /* margin: 0px 0px 0px 2px; */
     width: 70px;
     height: 25px;
     border: none;
@@ -34,8 +32,6 @@ const StudyMember = () => {
 
   const table = css`
     border-collapse: collapse;
-    /* padding-bottom: 100px; */
-    /* float: left; */
     width: 350px;
   `
 
@@ -43,7 +39,6 @@ const StudyMember = () => {
     font-size: 20px;
     padding: 10px 10px 10px 15px;
     font-weight: bold;
-    /* border-top: 2px solid #ddd; */
     border-bottom: 2px solid #ddd;
     color: #5d5d5d;
   `
@@ -63,22 +58,9 @@ const StudyMember = () => {
     color: #5d5d5d;
     padding: 5px;
     background: #fff;
-
     font-size: 14px;
-    /* width: 100%; */
     height: 30px;
-    /* border: none; */
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
   `
-
-  // const nickname = css`
-  //   padding-left: 30px;
-  //   border-top: 2px solid grey;
-  //   border-bottom: 2px solid #ddd;
-  //   color: #353535;
-  // `
 
   const top = css`
     padding-bottom: 30px;
@@ -347,22 +329,26 @@ const StudyMember = () => {
               percent={UserDetailStore.data.evaluation}
               status="active"
             />
-            <div css={comment}>
-              <div>관심사&nbsp;&nbsp;&nbsp;</div>
-              <div>
-                {UserDetailStore.data.interestDTOList.map(
-                  (interest: Interest, index: number) => (
-                    <span key={index}>
-                      <b>#{interest.scategory}&nbsp;&nbsp;</b>
-                    </span>
-                  )
-                )}
+            {UserDetailStore.data.interestDTOList.length > 0 && 
+              <div css={comment}>
+                <div><b><u>관심사</u>✍️&nbsp;&nbsp;&nbsp;</b></div>
+                <div>
+                  {UserDetailStore.data.interestDTOList.map(
+                    (interest: Interest, index: number) => (
+                      <span key={index}>
+                        #{interest.scategory}&nbsp;&nbsp;
+                      </span>
+                    )
+                  )}
+                </div>
               </div>
-            </div>
-            <span css={comment}>
-              <div>한마디</div>&nbsp;&nbsp;&nbsp;
-              <div>{UserDetailStore.data.introduction}</div>
-            </span>
+            }
+            {UserDetailStore.data.introduction !== '' && 
+              <span css={comment}>
+                <div><b><u>한마디</u>💬</b></div>&nbsp;&nbsp;&nbsp;
+                <div>{UserDetailStore.data.introduction}</div>
+              </span>
+            }
           </div>
         </div>
       </Modal>

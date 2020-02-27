@@ -3,6 +3,7 @@ import React, {useState, useCallback } from 'react'
 import { css, jsx } from '@emotion/core'
 import TextArea from 'antd/lib/input/TextArea'
 import StudyStore from "../../stores/StudyStore";
+import palette from "../../lib/styles/palette";
 
 const ReplyInsert = ({index} : {index: number}) => {
     const write = css`
@@ -18,10 +19,9 @@ const ReplyInsert = ({index} : {index: number}) => {
     justify-content: center;
     font-size: 14px;
     font-weight: bold;
-    /* color: navy; */
-    border: 2px solid #d1e9ff;
+    border: 2px solid ${palette.violet[1]};
 
-    background: #e6f7ff;
+    background: ${palette.violet[0]};
     border-radius: 5px;
     width: 70px;
     height: 35px;
@@ -29,7 +29,7 @@ const ReplyInsert = ({index} : {index: number}) => {
     margin-left: 5px;
 
     &:hover {
-      background-color: #d1e9ff;
+      background-color: ${palette.violet[1]};
     }
   `
 

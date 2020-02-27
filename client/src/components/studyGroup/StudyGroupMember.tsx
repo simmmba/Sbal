@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
-import { Icon, Empty, Modal, Progress, Avatar } from 'antd'
+import { Empty, Modal, Progress, Avatar } from 'antd'
 import { StudyMember } from './StudyGroupType'
 import { useObserver } from 'mobx-react'
 import StudyStore from '../../stores/StudyStore'
 import UserDetailStore from '../../stores/UserDetailStore'
 import { Interest } from '../userDetail/UserDetailTypes'
+import palette from '../../lib/styles/palette'
 
 const StudyGroupMember = () => {
   const main = css`
@@ -22,16 +23,16 @@ const StudyGroupMember = () => {
     display: flex;
     font-weight: bold;
     font-size: 21px;
-    color: #004584;
+    color: ${palette.violet[9]};
   `
   const content = css`
     display: flex;
-    background: #f4fcff;
+    background: ${palette.violet[0]};
     border-radius: 10px;
     margin-bottom: 2px;
 
     &:hover {
-      background-color: #e6f7ff;
+      background: ${palette.violet[1]};
     }
   `
   const list = css`
@@ -43,6 +44,7 @@ const StudyGroupMember = () => {
     justify-content: center;
     align-items: center;
     font-size: 14px;
+    padding: 10px 20px 10px 22px;
     border-right: 2px dashed #fff;
     width: 100%;
   `
@@ -50,11 +52,11 @@ const StudyGroupMember = () => {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 20px 10px 20px;
+    padding: 10px 5px 10px 5px;
     border-right: 2px dashed #fff;
     width: 100px;
   `
-  const date = css`
+  const state = css`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,11 +65,11 @@ const StudyGroupMember = () => {
     width: 200px;
     border-left: 2px dashed #fff;
   `
-  const attendance = css`
+  const evaluation = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 20px 10px 20px;
+    padding: 10px 5px 10px 5px;
     font-size: 14px;
     width: 150px;
   `
@@ -237,43 +239,40 @@ const StudyGroupMember = () => {
               percent={UserDetailStore.data.evaluation}
               status="active"
             />
-            <div css={comment}>
-              <div>관심사&nbsp;&nbsp;&nbsp;</div>
-              <div>
-                {UserDetailStore.data.interestDTOList.map(
-                  (interest: Interest, index: number) => (
-                    <span key={index}>
-                      <b>#{interest.scategory}&nbsp;&nbsp;</b>
-                    </span>
-                  )
-                )}
+            {UserDetailStore.data.interestDTOList.length > 0 && 
+              <div css={comment}>
+                <div><b><u>관심사</u>✍️&nbsp;&nbsp;&nbsp;</b></div>
+                <div>
+                  {UserDetailStore.data.interestDTOList.map(
+                    (interest: Interest, index: number) => (
+                      <span key={index}>
+                        #{interest.scategory}&nbsp;&nbsp;
+                      </span>
+                    )
+                  )}
+                </div>
               </div>
-            </div>
-            <span css={comment}>
-              <div>한마디</div>&nbsp;&nbsp;&nbsp;
-              <div>{UserDetailStore.data.introduction}</div>
-            </span>
+            }
+            {UserDetailStore.data.introduction !== '' && 
+              <span css={comment}>
+                <div><b><u>한마디</u>💬</b></div>&nbsp;&nbsp;&nbsp;
+                <div>{UserDetailStore.data.introduction}</div>
+              </span>
+            }
           </div>
         </div>
       </Modal>
       <div css={upper}>
         <div css={title}>
-          <Icon
-            css={icon}
-            type="smile"
-            style={{ fontSize: 24 }}
-            theme="twoTone"
-            twoToneColor="navy"
-          />
-          &nbsp;스터디 멤버
+          😃&nbsp;스터디 멤버
         </div>
       </div>
       {StudyStore.studyGroup.studyMemberDTOList.length > 0 ? (
         <div css={list}>
-          <div css={num}>순번</div>
+          <div css={num}>번호</div>
           <div css={listNickname}>닉네임</div>
-          <div css={attendance}>성실도</div>
-          <div css={date}>상태</div>
+          <div css={evaluation}>성실도</div>
+          <div css={state}>상태</div>
         </div>
       ) : (
         <div></div>
@@ -291,8 +290,9 @@ const StudyGroupMember = () => {
                   {m.user.nickname}
                 </button>
               </div>
-              <div css={attendance}>{m.user.id}</div>
-              <div css={date}>{m.state === 1 ? '가입' : '요청'}</div>
+              {/* <div css={attendance}>{m.user.id}</div> */}
+              <div css={evaluation}>{m.user.evaluation}</div>
+              <div css={state}>{m.state === 1 ? '가입' : '요청중'}</div>
             </div>
           )
         )

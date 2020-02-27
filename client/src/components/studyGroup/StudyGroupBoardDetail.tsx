@@ -8,6 +8,7 @@ import StudyStore from '../../stores/StudyStore'
 import {useParams, useHistory} from 'react-router'
 import {StudyNotice} from "./StudyGroupType";
 import {useEffect} from 'react'
+import palette from '../../lib/styles/palette'
 
 const StudyGroupBoardDetail = () => {
     const {index} = useParams();
@@ -15,9 +16,6 @@ const StudyGroupBoardDetail = () => {
     const main = css`
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
-    /* align-content: center; */
-    /* border: 1px solid black; */
   `
 
     const upper = css`
@@ -29,16 +27,17 @@ const StudyGroupBoardDetail = () => {
     display: flex;
     font-weight: bold;
     font-size: 21px;
-    color: #004584;
-    /* padding: 0px 17px 0px 5px; */
+    color: ${palette.violet[9]};
   `
 
     const content = css`
     display: flex;
     flex-direction: column;
-    background: #eef7ff;
-    border-radius: 5px;
+    /* background: ${palette.violet[0]}; */
+    border: 3px solid ${palette.violet[0]};
+    border-radius: 7px;
     margin-bottom: 2px;
+    margin-top: 10px;
   `
 
     const btitle = css`
@@ -52,29 +51,22 @@ const StudyGroupBoardDetail = () => {
 
     const writer = css`
     display: flex;
-    /* justify-content: center; */
     align-items: center;
     font-size: 14px;
-    /* border-right: 2px dashed #fff; */
   `
 
     const date = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    /* padding: 10px 20px 10px 20px; */
     font-size: 13px;
     padding-left: 10px;
-    /* width: 200px; */
-    /* border-right: 2px dashed #fff; */
   `
     const hit = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    /* padding: 10px 20px 10px 20px; */
     font-size: 13px;
-    /* width: 100px; */
     padding-left: 10px;
   `
 
@@ -82,30 +74,19 @@ const StudyGroupBoardDetail = () => {
     display: flex;
     justify-content: center;
     align-items: center;
-  `
+    cursor: pointer;
+    color: #747474;
 
-  //   const btn = css`
-  //   border: none;
-  //   cursor: pointer;
-  //   display: flex;
-  //   align-items: center;
-  //   justify-content: center;
-  //   font-size: 14px;
-  //   font-weight: bold;
-  //   color: navy;
-  //
-  //   background: #d9e5ff;
-  //   border-radius: 7px;
-  //   width: 100px;
-  //   height: 30px;
-  // `
+    &:hover{
+      font-weight: bold;
+      color: #747474;
+    }
+  `
 
     const detail = css`
     display: flex;
-    /* justify-content: center; */
-    /* align-items: center; */
     justify-content: space-between;
-    padding: 3px 50px 30px 27px;
+    padding: 3px 50px 12px 27px;
     color: #747474;
     flex-wrap: wrap;
   `
@@ -113,7 +94,7 @@ const StudyGroupBoardDetail = () => {
     const top = css`
     display: flex;
     flex-direction: column;
-    background: #d1e9ff;
+    background: ${palette.violet[0]};
     border-radius: 5px;
     margin-bottom: 2px;
   `
@@ -136,7 +117,8 @@ const StudyGroupBoardDetail = () => {
     padding-right: 15px;
 
     &:hover {
-      color: #4c4c4c;
+      font-weight: bold;
+      color: #747474;
     }
   `
     const history = useHistory();
@@ -156,14 +138,7 @@ const StudyGroupBoardDetail = () => {
         <div css={main}>
             <div css={upper}>
                 <div css={title}>
-                    <Icon
-                        css={icon}
-                        type="snippets"
-                        style={{fontSize: 24}}
-                        theme="twoTone"
-                        twoToneColor="navy"
-                    />
-                    &nbsp;게시글 읽기
+                📝&nbsp;스터디 게시판
                 </div>
             </div>
             <div>
@@ -182,10 +157,9 @@ const StudyGroupBoardDetail = () => {
                                         css={navLink}
                                         to={`/study/${StudyStore.studyGroup.id}/editBoard/${Number(index)}`}
                                     >
-                                        <Icon css={icon} type="edit" theme="filled"/>
+                                        <u>수정✏️</u>
                                     </NavLink>
-                                    <Icon css={icon} type="delete" theme="filled"
-                                          onClick={() => clickDeleteIcon(notice.id, Number(index))}/>
+                                    <span css={icon} onClick={() => clickDeleteIcon(notice.id, Number(index))}><u>삭제✂️</u></span>
 
                                 </div>
                             ) : (<div/>)}

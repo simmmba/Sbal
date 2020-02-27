@@ -27,8 +27,7 @@ public class Reply {
 
     public ReplyDTO toDTO(){
         ReplyDTO replyDTO = new ReplyDTO(id, content, notice.getId(),
-                new UserDTO(writer.getId(), writer.getNickname()) ,date);
+                new UserDTO(writer.getId(), writer.getNickname(), writer.getProfilePhotoDir()) ,date);
         return replyDTO;
     }
-
 }

@@ -32,7 +32,8 @@ export type StudyGroupType = {
 export type StudyMember = {
     user: {
         id: number,
-        nickname: string
+        nickname: string,
+        evaluation: number
     },
     state: number
 }
@@ -53,7 +54,7 @@ export type StudyNotice = {
     studyId: number,
     writer: {
         id: number,
-        nickname: string
+        nickname: string,
     },
     hits: number,
     date: string,
@@ -66,7 +67,8 @@ export type NoticeReply = {
     noticeId: number,
     writer: {
         id: number,
-        nickname: string
+        nickname: string,
+        profilePhotoDir : string
     },
     date: string
 }

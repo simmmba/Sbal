@@ -5,6 +5,7 @@ import {Icon} from 'antd'
 import ReplyInsert from './ReplyInsert'
 import StudyStore from "../../stores/StudyStore";
 import {NoticeReply} from "./StudyGroupType";
+import { Avatar } from 'antd'
 
 const Reply = ({index}: { index: number }) => {
 
@@ -89,6 +90,16 @@ const Reply = ({index}: { index: number }) => {
                     <div css={list} key={r.id}>
                         <div css={upper}>
                             <div css={left}>
+                            <Avatar
+                              src={
+                                'http://13.124.98.149/images/' +
+                                  r.writer.profilePhotoDir
+                              }
+                              icon="user"
+                              css={css`
+                                margin-right: 5px;
+                              `}
+                            />
                                 <div css={writer}>{r.writer.nickname}</div>
                                 <div css={date}>{r.date.substr(0, 16)}</div>
                             </div>

@@ -7,6 +7,8 @@ import StudyStore from "../../stores/StudyStore";
 import {useLocalStore} from 'mobx-react';
 import {CreatedOrUpdatedSchedule} from "./StudyGroupType";
 import moment from 'moment'
+import palette from '../../lib/styles/palette'
+
 const ScheduleEdit = ({sIndex}: { sIndex: number }) => {
 
   //   const icon = css`
@@ -24,15 +26,14 @@ const ScheduleEdit = ({sIndex}: { sIndex: number }) => {
     justify-content: center;
     font-size: 12px;
     font-weight: bold;
-    color: navy;
-    background: #d9e5ff;
+    color: ${palette.violet[9]};
+    background: ${palette.violet[0]};
     border-radius: 7px;
-    width: 50px;
     height: 25px;
     transition: 0.3s;
 
     &:hover {
-      background-color: #b2ccff;
+      background-color: ${palette.violet[1]};
     }
   `
 
@@ -119,7 +120,7 @@ const ScheduleEdit = ({sIndex}: { sIndex: number }) => {
     return (
         <div>
             <button css={btn} onClick={showModal}>
-                수정
+                수정 ✏️
             </button>
             <Modal
                 visible={visible}

@@ -308,7 +308,7 @@ const StudyMap = () => {
                 searchPlaces(1)
               }}
             >
-              내 주변 카페
+              스터디 주변 카페
             </button>
             <button
               css={buttonStyle}
@@ -316,7 +316,7 @@ const StudyMap = () => {
                 searchPlaces(2)
               }}
             >
-              내 주변 스터디룸
+              스터디 주변 스터디룸
             </button>
           </div>
         </div>

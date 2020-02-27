@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
-import { Icon, Empty, Modal, Pagination, message } from 'antd'
+import { Empty, Modal, Pagination, message } from 'antd'
 import { StudySchedule } from './StudyGroupType'
 import ScheduleAdd from './ScheduleAdd'
 import ScheduleEdit from './ScheduleEdit'
 import Score from './Score'
 import { useObserver } from 'mobx-react'
 import StudyStore from '../../stores/StudyStore'
+import palette from '../../lib/styles/palette'
 
 const StudyGroupSchedule = () => {
   const main = css`
@@ -28,21 +29,22 @@ const StudyGroupSchedule = () => {
     display: flex;
     font-weight: bold;
     font-size: 21px;
-    color: #004584;
+    color: ${palette.violet[9]};
     /* padding: 0px 17px 0px 5px; */
   `
 
   const content = css`
     display: flex;
-    background: #f4fcff;
+    background: ${palette.violet[0]};
     border-radius: 10px;
     margin-bottom: 2px;
-    padding: 10px 20px 20px 20px;
+    padding: 20px 20px 20px 0px;
     /* flex-wrap: wrap; */
     /* justify-content: space-between; */
+    transition: 0.3s;
 
     &:hover {
-      background-color: #e6f7ff;
+    background: ${palette.gray[0]};
     }
   `
 
@@ -86,15 +88,10 @@ const StudyGroupSchedule = () => {
     flex-wrap: wrap;
   `
 
-  // const cnt = css`
-  //   display: flex;
-  //   justify-content: center;
-  //   font-weight: bold;
-  // `
-
   const subject = css`
     font-weight: bold;
     font-size: 18px;
+    padding-bottom: 10px;
   `
 
   const homework = css`
@@ -107,29 +104,8 @@ const StudyGroupSchedule = () => {
     align-items: center;
   `
 
-  //   const add = css`
-  //   background-color: #fff;
-  //   border: none;
-  //   cursor: pointer;
-  //   display: flex;
-  //   align-items: center;
-  //   justify-content: center;
-  //   font-size: 14px;
-  //   font-weight: bold;
-  //   color: navy;
-  //   background: #d9e5ff;
-  //   border-radius: 7px;
-  //   width: 130px;
-  //   height: 30px;
-  //   transition: 0.3s;
-  //
-  //   &:hover {
-  //     background-color: #b2ccff;
-  //   }
-  // `
-
   const btn = css`
-    background-color: #fff;
+    /* background-color: #fff; */
     border: none;
     cursor: pointer;
     display: flex;
@@ -137,15 +113,14 @@ const StudyGroupSchedule = () => {
     justify-content: center;
     font-size: 12px;
     font-weight: bold;
-    color: navy;
-    background: #d9e5ff;
+    color: ${palette.violet[9]};
+    background: ${palette.violet[0]};
     border-radius: 7px;
-    width: 50px;
     height: 25px;
     transition: 0.3s;
 
     &:hover {
-      background-color: #b2ccff;
+      background-color: ${palette.violet[1]};
     }
   `
 
@@ -201,7 +176,7 @@ const StudyGroupSchedule = () => {
     StudyStore.userScores.map((updatedAttendance: object) => {
       StudyStore.updateAttendance(updatedAttendance)
     })
-    message.info('변경되었습니다.')
+    message.info('스케줄이 수정되었습니다.')
     setScoreConfirmLoading(true)
     setTimeout(() => {
       setScoreVisible(false)
@@ -215,7 +190,7 @@ const StudyGroupSchedule = () => {
   }
 
   const clickDeleteSchedule = (id: number, index: number): void => {
-    if (window.confirm('일정을 삭제하시겠습니까?')) {
+    if (window.confirm('스케줄을 삭제하시겠습니까?')) {
       StudyStore.deleteStudySchedule(Number(id), Number(index))
     }
   }
@@ -240,14 +215,7 @@ const StudyGroupSchedule = () => {
       </Modal>
       <div css={upper}>
         <div css={title}>
-          <Icon
-            css={icon}
-            type="schedule"
-            style={{ fontSize: 24 }}
-            theme="twoTone"
-            twoToneColor="navy"
-          />
-          &nbsp;스터디 스케줄
+        📅&nbsp;스터디 스케줄
         </div>
         {studyScheduleList.length > 0 &&
         StudyStore.loginUser.id === StudyStore.studyGroup.leader.id ? (
@@ -276,7 +244,6 @@ const StudyGroupSchedule = () => {
                   }
                 >
                   <div css={subject}>{s.subject}</div>
-                  <br />
                   <div css={homework}>
                     <b>시간 :</b> {s.meetDate.substr(0, 4)}년{' '}
                     {s.meetDate.substr(5, 2)}월 {s.meetDate.substr(8, 2)}일{' '}
@@ -307,7 +274,7 @@ const StudyGroupSchedule = () => {
                         )
                       }
                     >
-                      삭제
+                      삭제 ✂️
                     </button>
                   </div>
                 ) : (
