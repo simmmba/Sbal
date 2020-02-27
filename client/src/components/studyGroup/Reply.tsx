@@ -89,6 +89,7 @@ const Reply = ({index}: { index: number }) => {
                     <div css={list} key={r.id}>
                         <div css={upper}>
                             <div css={left}>
+                                
                                 <div css={writer}>{r.writer.nickname}</div>
                                 <div css={date}>{r.date.substr(0, 16)}</div>
                             </div>

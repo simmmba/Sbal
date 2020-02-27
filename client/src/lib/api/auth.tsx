@@ -20,7 +20,6 @@ export const getSocialData = (code: string, service: string) => {
   if (localStorage.token) {
     setAuthToken(localStorage.token)
   }
-  alert(code)
   return apiClient.post('/user/auth', {code, service})
 }
 

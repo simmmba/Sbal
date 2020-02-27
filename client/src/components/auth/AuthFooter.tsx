@@ -10,8 +10,6 @@ dotenv.config()
 
 function AuthFooter() {
 
-
-
   //  const openWindow = (url: string) => {
   //    //window.open(url, 'newwindow', 'width=490,height=560')
   //    window.location(url)
