@@ -280,18 +280,6 @@ const StudyRequest = () => {
                   <td css={td}>
                     <div css={btnBox}>
                       <button
-                        css={denyBtn}
-                        onClick={() => {
-                          StudyDetailStore.updateStudyMember(
-                            StudyDetailStore.data.id,
-                            sm.user.id,
-                            2
-                          )
-                        }}
-                      >
-                        거절
-                      </button>
-                      <button
                         css={approveBtn}
                         onClick={() => {
                           StudyDetailStore.updateStudyMember(
@@ -302,6 +290,18 @@ const StudyRequest = () => {
                         }}
                       >
                         수락
+                      </button>
+                      <button
+                        css={denyBtn}
+                        onClick={() => {
+                          StudyDetailStore.updateStudyMember(
+                            StudyDetailStore.data.id,
+                            sm.user.id,
+                            2
+                          )
+                        }}
+                      >
+                        거절
                       </button>
                     </div>
                   </td>

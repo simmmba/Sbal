@@ -198,10 +198,10 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
       sessionStorage.setItem('id', id)
       UserStore.token = token
       UserStore.isLoggingIn = false
-      message.info('로그인 되었습니다.', 2)
+      message.info('로그인 되었습니다. 첫 로그인 시 회원정보를 수정해주세요', 2)
       history.push('/')
     } else {
-      alert("yyyyyyy")
+      
       const { email, nickname, socialLogin } = res.data.value
       if (email) {
         state.email = email
