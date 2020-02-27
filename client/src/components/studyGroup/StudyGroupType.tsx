@@ -32,7 +32,8 @@ export type StudyGroupType = {
 export type StudyMember = {
     user: {
         id: number,
-        nickname: string
+        nickname: string,
+        evaluation: number
     },
     state: number
 }

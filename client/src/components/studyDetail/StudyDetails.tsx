@@ -104,9 +104,7 @@ const StudyDetails = () => {
     font-weight: bold;
     font-size: 14px;
     border-radius: 4px;
-    /* padding: 5px 15px 5px 15px; */
     margin: 0px 0px 0px 2px;
-    /* width: 100px; */
     height: 30px;
     border: none;
     display: flex;
@@ -117,15 +115,14 @@ const StudyDetails = () => {
 
     &:hover {
       color: #4c4c4c;
-      background-color: ${palette.violet[2]};
+      /* background-color: ${palette.violet[2]}; */
+      box-shadow: 2px 2px 3px inset;
     }
   `
 
   const btnBox = css`
     display: flex;
     justify-content: flex-end;
-    /* align-content: center; */
-    /* margin-top: 20px; */
     align-items: center;
     margin: 5px 0px 5px 0px;
     margin-left: 15px;

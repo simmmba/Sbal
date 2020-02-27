@@ -78,6 +78,7 @@ const StudyGroupMain = ({ id }: { id: number }) => {
     justify-content: center;
     @media screen and (max-width: 815px) {
       margin-top: 0;
+      margin-bottom: 10px;
     }
   `
   const move = css`
@@ -100,9 +101,16 @@ const StudyGroupMain = ({ id }: { id: number }) => {
 
     &:hover {
       color: #4c4c4c;
-      background-color: ${palette.violet[2]};
+      /* background-color: ${palette.violet[2]}; */
+      box-shadow: 2px 2px 3px inset;
     }
   `
+
+  const all = css`
+    margin-top: 42px;
+    margin-bottom: 50px;
+  `
+
   const state = useLocalStore(() => ({
     width: window.innerWidth,
     updateWidth() {
@@ -116,9 +124,7 @@ const StudyGroupMain = ({ id }: { id: number }) => {
 
   return useObserver(() => (
     <Display>
-      <div>
-        <br />
-        <br />
+      <div css={all}>
         <div css={top}>
           <div css={main}>
             <div css={title}>
@@ -168,48 +174,29 @@ const StudyGroupMain = ({ id }: { id: number }) => {
             >
               <Menu.Item key="schedule">
                 <NavLink to={`/study/${StudyStore.studyGroup.id}/schedule`}>
-                  <Icon
-                    type="schedule"
-                    style={{ fontSize: 19 }}
-                    theme="twoTone"
-                    twoToneColor="#845ef7"
-                  />
-                  {state.width >= 815 ? '스케줄' : ''}
+                  <big>📅</big>
+                  {state.width >= 815 ? ' 스케줄' : ''}
                 </NavLink>
               </Menu.Item>
               <Menu.Item key="board">
                 <NavLink to={`/study/${StudyStore.studyGroup.id}/board`}>
-                  <Icon
-                    type="snippets"
-                    style={{ fontSize: 19 }}
-                    theme="twoTone"
-                    twoToneColor="#845ef7"
-                  />
-                  {state.width >= 815 ? '게시판' : ''}
+                  <big>📝</big>
+                  {state.width >= 815 ? ' 게시판' : ''}
                 </NavLink>
               </Menu.Item>
               <Menu.Item key="memberinfo">
                 <NavLink to={`/study/${StudyStore.studyGroup.id}/member`}>
-                  <Icon
-                    type="smile"
-                    style={{ fontSize: 19 }}
-                    theme="twoTone"
-                    twoToneColor="#845ef7"
-                  />
-                  {state.width >= 815 ? '멤버 정보' : ''}
+                  <big>😃</big>
+                  {state.width >= 815 ? ' 멤버 정보' : ''}
                 </NavLink>
               </Menu.Item>
-              <Menu.Item key="studyinfo">
+              {!StudyStore.studyGroup.isOnline && 
+              <Menu.Item key="studylocation">
                 <NavLink to={`/study/${StudyStore.studyGroup.id}/map`}>
-                  <Icon
-                    type="info-circle"
-                    style={{ fontSize: 19 }}
-                    theme="twoTone"
-                    twoToneColor="#845ef7"
-                  />
-                  {state.width >= 815 ? '스터디 장소' : ''}
+                  <big>🌏</big>
+                  {state.width >= 815 ? ' 스터디 장소' : ''}
                 </NavLink>
-              </Menu.Item>
+              </Menu.Item>}
             </Menu>
           </div>
           <div css={content}>

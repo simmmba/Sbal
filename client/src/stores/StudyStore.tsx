@@ -116,11 +116,11 @@ const StudyStore = observable({
         const studyGroup = await studyAPI.getStudyGroup(this.studyGroup.id)
         this.studyGroup = studyGroup.data.value
       } else {
-        message.error('공지사항 등록 중 오류가 발생했습니다.')
+        message.error('게시글 등록 중 오류가 발생했습니다.')
       }
       message.info(res.data.message)
     } catch (e) {
-      message.error('공지사항 등록 중 오류가 발생했습니다.')
+      message.error('게시글 등록 중 오류가 발생했습니다.')
     }
   },
 
@@ -129,7 +129,7 @@ const StudyStore = observable({
       const res = await studyAPI.updateNotice(editedNotice)
       message.info(res.data.message)
     } catch (e) {
-      message.error('공지사항 수정 중 오류가 발생했습니다.')
+      message.error('게시글 수정 중 오류가 발생했습니다.')
     }
   },
 
@@ -138,7 +138,7 @@ const StudyStore = observable({
       const res = await studyAPI.deleteNotice(Number(id))
       message.info(res.data.message)
     } catch (e) {
-      message.error('공지사항 삭제 중 오류가 발생했습니다.')
+      message.error('게시글 삭제 중 오류가 발생했습니다.')
     }
   },
 
