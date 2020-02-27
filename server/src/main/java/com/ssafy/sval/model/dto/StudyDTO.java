@@ -31,6 +31,7 @@ public class StudyDTO {
     private String startDate;
     private String endDate;
     private Integer joinedMemberCount;
+    private Integer joinRequestCount;
     private List<StudyMemberDTO> studyMemberDTOList;
     private List<StudyScheduleDTO> studyScheduleDTOList;
     private List<NoticeDTO> noticeDTOList;

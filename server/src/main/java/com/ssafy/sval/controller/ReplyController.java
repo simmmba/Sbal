@@ -55,7 +55,6 @@ public class ReplyController {
             int userId = jwtService.getLoginUserId(request);
             Reply reply = replyDTO.toEntity(userId);
             reply = replyService.insert(reply);
-            //log.info("createdStudyDTO : {}", createdStudy.toDTO());
             return new ResponseEntity<>(new CommonResponse(reply.toDTO(), "enrollNewReply", "SUCCESS", "댓글이 등록되었습니다."), HttpStatus.OK);
         } catch (RuntimeException e) {
             e.printStackTrace();
@@ -73,7 +72,6 @@ public class ReplyController {
             if(reply.getWriter().getId()==userId){
                 Reply updateReply = replyDTO.toEntity(userId);
                 updateReply = replyService.insert(updateReply);
-                //log.info("createdStudyDTO : {}", createdStudy.toDTO());
                 return new ResponseEntity<>(new CommonResponse(updateReply.toDTO(), "replyUpdate", "SUCCESS", "댓글이 수정되었습니다."), HttpStatus.OK);
             }
             else{

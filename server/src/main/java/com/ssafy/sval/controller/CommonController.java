@@ -41,7 +41,6 @@ public class CommonController {
     @GetMapping(value = "/")
     public ResponseEntity<CommonResponse> manufactureMain(HttpServletRequest request) {
         Map<String, Object> mainInfo;
-        log.info("request for main");
         try {
             int loginUserId = jwtService.getLoginUserId(request);
             if (loginUserId > 0) {

@@ -55,7 +55,7 @@ public class Study {
     public StudyDTO toDTO() {
         StudyDTO studyDTO = new StudyDTO(id, title, contents, new UserDTO(leader.getId(), leader.getNickname()),
                 lCategory, sCategory, city, town, state, maxParticipants, hits, isOnline, monthOrWeek,
-                frequency, weekdayOrWeekend, timeslot, evaluationLimit, enrollDate, startDate, endDate, null, null, null,null);
+                frequency, weekdayOrWeekend, timeslot, evaluationLimit, enrollDate, startDate, endDate, null,null, null, null,null);
 
 
         if (memberList != null) {
@@ -85,7 +85,7 @@ public class Study {
         StudyDTO studyDTO = new StudyDTO(id, title, null, leaderDTO,
                 lCategory, sCategory, city, town, state, maxParticipants, hits, isOnline, monthOrWeek,
                 frequency, weekdayOrWeekend, timeslot, evaluationLimit, enrollDate,
-                startDate, endDate, null, null, null, null);
+                startDate, endDate, null, null, null, null, null);
 
         return studyDTO;
     }
@@ -93,7 +93,7 @@ public class Study {
     public StudyDTO myPageDTO() {
         StudyDTO studyDTO = new StudyDTO(id, title, null, null, null, null,
                 null, null, state, maxParticipants, null, isOnline, null, null,
-                null, null, null, null, startDate, endDate,
+                null, null, null, null, startDate, endDate, null,
                 null, null, null,null);
 
         return studyDTO;

@@ -98,7 +98,10 @@ const StudyRank = ({ title, list }: StudyRankprops) => {
               </div>
               <div css={listContainer}>
                 <div>
-                  <div css={listName}>{study.title}</div>
+                  <div css={listName}>
+                    {study.title}
+                    {study.joinRequestCount}
+                  </div>
                   <div css={listType}>{study.lcategory}</div>
                 </div>
               </div>
