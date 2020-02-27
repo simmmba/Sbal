@@ -227,6 +227,10 @@ const hover = css`
     font-weight: bold;
   }
 `
+const joinRequestCount = css`
+    font-size: 12px;
+    color: #ff5e00;
+`
 
 const UserDetail = () => {
   const history = useHistory()
@@ -421,7 +425,8 @@ const UserDetail = () => {
                             }}
                           >
                             {' '}
-                            👑&nbsp; {ledStudy.title}{' '}{ledStudy.joinRequestCount}
+                            👑&nbsp; {ledStudy.title}
+                            {ledStudy.joinRequestCount>0?(<span css={joinRequestCount}>&nbsp;&nbsp;[{ledStudy.joinRequestCount}]</span>):<span/>}
                           </td>
                           <td css={td}>
                             {' '}
