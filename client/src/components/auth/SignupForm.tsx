@@ -185,7 +185,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
     const query = qs.parse(location.search, { ignoreQueryPrefix: true })
     const kakaoAccessToken = query.code
     const res = await getSocialData(kakaoAccessToken, 'kakao')
-    console.log(res)
+
     if (res.headers['jwt-auth-token']) {
       UserStore.isLoggingIn = true
       UserStore.loginUser = {

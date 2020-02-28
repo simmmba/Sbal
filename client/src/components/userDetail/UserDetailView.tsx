@@ -103,7 +103,7 @@ const editBtn = css`
   font-weight: bold;
   font-size: 12px;
   border-radius: 4px;
-  width: 70px;
+  width: 100px;
   height: 25px;
   border: none;
   display: flex;
@@ -228,8 +228,8 @@ const hover = css`
   }
 `
 const joinRequestCount = css`
-    font-size: 12px;
-    color: #ff5e00;
+  font-size: 12px;
+  color: #ff5e00;
 `
 
 const UserDetail = () => {
@@ -238,6 +238,10 @@ const UserDetail = () => {
   const clickedUpdateButton = () => {
     // UserDetailStore.mypage();
     history.push('/mypage/update')
+  }
+  const passwordUpdateButton = () => {
+    // UserDetailStore.mypage();
+    history.push('/mypage/update/password')
   }
   const dis = css`
     display: none;
@@ -314,7 +318,10 @@ const UserDetail = () => {
                 </div>
               )}
               <button css={editBtn} onClick={() => clickedUpdateButton()}>
-                정보 수정
+                회원정보 수정
+              </button>
+              <button css={editBtn} onClick={() => passwordUpdateButton()}>
+                비밀번호 변경
               </button>
               <button
                 css={logoutBtn}
@@ -426,7 +433,13 @@ const UserDetail = () => {
                           >
                             {' '}
                             👑&nbsp; {ledStudy.title}
-                            {ledStudy.joinRequestCount>0?(<span css={joinRequestCount}>&nbsp;&nbsp;[{ledStudy.joinRequestCount}]</span>):<span/>}
+                            {ledStudy.joinRequestCount > 0 ? (
+                              <span css={joinRequestCount}>
+                                &nbsp;&nbsp;[{ledStudy.joinRequestCount}]
+                              </span>
+                            ) : (
+                              <span />
+                            )}
                           </td>
                           <td css={td}>
                             {' '}
@@ -512,10 +525,7 @@ const UserDetail = () => {
 
                   {UserDetailStore.data.joinedStudyList.map(
                     (joinedStudy: JoinedStudy, index: number) => (
-                      <tr
-                        css={hoverTr}
-                        key={index}
-                      >
+                      <tr css={hoverTr} key={index}>
                         {joinedStudy.state === 0 && <td css={td}> 요청 중 </td>}
                         {joinedStudy.state === 2 && <td css={td}> 거절 </td>}
                         {(joinedStudy.state === 0 ||
