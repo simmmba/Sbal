@@ -34,6 +34,7 @@ function UpdatePassword() {
   }, [])
 
   const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
     if(state.newPassword !== state.newPasswordToConfirm) {
       message.error("새 비밀번호와 새 비밀번호 확인이 같지 않습니다.")
       return

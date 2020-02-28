@@ -72,7 +72,7 @@ public class UserService {
 
     @Transactional
     public User updatePassword(Integer id, String pw){
-        User user = uRepo.findById(id);
+        User user = uRepo.findById(id).get();
         user.setPw(passwordEncoder.encode(pw));
         interestRepo.deleteAllByUserId(user.getId());
         interestRepo.saveAll(user.getInterestList());

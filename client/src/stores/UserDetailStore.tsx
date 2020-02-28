@@ -55,6 +55,7 @@ const UserDetailStore: UserDetailStoreType = observable({
   async findPassword(email : string, history : H.History){
       try{
         const res = await userDetail.findPassword(email)
+        alert(res.data.state)
         if(res.data.state === 'SUCCESS'){
           message.info("임시 비밀번호가 전송되었습니다.")
           history.push("/login")
