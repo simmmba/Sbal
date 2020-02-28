@@ -224,7 +224,7 @@ public class UserController {
 
     //비밀번호 수정
     @PostMapping("/updatePassword")
-    public ResponseEntity<CommonResponse> updatePassword(@RequestBody UserDTO user, @RequestBody UserDTO newUser, HttpServletResponse response){
+    public ResponseEntity<CommonResponse> updatePassword(@RequestBody UserDTO user, @RequestBody UserDTO newUser, HttpServletRequest request){
         try{
             int loginUserId = jwtService.getLoginUserId(request);
             User temp = userService.findById(loginUserId);

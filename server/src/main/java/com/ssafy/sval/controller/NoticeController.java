@@ -46,13 +46,13 @@ public class NoticeController {
     }
 
     @PostMapping
-    @ApiOperation(value = "새로운 공지사항을 등록한다.", response = CommonResponse.class)
+    @ApiOperation(value = "새로운 게시글을 등록한다.", response = CommonResponse.class)
     public ResponseEntity<CommonResponse> insert(@RequestBody NoticeDTO noticeDTO, HttpServletRequest request) {
         try {
             int userId = jwtService.getLoginUserId(request);
             Notice notice = noticeDTO.toEntity(userId);
             notice = noticeService.insert(notice);
-            return new ResponseEntity<>(new CommonResponse(notice.toDTO(), "enrollNewNotice", "SUCCESS", "공지사항이 등록되었습니다."), HttpStatus.OK);
+            return new ResponseEntity<>(new CommonResponse(notice.toDTO(), "enrollNewNotice", "SUCCESS", "게시글이 등록되었습니다."), HttpStatus.OK);
         } catch (RuntimeException e) {
             e.printStackTrace();
             throw new RuntimeException("enrollNewNotice");
@@ -60,7 +60,7 @@ public class NoticeController {
     }
 
     @PutMapping
-    @ApiOperation(value = "공지사항을 수정한다", response=CommonResponse.class)
+    @ApiOperation(value = "게시글을 수정한다", response=CommonResponse.class)
     public ResponseEntity<CommonResponse> update(@RequestBody NoticeDTO noticeDTO,  HttpServletRequest request){
         try {
             int userId = jwtService.getLoginUserId(request);
@@ -68,7 +68,7 @@ public class NoticeController {
             if(notice.getWriter().getId()== userId){
                 Notice updateNotice = noticeDTO.toEntity(userId);
                 updateNotice = noticeService.update(updateNotice);
-                return new ResponseEntity<>(new CommonResponse(updateNotice.toDTO(), "noticeUpdate", "SUCCESS", "공지사항이 수정되었습니다."), HttpStatus.OK);
+                return new ResponseEntity<>(new CommonResponse(updateNotice.toDTO(), "noticeUpdate", "SUCCESS", "게시글이 수정되었습니다."), HttpStatus.OK);
             }
             else {
                 return new ResponseEntity<>(new CommonResponse("noticeUpdate", "FAIL", "올바르지 않은 접근입니다."), HttpStatus.OK);
@@ -80,7 +80,7 @@ public class NoticeController {
     }
 
     @GetMapping("/{id}")
-    @ApiOperation(value = "공지사항의 상세 정보를 가져온다.", response = CommonResponse.class)
+    @ApiOperation(value = "게시글의 상세 정보를 가져온다.", response = CommonResponse.class)
     public ResponseEntity<CommonResponse> selectOne(@PathVariable Integer id, HttpServletRequest request) {
         try {
             int userId = jwtService.getLoginUserId(request);
@@ -93,12 +93,12 @@ public class NoticeController {
     }
 
     @GetMapping("/increaseHits/{noticeId}")
-    @ApiOperation(value = "공지사항의 hits를 증가시킨다.", response = CommonResponse.class)
+    @ApiOperation(value = "게시글의 조회수(hits)를 증가시킨다.", response = CommonResponse.class)
     public ResponseEntity<CommonResponse> increaseHits(@PathVariable Integer noticeId, HttpServletRequest request) {
         try {
             int userId = jwtService.getLoginUserId(request);
             noticeService.increaseHits(noticeId);
-            return new ResponseEntity<>(new CommonResponse("increaseHits", "SUCCESS", "조회 수 증가"), HttpStatus.OK);
+            return new ResponseEntity<>(new CommonResponse("increaseHits", "SUCCESS", "조회수 증가"), HttpStatus.OK);
         } catch (RuntimeException e) {
             e.printStackTrace();
             throw new RuntimeException("increaseHits");
@@ -106,7 +106,7 @@ public class NoticeController {
     }
 
     @DeleteMapping("/{id}")
-    @ApiOperation(value = "공지사항을 삭제한다.", response = CommonResponse.class)
+    @ApiOperation(value = "게시글을 삭제한다.", response = CommonResponse.class)
     public ResponseEntity<CommonResponse> delete(@PathVariable Integer id, HttpServletRequest request) {
         try {
             int userId = jwtService.getLoginUserId(request);
@@ -115,7 +115,7 @@ public class NoticeController {
                 return new ResponseEntity<>(new CommonResponse("noticeDelete", "FAIL", "올바르지 않은 접근입니다."), HttpStatus.OK);
             } else {
                 noticeService.delete(id);
-                return new ResponseEntity<>(new CommonResponse("noticeDelete", "SUCCESS", "공지사항이 삭제되었습니다."), HttpStatus.OK);
+                return new ResponseEntity<>(new CommonResponse("noticeDelete", "SUCCESS", "게시글이 삭제되었습니다."), HttpStatus.OK);
             }
         } catch (RuntimeException e) {
             e.printStackTrace();

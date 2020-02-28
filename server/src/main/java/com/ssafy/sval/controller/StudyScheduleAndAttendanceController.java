@@ -53,17 +53,17 @@ public class StudyScheduleAndAttendanceController {
     }
 
     @PostMapping
-    @ApiOperation(value = "새로운 일정을 추가하고, 추가된 일정을 반환한다.", response = CommonResponse.class)
+    @ApiOperation(value = "새로운 스케줄을 추가하고, 추가된 스케줄을 반환한다.", response = CommonResponse.class)
     public ResponseEntity<CommonResponse> enrollNewStudySchedule(@RequestBody StudyScheduleDTO schedule, HttpServletRequest request) {
         try {
             int loginUserId = jwtService.getLoginUserId(request);
             if(studyService.findById(schedule.getStudyDTO().getId()).getLeader().getId()!=loginUserId) {
                 return new ResponseEntity<>(new CommonResponse("enrollNewStudySchedule", "FAIL",
-                        "일정은 리더만 추가할 수 있습니다."), HttpStatus.OK);
+                        "스케줄은 리더만 추가할 수 있습니다."), HttpStatus.OK);
             } else {
                 StudySchedule newSchedule = studyScheduleService.insert(schedule.toEntity());
                 return new ResponseEntity<>(new CommonResponse(newSchedule.toDTO(), "enrollNewStudySchedule", "SUCCESS",
-                        "새로운 일정을 추가했습니다."), HttpStatus.OK);
+                        "새로운 스케줄을 추가했습니다."), HttpStatus.OK);
             }
         } catch (RuntimeException e) {
             e.printStackTrace();
@@ -72,17 +72,17 @@ public class StudyScheduleAndAttendanceController {
     }
 
     @PutMapping
-    @ApiOperation(value ="일정의 내용을 변경한다.", response = CommonResponse.class)
+    @ApiOperation(value ="스케줄의 내용을 변경한다.", response = CommonResponse.class)
     public ResponseEntity<CommonResponse> updateStudySchedule(@RequestBody StudyScheduleDTO schedule, HttpServletRequest request) {
         try {
             int loginUserId = jwtService.getLoginUserId(request);
             if(studyService.findById(schedule.getStudyDTO().getId()).getLeader().getId()!=loginUserId) {
                 return new ResponseEntity<>(new CommonResponse("updateStudySchedule", "FAIL",
-                        "일정은 리더만 수정할 수 있습니다."), HttpStatus.OK);
+                        "스케줄은 리더만 수정할 수 있습니다."), HttpStatus.OK);
             } else {
                 StudySchedule updatedSchedule = studyScheduleService.update(schedule.toEntity());
                 return new ResponseEntity<>(new CommonResponse(updatedSchedule.toDTO(), "updateStudySchedule", "SUCCESS",
-                        "일정을 수정하였습니다."), HttpStatus.OK);
+                        "스케줄을 수정하였습니다."), HttpStatus.OK);
             }
         } catch (RuntimeException e) {
             e.printStackTrace();
@@ -91,16 +91,16 @@ public class StudyScheduleAndAttendanceController {
     }
 
     @DeleteMapping("/{id}")
-    @ApiOperation(value = "일정을 삭제한다.", response = CommonResponse.class)
+    @ApiOperation(value = "스케줄을 삭제한다.", response = CommonResponse.class)
     public ResponseEntity<CommonResponse> deleteStudySchedule(@PathVariable Integer id, HttpServletRequest request) {
         try {
             int loginUserId = jwtService.getLoginUserId(request);
             StudySchedule schedule = studyScheduleService.find(id);
             if(studyService.findById(schedule.getStudy().getId()).getLeader().getId()!=loginUserId) {
-                return new ResponseEntity<>(new CommonResponse("deleteStudySchedule", "FAIL", "일정은 리더만 삭제할 수 있습니다."), HttpStatus.OK);
+                return new ResponseEntity<>(new CommonResponse("deleteStudySchedule", "FAIL", "스케줄은 리더만 삭제할 수 있습니다."), HttpStatus.OK);
             } else {
                 studyScheduleService.delete(id);
-                return new ResponseEntity<>(new CommonResponse("deleteStudySchedule", "SUCCESS", "일정이 삭제되었습니다."), HttpStatus.OK);
+                return new ResponseEntity<>(new CommonResponse("deleteStudySchedule", "SUCCESS", "스케줄이 삭제되었습니다."), HttpStatus.OK);
             }
         } catch (RuntimeException e) {
             throw new RuntimeException("deleteStudySchedule");
