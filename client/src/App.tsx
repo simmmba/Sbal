@@ -3,6 +3,7 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { jsx, css } from '@emotion/core'
 import styled from '@emotion/styled'
+import { PrivateRoute, PublicRoute } from './utils/RouteCheck'
 
 import NavBar from './components/NavBar'
 import HomePage from './pages/HomePage'
@@ -16,6 +17,7 @@ import MyInfoPage from './pages/MyInfoPage'
 import UserInfoPage from './pages/UserInfoPage'
 import Footer from './components/Footer'
 import MapPage from './pages/Map'
+import NotFound from './pages/NotFound'
 import './App.css'
 import ScrollToTop from './components/ScrollToTop'
 import NavBarBottom from './components/NavBarBottom'
@@ -37,29 +39,34 @@ const App: React.FC = () => {
         {/* 랜딩페이지 & 홈페이지 */}
         <Route path="/" component={HomePage} exact />
         {/* 회원가입 & 소셜로그인 페이지 */}
-        <Route path="/signup" component={LoginPage} exact />
+        <PublicRoute path="/signup" component={LoginPage} exact />
         {/* 회원가입 양식 페이지 */}
-        <Route path="/signup/form" component={SignupPage} />
+        <PublicRoute path="/signup/form" component={SignupPage} />
         {/* 최초 소셜로그인 후 추가정보 입력 페이지  */}
-        <Route path="/signup/oauth" component={SignupPage} />
+        <PublicRoute path="/signup/oauth" component={SignupPage} />
         {/* 로그인 & 소셜로그인 페이지 */}
-        <Route path="/login" component={LoginPage} exact />
-        <Route path="/login/temp-password" component={LoginPage} />
+        <PublicRoute path="/login" component={LoginPage} exact />
+        <PublicRoute path="/login/temp-password" component={LoginPage} />
         {/* 마이페이지 */}
-        <Route path="/mypage" component={MyInfoPage} exact />
-        <Route path="/mypage/update" component={SignupPage} exact />
-        <Route path="/mypage/update/password" component={MyInfoPage} />
+        <PrivateRoute path="/mypage" component={MyInfoPage} exact />
+        <PrivateRoute path="/mypage/update" component={SignupPage} exact />
+        <PrivateRoute path="/mypage/update/password" component={MyInfoPage} />
 
-        <Route path="/UserInfoPage/:id" component={UserInfoPage} exact />
+        <PrivateRoute path="/UserInfoPage/:id" component={UserInfoPage} exact />
         {/* 스터디 리스트 페이지 */}
         <Route path="/study" component={StudyListPage} exact />
         {/* 스터디 개설 페이지 */}
-        <Route path="/study/create" component={CreatePage} exact />
+        <PrivateRoute path="/study/create" component={CreatePage} exact />
         {/* 스터디 상세정보 페이지 */}
-        <Route path="/study/details/:id" component={StudyDetailPage} exact />
+        <PrivateRoute
+          path="/study/details/:id"
+          component={StudyDetailPage}
+          exact
+        />
         {/* 스터디 그룹 페이지 */}
-        <Route path="/study/:id" component={StudyGroupPage} />
-        <Route path="/map" component={MapPage} />
+        <PrivateRoute path="/study/:id" component={StudyGroupPage} />
+        <PrivateRoute path="/map" component={MapPage} />
+        <Route component={NotFound} />
       </Switch>
 
       <Footer />

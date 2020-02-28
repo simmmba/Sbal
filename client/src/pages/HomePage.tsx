@@ -1,20 +1,12 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 /***@jsx jsx */
 import { css, jsx } from '@emotion/core'
 import MainStudylist from '../components/main/MainStudyList'
-import { loadToken } from '../utils/authCheck'
 import { useObserver } from 'mobx-react'
 import { Carousel } from 'antd'
-import { useHistory } from 'react-router'
 import palette from '../lib/styles/palette'
 
 const HomePage = () => {
-  
-  const history = useHistory()
-  useEffect(() => {
-    loadToken(history)
-  }, [])
-
   const images = [
     'http://i02a306.p.ssafy.io/images/index/1080_360_2.jpg',
     'http://i02a306.p.ssafy.io/images/index/1080_360_3.jpg',

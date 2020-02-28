@@ -1,9 +1,6 @@
 /** @jsx jsx */
-import { useEffect } from 'react'
-import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { jsx, css } from '@emotion/core'
-import { loadToken, loggedIn } from '../utils/authCheck'
-import { useHistory } from 'react-router'
+import { useLocation } from 'react-router'
 import { useObserver } from 'mobx-react'
 import UserStore from '../stores/UserStore'
 
@@ -12,13 +9,8 @@ import AuthForm from '../components/auth/AuthForm'
 import AuthFooter from '../components/auth/AuthFooter'
 import TempPassword from '../components/auth/TempPassword'
 
-function LoginPage({ location }: RouteComponentProps) {
-  const history = useHistory()
-  useEffect(() => {
-    loadToken(history)
-    loggedIn(history)
-  }, [history])
-
+function LoginPage() {
+  const location = useLocation()
   const path = location.pathname.substring(1)
 
   return useObserver(() => (
@@ -54,4 +46,4 @@ function LoginPage({ location }: RouteComponentProps) {
   ))
 }
 
-export default withRouter(LoginPage)
+export default LoginPage
