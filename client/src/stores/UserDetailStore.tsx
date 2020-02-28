@@ -22,7 +22,8 @@ const UserDetailStore: UserDetailStoreType = observable({
     profilePhotoDir: '',
     interestDTOList: [],
     ledStudyList: [],
-    joinedStudyList: []
+    joinedStudyList: [],
+    social_login: ''
   },
   //{id, pw, email, phoneNum, nickname, gender, introduction,
   //city, town, evaluation, profilePhotoDir, socialLogin, interestDTOList, ledStudyList, joinedStudyList}

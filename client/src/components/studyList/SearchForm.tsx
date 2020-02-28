@@ -31,8 +31,8 @@ const SearchForm = () => {
     weekdayOrWeekend: '주중/주말'
   }
   const searchByMap = [
-    { value: 'title', name: '스터디명' },
-    { value: 'leader', name: '개설자명' }
+    { value: 'title', name: '스터디 이름' },
+    { value: 'leader', name: '리더 이름' }
   ]
   const isOnlineMap: { [key: number]: string } = { 1: '온라인', 0: '오프라인' }
 
@@ -62,7 +62,7 @@ const SearchForm = () => {
           {searchByMap.map(
             (elem: { value: string; name: string }, index: number) => (
               <Option value={elem.value} key={index}>
-                {elem.name}
+                {elem.name}&nbsp;
               </Option>
             )
           )}

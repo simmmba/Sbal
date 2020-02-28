@@ -320,9 +320,11 @@ const UserDetail = () => {
               <button css={editBtn} onClick={() => clickedUpdateButton()}>
                 회원정보 수정
               </button>
-              <button css={editBtn} onClick={() => passwordUpdateButton()}>
+              {/* 카카오 로그인이 아닐 때만 비밀번호 변경 가능 */}
+              {UserDetailStore.data.social_login !== null && (
+                <button css={editBtn} onClick={() => passwordUpdateButton()}>
                 비밀번호 변경
-              </button>
+              </button>)}
               <button
                 css={logoutBtn}
                 onClick={() => {
@@ -403,7 +405,7 @@ const UserDetail = () => {
                 </span>
               </h2>
               {UserDetailStore.data.ledStudyList.length === 0 ? (
-                <div>&nbsp;&nbsp;&nbsp;&nbsp;현재 스터디가 없습니다.</div>
+                <div>&nbsp;&nbsp;&nbsp;&nbsp;현재 스터디가 없습니다.<br /><br /><br /></div>
               ) : (
                 <table css={table}>
                   <tbody>

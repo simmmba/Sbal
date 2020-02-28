@@ -123,9 +123,12 @@ function AuthForm({ type, history }: RouteComponentProps & AuthFormProps) {
         </form>
       )}
       {type === 'signup' && (
-        <StyledButton marginTop={15} onClick={onClickToSignupForm}>
-          {footerText}
-        </StyledButton>
+        <div>
+          <br /><br />
+          <StyledButton onClick={onClickToSignupForm}>
+            {footerText}
+          </StyledButton>
+        </div>
       )}
     </AuthFormBlock>
   ))

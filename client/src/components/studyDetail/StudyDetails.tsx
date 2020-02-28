@@ -1,6 +1,7 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { useObserver } from 'mobx-react'
+import StudyInfo from './StudyInfo'
 import StudyMember from './StudyMember'
 import StudyRequest from './StudyRequest'
 /**@jsx jsx */
@@ -8,7 +9,7 @@ import { css, jsx } from '@emotion/core'
 // import styled from '@emotion/styled'
 import { Display } from '../Display'
 import StudyDetailStore from '../../stores/StudyDetailStore'
-import { Descriptions, Modal } from 'antd'
+import { Modal } from 'antd'
 import { useHistory } from 'react-router'
 import CreateForm from '../studyList/CreateForm'
 import palette from '../../lib/styles/palette'
@@ -59,21 +60,6 @@ const StudyDetails = () => {
     @media screen and (max-width: 815px) {
       font-size: 25px;
     }
-  `
-
-  const hit = css`
-    background: #f6f6f6;
-    font-size: 14px;
-    border-radius: 100%;
-    width: 45px;
-    height: 45px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: left;
-    font-size: 13px;
-    color: gray;
   `
 
   const btn = css`
@@ -131,7 +117,7 @@ const StudyDetails = () => {
   const middle = css`
     width: 100%;
     padding-top: 20px;
-    padding-bottom: 50px;
+    padding-bottom: 30px;
     display: flex;
     justify-content: center;
   `
@@ -141,6 +127,21 @@ const StudyDetails = () => {
     justify-content: space-between;
     flex-wrap: wrap;
     width: 100%;
+    padding-bottom: 50px;
+  `
+
+  const block = css`
+    padding: 0px 7px 2px 0px;
+    margin-right: 12px;
+    border-bottom: 3px solid ${palette.gray[5]};
+    border-right: 3px solid ${palette.gray[5]};
+    /* border-radius: 5px; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: ${palette.gray[9]};
   `
 
   return useObserver(() => (
@@ -151,6 +152,7 @@ const StudyDetails = () => {
         <div css={top}>
           <div css={main}>
             <div css={title}>
+              <div css={block}>&nbsp;😎 {StudyDetailStore.data.hits}</div>
               {StudyDetailStore.data.title}&nbsp;
               {StudyDetailStore.isMember() && (
                 <button
@@ -296,68 +298,9 @@ const StudyDetails = () => {
           </div>
         </div>
         {/* </div> */}
-
-        <br />
         <div css={content}>
           <div css={middle}>
-            <Descriptions
-              // title="Responsive Descriptions"
-              bordered
-              column={{ xxl: 4, xl: 4, lg: 3, md: 3, sm: 2, xs: 1 }}
-            >
-              <Descriptions.Item label="리더">
-                {StudyDetailStore.data.leader.nickname}
-              </Descriptions.Item>
-              <Descriptions.Item label="인원">
-                {StudyDetailStore.data.joinedMemberCount} /{' '}
-                {StudyDetailStore.data.maxParticipants}
-              </Descriptions.Item>
-              <Descriptions.Item label="분야">
-                {StudyDetailStore.data.lcategory} /{' '}
-                {StudyDetailStore.data.scategory}
-              </Descriptions.Item>
-              <Descriptions.Item label="기간">
-                {StudyDetailStore.data.startDate} ~{' '}
-                {StudyDetailStore.data.endDate}
-              </Descriptions.Item>
-              <Descriptions.Item label="장소">
-                {!StudyDetailStore.data.isOnline
-                  ? StudyDetailStore.data.city +
-                    ' ' +
-                    StudyDetailStore.data.town
-                  : '온라인'}
-              </Descriptions.Item>
-              <Descriptions.Item label="일정">
-                {StudyDetailStore.data.monthOrWeek === 0
-                  ? '추후 협의'
-                  : StudyDetailStore.data.monthOrWeek === 1
-                  ? '월'
-                  : '주'}{' '}
-                {StudyDetailStore.data.frequency}회
-              </Descriptions.Item>
-              <Descriptions.Item label="시간">
-                {StudyDetailStore.data.weekdayOrWeekend === 0
-                  ? '요일 협의,'
-                  : StudyDetailStore.data.weekdayOrWeekend === 1
-                  ? '평일'
-                  : StudyDetailStore.data.weekdayOrWeekend === 2
-                  ? '주말'
-                  : '요일 무관,'}{' '}
-                {StudyDetailStore.data.timeslot === 0
-                  ? '시간 협의'
-                  : StudyDetailStore.data.timeslot === 1
-                  ? '오전'
-                  : StudyDetailStore.data.timeslot === 2
-                  ? '오후'
-                  : '저녁'}
-              </Descriptions.Item>
-              <Descriptions.Item label="성실도">
-                {StudyDetailStore.data.evaluationLimit} 이상
-              </Descriptions.Item>
-              <Descriptions.Item label="내용">
-                {StudyDetailStore.data.contents}
-              </Descriptions.Item>
-            </Descriptions>
+            <StudyInfo />
           </div>
           <div css={bottom}>
             {StudyDetailStore.isMember() ? <StudyMember /> : <div />}

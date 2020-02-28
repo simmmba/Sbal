@@ -44,7 +44,7 @@ const Footer = () => {
         <br />
         <NormalP>
           <small>
-            Copyright by 서울 A306 600-Not-Found Team. All rights reserved.
+            Copyright by 서울 A306 6:00-Not-Found Team. All rights reserved.
           </small>
         </NormalP>
         <small>
@@ -76,9 +76,11 @@ const Footer = () => {
         </small>
         <NormalP>
           <small>
-            문의 사항 : 010-2990-5719
+            대표번호 : 010-2990-5719
             <br />
-            평일 문의 가능 시간 : 09:00~18:00
+            고객센터 : jsy9532@naver.com
+            <br />
+            상담시간 : 평일 09:00~18:00
           </small>
         </NormalP>
       </WrapperDiv>

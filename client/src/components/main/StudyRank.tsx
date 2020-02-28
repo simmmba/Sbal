@@ -10,7 +10,7 @@ const listBox = css`
   margin: 10px;
   background-color: white;
   padding: 15px 15px 20px 15px;
-  width: 400px;
+  width: 330px;
   border-radius: 10px;
 `
 const listTitle = css`
@@ -86,7 +86,7 @@ const comment = css`
 `
 
 const titleMap: { [key: string]: string } = {
-  myStudy: '내 진행 중인 스터디',
+  myStudy: '나의 진행 중인 스터디',
   recentStudy: '최근 개설된 스터디',
   famousStudy: '지금 급상승 중인 스터디'
 }
@@ -105,7 +105,10 @@ const StudyRank = ({ title, list }: StudyRankprops) => {
               <div css={listContainer}>
                 <div>
                   <div css={listName}>
-                    {study.title} {study.joinRequestCount!=null&&study.joinRequestCount>0?(<span css={comment}>&nbsp;&nbsp;[{study.joinRequestCount}]</span>):<span/>}
+                    {study.title.length > 10
+                    ? study.title.slice(0, 20) + '...'
+                    : study.title} 
+                    {study.joinRequestCount!=null&&study.joinRequestCount>0?(<span css={comment}>&nbsp;&nbsp;[{study.joinRequestCount}]</span>):<span/>}
                   </div>
                   <div css={listType}>{study.lcategory}</div>
                 </div>
@@ -113,7 +116,7 @@ const StudyRank = ({ title, list }: StudyRankprops) => {
             </div>
           </NavLink>
         ))
-      ) : title === 'myStudy' ? (
+      ) : (sessionStorage.token && title === 'myStudy') ? (
         <div css={empty}>
           <span className="emoji" role="img" aria-label={'^^'}>
             참여중인 스터디가 없네요 😅
@@ -121,6 +124,18 @@ const StudyRank = ({ title, list }: StudyRankprops) => {
           스터디를 둘러보시겠어요?
           <NavLink css={link} to="/study">
             스터디 보러가기
+          </NavLink>
+        </div>
+      ) : (!sessionStorage.token && title === 'myStudy') ? (
+        <div css={empty}>
+          <span className="emoji" role="img" aria-label={'^^'}>
+            로그인 후 목록을 확인할 수 있어요! 😉
+          </span>
+          <NavLink css={link} to="/login">
+            로그인하기
+          </NavLink>
+          <NavLink css={link} to="/study">
+            스터디 둘러보기
           </NavLink>
         </div>
       ) : (

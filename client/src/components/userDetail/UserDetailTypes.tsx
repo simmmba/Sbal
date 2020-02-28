@@ -13,6 +13,7 @@ export type UserInfoType = {
     interestDTOList : Interest[]
     ledStudyList : LedStudy[]
     joinedStudyList : JoinedStudy[]
+    social_login : string
 }
 export type UserDetailStoreType = {
     data: UserInfoType

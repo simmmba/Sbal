@@ -139,16 +139,21 @@ function StudyCard({
         </Row>
         <Row>
           <StarIcon css={marginThree} />
-          <span>{`성실도 제한 ${study.evaluationLimit} 이상`}</span>
+          <span>
+            성실도{' '}
+            {study.evaluationLimit === 0 || study.evaluationLimit === null ? (
+              <span>무관</span>
+            ) : (
+              <span>{study.evaluationLimit}% 이상</span>
+            )}
+          </span>
         </Row>
       </div>
       <div>
         <div css={footerContainerLeft}>
+          &nbsp;&nbsp;
           <Avatar
-            src={
-               'http://13.124.98.149/images/' +
-                study.leader.profilePhotoDir
-             }
+            src={'http://13.124.98.149/images/' + study.leader.profilePhotoDir}
             icon="user"
             css={css`
               margin-right: 5px;

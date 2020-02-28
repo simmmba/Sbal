@@ -72,7 +72,7 @@ export const FlexBetween = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 10px 0px 20px 0px;
+  margin: 0px 0px 20px 0px;
 `
 
 export const StyledSelect = styled.select`
@@ -102,18 +102,22 @@ export const SocialButton = ({
       color: ${color};
       background: ${bColor};
       font-weight: bold;
-      font-size: 0.76em;
+      font-size: 0.9em;
       border-radius: 4px;
-      padding: 6px 0px;
+      /* padding: 6px 0px; */
       width: 100%;
       border: none;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: 10px;
+      padding: 0.5rem 1rem;
+      /* margin-top: 10px; */
       cursor: pointer;
+      transition: 0.3s;
+
       &:hover {
         opacity: 0.7;
+        color: black;
       }
     `}
     onClick={onRemove}
@@ -172,7 +176,7 @@ export const StyledButton = styled.button<{
   color: white;
   outline: none;
   cursor: pointer;
-
+  transition: 0.3s;
   background: ${palette.violet[6]};
   &:hover {
     background: ${palette.violet[4]};

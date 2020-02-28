@@ -9,7 +9,13 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 function AuthFooter() {
+  const btn = css`
+    color: #3C1E1E;
 
+    &:hover{
+      color: #3C1E1E
+    }
+  `
   
   const clientId = '65c8c65086b415b91d2decea051f2765'
   //const redirectURI = 'http://localhost:3000/signup/oauth'
@@ -20,13 +26,13 @@ function AuthFooter() {
   //   'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=ZaZ22Ro1uzKMK_w_pbkX&redirect_uri=http%3A%2F%2F70.12.247.32%3A8080%2Fuser%2Fauth%2Fnaver%2Fcallback&scope=profile'
   return (
     <div>
-      <h4
+      {/* <h4
         css={css`
           color: ${palette.violet[7]};
         `}
       >
         SNS 로그인
-      </h4>
+      </h4> */}
       <SocialButton
         bColor="#F7E317"
         color="#3C1E1E"
@@ -35,7 +41,7 @@ function AuthFooter() {
         //  }}
       >
         <KakaoIcon />
-       <a href={kakaoURL+""}> 카카오 계정으로 로그인</a>
+       <a href={kakaoURL+""} css={btn}> 카카오 계정으로 로그인</a>
       </SocialButton>
       <br />
       <br />

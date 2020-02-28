@@ -30,12 +30,22 @@ function LoginPage() {
           </div>
         ) : path === 'login/temp-password' ? (
           <TempPassword />
+        ) : path === 'signup' ? (
+          <div>
+            <AuthForm type={path} />
+            <div
+              css={css`
+                height: 60px;
+              `}
+            />
+            <AuthFooter />
+          </div>
         ) : (
           <div>
             <AuthForm type={path} />
             <div
               css={css`
-                height: 50px;
+                height: 10px;
               `}
             />
             <AuthFooter />
