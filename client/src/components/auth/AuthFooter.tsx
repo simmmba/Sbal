@@ -12,8 +12,8 @@ function AuthFooter() {
 
   
   const clientId = '65c8c65086b415b91d2decea051f2765'
-  const redirectURI = 'http://localhost:3000/signup/oauth'
-  //const redirectURI = 'http://i02a306.p.ssafy.io/signup/oauth'
+  //const redirectURI = 'http://localhost:3000/signup/oauth'
+  const redirectURI = 'http://i02a306.p.ssafy.io/signup/oauth'
  
   const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectURI}&response_type=code`
   // const naverURL =
