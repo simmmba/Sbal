@@ -43,9 +43,13 @@ const App: React.FC = () => {
         {/* 최초 소셜로그인 후 추가정보 입력 페이지  */}
         <Route path="/signup/oauth" component={SignupPage} />
         {/* 로그인 & 소셜로그인 페이지 */}
-        <Route path="/login" component={LoginPage} />
+        <Route path="/login" component={LoginPage} exact />
+        <Route path="/login/temp-password" component={LoginPage} />
         {/* 마이페이지 */}
         <Route path="/mypage" component={MyInfoPage} exact />
+        <Route path="/mypage/update" component={SignupPage} exact />
+        <Route path="/mypage/update/password" component={MyInfoPage} />
+
         <Route path="/UserInfoPage/:id" component={UserInfoPage} exact />
         {/* 스터디 리스트 페이지 */}
         <Route path="/study" component={StudyListPage} exact />
@@ -56,7 +60,6 @@ const App: React.FC = () => {
         {/* 스터디 그룹 페이지 */}
         <Route path="/study/:id" component={StudyGroupPage} />
         <Route path="/map" component={MapPage} />
-        <Route path="/mypage/update" component={SignupPage} />
       </Switch>
 
       <Footer />

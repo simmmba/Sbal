@@ -43,8 +43,10 @@ public class UserController {
     @Autowired
     private UserProfileService profileService;
 
+
     private SnsValue naverSns = new SnsValue("naver", "ZaZ22Ro1uzKMK_w_pbkX", "QDpGVk3dcT", "http://70.12.247.32:8080/user/auth/naver/callback");
-    private SnsValue kakaoSns = new SnsValue("kakao", "65c8c65086b415b91d2decea051f2765", null, "http://localhost:3000/signup/oauth");
+    //private SnsValue kakaoSns = new SnsValue("kakao", "65c8c65086b415b91d2decea051f2765", null, "http://localhost:3000/signup/oauth");
+    private SnsValue kakaoSns = new SnsValue("kakao", "65c8c65086b415b91d2decea051f2765", null, "http://i02a306.p.ssafy.io/signup/oauth");
 
     @ExceptionHandler
     @ApiOperation(value = "모든 INTERNAL SERVER ERROR 상태를 처리한다. message를 화면에 출력하고 작성한 ERROR PAGE로 이동시킨다.")
@@ -186,7 +188,7 @@ public class UserController {
             int ran = new Random().nextInt(100000) + 10000;
             String dice = ran+"";
             Map<String, String> result = new HashMap<>();
-            emailService.sendMail(email, sub, dice);
+            emailService.sendMail(email, sub, "인증 번호 : " + dice);
             result.put("dice", dice);
             return new ResponseEntity<>(new CommonResponse(result,"validateEmail", "SUCCESS", "사용할 수 있는 이메일입니다."), HttpStatus.OK);
         } else {
@@ -204,6 +206,43 @@ public class UserController {
             return new ResponseEntity<>(new CommonResponse("validateNickname", "FAIL", "사용할 수 없는 닉네임입니다."), HttpStatus.OK);
         }
     }
+    //비밀번호 찾기 (이메일로 임시 비밀번호를 보내고 임시비밀번호로 디비 비번 변경)
+    @GetMapping("/findPassword/{email}")
+    public  ResponseEntity<CommonResponse> findPassword(@PathVariable String email) {
+        log.info(email);
+        if (userService.isExistEmail(email)) {
+            EmailService emailService = new EmailService();
+            String sub = "스터디의 발견 임시 비밀번호 입니다.";
+            int ran = new Random().nextInt(10000000) + 1000000;
+            String dice = ran+"";
+            emailService.sendMail(email, sub, "임시 비밀번호 : " + dice);
+            userService.findPassword(email, dice);
+            return new ResponseEntity<>(new CommonResponse("validateEmail", "SUCCESS", "이메일로 임시비밀번호가 전송되었습니다."), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new CommonResponse("validateEmail", "FAIL", "등록되지 않은 이메일입니다."), HttpStatus.OK);
+        }
+    }
+
+    //비밀번호 수정
+    @PostMapping("/updatePassword")
+    public ResponseEntity<CommonResponse> updatePassword(@RequestBody UserDTO[] userDTO, HttpServletRequest request){
+        try{
+            UserDTO user = userDTO[0];
+            UserDTO newUser = userDTO[1];
+            int loginUserId = jwtService.getLoginUserId(request);
+            User temp = userService.findById(loginUserId);
+            if(temp == null) return new ResponseEntity<>(new CommonResponse("updatePassword", "FAIL", "등록되지 않은 회원입니다."), HttpStatus.OK);
+            User u = userService.signIn(temp.getEmail(), user.getPw());
+            if(u == null) return new ResponseEntity<>(new CommonResponse("updatePassword", "FAIL", "비밀번호가 일치하지 않습니다."), HttpStatus.OK);
+            userService.updatePassword(loginUserId, newUser.getPw());
+            return new ResponseEntity<>(new CommonResponse("updatePassword", "SUCCESS", "비밀번호가 변경되었습니다."), HttpStatus.OK);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            throw new RuntimeException("updatePassword");
+        }
+
+    }
+ 
 
     @PostMapping("/profileUpload")
     public ResponseEntity<CommonResponse> profileUpload(@RequestBody MultipartFile file, HttpServletRequest request) {
@@ -250,18 +289,17 @@ public class UserController {
                 response.setHeader("jwt-auth-token", jwtService.create(user.getId()));
                 userDTO.setId(user.getId());
                 userDTO.setNickname(user.getNickname());
-                return new ResponseEntity<>(new CommonResponse(userDTO, "signIn", "SUCCESS", "회원 가입에 성공했습니다."), HttpStatus.OK);
+                return new ResponseEntity<>(new CommonResponse(userDTO, "signIn", "SUCCESS", "로그인에에 성공했습니다."), HttpStatus.OK);
             } catch (RuntimeException e) {
                 e.printStackTrace();
                 throw new RuntimeException("signIn");
             }
         } else {
-            userDTO.setEmail(user.getEmail());
+            userDTO.setEmail(user.getSocialLogin());
             userDTO.setNickname(user.getNickname());
             userDTO.setSocialLogin(user.getSocialLogin());
             userDTO.setCity("서울");
-            //return new ResponseEntity<>(new CommonResponse(userDTO, "SocialLogin", "FAIL", "필수 정보가 필요합니다."), HttpStatus.OK);
-            return signIn(userDTO, response);
+            return signUp(userDTO, response);
         }
     }
 }

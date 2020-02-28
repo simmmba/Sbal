@@ -10,6 +10,7 @@ import UserStore from '../stores/UserStore'
 import AuthTemplate from '../components/auth/AuthTemplate'
 import AuthForm from '../components/auth/AuthForm'
 import AuthFooter from '../components/auth/AuthFooter'
+import TempPassword from '../components/auth/TempPassword'
 
 function LoginPage({ location }: RouteComponentProps) {
   const history = useHistory()
@@ -35,6 +36,8 @@ function LoginPage({ location }: RouteComponentProps) {
             <br />
             로그인 중입니다...
           </div>
+        ) : path === 'login/temp-password' ? (
+          <TempPassword />
         ) : (
           <div>
             <AuthForm type={path} />

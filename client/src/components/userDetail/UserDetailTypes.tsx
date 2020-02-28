@@ -22,6 +22,8 @@ export type UserDetailStoreType = {
     userInfo: (userId : number) => void
     deleteStudyMember: (studyId : number, idx : number)=> void
     upload: (formdata: FormData) => void
+    findPassword: (email : string, history : H.History) => void
+    updatePassword: (password: string , newPassword : string, history : H.History) => void
 }
 export type Interest = {
     lcategory: string

@@ -42,14 +42,17 @@ function AuthForm({ type, history }: RouteComponentProps & AuthFormProps) {
     [history]
   )
 
-  const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
-    const dataToSend = {
-      email: state.email,
-      pw: state.password
-    }
-    UserStore.login(dataToSend, history)
-    e.preventDefault()
-  }, [state, history])
+  const handleSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      const dataToSend = {
+        email: state.email,
+        pw: state.password
+      }
+      UserStore.login(dataToSend, history)
+      e.preventDefault()
+    },
+    [state, history]
+  )
 
   const headerText = textMapForHeader[type]
   const footerText = textMapForFooter[type]
@@ -110,7 +113,7 @@ function AuthForm({ type, history }: RouteComponentProps & AuthFormProps) {
                 font-size: 0.85rem;
                 margin-left: 5px;
               `}
-              to="/"
+              to="/login/temp-password"
             >
               아이디/비밀번호 찾기
             </Link>
