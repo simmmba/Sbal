@@ -187,7 +187,7 @@ public class UserController {
             int ran = new Random().nextInt(100000) + 10000;
             String dice = ran+"";
             Map<String, String> result = new HashMap<>();
-            emailService.sendMail(email, sub, dice);
+            emailService.sendMail(email, sub, "인증 번호 : " + dice);
             result.put("dice", dice);
             return new ResponseEntity<>(new CommonResponse(result,"validateEmail", "SUCCESS", "사용할 수 있는 이메일입니다."), HttpStatus.OK);
         } else {
@@ -214,7 +214,7 @@ public class UserController {
             int ran = new Random().nextInt(10000000) + 1000000;
             String dice = ran+"";
             Map<String, String> result = new HashMap<>();
-            emailService.sendMail(email, sub, dice);
+            emailService.sendMail(email, sub, "임시 비밀번호 : " + dice);
             userService.updatePassword(email, dice);
             result.put("dice", dice);
             return new ResponseEntity<>(new CommonResponse(result,"validateEmail", "SUCCESS", "이메일로 임시비밀번호가 전송되었습니다."), HttpStatus.OK);
@@ -224,6 +224,7 @@ public class UserController {
     }
 
     //비밀번호 수정
+ 
 
     @PostMapping("/profileUpload")
     public ResponseEntity<CommonResponse> profileUpload(@RequestBody MultipartFile file, HttpServletRequest request) {

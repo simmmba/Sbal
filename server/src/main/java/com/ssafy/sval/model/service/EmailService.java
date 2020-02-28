@@ -27,7 +27,7 @@ public class EmailService {
             email.setFrom(user);
             email.setDebug(true);
             email.setSubject(sub);
-            email.setMsg("인증번호 : " + dice);
+            email.setMsg(dice);
             email.addTo(to);
             email.send();
         } catch (Exception e){
