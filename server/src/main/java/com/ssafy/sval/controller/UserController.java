@@ -45,6 +45,7 @@ public class UserController {
 
     private SnsValue naverSns = new SnsValue("naver", "ZaZ22Ro1uzKMK_w_pbkX", "QDpGVk3dcT", "http://70.12.247.32:8080/user/auth/naver/callback");
     private SnsValue kakaoSns = new SnsValue("kakao", "65c8c65086b415b91d2decea051f2765", null, "http://localhost:3000/signup/oauth");
+    //private SnsValue kakaoSns = new SnsValue("kakao", "65c8c65086b415b91d2decea051f2765", null, "http://i02a306.p.ssafy.io/signup/oauth");
 
     @ExceptionHandler
     @ApiOperation(value = "모든 INTERNAL SERVER ERROR 상태를 처리한다. message를 화면에 출력하고 작성한 ERROR PAGE로 이동시킨다.")
@@ -250,18 +251,17 @@ public class UserController {
                 response.setHeader("jwt-auth-token", jwtService.create(user.getId()));
                 userDTO.setId(user.getId());
                 userDTO.setNickname(user.getNickname());
-                return new ResponseEntity<>(new CommonResponse(userDTO, "signIn", "SUCCESS", "회원 가입에 성공했습니다."), HttpStatus.OK);
+                return new ResponseEntity<>(new CommonResponse(userDTO, "signIn", "SUCCESS", "로그인에에 성공했습니다."), HttpStatus.OK);
             } catch (RuntimeException e) {
                 e.printStackTrace();
                 throw new RuntimeException("signIn");
             }
         } else {
-            userDTO.setEmail(user.getEmail());
+            userDTO.setEmail(user.getSocialLogin());
             userDTO.setNickname(user.getNickname());
             userDTO.setSocialLogin(user.getSocialLogin());
             userDTO.setCity("서울");
-            //return new ResponseEntity<>(new CommonResponse(userDTO, "SocialLogin", "FAIL", "필수 정보가 필요합니다."), HttpStatus.OK);
-            return signIn(userDTO, response);
+            return signUp(userDTO, response);
         }
     }
 }

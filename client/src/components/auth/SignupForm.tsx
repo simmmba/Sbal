@@ -185,8 +185,8 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
     const query = qs.parse(location.search, { ignoreQueryPrefix: true })
     const kakaoAccessToken = query.code
     const res = await getSocialData(kakaoAccessToken, 'kakao')
-    //console.log(res)
-    if (res.data.value.token) {
+    console.log(res)
+    if (res.headers['jwt-auth-token']) {
       UserStore.isLoggingIn = true
       UserStore.loginUser = {
         id: res.data.value.id,
@@ -201,16 +201,17 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
       message.info('로그인 되었습니다. 첫 로그인 시 회원정보를 수정해주세요', 2)
       history.push('/')
     } else {
-      
-      const { email, nickname, socialLogin } = res.data.value
-      if (email) {
-        state.email = email
-      }
-      if (nickname) {
-        state.nickname = nickname
-      }
-      if (socialLogin) {
-      }
+      message.error('로그인에 실패하였습니다.', 2)
+      history.push('/login')
+      // const { email, nickname, socialLogin } = res.data.value
+      // if (email) {
+      //   state.email = email
+      // }
+      // if (nickname) {
+      //   state.nickname = nickname
+      // }
+      // if (socialLogin) {
+      // }
     }
   }
 
