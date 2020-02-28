@@ -205,6 +205,25 @@ public class UserController {
             return new ResponseEntity<>(new CommonResponse("validateNickname", "FAIL", "사용할 수 없는 닉네임입니다."), HttpStatus.OK);
         }
     }
+    //비밀번호 찾기 (이메일로 임시 비밀번호를 보내고 임시비밀번호로 디비 비번 변경)
+    @GetMapping("/findPassword")
+    public  ResponseEntity<CommonResponse> findPassword(@PathVariable String email) {
+        if (userService.isExistEmail(email)) {
+            EmailService emailService = new EmailService();
+            String sub = "스터디의 발견 임시 비밀번호 입니다.";
+            int ran = new Random().nextInt(10000000) + 1000000;
+            String dice = ran+"";
+            Map<String, String> result = new HashMap<>();
+            emailService.sendMail(email, sub, dice);
+            userService.updatePassword(email, dice);
+            result.put("dice", dice);
+            return new ResponseEntity<>(new CommonResponse(result,"validateEmail", "SUCCESS", "이메일로 임시비밀번호가 전송되었습니다."), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(new CommonResponse("validateEmail", "FAIL", "등록되지 않은 이메일입니다."), HttpStatus.OK);
+        }
+    }
+
+    //비밀번호 수정
 
     @PostMapping("/profileUpload")
     public ResponseEntity<CommonResponse> profileUpload(@RequestBody MultipartFile file, HttpServletRequest request) {

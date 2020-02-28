@@ -60,6 +60,26 @@ public class UserService {
         return null;
     }
 
+    @Transactional
+    public User updatePassword(String email, String pw){
+        User user = uRepo.findUserByEmail(email);
+        user.setPw(passwordEncoder.encode(pw));
+        interestRepo.deleteAllByUserId(user.getId());
+        interestRepo.saveAll(user.getInterestList());
+        user = uRepo.save(user);
+        return user;
+    }
+
+    @Transactional
+    public User updatePassword(Integer id, String pw){
+        User user = uRepo.findById(id);
+        user.setPw(passwordEncoder.encode(pw));
+        interestRepo.deleteAllByUserId(user.getId());
+        interestRepo.saveAll(user.getInterestList());
+        user = uRepo.save(user);
+        return user;
+    }
+
 
     @Transactional
     public User update(User user) {
