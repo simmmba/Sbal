@@ -26,7 +26,8 @@ function TempPassword() {
   }, [])
 
   const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
-      UserDetailStore.findPassword(state.email, history)
+    e.preventDefault()
+    UserDetailStore.findPassword(state.email, history)
   }, [])
 
   return useObserver(() => (
