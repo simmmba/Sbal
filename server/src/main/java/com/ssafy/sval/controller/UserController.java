@@ -225,6 +225,7 @@ public class UserController {
 
     //비밀번호 수정
     @PostMapping("/updatePassword")
+
     public ResponseEntity<CommonResponse> updatePassword(@RequestBody UserDTO[] userDTO, HttpServletRequest request){
         try{
             UserDTO user = userDTO[0];

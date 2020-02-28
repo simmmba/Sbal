@@ -64,8 +64,6 @@ public class UserService {
     public User findPassword(String email, String pw){
         User user = uRepo.findUserByEmail(email);
         user.setPw(passwordEncoder.encode(pw));
-        interestRepo.deleteAllByUserId(user.getId());
-        interestRepo.saveAll(user.getInterestList());
         user = uRepo.save(user);
         return user;
     }
