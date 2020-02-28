@@ -1,9 +1,9 @@
 import React from 'react'
 import AuthTemplate from '../components/auth/AuthTemplate'
 import SignupForm from '../components/auth/SignupForm'
-import { RouteComponentProps, withRouter } from 'react-router-dom'
-function RegisterPage({ location }: RouteComponentProps) {
-
+import { useLocation } from 'react-router'
+function RegisterPage() {
+  const location = useLocation()
   const path = location.pathname.substring(1)
 
   return (
@@ -15,4 +15,4 @@ function RegisterPage({ location }: RouteComponentProps) {
   )
 }
 
-export default withRouter(RegisterPage)
+export default RegisterPage

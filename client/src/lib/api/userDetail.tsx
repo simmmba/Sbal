@@ -25,7 +25,7 @@ export const updatePassword = (password : string , newPassword : string ) => {
   const newUser = {
     pw : newPassword
   }
-  return apiClient.post("/user/updatePassword",  {user, newUser})
+  return apiClient.post("/user/updatePassword",  [user, newUser])
 }
 
 export const upload = (formdata : FormData) => {

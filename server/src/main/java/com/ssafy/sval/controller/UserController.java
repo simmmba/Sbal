@@ -209,6 +209,7 @@ public class UserController {
     //비밀번호 찾기 (이메일로 임시 비밀번호를 보내고 임시비밀번호로 디비 비번 변경)
     @GetMapping("/findPassword/{email}")
     public  ResponseEntity<CommonResponse> findPassword(@PathVariable String email) {
+        log.info(email);
         if (userService.isExistEmail(email)) {
             EmailService emailService = new EmailService();
             String sub = "스터디의 발견 임시 비밀번호 입니다.";
@@ -224,8 +225,11 @@ public class UserController {
 
     //비밀번호 수정
     @PostMapping("/updatePassword")
-    public ResponseEntity<CommonResponse> updatePassword(@RequestBody UserDTO user, @RequestBody UserDTO newUser, HttpServletRequest request){
+
+    public ResponseEntity<CommonResponse> updatePassword(@RequestBody UserDTO[] userDTO, HttpServletRequest request){
         try{
+            UserDTO user = userDTO[0];
+            UserDTO newUser = userDTO[1];
             int loginUserId = jwtService.getLoginUserId(request);
             User temp = userService.findById(loginUserId);
             if(temp == null) return new ResponseEntity<>(new CommonResponse("updatePassword", "FAIL", "등록되지 않은 회원입니다."), HttpStatus.OK);

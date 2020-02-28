@@ -139,7 +139,7 @@ const NavBar = () => {
               alt="statu페이지"
             />
           </a>
-          {!UserStore.token ? (
+          {!sessionStorage.token ? (
             <div>
               <StyledLinkPhone to="/signup">회원가입</StyledLinkPhone>
               <StyledButton>
