@@ -61,7 +61,7 @@ public class UserService {
     }
 
     @Transactional
-    public User updatePassword(String email, String pw){
+    public User findPassword(String email, String pw){
         User user = uRepo.findUserByEmail(email);
         user.setPw(passwordEncoder.encode(pw));
         interestRepo.deleteAllByUserId(user.getId());

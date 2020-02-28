@@ -4,6 +4,7 @@ import { UserDetailStoreType } from '../components/userDetail/UserDetailTypes'
 import * as studyAPI from '../lib/api/study'
 import * as H from 'history'
 import { message } from 'antd'
+import UserStore from './UserStore'
 
 const UserDetailStore: UserDetailStoreType = observable({
   // isLoggingIn : false,
@@ -51,6 +52,37 @@ const UserDetailStore: UserDetailStoreType = observable({
     }
   },
 
+  async findPassword(email : string, history : H.History){
+      try{
+        const res = await userDetail.findPassword(email)
+        if(res.data.state === 'SUCCESS'){
+          message.info("임시 비밀번호가 전송되었습니다.")
+          history.push("/login")
+        }
+        else{
+          message.error("등록되지 않은 이메일입니다.")
+          return
+        }
+      } catch(error){
+        message.error("등록되지 않은 이메일입니다.")
+        return
+      } 
+  },
+  async updatePassword(password : string , newPassword : string, history : H.History){
+    try{
+      const res = await userDetail.updatePassword(password, newPassword)
+      if(res.data.state === 'SUCCESS'){
+        message.info("비밀번호가 변경되었습니다. 다시 로그인 해 주세요.")
+        UserStore.logout(history)
+      }
+      else{
+        message.error("현재 비밀번호가 일치하지 않습니다.")
+      }
+    } catch(error){
+      message.error("일시적인 오류로 인해 비밀번호 변경이 불가능합니다.")
+      return
+    }
+  },
   async upload(formdata: FormData) {
     try {
       console.log(formdata.get('file'))

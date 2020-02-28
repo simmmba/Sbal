@@ -43,6 +43,7 @@ public class UserController {
     @Autowired
     private UserProfileService profileService;
 
+
     private SnsValue naverSns = new SnsValue("naver", "ZaZ22Ro1uzKMK_w_pbkX", "QDpGVk3dcT", "http://70.12.247.32:8080/user/auth/naver/callback");
     //private SnsValue kakaoSns = new SnsValue("kakao", "65c8c65086b415b91d2decea051f2765", null, "http://localhost:3000/signup/oauth");
     private SnsValue kakaoSns = new SnsValue("kakao", "65c8c65086b415b91d2decea051f2765", null, "http://i02a306.p.ssafy.io/signup/oauth");
@@ -213,17 +214,31 @@ public class UserController {
             String sub = "스터디의 발견 임시 비밀번호 입니다.";
             int ran = new Random().nextInt(10000000) + 1000000;
             String dice = ran+"";
-            Map<String, String> result = new HashMap<>();
             emailService.sendMail(email, sub, "임시 비밀번호 : " + dice);
-            userService.updatePassword(email, dice);
-            result.put("dice", dice);
-            return new ResponseEntity<>(new CommonResponse(result,"validateEmail", "SUCCESS", "이메일로 임시비밀번호가 전송되었습니다."), HttpStatus.OK);
+            userService.findPassword(email, dice);
+            return new ResponseEntity<>(new CommonResponse("validateEmail", "SUCCESS", "이메일로 임시비밀번호가 전송되었습니다."), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(new CommonResponse("validateEmail", "FAIL", "등록되지 않은 이메일입니다."), HttpStatus.OK);
         }
     }
 
     //비밀번호 수정
+    @PostMapping("/updatePassword")
+    public ResponseEntity<CommonResponse> updatePassword(@RequestBody UserDTO user, @RequestBody UserDTO newUser, HttpServletResponse response){
+        try{
+            int loginUserId = jwtService.getLoginUserId(request);
+            User temp = userService.findById(loginUserId);
+            if(temp == null) return new ResponseEntity<>(new CommonResponse("updatePassword", "FAIL", "등록되지 않은 회원입니다."), HttpStatus.OK);
+            User u = userService.signIn(temp.getEmail(), user.getPw());
+            if(u == null) return new ResponseEntity<>(new CommonResponse("updatePassword", "FAIL", "비밀번호가 일치하지 않습니다."), HttpStatus.OK);
+            userService.updatePassword(loginUserId, newUser.getPw());
+            return new ResponseEntity<>(new CommonResponse("updatePassword", "SUCCESS", "비밀번호가 변경되었습니다."), HttpStatus.OK);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            throw new RuntimeException("updatePassword");
+        }
+
+    }
  
 
     @PostMapping("/profileUpload")

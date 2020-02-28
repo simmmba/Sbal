@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 /** @jsx jsx */
 import { useLocalStore, useObserver } from 'mobx-react'
 import { css, jsx } from '@emotion/core'
-import UserStore from '../../stores/UserStore'
+import UserDetailStore from '../../stores/UserDetailStore'
 import {
   AuthFormBlock,
   StyledInput,
@@ -21,8 +21,8 @@ function UpdatePassword() {
     color: #6741d9;
     padding-bottom: 15px;
   `
-
   const history = useHistory()
+
   const state: { [key: string]: string } = useLocalStore(() => ({
     currentPassword: '',
     newPassword: '',
@@ -34,7 +34,11 @@ function UpdatePassword() {
   }, [])
 
   const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    if(state.newPassword !== state.newPasswordToConfirm) {
+      message.error("새 비밀번호와 새 비밀번호 확인이 같지 않습니다.")
+      return
+    }
+    UserDetailStore.updatePassword(state.currentPassword, state.newPassword, history)
   }, [])
 
   return useObserver(() => (

@@ -1,7 +1,8 @@
 /** @jsx jsx */
 import React, { useCallback } from 'react'
 import { useLocalStore, useObserver } from 'mobx-react'
-import UserStore from '../../stores/UserStore'
+import UserDetailStore from '../../stores/UserDetailStore'
+
 import { useHistory } from 'react-router'
 import { jsx, css } from '@emotion/core'
 import { Link } from 'react-router-dom'
@@ -12,6 +13,7 @@ import {
   StyledButton,
   Guide
 } from './AuthStyled'
+import { message } from 'antd'
 
 function TempPassword() {
   const history = useHistory()
@@ -24,7 +26,7 @@ function TempPassword() {
   }, [])
 
   const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
-    history.push('/login')
+      UserDetailStore.findPassword(state.email, history)
   }, [])
 
   return useObserver(() => (
