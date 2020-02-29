@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="703f5862-ffa2-4945-9468-12af9d573c3c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../client/src/components/auth/SignupForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/auth/SignupForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/map/MapView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/map/MapView.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/components/studyGroup/ScheduleAdd.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/studyGroup/ScheduleAdd.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/studyGroup/StudyMap.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/studyGroup/StudyMap.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/components/userDetail/UserDetailTypes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/userDetail/UserDetailTypes.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/components/userDetail/UserDetailView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/userDetail/UserDetailView.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/stores/StudyStore.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/stores/StudyStore.tsx" afterDir="false" />
@@ -242,7 +244,7 @@
       <workItem from="1582783788610" duration="5270000" />
       <workItem from="1582880732578" duration="1805000" />
       <workItem from="1582896232121" duration="754000" />
-      <workItem from="1582944193883" duration="2452000" />
+      <workItem from="1582944193883" duration="3094000" />
     </task>
     <servers />
   </component>
