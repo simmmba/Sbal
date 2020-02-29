@@ -210,7 +210,7 @@ public class UserController {
     @GetMapping("/findPassword/{email}")
     public  ResponseEntity<CommonResponse> findPassword(@PathVariable String email) {
         log.info(email);
-        if (userService.isExistEmail(email)) {
+        if (!userService.isExistEmail(email)) {
             EmailService emailService = new EmailService();
             String sub = "스터디의 발견 임시 비밀번호 입니다.";
             int ran = new Random().nextInt(10000000) + 1000000;
@@ -300,6 +300,7 @@ public class UserController {
             userDTO.setNickname(user.getNickname());
             userDTO.setSocialLogin(user.getSocialLogin());
             userDTO.setCity("서울");
+            userDTO.setTown("강남구");
             return signUp(userDTO, response);
         }
     }
