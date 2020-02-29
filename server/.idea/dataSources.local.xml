@@ -2,7 +2,7 @@
 <project version="4">
   <component name="dataSourceStorageLocal">
     <data-source name="AWS" uuid="671f6262-85ed-448c-ae7a-1aab39d200cb">
-      <database-info product="MariaDB" version="10.1.44-MariaDB-0ubuntu0.18.04.1" jdbc-version="4.2" driver-name="MariaDB Connector/J" driver-version="2.4.1" dbms="MARIADB" exact-version="10.1.44" exact-driver-version="2.4">
+      <database-info product="MariaDB" version="10.1.44-MariaDB-0ubuntu0.18.04.1" jdbc-version="4.2" driver-name="MariaDB Connector/J" driver-version="2.4.1" dbms="MARIADB" exact-version="10.1.44">
         <extra-name-characters>#@</extra-name-characters>
         <identifier-quote-string>`</identifier-quote-string>
       </database-info>
@@ -21,6 +21,11 @@
     </data-source>
     <data-source name="TEST_DB@localhost" uuid="6beb24c6-91c6-4c68-88f4-814697ff1ac4">
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MARIADB" exact-version="0" />
+      <schema-mapping />
+    </data-source>
+    <data-source name="User Data Source -" uuid="58a74525-a5a0-4044-b79d-c2bec8b6f760">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="UNKNOWN" exact-version="0" />
+      <secret-storage>master_key</secret-storage>
       <schema-mapping />
     </data-source>
   </component>

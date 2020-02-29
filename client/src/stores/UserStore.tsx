@@ -11,7 +11,7 @@ import StudyStore from './StudyStore'
 import { CascaderOptionType } from 'antd/lib/cascader'
 import { message } from 'antd'
 import * as H from 'history'
-import setAuthToken from '../utils/setAuthToken'
+import setAuthToken from '../utils/SetAuthToken'
 
 export const cityAndTowns: { [key: string]: string[] } = {
   서울: [
