@@ -8,12 +8,10 @@ import palette from '../lib/styles/palette'
 
 const HomePage = () => {
   const images = [
-    'http://i02a306.p.ssafy.io/images/index/1080_360_2.jpg',
-    'http://i02a306.p.ssafy.io/images/index/1080_360_3.jpg',
-    'http://i02a306.p.ssafy.io/images/index/1080_360_4.jpg',
-    'http://i02a306.p.ssafy.io/images/index/1080_360_5.jpg',
-    'http://i02a306.p.ssafy.io/images/index/1080_360_6.jpg',
-    'http://i02a306.p.ssafy.io/images/index/1080_360_1.jpeg'
+    'http://i02a306.p.ssafy.io/images/index/banner1.png',
+    'http://i02a306.p.ssafy.io/images/index/banner2.png',
+    'http://i02a306.p.ssafy.io/images/index/banner3.png',
+    'http://i02a306.p.ssafy.io/images/index/banner4.png'
   ]
 
   const back = css`

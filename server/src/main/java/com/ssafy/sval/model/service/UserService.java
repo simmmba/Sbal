@@ -93,8 +93,8 @@ public class UserService {
         return uRepo.findById(id).get();
     }
 
-    public User findByNickname(String nickname) {
-        return uRepo.findUserByNickname(nickname);
+    public List<User> findByNickname(String nickname) {
+        return uRepo.findUserByNicknameIsLike(nickname);
     }
 
     public User findBySocialLogin(String socialLogin){

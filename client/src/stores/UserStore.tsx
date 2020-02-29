@@ -834,9 +834,6 @@ const UserStore = observable<UserStoreType>({
     }
   },
 
-  
-
-
   async login(data: LoginData, history: H.History) {
     this.isLoggingIn = true
     try {
@@ -868,7 +865,7 @@ const UserStore = observable<UserStoreType>({
     sessionStorage.removeItem('id')
     this.token = null
     StudyStore.myStudy = []
-    setAuthToken("")
+    setAuthToken('')
     history.push('/')
   },
 
@@ -886,8 +883,7 @@ const UserStore = observable<UserStoreType>({
       this.isLoggingIn = false
     }
     history.push('/mypage')
-  },
-
+  }
 })
 
 export default UserStore
