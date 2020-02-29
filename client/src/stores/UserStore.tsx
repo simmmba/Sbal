@@ -11,7 +11,7 @@ import StudyStore from './StudyStore'
 import { CascaderOptionType } from 'antd/lib/cascader'
 import { message } from 'antd'
 import * as H from 'history'
-import setAuthToken from '../utils/SetAuthToken'
+import setAuthToken from '../utils/setAuthToken'
 
 export const cityAndTowns: { [key: string]: string[] } = {
   서울: [
@@ -834,9 +834,6 @@ const UserStore = observable<UserStoreType>({
     }
   },
 
-  
-
-
   async login(data: LoginData, history: H.History) {
     this.isLoggingIn = true
     try {
@@ -868,7 +865,7 @@ const UserStore = observable<UserStoreType>({
     sessionStorage.removeItem('id')
     this.token = null
     StudyStore.myStudy = []
-    setAuthToken("")
+    setAuthToken('')
     history.push('/')
   },
 
@@ -886,8 +883,7 @@ const UserStore = observable<UserStoreType>({
       this.isLoggingIn = false
     }
     history.push('/mypage')
-  },
-
+  }
 })
 
 export default UserStore

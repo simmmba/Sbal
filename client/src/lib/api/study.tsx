@@ -1,5 +1,5 @@
 import apiClient from './client'
-import setAuthToken from '../../utils/SetAuthToken'
+import setAuthToken from '../../utils/setAuthToken'
 import { Study } from '../../components/main/MainTypes'
 import { studyDetailType } from '../../components/studyDetail/StudyDetailTypes'
 import { FilterData } from '../../components/studyList/ListTypes'
