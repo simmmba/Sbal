@@ -180,7 +180,7 @@ public class StudyController {
                 String searchText = (String) filter.get("searchText");
                 if (searchText == null) searchText = "";
                 if (value.equals("leader")) {
-                    spec = spec.and(studySpecs.leaderIdIs(userService.findByNickname(searchText).getId()));
+                    spec = spec.and(studySpecs.leaderLike(searchText));
                 } else if (value.equals("title")) {
                     spec = spec.and(studySpecs.titleLike(searchText));
                 }

@@ -25,8 +25,8 @@ public class StudySpecs {
     public Specification<Study> dayStateIs(final Integer weekdayOrWeekend) {
         return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.equal(root.<Study>get("weekdayOrWeekend"), weekdayOrWeekend);
     }
-    public Specification<Study> leaderIdIs(final Integer leaderId) {
-        return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.equal(root.<Study>get("leader").get("id"), leaderId);
+    public Specification<Study> leaderLike(final String searchText) {
+        return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.like(root.<Study>get("leader").get("nickname"), "%".concat(searchText).concat("%"));
     }
     public Specification<Study> titleLike(final String searchText) {
         return (root, criteriaQuery, criteriaBuilder) -> criteriaBuilder.like(root.<Study>get("title").as(String.class), "%".concat(searchText).concat("%"));

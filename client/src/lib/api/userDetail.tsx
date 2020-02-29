@@ -1,5 +1,5 @@
 import apiClient from './client'
-import setAuthToken from '../../utils/setAuthToken'
+import setAuthToken from '../../utils/SetAuthToken'
 import Password from 'antd/lib/input/Password'
 // import { userInfo } from '../../components/userDetail/UserInfoTypes'
 

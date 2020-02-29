@@ -1,4 +1,4 @@
-import setAuthToken from '../../utils/setAuthToken'
+import setAuthToken from '../../utils/SetAuthToken'
 import apiClient from './client'
 import {
   LoginData,

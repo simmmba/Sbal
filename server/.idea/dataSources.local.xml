@@ -23,5 +23,10 @@
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MARIADB" exact-version="0" />
       <schema-mapping />
     </data-source>
+    <data-source name="User Data Source -" uuid="58a74525-a5a0-4044-b79d-c2bec8b6f760">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="UNKNOWN" exact-version="0" />
+      <secret-storage>master_key</secret-storage>
+      <schema-mapping />
+    </data-source>
   </component>
 </project>
