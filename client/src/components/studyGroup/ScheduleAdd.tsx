@@ -105,7 +105,7 @@ const ScheduleAdd = () => {
     },
     subject: '',
     homework: '',
-    meetDate: '',
+    meetDate: moment().format('YYYY-MM-DD HH:mm'),
     location: '',
     onChangeTextArea(e: React.ChangeEvent<HTMLTextAreaElement>) {
       state[e.target.name] = e.target.value
@@ -146,11 +146,11 @@ const ScheduleAdd = () => {
           <div css={title}>시간</div>
           <div css={content}>
             <DatePicker
-              showTime={{ format: 'HH:mm' }}
+              // showTime={{ format: 'HH:mm' }}
               format="YYYY-MM-DD HH:mm"
               placeholder="날짜, 시간을 입력하세요"
               name="meetDate"
-              defaultValue={moment().locale('ko-KR')}
+              defaultValue={moment(state.meetDate)}
               onChange={handleDatePickerChanged}
             />
           </div>

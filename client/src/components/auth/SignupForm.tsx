@@ -198,7 +198,10 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
       sessionStorage.setItem('id', id)
       UserStore.token = token
       UserStore.isLoggingIn = false
-      message.info('로그인 되었습니다. \n 첫 로그인 시 회원정보를 수정해주세요', 2)
+      message.info(
+        '로그인 되었습니다. \n 첫 로그인 시 회원정보를 수정해주세요',
+        2
+      )
       history.push('/')
     } else {
       message.error('로그인에 실패하였습니다.', 2)
@@ -295,74 +298,75 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
       <Guide color="red">* 아래는 필수 입력사항입니다</Guide>
       <form onSubmit={handleSubmit}>
         {/* 이메일 입력 부분 */}
-        {UserDetailStore.data.social_login !== null && (
-        <div>
+        {UserDetailStore.data.socialLogin === null && (
           <div>
-            <StyledLabel htmlFor="email">
-              <Guide color="red">* </Guide>이메일 아이디
-            </StyledLabel>
-            <StyledInput
-              placeholder="이메일 아이디를 입력하세요"
-              autoComplete="email"
-              name="email"
-              value={state.email}
-              onChange={state.onChange}
-              width={60}
-            />
-            <StyledButton
-              width={35}
-              marginLeft={5}
-              disabled={
-                type === 'mypage/update' &&
-                UserDetailStore.data.email === state.email
-              }
-              onClick={e => {
-                state.validateUserEmail()
-                e.preventDefault()
-              }}
-            >
-              {state.emailCheckLoading ? (
-                <Spin
-                  indicator={
-                    <Icon type="loading" style={{ color: 'white' }} spin />
-                  }
-                />
-              ) : (
-                '중복 확인'
-              )}
-            </StyledButton>
-            <div hidden={!state.isCheckedEmail}>
-              <Guide color={state.emailState ? 'green' : 'red'}>
-                {state.emailDupMessage}
-              </Guide>
-            </div>
-          </div>
-          {state.emailValidationCode && (
             <div>
+              <StyledLabel htmlFor="email">
+                <Guide color="red">* </Guide>이메일 아이디
+              </StyledLabel>
               <StyledInput
-                placeholder="인증번호를 입력하세요"
-                autoComplete="number"
-                name="emailValidationInput"
-                value={state.emailValidationInput}
+                placeholder="이메일 아이디를 입력하세요"
+                autoComplete="email"
+                name="email"
+                value={state.email}
                 onChange={state.onChange}
                 width={60}
               />
-              {state.emailValidationCode && (
-                <Guide
-                  color={
-                    state.emailValidationInput === state.emailValidationCode
-                      ? 'green'
-                      : 'red'
-                  }
-                >
-                  {state.emailValidationInput === state.emailValidationCode
-                    ? '인증되었습니다'
-                    : '인증번호를 확인주세요'}
+              <StyledButton
+                width={35}
+                marginLeft={5}
+                disabled={
+                  type === 'mypage/update' &&
+                  UserDetailStore.data.email === state.email
+                }
+                onClick={e => {
+                  state.validateUserEmail()
+                  e.preventDefault()
+                }}
+              >
+                {state.emailCheckLoading ? (
+                  <Spin
+                    indicator={
+                      <Icon type="loading" style={{ color: 'white' }} spin />
+                    }
+                  />
+                ) : (
+                  '중복 확인'
+                )}
+              </StyledButton>
+              <div hidden={!state.isCheckedEmail}>
+                <Guide color={state.emailState ? 'green' : 'red'}>
+                  {state.emailDupMessage}
                 </Guide>
-              )}
+              </div>
             </div>
-          )}
-        </div>)}
+            {state.emailValidationCode && (
+              <div>
+                <StyledInput
+                  placeholder="인증번호를 입력하세요"
+                  autoComplete="number"
+                  name="emailValidationInput"
+                  value={state.emailValidationInput}
+                  onChange={state.onChange}
+                  width={60}
+                />
+                {state.emailValidationCode && (
+                  <Guide
+                    color={
+                      state.emailValidationInput === state.emailValidationCode
+                        ? 'green'
+                        : 'red'
+                    }
+                  >
+                    {state.emailValidationInput === state.emailValidationCode
+                      ? '인증되었습니다'
+                      : '인증번호를 확인주세요'}
+                  </Guide>
+                )}
+              </div>
+            )}
+          </div>
+        )}
         <StyledLabel htmlFor="nickname">
           <Guide color="red">* </Guide>닉네임
         </StyledLabel>
@@ -498,10 +502,16 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
             margin-left: 5px;
           `}
         >
-          {state.interestList.length === 0 && (<div css={css`
-            margin: 10px 0px 20px 0px;
-            font-size: 13px;
-          `}>관심사가 없습니다.</div>)}
+          {state.interestList.length === 0 && (
+            <div
+              css={css`
+                margin: 10px 0px 20px 0px;
+                font-size: 13px;
+              `}
+            >
+              관심사가 없습니다.
+            </div>
+          )}
 
           {state.interestList.map((interest: Interest, index: number) => (
             <ListItem

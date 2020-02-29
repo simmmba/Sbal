@@ -24,15 +24,25 @@ const StudyGroupMember = () => {
     font-weight: bold;
     font-size: 21px;
     color: ${palette.violet[9]};
+    margin-bottom: 7px;
   `
   const content = css`
     display: flex;
+    width: 200px;
     background: ${palette.violet[0]};
     border-radius: 10px;
-    margin-bottom: 2px;
+    margin: 5px;
+    cursor: pointer;
+    transition: 0.3s;
 
     &:hover {
       background: ${palette.violet[1]};
+    }
+
+    @media (max-width: 415px) {
+      /* margin: 0px 10px 0px 0px; */
+      display: flex;
+      width: 90%;
     }
   `
   const list = css`
@@ -53,31 +63,49 @@ const StudyGroupMember = () => {
     justify-content: center;
     align-items: center;
     padding: 10px 5px 10px 5px;
-    border-right: 2px dashed #fff;
-    width: 100px;
+    /* border-right: 2px dashed #fff; */
+    width: 50px;
+    border-radius: 10px;
+    background: ${palette.violet[1]};
   `
-  const state = css`
+
+  const nickname = css`
     display: flex;
-    justify-content: center;
     align-items: center;
-    padding: 10px 20px 10px 20px;
-    font-size: 14px;
-    width: 200px;
-    border-left: 2px dashed #fff;
-  `
-  const evaluation = css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 5px 10px 5px;
+    padding: 10px 10px 10px 10px;
+    font-weight: bold;
     font-size: 14px;
     width: 150px;
+
+    @media (max-width: 415px) {
+      /* margin: 0px 10px 0px 0px; */
+      /* display: flex; */
+      width: 100%;
+    }
   `
-  const icon = css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  `
+
+  // const state = css`
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   padding: 10px 20px 10px 20px;
+  //   font-size: 14px;
+  //   width: 200px;
+  //   border-left: 2px dashed #fff;
+  // `
+  // const evaluation = css`
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   padding: 10px 5px 10px 5px;
+  //   font-size: 14px;
+  //   width: 150px;
+  // `
+  // const icon = css`
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  // `
 
   const empty = css`
     height: 300px;
@@ -87,15 +115,6 @@ const StudyGroupMember = () => {
     align-items: center;
   `
 
-  const nickname = css`
-    display: flex;
-    align-items: center;
-    padding: 10px 20px 10px 22px;
-    font-weight: bold;
-    font-size: 14px;
-    border-right: 2px dashed #fff;
-    width: 100%;
-  `
   const memberInfoBtn = css`
     color: #5d5d5d;
     border: none;
@@ -182,6 +201,17 @@ const StudyGroupMember = () => {
     margin-top: 10px;
   `
 
+  const memList = css`
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 30px;
+
+    @media (max-width: 415px) {
+      display: flex;
+      flex-direction: column;
+    }
+  `
+
   // 멤버 이름 클릭시
   const [visible, setVisible] = useState(false)
 
@@ -194,8 +224,92 @@ const StudyGroupMember = () => {
     setVisible(false)
   }
 
+  var idx: number = 2
+
   return useObserver(() => (
     <div css={main}>
+      <div css={upper}>
+        <div css={title}>😃&nbsp;스터디 멤버</div>
+      </div>
+      {/* {StudyStore.studyGroup.studyMemberDTOList.length > 0 ? (
+        <div css={list}>
+          <div css={num}>번호</div>
+          <div css={listNickname}>닉네임</div>
+          <div css={evaluation}>성실도</div>
+          <div css={state}>상태</div>
+        </div>
+      ) : (
+        <div></div>
+      )} */}
+      {StudyStore.studyGroup.studyMemberDTOList.length > 0 ? (
+        <div css={memList}>
+          {StudyStore.studyGroup.studyMemberDTOList.map(
+            (m: StudyMember, index: number) => (
+              <div>
+                {StudyStore.studyGroup.leader.id === m.user.id && (
+                  <div
+                    css={content}
+                    key={m.user.id}
+                    onClick={() => showModal(m.user.id)}
+                  >
+                    <div css={num}>1</div>
+                    <div css={nickname}>
+                      {/* <button
+                        css={memberInfoBtn}
+                        }
+                      > */}
+                      <span>&nbsp;👑&nbsp;</span>
+                      {m.user.nickname}
+                      {/* </button> */}
+                    </div>
+                    {/* <div css={attendance}>{m.user.id}</div> */}
+                    {/* <div css={evaluation}>{m.user.evaluation}</div>
+                    <div css={state}>{m.state === 1 ? '가입' : '요청중'}</div> */}
+                  </div>
+                )}
+              </div>
+            )
+          )}
+          {StudyStore.studyGroup.studyMemberDTOList.map(
+            (m: StudyMember, index: number) => (
+              <div>
+                {StudyStore.studyGroup.leader.id !== m.user.id &&
+                  m.state === 1 && (
+                    <div
+                      css={content}
+                      key={m.user.id}
+                      onClick={() => showModal(m.user.id)}
+                    >
+                      <div css={num}>{idx++}</div>
+                      <div css={nickname}>
+                        <button
+                          css={memberInfoBtn}
+                          onClick={() => showModal(m.user.id)}
+                        >
+                          {m.user.nickname}
+                        </button>
+                      </div>
+                      {/* <div css={attendance}>{m.user.id}</div> */}
+                      {/* <div css={evaluation}>{m.user.evaluation}</div>
+                      <div css={state}>{m.state === 1 ? '가입' : '요청중'}</div> */}
+                    </div>
+                  )}
+              </div>
+            )
+          )}
+        </div>
+      ) : (
+        <Empty
+          css={empty}
+          description={
+            <h3>
+              <br />
+              멤버가 아직 없네요 😢
+            </h3>
+          }
+        />
+      )}
+
       {/* 멤버 클릭 모달 */}
       <Modal
         visible={visible}
@@ -239,74 +353,36 @@ const StudyGroupMember = () => {
               percent={UserDetailStore.data.evaluation}
               status="active"
             />
-            {UserDetailStore.data.interestDTOList.length > 0 && 
+            {UserDetailStore.data.interestDTOList.length > 0 && (
               <div css={comment}>
-                <div><b><u>관심사</u>✍️&nbsp;&nbsp;&nbsp;</b></div>
+                <div>
+                  <b>
+                    <u>관심사</u>✍️&nbsp;&nbsp;&nbsp;
+                  </b>
+                </div>
                 <div>
                   {UserDetailStore.data.interestDTOList.map(
                     (interest: Interest, index: number) => (
-                      <span key={index}>
-                        #{interest.scategory}&nbsp;&nbsp;
-                      </span>
+                      <span key={index}>#{interest.scategory}&nbsp;&nbsp;</span>
                     )
                   )}
                 </div>
               </div>
-            }
-            {UserDetailStore.data.introduction !== '' && 
+            )}
+            {UserDetailStore.data.introduction !== '' && (
               <span css={comment}>
-                <div><b><u>한마디</u>💬</b></div>&nbsp;&nbsp;&nbsp;
+                <div>
+                  <b>
+                    <u>한마디</u>💬
+                  </b>
+                </div>
+                &nbsp;&nbsp;&nbsp;
                 <div>{UserDetailStore.data.introduction}</div>
               </span>
-            }
+            )}
           </div>
         </div>
       </Modal>
-      <div css={upper}>
-        <div css={title}>
-          😃&nbsp;스터디 멤버
-        </div>
-      </div>
-      {StudyStore.studyGroup.studyMemberDTOList.length > 0 ? (
-        <div css={list}>
-          <div css={num}>번호</div>
-          <div css={listNickname}>닉네임</div>
-          <div css={evaluation}>성실도</div>
-          <div css={state}>상태</div>
-        </div>
-      ) : (
-        <div></div>
-      )}
-      {StudyStore.studyGroup.studyMemberDTOList.length > 0 ? (
-        StudyStore.studyGroup.studyMemberDTOList.map(
-          (m: StudyMember, index: number) => (
-            <div css={content} key={m.user.id}>
-              <div css={num}>{index + 1}</div>
-              <div css={nickname}>
-                <button
-                  css={memberInfoBtn}
-                  onClick={() => showModal(m.user.id)}
-                >
-                  {m.user.nickname}
-                </button>
-              </div>
-              {/* <div css={attendance}>{m.user.id}</div> */}
-              <div css={evaluation}>{m.user.evaluation}</div>
-              <div css={state}>{m.state === 1 ? '가입' : '요청중'}</div>
-            </div>
-          )
-        )
-      ) : (
-        <Empty
-          css={empty}
-          description={
-            <h3>
-              <br />
-              멤버가 아직 없네요 😢
-            </h3>
-          }
-        />
-      )}
     </div>
   ))
 }

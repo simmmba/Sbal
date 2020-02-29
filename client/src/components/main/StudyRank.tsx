@@ -4,7 +4,7 @@ import { css, jsx } from '@emotion/core'
 import { NavLink } from 'react-router-dom'
 import { StudyRankprops, Study } from './MainTypes'
 import LoadingSpin from '../common/LoadingSpin'
-import React from "react";
+import React from 'react'
 
 const listBox = css`
   margin: 10px;
@@ -81,8 +81,8 @@ const link = css`
 `
 
 const comment = css`
-    font-size: 12px;
-    color: #ff5e00;
+  font-size: 12px;
+  color: #ff5e00;
 `
 
 const titleMap: { [key: string]: string } = {
@@ -106,9 +106,16 @@ const StudyRank = ({ title, list }: StudyRankprops) => {
                 <div>
                   <div css={listName}>
                     {study.title.length > 10
-                    ? study.title.slice(0, 20) + '...'
-                    : study.title} 
-                    {study.joinRequestCount!=null&&study.joinRequestCount>0?(<span css={comment}>&nbsp;&nbsp;[{study.joinRequestCount}]</span>):<span/>}
+                      ? study.title.slice(0, 19) + '...'
+                      : study.title}
+                    {study.joinRequestCount != null &&
+                    study.joinRequestCount > 0 ? (
+                      <span css={comment}>
+                        &nbsp;&nbsp;[{study.joinRequestCount}]
+                      </span>
+                    ) : (
+                      <span />
+                    )}
                   </div>
                   <div css={listType}>{study.lcategory}</div>
                 </div>
@@ -116,7 +123,7 @@ const StudyRank = ({ title, list }: StudyRankprops) => {
             </div>
           </NavLink>
         ))
-      ) : (sessionStorage.token && title === 'myStudy') ? (
+      ) : sessionStorage.token && title === 'myStudy' ? (
         <div css={empty}>
           <span className="emoji" role="img" aria-label={'^^'}>
             참여중인 스터디가 없네요 😅
@@ -126,7 +133,7 @@ const StudyRank = ({ title, list }: StudyRankprops) => {
             스터디 보러가기
           </NavLink>
         </div>
-      ) : (!sessionStorage.token && title === 'myStudy') ? (
+      ) : !sessionStorage.token && title === 'myStudy' ? (
         <div css={empty}>
           <span className="emoji" role="img" aria-label={'^^'}>
             로그인 후 목록을 확인할 수 있어요! 😉

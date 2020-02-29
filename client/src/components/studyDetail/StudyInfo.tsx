@@ -21,23 +21,32 @@ const StudyInfo = () => {
     flex-wrap: wrap;
     /* align-items: center; */
     justify-content: center;
+
+    @media screen and (max-width: 500px) {
+      width: 100%;
+      flex-direction: column;
+    }
   `
 
   const block = css`
     padding: 10px 15px 10px 15px;
     margin: 10px;
-    background: ${palette.yellow[0]};
+    background: ${palette.gray[0]};
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     /* justify-content: center; */
     justify-content: space-between;
+
+    @media screen and (max-width: 500px) {
+      margin: 3px 10px 3px 10px;
+    }
   `
 
   const title = css`
     width: 100%;
-    border-bottom: 2px solid ${palette.yellow[9]};
+    border-bottom: 2px solid ${palette.gray[5]};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -50,7 +59,7 @@ const StudyInfo = () => {
   const modal = css`
     padding: 10px 15px 10px 15px;
     margin: 10px;
-    background: ${palette.yellow[2]};
+    background: ${palette.yellow[0]};
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -61,7 +70,11 @@ const StudyInfo = () => {
     transition: 0.3s;
 
     &:hover {
-      background: ${palette.yellow[3]};
+      background: ${palette.yellow[1]};
+    }
+
+    @media screen and (max-width: 500px) {
+      margin: 3px 10px 3px 10px;
     }
   `
 
@@ -190,13 +203,6 @@ const StudyInfo = () => {
           </div>
         </div>
         <div css={block}>
-          <div css={title}>📅 진행 기간</div>
-          <div>
-            &nbsp;&nbsp;{StudyDetailStore.data.startDate} ~{' '}
-            {StudyDetailStore.data.endDate}&nbsp;&nbsp;
-          </div>
-        </div>
-        <div css={block}>
           <div css={title}>&nbsp;&nbsp;🌏 진행 장소(방식)&nbsp;&nbsp;</div>
           <div>
             {!StudyDetailStore.data.isOnline
@@ -204,6 +210,14 @@ const StudyInfo = () => {
               : '온라인'}
           </div>
         </div>
+        <div css={block}>
+          <div css={title}>📅 진행 기간</div>
+          <div>
+            &nbsp;&nbsp;{StudyDetailStore.data.startDate} ~{' '}
+            {StudyDetailStore.data.endDate}&nbsp;&nbsp;
+          </div>
+        </div>
+
         <div css={block}>
           <div css={title}>&nbsp;&nbsp;⌛️ 일정&nbsp;&nbsp;</div>
           <div>

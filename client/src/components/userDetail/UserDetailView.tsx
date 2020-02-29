@@ -104,14 +104,15 @@ const editBtn = css`
   font-size: 12px;
   border-radius: 4px;
   width: 100px;
-  height: 25px;
+  /* height: 25px; */
+  padding: 4px 0px 4px 0px;
   border: none;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: 0.3s;
-  margin-top: 10px;
+  margin-top: 5px;
 
   &:hover {
     background: ${palette.violet[2]};
@@ -133,6 +134,7 @@ const logoutBtn = css`
   cursor: pointer;
   transition: 0.3s;
   margin-top: 5px;
+  padding: 4px 0px 4px 0px;
 
   &:hover {
     background: ${palette.violet[2]};
@@ -165,41 +167,11 @@ const second = css`
   flex-wrap: wrap;
 `
 
-const third = css`
-  display: flex;
-  font-size: 16px;
-  flex-wrap: wrap;
-  margin-bottom: 10px;
-`
-
 const comment = css`
   display: flex;
   font-size: 16px;
   flex-wrap: wrap;
   margin-top: 10px;
-`
-const link = css`
-  margin: 10px 0px 0px 0px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: bold;
-  border-radius: 7px;
-  width: 100px;
-  height: 30px;
-  transition: 0.3s;
-  border: none;
-  /* border: 2px solid #e5dbff; */
-  background: #e5dbff;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #f3f0ff;
-  }
-  @media screen and (min-width: 815px) {
-    display: none;
-  }
 `
 
 const hoverTr = css`
@@ -321,10 +293,11 @@ const UserDetail = () => {
                 회원정보 수정
               </button>
               {/* 카카오 로그인이 아닐 때만 비밀번호 변경 가능 */}
-              {UserDetailStore.data.social_login !== null && (
+              {UserDetailStore.data.socialLogin === null && (
                 <button css={editBtn} onClick={() => passwordUpdateButton()}>
-                비밀번호 변경
-              </button>)}
+                  비밀번호 변경
+                </button>
+              )}
               <button
                 css={logoutBtn}
                 onClick={() => {
@@ -363,7 +336,11 @@ const UserDetail = () => {
             status="active"
           />
           <div css={comment}>
-            <div>관심사&nbsp;&nbsp;&nbsp;</div>
+            <div>
+              <b>
+                <u>관심사</u>✍️&nbsp;&nbsp;&nbsp;
+              </b>
+            </div>
             <div>
               {UserDetailStore.data.interestDTOList.map(
                 (interest: Interest, index: number) => (
@@ -375,7 +352,11 @@ const UserDetail = () => {
             </div>
           </div>
           <span css={comment}>
-            <div>한마디</div>
+            <div>
+              <b>
+                <u>한마디</u>💬
+              </b>
+            </div>
             &nbsp;&nbsp;&nbsp;
             <div>
               <b>{UserDetailStore.data.introduction}</b>
@@ -405,7 +386,12 @@ const UserDetail = () => {
                 </span>
               </h2>
               {UserDetailStore.data.ledStudyList.length === 0 ? (
-                <div>&nbsp;&nbsp;&nbsp;&nbsp;현재 스터디가 없습니다.<br /><br /><br /></div>
+                <div>
+                  &nbsp;&nbsp;&nbsp;&nbsp;현재 스터디가 없습니다.
+                  <br />
+                  <br />
+                  <br />
+                </div>
               ) : (
                 <table css={table}>
                   <tbody>

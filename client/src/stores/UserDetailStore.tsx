@@ -23,17 +23,16 @@ const UserDetailStore: UserDetailStoreType = observable({
     interestDTOList: [],
     ledStudyList: [],
     joinedStudyList: [],
-    social_login: ''
+    socialLogin: ''
   },
   //{id, pw, email, phoneNum, nickname, gender, introduction,
   //city, town, evaluation, profilePhotoDir, socialLogin, interestDTOList, ledStudyList, joinedStudyList}
   async deleteStudyMember(studyId: number, idx: number) {
     try {
-      if(window.confirm("목록에서 삭제 하시겠습니까?")){
+      if (window.confirm('목록에서 삭제 하시겠습니까?')) {
         const res = await studyAPI.studyDelete(studyId)
         this.data.joinedStudyList.splice(idx, 1)
-      } else return;
-      
+      } else return
     } catch (error) {}
   },
   async mypage() {
@@ -53,35 +52,36 @@ const UserDetailStore: UserDetailStoreType = observable({
     }
   },
 
-  async findPassword(email : string, history : H.History){
-      try{
-        const res = await userDetail.findPassword(email)
-        alert(res.data.state)
-        if(res.data.state === 'SUCCESS'){
-          message.info("임시 비밀번호가 전송되었습니다.")
-          history.push("/login")
-        }
-        else{
-          message.error("등록되지 않은 이메일입니다.")
-          return
-        }
-      } catch(error){
-        message.error("등록되지 않은 이메일입니다.")
+  async findPassword(email: string, history: H.History) {
+    try {
+      const res = await userDetail.findPassword(email)
+      if (res.data.state === 'SUCCESS') {
+        message.info('임시 비밀번호가 전송되었습니다.')
+        history.push('/login')
+      } else {
+        message.error('등록되지 않은 이메일입니다.')
         return
-      } 
+      }
+    } catch (error) {
+      message.error('등록되지 않은 이메일입니다.')
+      return
+    }
   },
-  async updatePassword(password : string , newPassword : string, history : H.History){
-    try{
+  async updatePassword(
+    password: string,
+    newPassword: string,
+    history: H.History
+  ) {
+    try {
       const res = await userDetail.updatePassword(password, newPassword)
-      if(res.data.state === 'SUCCESS'){
-        message.info("비밀번호가 변경되었습니다. 다시 로그인 해 주세요.")
+      if (res.data.state === 'SUCCESS') {
+        message.info('비밀번호가 변경되었습니다. 다시 로그인 해 주세요.')
         UserStore.logout(history)
+      } else {
+        message.error('현재 비밀번호가 일치하지 않습니다.')
       }
-      else{
-        message.error("현재 비밀번호가 일치하지 않습니다.")
-      }
-    } catch(error){
-      message.error("일시적인 오류로 인해 비밀번호 변경이 불가능합니다.")
+    } catch (error) {
+      message.error('일시적인 오류로 인해 비밀번호 변경이 불가능합니다.')
       return
     }
   },

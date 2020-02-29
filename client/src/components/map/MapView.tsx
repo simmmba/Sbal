@@ -43,7 +43,7 @@ const MapView = () => {
           // 인포윈도우로 장소에 대한 설명을 표시합니다
           var infowindow = new window.kakao.maps.InfoWindow({
             content:
-              '<div style="width:150px;text-align:center;padding:6px 0;">현 주소</div>'
+              '<div style="width:150px;text-align:center;padding:6px 0;">설정 위치</div>'
           })
           infowindow.open(map, marker)
 
@@ -329,11 +329,13 @@ const MapView = () => {
               font-weight: bold;
               margin-top: 10px;
               margin-bottom: 10px;
+              padding-top: 5px;
+              padding-bottom: 5px;
               background-color: white;
             `}
           >
-            {UserDetailStore.data.city} {UserDetailStore.data.town} 기준 검색
-            결과입니다...
+            "{UserDetailStore.data.city} {UserDetailStore.data.town}" 기준 검색
+            결과입니다.
           </div>
           <ul id="placesList"></ul>
           <div id="pagination"></div>
