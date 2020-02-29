@@ -2,10 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="703f5862-ffa2-4945-9468-12af9d573c3c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../client/src/components/auth/SignupForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/auth/SignupForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/studyGroup/ScheduleAdd.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/studyGroup/ScheduleAdd.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/userDetail/UserDetailTypes.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/userDetail/UserDetailTypes.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/userDetail/UserDetailView.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/userDetail/UserDetailView.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/lib/api/auth.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/lib/api/auth.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/lib/api/client.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/lib/api/client.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/lib/api/study.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/lib/api/study.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/lib/api/userDetail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/lib/api/userDetail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/stores/StudyStore.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/stores/StudyStore.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/stores/UserDetailStore.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/stores/UserDetailStore.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/stores/UserStore.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/stores/UserStore.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -244,6 +250,7 @@
       <workItem from="1582944329488" duration="1523000" />
       <workItem from="1582946764003" duration="162000" />
       <workItem from="1582946969659" duration="883000" />
+      <workItem from="1582944193883" duration="2452000" />
     </task>
     <servers />
   </component>
@@ -330,6 +337,32 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1322" height="174" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1582947882268" />
+    <state width="1323" height="163" key="GridCell.Tab.0.bottom" timestamp="1582946865453">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="163" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1582946865453" />
+    <state width="1493" height="218" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1582193121202" />
+    <state width="1877" height="284" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1582886964022" />
+    <state width="1493" height="207" key="GridCell.Tab.0.bottom/0.40.1536.824@0.40.1536.824" timestamp="1581325111008" />
+    <state width="1323" height="163" key="GridCell.Tab.0.center" timestamp="1582946865453">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="163" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1582946865453" />
+    <state width="1493" height="218" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1582193121202" />
+    <state width="1877" height="284" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1582886964022" />
+    <state width="1493" height="207" key="GridCell.Tab.0.center/0.40.1536.824@0.40.1536.824" timestamp="1581325111008" />
+    <state width="1323" height="163" key="GridCell.Tab.0.left" timestamp="1582946865452">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="163" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1582946865452" />
+    <state width="1493" height="218" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1582193121202" />
+    <state width="1877" height="284" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1582886964022" />
+    <state width="1493" height="207" key="GridCell.Tab.0.left/0.40.1536.824@0.40.1536.824" timestamp="1581325111008" />
+    <state width="1323" height="163" key="GridCell.Tab.0.right" timestamp="1582946865453">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="163" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1582946865453" />
+    &gt;&gt;&gt;&gt;&gt;&gt;&gt; 10b272681723745c3dd8f83a69b82bc73b81b9de
     <state width="1493" height="218" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1582193121202" />
     <state width="1877" height="284" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1582886964022" />
     <state width="1493" height="207" key="GridCell.Tab.0.right/0.40.1536.824@0.40.1536.824" timestamp="1581325111008" />
