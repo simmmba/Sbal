@@ -44,7 +44,7 @@ const StudyGroupSchedule = () => {
     transition: 0.3s;
 
     &:hover {
-    background: ${palette.gray[0]};
+      background: ${palette.gray[0]};
     }
   `
 
@@ -176,7 +176,7 @@ const StudyGroupSchedule = () => {
     StudyStore.userScores.map((updatedAttendance: object) => {
       StudyStore.updateAttendance(updatedAttendance)
     })
-    message.info('스케줄이 수정되었습니다.')
+    message.info('성실도 평가가 완료되었습니다.')
     setScoreConfirmLoading(true)
     setTimeout(() => {
       setScoreVisible(false)
@@ -214,9 +214,7 @@ const StudyGroupSchedule = () => {
         <Score scheduleIndex={attendanceIndex} />
       </Modal>
       <div css={upper}>
-        <div css={title}>
-        📅&nbsp;스터디 스케줄
-        </div>
+        <div css={title}>📅&nbsp;스터디 스케줄</div>
         {studyScheduleList.length > 0 &&
         StudyStore.loginUser.id === StudyStore.studyGroup.leader.id ? (
           <ScheduleAdd />

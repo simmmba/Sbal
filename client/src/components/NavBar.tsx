@@ -19,13 +19,13 @@ const Logo = styled(Link)`
   font-weight: bold;
   font-size: 27px;
   margin-right: auto;
-  color: ${palette.violet[0]};
+  color: #fff;
   transition: 0.3s;
   text-shadow: -1px 0 ${palette.violet[4]}, 0 1px ${palette.violet[4]},
     1px 0 ${palette.violet[4]}, 0 -1px ${palette.violet[4]};
 
   &:hover {
-    color: ${palette.violet[1]};
+    color: #fff;
     font-size: 25px;
   }
 `
@@ -129,7 +129,10 @@ const NavBar = () => {
           <Logo to="/">
             스<small>터디의</small>
             &nbsp;발
-            <img src="../logo.png" alt="로고 이미지" />
+            <img
+              src="http://i02a306.p.ssafy.io/images/index/logo.png"
+              alt="로고 이미지"
+            />
           </Logo>
           <StyledLink to="/study/create">스터디 개설</StyledLink>
           <StyledLink to="/study">스터디 목록</StyledLink>

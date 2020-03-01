@@ -199,7 +199,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
       UserStore.token = token
       UserStore.isLoggingIn = false
       message.info(
-        '로그인 되었습니다. \n 첫 로그인 시 회원정보를 수정해주세요',
+        '카카오 연동 로그인 되었습니다. \n 첫 로그인 시 회원정보를 수정해주세요',
         2
       )
       history.push('/')
@@ -263,8 +263,8 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
         state.isEqualPassword &&
         state.emailState &&
         state.nicknameState &&
-        state.emailValidationCode === state.emailValidationInput &&
-        state.interestList.length !== 0
+        state.emailValidationCode === state.emailValidationInput
+        // && state.interestList.length !== 0
       ) {
         const dataToSend = {
           email: state.email,
@@ -279,9 +279,7 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
         }
         UserStore.signup(dataToSend, history)
       } else {
-        message.error(
-          '입력하신 정보를 확인해주세요. \n 관심사는 최소 하나 이상 필요합니다.'
-        )
+        message.error('입력하신 정보를 확인해주세요.')
       }
     }
   }
@@ -298,7 +296,9 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
       <Guide color="red">* 아래는 필수 입력사항입니다</Guide>
       <form onSubmit={handleSubmit}>
         {/* 이메일 입력 부분 */}
-        {UserDetailStore.data.socialLogin === null && (
+        {(type === 'signup/form' ||
+          (type === 'mypage/update' &&
+            UserDetailStore.data.socialLogin === null)) && (
           <div>
             <div>
               <StyledLabel htmlFor="email">
@@ -442,36 +442,6 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
         <Guide marginTop="20px" color="#6741d9">
           * 아래는 추가 입력사항입니다
         </Guide>
-        {/* <StyledLabel htmlFor="email">연락처</StyledLabel>
-        <StyledInput
-          placeholder="휴대폰 번호를 입력하세요"
-          autoComplete="phoneNumber"
-          name="phoneNumber"
-          value={state.phoneNumber}
-          type="text"
-          onChange={state.onChange}
-        />
-        {type === 'mypage/update' ? (
-          <div />
-        ) : (
-          <div>
-            <StyledLabel htmlFor="gender">성별</StyledLabel>
-            <FlexBetween className="gender-select">
-              <StyledRadio name="gender" value="1" onChange={state.onChange}>
-                남성
-              </StyledRadio>
-              <StyledRadio name="gender" value="2" onChange={state.onChange}>
-                여성
-              </StyledRadio>
-              <StyledRadio name="gender" value="3" onChange={state.onChange}>
-                기타
-              </StyledRadio>
-              <StyledRadio name="gender" value="0" onChange={state.onChange}>
-                선택 안함
-              </StyledRadio>
-            </FlexBetween>
-          </div>
-        )} */}
 
         <StyledLabel htmlFor="city">지역</StyledLabel>
         <FlexBetween>

@@ -416,7 +416,7 @@ const UserDetail = () => {
                           <td
                             css={hover}
                             onClick={() => {
-                              history.push(`study/details/${ledStudy.id}`)
+                              history.push(`study/${ledStudy.id}`)
                             }}
                           >
                             {' '}
@@ -460,9 +460,7 @@ const UserDetail = () => {
                             <td
                               css={hover}
                               onClick={() => {
-                                history.push(
-                                  `study/details/${joinedStudy.study.id}`
-                                )
+                                history.push(`study/${joinedStudy.study.id}`)
                               }}
                             >
                               {' '}

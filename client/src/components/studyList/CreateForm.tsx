@@ -29,6 +29,7 @@ import { FormComponentProps } from 'antd/lib/form/Form'
 import { CheckboxChangeEvent } from 'antd/lib/checkbox/Checkbox'
 import { useHistory, useLocation } from 'react-router'
 import moment from 'moment'
+import { RadioChangeEvent } from 'antd/lib/radio'
 
 function CreateForm({ form }: FormComponentProps) {
   const { getFieldDecorator } = form
@@ -60,8 +61,8 @@ function CreateForm({ form }: FormComponentProps) {
   } else {
     initialValues = {
       title: '',
-      lcategory: '어학',
-      scategory: 'TOEIC',
+      lcategory: '개발',
+      scategory: 'Web',
       city: '서울',
       town: '강남구',
       maxParticipants: 30,
@@ -74,10 +75,11 @@ function CreateForm({ form }: FormComponentProps) {
         .add(30, 'days')
         .format('YYYY-MM-DD'),
       evaluationLimit: 30,
-      isOnline: true,
+      isOnline: false,
       timeslot: 2
     }
   }
+
   const state = useLocalStore(() => ({
     monthOrWeek: 2,
     weekdayOrWeekend: 0,
@@ -91,14 +93,16 @@ function CreateForm({ form }: FormComponentProps) {
     isOnlineChecked: false,
     weekdayOrWeekendChecked: false,
     locationChecked: false,
+    io: initialValues.isOnline,
 
     onInterestChange(e: CheckboxChangeEvent) {
       this.interestChecked = !this.interestChecked
       this.interestDisabled = !this.interestDisabled
     },
-    onChangeIsOnline(e: CheckboxChangeEvent) {
-      this.isOnlineChecked = !this.isOnlineChecked
-      this.isOnlineDisabled = !this.isOnlineDisabled
+    onChangeIsOnline(e: RadioChangeEvent) {
+      // this.isOnlineChecked = !this.isOnlineChecked
+      this.io = e.target.value
+      // this.isOnlineDisabled = !this.isOnlineDisabled
     }
   }))
 
@@ -156,8 +160,8 @@ function CreateForm({ form }: FormComponentProps) {
   }
 
   const isOnline = [
-    { value: 1, label: '온라인' },
-    { value: 0, label: '오프라인' }
+    { value: 0, label: '오프라인' },
+    { value: 1, label: '온라인' }
   ]
   const monthorWeek = [
     { value: 1, label: '매월' },
@@ -286,7 +290,10 @@ function CreateForm({ form }: FormComponentProps) {
             {getFieldDecorator('isOnline', {
               initialValue: initialValues.isOnline
             })(
-              <Radio.Group disabled={state.isOnlineDisabled}>
+              <Radio.Group
+                disabled={state.isOnlineDisabled}
+                onChange={state.onChangeIsOnline}
+              >
                 {isOnline.map(
                   (iO: { value: number; label: string }, index: number) => (
                     <Radio.Button value={Boolean(iO.value)} key={index}>
@@ -309,6 +316,59 @@ function CreateForm({ form }: FormComponentProps) {
             적용 안함
           </Checkbox> */}
         </Row>
+
+        {state.io === false ? (
+          <Row>
+            <Form.Item label="지역">
+              {getFieldDecorator('location', {
+                initialValue: [initialValues.city, initialValues.town],
+                rules: [
+                  {
+                    type: 'array',
+                    required: true,
+                    message: '스터디 지역을 입력해주세요'
+                  }
+                ]
+              })(
+                <Cascader
+                  options={
+                    pathname !== '/study'
+                      ? cityAndTownsForForm
+                      : makeFilter(cityAndTownsForForm)
+                  }
+                />
+              )}
+            </Form.Item>
+          </Row>
+        ) : (
+          <Row
+            css={css`
+              display: none;
+            `}
+          >
+            <Form.Item label="지역">
+              {getFieldDecorator('location', {
+                initialValue: [initialValues.city, initialValues.town],
+                rules: [
+                  {
+                    type: 'array',
+                    required: true,
+                    message: '스터디 지역을 입력해주세요'
+                  }
+                ]
+              })(
+                <Cascader
+                  options={
+                    pathname !== '/study'
+                      ? cityAndTownsForForm
+                      : makeFilter(cityAndTownsForForm)
+                  }
+                />
+              )}
+            </Form.Item>
+          </Row>
+        )}
+
         {pathname !== '/study' && (
           <Row>
             <Form.Item label={'스터디 일정'}>
@@ -403,28 +463,7 @@ function CreateForm({ form }: FormComponentProps) {
             </Form.Item>
           </Row>
         )}
-        <Row>
-          <Form.Item label="지역">
-            {getFieldDecorator('location', {
-              initialValue: [initialValues.city, initialValues.town],
-              rules: [
-                {
-                  type: 'array',
-                  required: true,
-                  message: '스터디 지역을 입력해주세요'
-                }
-              ]
-            })(
-              <Cascader
-                options={
-                  pathname !== '/study'
-                    ? cityAndTownsForForm
-                    : makeFilter(cityAndTownsForForm)
-                }
-              />
-            )}
-          </Form.Item>
-        </Row>
+
         {pathname !== '/study' && (
           <Row>
             <Form.Item label="최대 인원">

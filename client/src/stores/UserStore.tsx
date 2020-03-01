@@ -730,7 +730,8 @@ export const interests: { [key: string]: string[] } = {
     'Server',
     'Android',
     'Algorithms',
-    '영상/음성처리'
+    '영상/음성처리',
+    '기타'
   ],
   어학: [
     'BCT',
@@ -740,9 +741,10 @@ export const interests: { [key: string]: string[] } = {
     'Opic',
     'TOEFL',
     'TOEIC',
-    'TOEIC Speaking'
+    'TOEIC Speaking',
+    '기타'
   ],
-  취업: ['자소서', 'NCS', '인적성', '면접']
+  취업: ['자소서', 'NCS', '인적성', '면접', '기타']
 }
 
 export const interestsForForm: CascaderOptionType[] = [
@@ -768,7 +770,8 @@ export const interestsForForm: CascaderOptionType[] = [
       { value: 'Java', label: 'Java' },
       { value: 'Python', label: 'Python' },
       { value: 'Publisher', label: 'Publisher' },
-      { value: 'Front-End', label: 'Front-End' }
+      { value: 'Front-End', label: 'Front-End' },
+      { value: '기타', label: '기타' }
     ]
   },
   {
@@ -782,7 +785,8 @@ export const interestsForForm: CascaderOptionType[] = [
       { value: 'Opic', label: 'Opic' },
       { value: 'TOEFL', label: 'TOEFL' },
       { value: 'TOEIC', label: 'TOEIC' },
-      { value: 'TOEIC Speaking', label: 'TOEIC Speaking' }
+      { value: 'TOEIC Speaking', label: 'TOEIC Speaking' },
+      { value: '기타', label: '기타' }
     ]
   },
   {
@@ -792,7 +796,8 @@ export const interestsForForm: CascaderOptionType[] = [
       { value: '자소서', label: '자소서' },
       { value: 'NCS', label: 'NCS' },
       { value: '인적성', label: '인적성' },
-      { value: '면접', label: '면접' }
+      { value: '면접', label: '면접' },
+      { value: '기타', label: '기타' }
     ]
   }
 ]

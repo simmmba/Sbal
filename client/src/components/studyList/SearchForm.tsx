@@ -34,7 +34,7 @@ const SearchForm = () => {
     { value: 'title', name: '스터디 이름' },
     { value: 'leader', name: '리더 이름' }
   ]
-  const isOnlineMap: { [key: number]: string } = { 1: '온라인', 0: '오프라인' }
+  const isOnlineMap: { [key: number]: string } = { 0: '오프라인', 1: '온라인' }
 
   const weekdayOrWeekendMap: { [key: number]: string } = {
     1: '평일',
