@@ -12,13 +12,10 @@ const Attendance = ({ scheduleIndex }: { scheduleIndex: number }) => {
     background: ${palette.violet[0]};
     border-radius: 10px;
     margin-bottom: 2px;
-    /* height: 50px; */
-    /* cursor: pointer; */
     transition: 0.3s;
 
     &:hover {
       background-color: ${palette.gray[0]};
-      /* border: 1px solid ${palette.violet[1]}; */
     }
   `
 
@@ -30,24 +27,19 @@ const Attendance = ({ scheduleIndex }: { scheduleIndex: number }) => {
     margin: 10px 0px 10px 20px;
     border-right: 2px dashed #fff;
     width: 40px;
-    /* font-weight: bold; */
   `
   const nickname = css`
     display: flex;
     align-items: center;
-    /* justify-content: center; */
     padding: 10px 20px 10px 22px;
     font-weight: bold;
     font-size: 14px;
-    /* width: 100%; */
   `
 
   const score = css`
     display: flex;
-    /* justify-content: center; */
     align-items: center;
     padding: 10px 20px 10px 20px;
-    /* width: 250px; */
   `
 
   const empty = css`

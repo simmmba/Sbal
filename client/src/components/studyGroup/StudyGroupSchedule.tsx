@@ -11,12 +11,23 @@ import StudyStore from '../../stores/StudyStore'
 import palette from '../../lib/styles/palette'
 
 const StudyGroupSchedule = () => {
+  const Emoji = (props: {
+    label: string | undefined
+    symbol: React.ReactNode
+  }) => (
+    <span
+      className="emoji"
+      role="img"
+      aria-label={props.label ? props.label : ''}
+      aria-hidden={props.label ? 'false' : 'true'}
+    >
+      {props.symbol}
+    </span>
+  )
+
   const main = css`
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
-    /* align-content: center; */
-    /* border: 1px solid black; */
   `
 
   const upper = css`
@@ -30,7 +41,6 @@ const StudyGroupSchedule = () => {
     font-weight: bold;
     font-size: 21px;
     color: ${palette.violet[9]};
-    /* padding: 0px 17px 0px 5px; */
   `
 
   const content = css`
@@ -39,8 +49,6 @@ const StudyGroupSchedule = () => {
     border-radius: 10px;
     margin-bottom: 2px;
     padding: 20px 20px 20px 0px;
-    /* flex-wrap: wrap; */
-    /* justify-content: space-between; */
     transition: 0.3s;
 
     &:hover {
@@ -50,10 +58,8 @@ const StudyGroupSchedule = () => {
 
   const left = css`
     display: flex;
-    /* flex-direction: column; */
     justify-content: center;
     align-items: center;
-    /* border: 1px solid black; */
     padding: 10px 10px 10px 10px;
     border-right: 2px dashed #fff;
     font-weight: bold;
@@ -63,7 +69,6 @@ const StudyGroupSchedule = () => {
   const middle = css`
     display: flex;
     flex-direction: column;
-    /* border: 1px solid black; */
     padding: 0px 10px 0px 20px;
     justify-content: center;
     min-width: 500px;
@@ -75,7 +80,6 @@ const StudyGroupSchedule = () => {
 
   const right = css`
     display: flex;
-    /* border: 1px solid black; */
     padding: 5px 10px 0px 20px;
     justify-content: flex-end;
     align-items: center;
@@ -98,14 +102,7 @@ const StudyGroupSchedule = () => {
     padding-left: 6px;
   `
 
-  const icon = css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  `
-
   const btn = css`
-    /* background-color: #fff; */
     border: none;
     cursor: pointer;
     display: flex;
@@ -155,7 +152,7 @@ const StudyGroupSchedule = () => {
     const attendanceList =
       StudyStore.studyGroup.studyScheduleDTOList[Number(scheduleIndex)]
         .attendanceDTOList
-    attendanceList.map(a => {
+    attendanceList.forEach(a => {
       StudyStore.userScores.push({
         schedule: {
           id:
@@ -173,7 +170,7 @@ const StudyGroupSchedule = () => {
   }
 
   const handleScoreOk = () => {
-    StudyStore.userScores.map((updatedAttendance: object) => {
+    StudyStore.userScores.forEach((updatedAttendance: object) => {
       StudyStore.updateAttendance(updatedAttendance)
     })
     message.info('성실도 평가가 완료되었습니다.')
@@ -214,7 +211,10 @@ const StudyGroupSchedule = () => {
         <Score scheduleIndex={attendanceIndex} />
       </Modal>
       <div css={upper}>
-        <div css={title}>📅&nbsp;스터디 스케줄</div>
+        <div css={title}>
+          <Emoji label="schedule" symbol="📅" />
+          &nbsp;스터디 스케줄
+        </div>
         {studyScheduleList.length > 0 &&
         StudyStore.loginUser.id === StudyStore.studyGroup.leader.id ? (
           <ScheduleAdd />
@@ -272,7 +272,7 @@ const StudyGroupSchedule = () => {
                         )
                       }
                     >
-                      삭제 ✂️
+                      삭제 <Emoji label="delete" symbol="✂️" />
                     </button>
                   </div>
                 ) : (

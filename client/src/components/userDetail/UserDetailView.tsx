@@ -1,11 +1,10 @@
+import React from 'react'
 import { useObserver, useLocalStore } from 'mobx-react'
 import UserDetailStore from '../../stores/UserDetailStore'
 import { Interest, LedStudy, JoinedStudy } from './UserDetailTypes'
-import React from 'react'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
 import { Display } from '../Display'
-// import Button from '../common/Button'
 
 import { useHistory } from 'react-router'
 import { Progress, message } from 'antd'
@@ -83,6 +82,7 @@ const img = css`
   width: 180px;
   height: 180px;
   border-radius: 50%;
+  cursor: pointer;
 
   @media (max-width: 815px) {
     width: 100px;
@@ -104,7 +104,6 @@ const editBtn = css`
   font-size: 12px;
   border-radius: 4px;
   width: 100px;
-  /* height: 25px; */
   padding: 4px 0px 4px 0px;
   border: none;
   display: flex;
@@ -204,15 +203,26 @@ const joinRequestCount = css`
   color: #ff5e00;
 `
 
+const Emoji = (props: {
+  label: string | undefined
+  symbol: React.ReactNode
+}) => (
+  <span
+    className="emoji"
+    role="img"
+    aria-label={props.label ? props.label : ''}
+    aria-hidden={props.label ? 'false' : 'true'}
+  >
+    {props.symbol}
+  </span>
+)
+
 const UserDetail = () => {
   const history = useHistory()
-  // JSON.stringify(UserStore.data);
   const clickedUpdateButton = () => {
-    // UserDetailStore.mypage();
     history.push('/mypage/update')
   }
   const passwordUpdateButton = () => {
-    // UserDetailStore.mypage();
     history.push('/mypage/update/password')
   }
   const dis = css`
@@ -259,6 +269,7 @@ const UserDetail = () => {
                   'http://13.124.98.149/images/' +
                   UserDetailStore.data.profilePhotoDir
                 }
+                alt="프로필사진"
               />
             </label>
             <input
@@ -338,7 +349,9 @@ const UserDetail = () => {
           <div css={comment}>
             <div>
               <b>
-                <u>관심사</u>✍️&nbsp;&nbsp;&nbsp;
+                <u>관심사</u>
+                <Emoji label="interest" symbol="✍️" />
+                &nbsp;&nbsp;&nbsp;
               </b>
             </div>
             <div>
@@ -354,7 +367,8 @@ const UserDetail = () => {
           <span css={comment}>
             <div>
               <b>
-                <u>한마디</u>💬
+                <u>한마디</u>
+                <Emoji label="comment" symbol="💬" />
               </b>
             </div>
             &nbsp;&nbsp;&nbsp;
@@ -382,7 +396,9 @@ const UserDetail = () => {
                     color: #5d5d5d;
                   `}
                 >
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;👑내가 개설한 스터디
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <Emoji label="crown" symbol="👑" />
+                  내가 개설한 스터디
                 </span>
               </h2>
               {UserDetailStore.data.ledStudyList.length === 0 ? (
@@ -403,24 +419,19 @@ const UserDetail = () => {
                     </tr>
                     {UserDetailStore.data.ledStudyList.map(
                       (ledStudy: LedStudy, index: number) => (
-                        <tr
-                          css={hoverTr}
-                          key={index}
-                          // onClick={() => {
-                          //   history.push(`study/details/${ledStudy.id}`)
-                          // }}
-                        >
+                        <tr css={hoverTr} key={index}>
                           {ledStudy.state === 0 && <td css={td}> 모집 중 </td>}
                           {ledStudy.state === 1 && <td css={td}> 진행 중 </td>}
                           {ledStudy.state === 2 && <td css={td}> 종 료 </td>}
                           <td
                             css={hover}
                             onClick={() => {
-                              history.push(`study/${ledStudy.id}`)
+                              history.push(`study/details/${ledStudy.id}`)
                             }}
                           >
                             {' '}
-                            👑&nbsp; {ledStudy.title}
+                            <Emoji label="crown" symbol="👑" />
+                            &nbsp; {ledStudy.title}
                             {ledStudy.joinRequestCount > 0 ? (
                               <span css={joinRequestCount}>
                                 &nbsp;&nbsp;[{ledStudy.joinRequestCount}]
@@ -460,7 +471,9 @@ const UserDetail = () => {
                             <td
                               css={hover}
                               onClick={() => {
-                                history.push(`study/${joinedStudy.study.id}`)
+                                history.push(
+                                  `study/details/${joinedStudy.study.id}`
+                                )
                               }}
                             >
                               {' '}

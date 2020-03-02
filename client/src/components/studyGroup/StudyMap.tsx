@@ -3,7 +3,6 @@ import { useObserver } from 'mobx-react'
 import { useParams } from 'react-router'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
-import { Display } from '../Display'
 import { message } from 'antd'
 import palette from '../../lib/styles/palette'
 import StudyDetailStore from '../../stores/StudyDetailStore'
@@ -59,7 +58,7 @@ const StudyMap = () => {
         }
       }
     )
-  }, [StudyDetailStore.data.city, StudyDetailStore.data.town])
+  }, [id])
 
   let markers: any[] = []
 
@@ -104,8 +103,7 @@ const StudyMap = () => {
     var listEl = document.getElementById('placesList'),
       menuEl = document.getElementById('menu_wrap'),
       fragment = document.createDocumentFragment(),
-      bounds = new window.kakao.maps.LatLngBounds(),
-      listStr = ''
+      bounds = new window.kakao.maps.LatLngBounds()
 
     // 검색 결과 목록에 추가된 항목들을 제거합니다
     removeAllChildNods(listEl)
@@ -281,7 +279,7 @@ const StudyMap = () => {
   `
   const searchStyle = css`
     display: flex;
-    justidy-content: space-around;
+    justify-content: space-around;
     margin: 10px 0;
   `
   const buttonStyle = css`

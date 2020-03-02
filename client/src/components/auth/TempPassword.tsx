@@ -13,7 +13,6 @@ import {
   StyledButton,
   Guide
 } from './AuthStyled'
-import { message } from 'antd'
 
 function TempPassword() {
   const history = useHistory()
@@ -21,14 +20,20 @@ function TempPassword() {
     email: ''
   }))
 
-  const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    state.email = e.target.value
-  }, [])
+  const onChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      state.email = e.target.value
+    },
+    [state.email]
+  )
 
-  const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    UserDetailStore.findPassword(state.email, history)
-  }, [])
+  const handleSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+      UserDetailStore.findPassword(state.email, history)
+    },
+    [history, state.email]
+  )
 
   return useObserver(() => (
     <AuthFormBlock>

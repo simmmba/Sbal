@@ -1,5 +1,5 @@
 package com.ssafy.sval.controller;
-import com.ssafy.sval.jwt.JwtService;
+import com.ssafy.sval.util.jwt.JwtService;
 import com.ssafy.sval.model.dto.StudyDTO;
 import com.ssafy.sval.model.dto.StudyMemberDTO;
 import com.ssafy.sval.model.dto.StudyScheduleDTO;
@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 

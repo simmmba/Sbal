@@ -1,6 +1,6 @@
 import React from 'react'
 import { Display } from '../Display'
-import { Menu, Icon } from 'antd'
+import { Menu } from 'antd'
 import { NavLink, Route, Switch } from 'react-router-dom'
 import StudyGroupBoard from './StudyGroupBoard'
 import StudyGroupBoardDetail from './StudyGroupBoardDetail'
@@ -12,7 +12,6 @@ import StudyGroupBoardInsert from './StudyGroupBoardInsert'
 import { css, jsx } from '@emotion/core'
 import { useEffect } from 'react'
 import { useLocalStore, useObserver } from 'mobx-react'
-import { useHistory } from 'react-router'
 import StudyStore from '../../stores/StudyStore'
 import ScrollToTop from '../ScrollToTop'
 import StudyMap from './StudyMap'
@@ -23,18 +22,14 @@ const StudyGroupMain = ({ id }: { id: number }) => {
     StudyStore.fetchStudyGroup(Number(id))
   }, [id])
 
-  const history = useHistory()
-
   const title = css`
     font-weight: bold;
     font-size: 30px;
     color: ${palette.violet[9]};
     text-align: left;
     margin-left: 15px;
-
     display: flex;
     align-items: center;
-    /* justify-content: center; */
     flex-wrap: wrap;
 
     @media screen and (max-width: 815px) {
@@ -64,7 +59,6 @@ const StudyGroupMain = ({ id }: { id: number }) => {
   `
 
   const content = css`
-    /* border: 1px solid black; */
     width: 100%;
     margin-left: 25px;
     min-height: 360px;
@@ -87,10 +81,8 @@ const StudyGroupMain = ({ id }: { id: number }) => {
     font-weight: bold;
     font-size: 14px;
     border-radius: 4px;
-    /* padding: 5px 15px 5px 15px; */
     margin: 0px 0px 0px 2px;
     padding: 0px 10px 0px 10px;
-    /* width: 100px; */
     height: 30px;
     border: none;
     display: flex;
@@ -101,7 +93,6 @@ const StudyGroupMain = ({ id }: { id: number }) => {
 
     &:hover {
       color: #4c4c4c;
-      /* background-color: ${palette.violet[2]}; */
       box-shadow: 2px 2px 3px inset;
     }
   `
@@ -110,6 +101,20 @@ const StudyGroupMain = ({ id }: { id: number }) => {
     margin-top: 42px;
     margin-bottom: 50px;
   `
+
+  const Emoji = (props: {
+    label: string | undefined
+    symbol: React.ReactNode
+  }) => (
+    <span
+      className="emoji"
+      role="img"
+      aria-label={props.label ? props.label : ''}
+      aria-hidden={props.label ? 'false' : 'true'}
+    >
+      {props.symbol}
+    </span>
+  )
 
   const state = useLocalStore(() => ({
     width: window.innerWidth,
@@ -129,7 +134,10 @@ const StudyGroupMain = ({ id }: { id: number }) => {
           <div css={main}>
             <div css={title}>
               {StudyStore.studyGroup.title}&nbsp;
-              <NavLink css={move} to={`/study/details/${StudyStore.studyGroup.id}`}> 
+              <NavLink
+                css={move}
+                to={`/study/details/${StudyStore.studyGroup.id}`}
+              >
                 <span
                   css={css`
                     transition: 0.3s;
@@ -138,9 +146,8 @@ const StudyGroupMain = ({ id }: { id: number }) => {
                     }
                   `}
                 >
-                  🚴‍♀️
+                  <Emoji label="move" symbol="🚴‍♀️" />
                 </span>
-                
                 &nbsp; 상세정보 페이지로 이동&nbsp;
                 <span
                   css={css`
@@ -150,7 +157,7 @@ const StudyGroupMain = ({ id }: { id: number }) => {
                     }
                   `}
                 >
-                  🚴‍♀️
+                  <Emoji label="move" symbol="🚴‍♀️" />
                 </span>
               </NavLink>
             </div>
@@ -174,29 +181,38 @@ const StudyGroupMain = ({ id }: { id: number }) => {
             >
               <Menu.Item key="schedule">
                 <NavLink to={`/study/${StudyStore.studyGroup.id}/schedule`}>
-                  <big>📅</big>
+                  <big>
+                    <Emoji label="schedule" symbol="📅" />
+                  </big>
                   {state.width >= 815 ? ' 스케줄' : ''}
                 </NavLink>
               </Menu.Item>
               <Menu.Item key="board">
                 <NavLink to={`/study/${StudyStore.studyGroup.id}/board`}>
-                  <big>📝</big>
+                  <big>
+                    <Emoji label="board" symbol="📝" />
+                  </big>
                   {state.width >= 815 ? ' 게시판' : ''}
                 </NavLink>
               </Menu.Item>
               <Menu.Item key="memberinfo">
                 <NavLink to={`/study/${StudyStore.studyGroup.id}/member`}>
-                  <big>😃</big>
+                  <big>
+                    <Emoji label="member" symbol="😃" />
+                  </big>
                   {state.width >= 815 ? ' 멤버 정보' : ''}
                 </NavLink>
               </Menu.Item>
-              {!StudyStore.studyGroup.isOnline && 
-              <Menu.Item key="studylocation">
-                <NavLink to={`/study/${StudyStore.studyGroup.id}/map`}>
-                  <big>🌏</big>
-                  {state.width >= 815 ? ' 스터디 장소' : ''}
-                </NavLink>
-              </Menu.Item>}
+              {!StudyStore.studyGroup.isOnline && (
+                <Menu.Item key="studylocation">
+                  <NavLink to={`/study/${StudyStore.studyGroup.id}/map`}>
+                    <big>
+                      <Emoji label="map" symbol="🌏" />
+                    </big>
+                    {state.width >= 815 ? ' 스터디 장소' : ''}
+                  </NavLink>
+                </Menu.Item>
+              )}
             </Menu>
           </div>
           <div css={content}>

@@ -23,10 +23,9 @@ const style = css`
   max-height: 40px;
   margin: 13px 0 15px 0;
   border: none;
-  /* border: 2px solid #e5dbff; */
   background: #e5dbff;
   color: #5f3dc4;
-  
+
   &:hover {
     background-color: #f3f0ff;
     color: #6741d9;

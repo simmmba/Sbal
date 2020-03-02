@@ -2,14 +2,28 @@ import React from 'react'
 import { useHistory } from 'react-router'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
-import { Icon, message } from 'antd'
+import { message } from 'antd'
 import TextArea from 'antd/lib/input/TextArea'
 import { useLocalStore } from 'mobx-react'
 import StudyStore from '../../stores/StudyStore'
 import { CreatedNotice } from './StudyGroupType'
-import palette from "../../lib/styles/palette";
+import palette from '../../lib/styles/palette'
 
 const StudyGroupBoardInsert = () => {
+  const Emoji = (props: {
+    label: string | undefined
+    symbol: React.ReactNode
+  }) => (
+    <span
+      className="emoji"
+      role="img"
+      aria-label={props.label ? props.label : ''}
+      aria-hidden={props.label ? 'false' : 'true'}
+    >
+      {props.symbol}
+    </span>
+  )
+
   const upper = css`
     display: flex;
     padding: 8px 0px 10px 20px;
@@ -29,12 +43,6 @@ const StudyGroupBoardInsert = () => {
     background: ${palette.violet[0]};
     border-radius: 5px;
     margin-bottom: 2px;
-  `
-
-  const icon = css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
   `
 
   const top = css`
@@ -57,47 +65,47 @@ const StudyGroupBoardInsert = () => {
     margin-top: 5px;
   `
 
-const cancel = css`
-border: none;
-cursor: pointer;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 14px;
-font-weight: bold;
-color: ${palette.gray[7]};
-background: ${palette.yellow[1]};
-border-radius: 7px;
-width: 70px;
-height: 30px;
-margin: 6px 5px 0px 5px;
-transition: 0.3s;
+  const cancel = css`
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: ${palette.gray[7]};
+    background: ${palette.yellow[1]};
+    border-radius: 7px;
+    width: 70px;
+    height: 30px;
+    margin: 6px 5px 0px 5px;
+    transition: 0.3s;
 
-&:hover {
-  background-color: ${palette.yellow[2]};
-}
-`
+    &:hover {
+      background-color: ${palette.yellow[2]};
+    }
+  `
 
-const ok = css`
-border: none;
-cursor: pointer;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 14px;
-font-weight: bold;
-color: #353535;
-background: ${palette.violet[1]};
-border-radius: 7px;
-width: 70px;
-height: 30px;
-margin: 6px 5px 0px 5px;
-transition: 0.3s;
+  const ok = css`
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: #353535;
+    background: ${palette.violet[1]};
+    border-radius: 7px;
+    width: 70px;
+    height: 30px;
+    margin: 6px 5px 0px 5px;
+    transition: 0.3s;
 
-&:hover {
-  background-color: ${palette.violet[2]};
-}
-`
+    &:hover {
+      background-color: ${palette.violet[2]};
+    }
+  `
 
   const history = useHistory()
 
@@ -133,7 +141,8 @@ transition: 0.3s;
     <div>
       <div css={upper}>
         <div css={title}>
-          ✏️&nbsp;게시글 작성
+          <Emoji label="edit" symbol="✏️" />
+          &nbsp;게시글 작성
         </div>
       </div>
       <div css={content}>
@@ -142,7 +151,6 @@ transition: 0.3s;
             rows={1}
             cols={100}
             placeholder="제목을 입력해주세요"
-            // value={state.title}
             name="title"
             onChange={state.onChangeTextarea}
           />
@@ -152,7 +160,6 @@ transition: 0.3s;
             rows={10}
             cols={100}
             placeholder="내용을 입력해주세요"
-            // value={state.contents}
             name="contents"
             onChange={state.onChangeTextarea}
           />

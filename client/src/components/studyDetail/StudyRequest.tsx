@@ -10,13 +10,26 @@ import { Interest } from '../userDetail/UserDetailTypes'
 import palette from '../../lib/styles/palette'
 
 const StudyRequest = () => {
+  const Emoji = (props: {
+    label: string | undefined
+    symbol: React.ReactNode
+  }) => (
+    <span
+      className="emoji"
+      role="img"
+      aria-label={props.label ? props.label : ''}
+      aria-hidden={props.label ? 'false' : 'true'}
+    >
+      {props.symbol}
+    </span>
+  )
+
   const approveBtn = css`
     color: #5d5d5d;
     background: ${palette.violet[1]};
     font-weight: bold;
     font-size: 12px;
     border-radius: 30px;
-    /* padding: 5px 15px 5px 15px; */
     margin: 0px 0px 0px 3px;
     width: 40px;
     height: 25px;
@@ -38,7 +51,6 @@ const StudyRequest = () => {
     font-weight: bold;
     font-size: 12px;
     border-radius: 30px;
-    /* padding: 5px 15px 5px 15px; */
     margin: 0px 0px 0px 3px;
     width: 40px;
     height: 25px;
@@ -60,8 +72,6 @@ const StudyRequest = () => {
 
   const table = css`
     border-collapse: collapse;
-    /* padding-bottom: 100px; */
-    /* float: left; */
     width: 350px;
   `
 
@@ -69,17 +79,8 @@ const StudyRequest = () => {
     font-size: 20px;
     padding: 10px 10px 10px 15px;
     font-weight: bold;
-    /* border-top: 2px solid #ddd; */
     border-bottom: 2px solid #ddd;
     color: #5d5d5d;
-  `
-
-  const th = css`
-    border-top: 4px solid #ddd;
-    border-bottom: 2px solid #ddd;
-    color: grey;
-    padding: 7px;
-    text-align: center;
   `
 
   const td = css`
@@ -151,7 +152,6 @@ const StudyRequest = () => {
 
     &:hover {
       font-weight: bold;
-      /* background: #ffe08c; */
     }
   `
 
@@ -224,7 +224,6 @@ const StudyRequest = () => {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-
     margin: 0px 10px 0px 0px;
   `
 
@@ -355,26 +354,36 @@ const StudyRequest = () => {
               percent={UserDetailStore.data.evaluation}
               status="active"
             />
-            {UserDetailStore.data.interestDTOList.length > 0 && 
+            {UserDetailStore.data.interestDTOList.length > 0 && (
               <div css={comment}>
-                <div><b><u>관심사</u>✍️&nbsp;&nbsp;&nbsp;</b></div>
+                <div>
+                  <b>
+                    <u>관심사</u>
+                    <Emoji label="interest" symbol="✍️" />
+                    &nbsp;&nbsp;&nbsp;
+                  </b>
+                </div>
                 <div>
                   {UserDetailStore.data.interestDTOList.map(
                     (interest: Interest, index: number) => (
-                      <span key={index}>
-                        #{interest.scategory}&nbsp;&nbsp;
-                      </span>
+                      <span key={index}>#{interest.scategory}&nbsp;&nbsp;</span>
                     )
                   )}
                 </div>
               </div>
-            }
-            {UserDetailStore.data.introduction !== '' && 
+            )}
+            {UserDetailStore.data.introduction !== '' && (
               <span css={comment}>
-                <div><b><u>한마디</u>💬</b></div>&nbsp;&nbsp;&nbsp;
+                <div>
+                  <b>
+                    <u>한마디</u>
+                    <Emoji label="comment" symbol="💬" />
+                  </b>
+                </div>
+                &nbsp;&nbsp;&nbsp;
                 <div>{UserDetailStore.data.introduction}</div>
               </span>
-            }
+            )}
           </div>
         </div>
       </Modal>

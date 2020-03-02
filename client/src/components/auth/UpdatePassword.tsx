@@ -29,18 +29,33 @@ function UpdatePassword() {
     newPasswordToConfirm: ''
   }))
 
-  const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    state[e.target.name] = e.target.value
-  }, [])
+  const onChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      state[e.target.name] = e.target.value
+    },
+    [state]
+  )
 
-  const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    if(state.newPassword !== state.newPasswordToConfirm) {
-      message.error("새 비밀번호와 새 비밀번호 확인이 같지 않습니다.")
-      return
-    }
-    UserDetailStore.updatePassword(state.currentPassword, state.newPassword, history)
-  }, [])
+  const handleSubmit = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+      if (state.newPassword !== state.newPasswordToConfirm) {
+        message.error('새 비밀번호와 새 비밀번호 확인이 같지 않습니다.')
+        return
+      }
+      UserDetailStore.updatePassword(
+        state.currentPassword,
+        state.newPassword,
+        history
+      )
+    },
+    [
+      history,
+      state.currentPassword,
+      state.newPassword,
+      state.newPasswordToConfirm
+    ]
+  )
 
   return useObserver(() => (
     <AuthTemplate>

@@ -4,7 +4,7 @@ import { css, jsx } from '@emotion/core'
 import { Modal, Progress, Avatar } from 'antd'
 import StudyDetailStore from '../../stores/StudyDetailStore'
 import UserDetailStore from '../../stores/UserDetailStore'
-import { studyMember } from './StudyDetailTypes'
+import { studyMember } from '../studyDetail/StudyDetailTypes'
 import { useObserver } from 'mobx-react'
 import { Interest } from '../userDetail/UserDetailTypes'
 import palette from '../../lib/styles/palette'
@@ -177,6 +177,20 @@ const StudyMember = () => {
     font-size: 12px;
   `
 
+  const Emoji = (props: {
+    label: string | undefined
+    symbol: React.ReactNode
+  }) => (
+    <span
+      className="emoji"
+      role="img"
+      aria-label={props.label ? props.label : ''}
+      aria-hidden={props.label ? 'false' : 'true'}
+    >
+      {props.symbol}
+    </span>
+  )
+
   // 멤버 이름 클릭시
   const [visible, setVisible] = useState(false)
 
@@ -203,7 +217,11 @@ const StudyMember = () => {
                 스터디 멤버 ( {StudyDetailStore.studyMember} )
               </span>
               <span css={explain}>
-                &nbsp;&nbsp;&nbsp;&nbsp;👑리더&nbsp;&nbsp; 🙋‍♂️본인
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <Emoji label="crown" symbol="👑" />
+                리더&nbsp;&nbsp;
+                <Emoji label="me" symbol="🙋‍♂️" />
+                본인
               </span>
             </td>
           </tr>
@@ -223,10 +241,12 @@ const StudyMember = () => {
                       {studyMember.user.id ===
                         StudyDetailStore.data.leader.id && (
                         <span role="img" aria-label={''}>
-                          👑&nbsp;
+                          <Emoji label="crown" symbol="👑" />
+                          &nbsp;
                         </span>
                       )}
-                      🙋‍♂️&nbsp;{studyMember.user.nickname}
+                      <Emoji label="me" symbol="🙋‍♂️" />
+                      &nbsp;{studyMember.user.nickname}
                     </td>
                   )}
 
@@ -252,7 +272,10 @@ const StudyMember = () => {
                         {/* 본인이 아닌 사람이 리더일 때 */}
                         {studyMember.user.id ===
                           StudyDetailStore.data.leader.id && (
-                          <span>👑&nbsp;</span>
+                          <span>
+                            <Emoji label="crown" symbol="👑" />
+                            &nbsp;
+                          </span>
                         )}
                         {studyMember.user.nickname}
                       </button>
@@ -329,26 +352,36 @@ const StudyMember = () => {
               percent={UserDetailStore.data.evaluation}
               status="active"
             />
-            {UserDetailStore.data.interestDTOList.length > 0 && 
+            {UserDetailStore.data.interestDTOList.length > 0 && (
               <div css={comment}>
-                <div><b><u>관심사</u>✍️&nbsp;&nbsp;&nbsp;</b></div>
+                <div>
+                  <b>
+                    <u>관심사</u>
+                    <Emoji label="interest" symbol="✍️" />
+                    &nbsp;&nbsp;&nbsp;
+                  </b>
+                </div>
                 <div>
                   {UserDetailStore.data.interestDTOList.map(
                     (interest: Interest, index: number) => (
-                      <span key={index}>
-                        #{interest.scategory}&nbsp;&nbsp;
-                      </span>
+                      <span key={index}>#{interest.scategory}&nbsp;&nbsp;</span>
                     )
                   )}
                 </div>
               </div>
-            }
-            {UserDetailStore.data.introduction !== '' && 
+            )}
+            {UserDetailStore.data.introduction !== '' && (
               <span css={comment}>
-                <div><b><u>한마디</u>💬</b></div>&nbsp;&nbsp;&nbsp;
+                <div>
+                  <b>
+                    <u>한마디</u>
+                    <Emoji label="comment" symbol="💬" />
+                  </b>
+                </div>
+                &nbsp;&nbsp;&nbsp;
                 <div>{UserDetailStore.data.introduction}</div>
               </span>
-            }
+            )}
           </div>
         </div>
       </Modal>

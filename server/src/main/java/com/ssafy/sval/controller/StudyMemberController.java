@@ -1,6 +1,6 @@
 package com.ssafy.sval.controller;
 
-import com.ssafy.sval.jwt.JwtService;
+import com.ssafy.sval.util.jwt.JwtService;
 import com.ssafy.sval.model.dto.StudyMemberDTO;
 import com.ssafy.sval.model.service.StudyMemberService;
 import com.ssafy.sval.responseType.CommonResponse;

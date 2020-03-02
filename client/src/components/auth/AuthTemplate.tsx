@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core'
+import { jsx } from '@emotion/core'
 import { StyledContainer, WhiteBox } from './AuthStyled'
 import { AuthTemplateProps } from './AuthTypes'
 

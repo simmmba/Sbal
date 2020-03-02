@@ -1,4 +1,4 @@
-package com.ssafy.sval.jwt;
+package com.ssafy.sval.util.jwt;
 
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;

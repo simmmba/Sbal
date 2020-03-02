@@ -6,7 +6,6 @@ import StudyMember from './StudyMember'
 import StudyRequest from './StudyRequest'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
-// import styled from '@emotion/styled'
 import { Display } from '../Display'
 import StudyDetailStore from '../../stores/StudyDetailStore'
 import { Modal } from 'antd'
@@ -51,10 +50,8 @@ const StudyDetails = () => {
     color: ${palette.violet[9]};
     text-align: left;
     margin-left: 15px;
-
     display: flex;
     align-items: center;
-    /* justify-content: center; */
     flex-wrap: wrap;
 
     @media screen and (max-width: 815px) {
@@ -101,7 +98,6 @@ const StudyDetails = () => {
 
     &:hover {
       color: #4c4c4c;
-      /* background-color: ${palette.violet[2]}; */
       box-shadow: 2px 2px 3px inset;
     }
   `
@@ -135,14 +131,26 @@ const StudyDetails = () => {
     margin-right: 12px;
     border-bottom: 3px solid ${palette.gray[5]};
     border-right: 3px solid ${palette.gray[5]};
-    /* border-radius: 5px; */
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     font-size: 14px;
     color: ${palette.gray[9]};
   `
+
+  const Emoji = (props: {
+    label: string | undefined
+    symbol: React.ReactNode
+  }) => (
+    <span
+      className="emoji"
+      role="img"
+      aria-label={props.label ? props.label : ''}
+      aria-hidden={props.label ? 'false' : 'true'}
+    >
+      {props.symbol}
+    </span>
+  )
 
   return useObserver(() => (
     <Display>
@@ -152,7 +160,11 @@ const StudyDetails = () => {
         <div css={top}>
           <div css={main}>
             <div css={title}>
-              <div css={block}>&nbsp;😎 {StudyDetailStore.data.hits}</div>
+              <div css={block}>
+                &nbsp;
+                <Emoji label="hit" symbol="😎" />
+                &nbsp;&nbsp;{StudyDetailStore.data.hits}
+              </div>
               {StudyDetailStore.data.title}&nbsp;
               {StudyDetailStore.isMember() && (
                 <button
@@ -172,7 +184,7 @@ const StudyDetails = () => {
                       }
                     `}
                   >
-                    🚴‍♀️
+                    <Emoji label="move" symbol="🚴‍♀️" />
                   </span>
                   &nbsp; 그룹 페이지로 이동&nbsp;
                   <span
@@ -183,7 +195,7 @@ const StudyDetails = () => {
                       }
                     `}
                   >
-                    🚴‍♀️
+                    <Emoji label="move" symbol="🚴‍♀️" />
                   </span>
                 </button>
               )}
@@ -201,14 +213,12 @@ const StudyDetails = () => {
                 }}
               >
                 가입신청
-                {/* {StudyDetailStore.data.state === 0 ? '모집' : '신청'} */}
               </button>
             ) : (
               StudyDetailStore.isJoin() &&
               sessionStorage.getItem('id') !==
                 StudyDetailStore.data.leader.id + '' &&
               StudyDetailStore.isMember() && (
-                // <button css={btn} onClick={() => alert('신청되었습니다.')}>
                 <button
                   css={btn}
                   onClick={() => {
@@ -219,7 +229,6 @@ const StudyDetails = () => {
                   }}
                 >
                   탈퇴 요청
-                  {/* {StudyDetailStore.data.state === 0 ? '모집' : '신청'} */}
                 </button>
               )
             )}
@@ -237,7 +246,6 @@ const StudyDetails = () => {
                   }}
                 >
                   신청 취소
-                  {/* {StudyDetailStore.data.state === 0 ? '모집' : '신청'} */}
                 </button>
               )}
             {sessionStorage.getItem('id') ===
@@ -296,7 +304,6 @@ const StudyDetails = () => {
             )}
           </div>
         </div>
-        {/* </div> */}
         <div css={content}>
           <div css={middle}>
             <StudyInfo />

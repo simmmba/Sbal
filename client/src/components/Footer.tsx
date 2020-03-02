@@ -33,7 +33,6 @@ const link = css`
 const Footer = () => {
   return (
     <div css={FooterStyle}>
-      {/* <Spacer /> */}
       <WrapperDiv>
         <br />
         <small>
@@ -48,14 +47,23 @@ const Footer = () => {
           </small>
         </NormalP>
         <small>
-          {/* <StressedSpan><Link to = "/">박준성</Link></StressedSpan> */}
           <StressedSpan>
-            <a css={link} href="https://github.com/JunSeongA" target="_blank">
+            <a
+              css={link}
+              href="https://github.com/JunSeongA"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               박준성
             </a>
           </StressedSpan>
           <StressedSpan>
-            <a css={link} href="https://github.com/hackthegist" target="_blank">
+            <a
+              css={link}
+              href="https://github.com/hackthegist"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               배성호
             </a>
           </StressedSpan>
@@ -64,12 +72,18 @@ const Footer = () => {
               css={link}
               href="https://github.com/Imsunwoo-hub"
               target="_blank"
+              rel="noopener noreferrer"
             >
               임선우
             </a>
           </StressedSpan>
           <StressedSpan>
-            <a css={link} href="https://github.com/simmmba" target="_blank">
+            <a
+              css={link}
+              href="https://github.com/simmmba"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               조서원
             </a>
           </StressedSpan>

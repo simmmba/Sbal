@@ -1,6 +1,6 @@
 package com.ssafy.sval.controller;
 
-import com.ssafy.sval.jwt.JwtService;
+import com.ssafy.sval.util.jwt.JwtService;
 import com.ssafy.sval.model.dto.SocialParam;
 import com.ssafy.sval.model.dto.UserDTO;
 import com.ssafy.sval.model.entity.User;
@@ -18,7 +18,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 

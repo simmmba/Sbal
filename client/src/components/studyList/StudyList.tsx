@@ -1,7 +1,6 @@
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
 import '../../css/SuperResponsiveTableStyle.css'
-import LoadingSpin from '../common/LoadingSpin'
 import StudyCard from './StudyCard'
 import { Study } from '../studyList/StudyTypes'
 import { useHistory } from 'react-router'
@@ -64,7 +63,7 @@ const StudyList = ({ studyList }: { studyList: Study[] }) => {
           <span className="emoji" role="img" aria-label={'^^'}>
             해당하는 스터디가 존재하지 않아요 😅
           </span>
-            원하는 스터디를 직접 운영해볼까요?
+          원하는 스터디를 직접 운영해볼까요?
           <Link css={link} to="/study/create">
             스터디 만들기
           </Link>

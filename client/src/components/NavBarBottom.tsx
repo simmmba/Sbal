@@ -34,7 +34,6 @@ const NavStyle = css`
   height: 65px;
   background-color: ${palette.violet[0]};
   z-index: 30;
-  /* border-top: 0.5px solid gray; */
 
   @media screen and (min-width: 815px) {
     display: none;

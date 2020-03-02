@@ -111,7 +111,6 @@ export const SocialButton = ({
       align-items: center;
       justify-content: center;
       padding: 0.5rem 1rem;
-      /* margin-top: 10px; */
       cursor: pointer;
       transition: 0.3s;
 
