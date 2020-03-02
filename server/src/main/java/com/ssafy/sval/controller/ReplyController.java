@@ -1,7 +1,7 @@
 package com.ssafy.sval.controller;
 
 
-import com.ssafy.sval.jwt.JwtService;
+import com.ssafy.sval.util.jwt.JwtService;
 import com.ssafy.sval.model.dto.ReplyDTO;
 import com.ssafy.sval.model.entity.Reply;
 import com.ssafy.sval.model.service.ReplyService;

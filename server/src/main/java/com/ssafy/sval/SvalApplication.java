@@ -1,7 +1,7 @@
 package com.ssafy.sval;
 
 import com.ssafy.sval.config.UserProfileUploadProperties;
-import com.ssafy.sval.jwt.JwtInterceptor;
+import com.ssafy.sval.util.jwt.JwtInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,6 +1,6 @@
 package com.ssafy.sval.controller;
 
-import com.ssafy.sval.jwt.JwtService;
+import com.ssafy.sval.util.jwt.JwtService;
 import com.ssafy.sval.model.dto.NoticeDTO;
 import com.ssafy.sval.model.entity.Notice;
 import com.ssafy.sval.model.service.NoticeService;
