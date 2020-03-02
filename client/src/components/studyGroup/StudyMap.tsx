@@ -279,7 +279,7 @@ const StudyMap = () => {
   `
   const searchStyle = css`
     display: flex;
-    justidy-content: space-around;
+    justify-content: space-around;
     margin: 10px 0;
   `
   const buttonStyle = css`
