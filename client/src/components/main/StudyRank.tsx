@@ -1,10 +1,9 @@
-// import React from 'react'
+import React from 'react'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
 import { NavLink } from 'react-router-dom'
 import { StudyRankprops, Study } from './MainTypes'
 import LoadingSpin from '../common/LoadingSpin'
-import React from 'react'
 
 const listBox = css`
   margin: 10px;
@@ -25,7 +24,6 @@ const listContent = css`
   display: flex;
   padding: 0px 0px 3px 0px;
   &:hover {
-    /* background: rgb(236, 236, 236); */
     background: #f3f0ff;
   }
 `
@@ -72,7 +70,6 @@ const link = css`
   width: 150px;
   height: 30px;
   transition: 0.3s;
-  /* border: 2px solid #e5dbff; */
   background: #e5dbff;
 
   &:hover {
@@ -106,7 +103,7 @@ const StudyRank = ({ title, list }: StudyRankprops) => {
                 <div>
                   <div css={listName}>
                     {study.title.length > 10
-                      ? study.title.slice(0, 19) + '...'
+                      ? study.title.slice(0, 18) + '...'
                       : study.title}
                     {study.joinRequestCount != null &&
                     study.joinRequestCount > 0 ? (

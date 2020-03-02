@@ -1,7 +1,7 @@
-/**@jsx jsx */
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { jsx, css } from '@emotion/core'
+/**@jsx jsx */
+import { jsx } from '@emotion/core'
 import styled from '@emotion/styled'
 import { PrivateRoute, PublicRoute } from './utils/RouteCheck'
 
@@ -51,7 +51,6 @@ const App: React.FC = () => {
         <PrivateRoute path="/mypage" component={MyInfoPage} exact />
         <PrivateRoute path="/mypage/update" component={SignupPage} exact />
         <PrivateRoute path="/mypage/update/password" component={MyInfoPage} />
-
         <PrivateRoute path="/UserInfoPage/:id" component={UserInfoPage} exact />
         {/* 스터디 리스트 페이지 */}
         <Route path="/study" component={StudyListPage} exact />
@@ -65,7 +64,9 @@ const App: React.FC = () => {
         />
         {/* 스터디 그룹 페이지 */}
         <PrivateRoute path="/study/:id" component={StudyGroupPage} />
+        {/* 지도 페이지 */}
         <PrivateRoute path="/map" component={MapPage} />
+
         <Route component={NotFound} />
       </Switch>
 

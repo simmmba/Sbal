@@ -8,6 +8,20 @@ import { Pagination, Empty } from 'antd'
 import palette from '../../lib/styles/palette'
 
 const StudyGroupBoard = () => {
+  const Emoji = (props: {
+    label: string | undefined
+    symbol: React.ReactNode
+  }) => (
+    <span
+      className="emoji"
+      role="img"
+      aria-label={props.label ? props.label : ''}
+      aria-hidden={props.label ? 'false' : 'true'}
+    >
+      {props.symbol}
+    </span>
+  )
+
   const main = css`
     display: flex;
     flex-direction: column;
@@ -18,7 +32,7 @@ const StudyGroupBoard = () => {
     justify-content: space-between;
     padding: 8px 0px 10px 20px;
 
-    @media (max-width: 815px){
+    @media (max-width: 815px) {
       margin-bottom: 10px;
     }
   `
@@ -44,7 +58,7 @@ const StudyGroupBoard = () => {
   const contentTop = css`
     display: flex;
 
-    @media (max-width: 815px){
+    @media (max-width: 815px) {
       display: none;
     }
   `
@@ -104,7 +118,6 @@ const StudyGroupBoard = () => {
     font-size: 14px;
     font-weight: bold;
     color: ${palette.violet[9]};
-    /* background-color: ${palette.violet[1]}; */
     border: 2px solid ${palette.violet[1]};
     border-radius: 7px;
     width: 90px;
@@ -153,117 +166,131 @@ const StudyGroupBoard = () => {
     <div css={main}>
       <div css={upper}>
         <div css={title}>
-          📝&nbsp;스터디 게시판
+          <Emoji label="board" symbol="📝" />
+          &nbsp;스터디 게시판
         </div>
-        {noticeList.length > 0 && 
+        {noticeList.length > 0 && (
           <NavLink css={btn} to={`/study/${StudyStore.studyGroup.id}/newBoard`}>
-            글쓰기&nbsp;✒️
+            글쓰기&nbsp;
+            <Emoji label="write" symbol="✒️" />
           </NavLink>
-        }
+        )}
       </div>
-      
-      {noticeList.length > 0 ? ( 
+
+      {noticeList.length > 0 ? (
         <div>
-        
-      <div css={contentTop}>
-        <div css={num}>번호</div>
-        <div
-          css={css`
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px 20px 10px 22px;
-            font-size: 14px;
-            border-right: 2px dashed #fff;
-            width: 100%;
-          `}
-        >
-          제목
-        </div>
-        <div
-          css={css`
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px 5px 10px 5px;
-            font-size: 14px;
-            width: 250px;
-            border-right: 2px dashed #fff;
-          `}
-        >
-          작성자
-        </div>
-        <div
-          css={css`
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px 5px 10px 5px;
-            font-size: 14px;
-            width: 200px;
-            border-right: 2px dashed #fff;
-          `}
-        >
-          작성일
-        </div>
-        <div css={hit}>조회수</div>
-      </div>
-      {noticeList
-        .reverse()
-        .slice(
-          (pageNumber - 1) * pageSize,
-          (pageNumber - 1) * pageSize + pageSize
-        )
-        .map((notice: StudyNotice, index: number) => (
-          <div css={content} key={notice.id}>
-            <div css={num}>
-              {noticeList.length - (pageNumber - 1) * pageSize - index}
+          <div css={contentTop}>
+            <div css={num}>번호</div>
+            <div
+              css={css`
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 10px 20px 10px 22px;
+                font-size: 14px;
+                border-right: 2px dashed #fff;
+                width: 100%;
+              `}
+            >
+              제목
             </div>
-            <div css={btitle}>
-              <NavLink
-                css={link}
-                to={
-                  `/study/${StudyStore.studyGroup.id}/board/` +
-                  (noticeList.length - (pageNumber - 1) * pageSize - index - 1)
-                }
-              >
-                <b>{notice.title}</b>
-              </NavLink>
-              {notice.replyList.length > 0 && (
-                <span css={comment}>
-                  &nbsp;&nbsp;&nbsp;<b>[{notice.replyList.length}]</b>
-                </span>
-              )}
+            <div
+              css={css`
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 10px 5px 10px 5px;
+                font-size: 14px;
+                width: 250px;
+                border-right: 2px dashed #fff;
+              `}
+            >
+              작성자
             </div>
-              <div css={writer}>{StudyStore.studyGroup.leader.id === notice.writer.id && <span>👑&nbsp;</span>}{notice.writer.nickname}</div>
-            <div css={date}>{notice.date.substr(0, 10)}</div>
-            <div css={hit}>{notice.hits}</div>
+            <div
+              css={css`
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 10px 5px 10px 5px;
+                font-size: 14px;
+                width: 200px;
+                border-right: 2px dashed #fff;
+              `}
+            >
+              작성일
+            </div>
+            <div css={hit}>조회수</div>
           </div>
-        ))}
-      {noticeList.length > pageSize ? (
-        <Pagination
-          css={pageNation}
-          total={noticeList.length}
-          onChange={handlePageChange}
-          current={pageNumber}
-          defaultCurrent={1}
-          pageSize={pageSize}
-        />
+          {noticeList
+            .reverse()
+            .slice(
+              (pageNumber - 1) * pageSize,
+              (pageNumber - 1) * pageSize + pageSize
+            )
+            .map((notice: StudyNotice, index: number) => (
+              <div css={content} key={notice.id}>
+                <div css={num}>
+                  {noticeList.length - (pageNumber - 1) * pageSize - index}
+                </div>
+                <div css={btitle}>
+                  <NavLink
+                    css={link}
+                    to={
+                      `/study/${StudyStore.studyGroup.id}/board/` +
+                      (noticeList.length -
+                        (pageNumber - 1) * pageSize -
+                        index -
+                        1)
+                    }
+                  >
+                    <b>{notice.title}</b>
+                  </NavLink>
+                  {notice.replyList.length > 0 && (
+                    <span css={comment}>
+                      &nbsp;&nbsp;&nbsp;<b>[{notice.replyList.length}]</b>
+                    </span>
+                  )}
+                </div>
+                <div css={writer}>
+                  {StudyStore.studyGroup.leader.id === notice.writer.id && (
+                    <span>
+                      <Emoji label="crown" symbol="👑" />
+                      &nbsp;
+                    </span>
+                  )}
+                  {notice.writer.nickname}
+                </div>
+                <div css={date}>{notice.date.substr(0, 10)}</div>
+                <div css={hit}>{notice.hits}</div>
+              </div>
+            ))}
+          {noticeList.length > pageSize ? (
+            <Pagination
+              css={pageNation}
+              total={noticeList.length}
+              onChange={handlePageChange}
+              current={pageNumber}
+              defaultCurrent={1}
+              pageSize={pageSize}
+            />
+          ) : (
+            <div />
+          )}
+        </div>
       ) : (
-        <div />
-      )}
-      </div>) : (
         <Empty
           css={empty}
           description={
             <h3>
               <br />
-              등록된 글이 없습니다 😮
+              등록된 글이 없습니다 <Emoji label="nothing" symbol="😮" />
             </h3>
           }
         >
           <NavLink css={btn} to={`/study/${StudyStore.studyGroup.id}/newBoard`}>
-            글쓰기&nbsp;✒️
+            글쓰기&nbsp;
+            <Emoji label="write" symbol="✒️" />
           </NavLink>
         </Empty>
       )}

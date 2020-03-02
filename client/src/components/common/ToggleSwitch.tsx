@@ -1,6 +1,5 @@
 /**@jsx jsx */
 import { jsx, css } from '@emotion/core'
-import palette from '../../lib/styles/palette'
 
 const SwitchStyle = css`
   position: relative;
@@ -38,7 +37,6 @@ const SwitchStyle = css`
     border-radius: 50%;
   }
   & input:checked + span {
-    /* background-color: ${palette.yellow[7]}; */
     background-color: #845ef7;
   }
 

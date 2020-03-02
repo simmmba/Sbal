@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
-import { Icon, Modal, DatePicker } from 'antd'
+import { Modal, DatePicker } from 'antd'
 import TextArea from 'antd/lib/input/TextArea'
 import { useLocalStore } from 'mobx-react'
 import StudyStore from '../../stores/StudyStore'
@@ -10,11 +10,19 @@ import moment from 'moment'
 import palette from '../../lib/styles/palette'
 
 const ScheduleAdd = () => {
-  const icon = css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  `
+  const Emoji = (props: {
+    label: string | undefined
+    symbol: React.ReactNode
+  }) => (
+    <span
+      className="emoji"
+      role="img"
+      aria-label={props.label ? props.label : ''}
+      aria-hidden={props.label ? 'false' : 'true'}
+    >
+      {props.symbol}
+    </span>
+  )
 
   const btn = css`
     background-color: #fff;
@@ -27,14 +35,12 @@ const ScheduleAdd = () => {
     font-weight: bold;
     color: ${palette.violet[9]};
     padding-left: 5px;
-    /* background: ${palette.violet[1]}; */
     border: 2px solid ${palette.violet[1]};
     border-radius: 7px;
     width: 130px;
     height: 35px;
 
     &:hover {
-      /* background-color: ${palette.violet[1]}; */
       box-shadow: 2px 2px 3px inset;
     }
   `
@@ -64,7 +70,6 @@ const ScheduleAdd = () => {
   const content = css`
     width: 100%;
     display: flex;
-    /* justify-content: center; */
     align-items: center;
   `
 
@@ -120,15 +125,15 @@ const ScheduleAdd = () => {
     <div>
       <button css={btn} onClick={showModal}>
         스케줄 추가&nbsp;&nbsp;
-        <big>⏰</big>
+        <big>
+          <Emoji label="time" symbol="⏰" />
+        </big>
       </button>
       <Modal
-        // title="스케줄 추가"
         visible={visible}
         onOk={handleOk}
         confirmLoading={confirmLoading}
         onCancel={handleCancel}
-        // footer={null}
         destroyOnClose={true}
       >
         <h2 css={top}>스터디 스케줄 추가</h2>
@@ -146,7 +151,6 @@ const ScheduleAdd = () => {
           <div css={title}>시간</div>
           <div css={content}>
             <DatePicker
-              // showTime={{ format: 'HH:mm' }}
               format="YYYY-MM-DD HH:mm"
               placeholder="날짜, 시간을 입력하세요"
               name="meetDate"

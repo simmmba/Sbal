@@ -10,6 +10,20 @@ import { Interest } from '../userDetail/UserDetailTypes'
 import palette from '../../lib/styles/palette'
 
 const StudyGroupMember = () => {
+  const Emoji = (props: {
+    label: string | undefined
+    symbol: React.ReactNode
+  }) => (
+    <span
+      className="emoji"
+      role="img"
+      aria-label={props.label ? props.label : ''}
+      aria-hidden={props.label ? 'false' : 'true'}
+    >
+      {props.symbol}
+    </span>
+  )
+
   const main = css`
     display: flex;
     flex-direction: column;
@@ -40,30 +54,15 @@ const StudyGroupMember = () => {
     }
 
     @media (max-width: 415px) {
-      /* margin: 0px 10px 0px 0px; */
       display: flex;
       width: 90%;
     }
-  `
-  const list = css`
-    display: flex;
-    margin-bottom: 2px;
-  `
-  const listNickname = css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
-    padding: 10px 20px 10px 22px;
-    border-right: 2px dashed #fff;
-    width: 100%;
   `
   const num = css`
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 10px 5px 10px 5px;
-    /* border-right: 2px dashed #fff; */
     width: 50px;
     border-radius: 10px;
     background: ${palette.violet[1]};
@@ -78,34 +77,9 @@ const StudyGroupMember = () => {
     width: 150px;
 
     @media (max-width: 415px) {
-      /* margin: 0px 10px 0px 0px; */
-      /* display: flex; */
       width: 100%;
     }
   `
-
-  // const state = css`
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  //   padding: 10px 20px 10px 20px;
-  //   font-size: 14px;
-  //   width: 200px;
-  //   border-left: 2px dashed #fff;
-  // `
-  // const evaluation = css`
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  //   padding: 10px 5px 10px 5px;
-  //   font-size: 14px;
-  //   width: 150px;
-  // `
-  // const icon = css`
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  // `
 
   const empty = css`
     height: 300px;
@@ -229,18 +203,11 @@ const StudyGroupMember = () => {
   return useObserver(() => (
     <div css={main}>
       <div css={upper}>
-        <div css={title}>😃&nbsp;스터디 멤버</div>
-      </div>
-      {/* {StudyStore.studyGroup.studyMemberDTOList.length > 0 ? (
-        <div css={list}>
-          <div css={num}>번호</div>
-          <div css={listNickname}>닉네임</div>
-          <div css={evaluation}>성실도</div>
-          <div css={state}>상태</div>
+        <div css={title}>
+          <Emoji label="member" symbol="😃" />
+          &nbsp;스터디 멤버
         </div>
-      ) : (
-        <div></div>
-      )} */}
+      </div>
       {StudyStore.studyGroup.studyMemberDTOList.length > 0 ? (
         <div css={memList}>
           {StudyStore.studyGroup.studyMemberDTOList.map(
@@ -254,17 +221,13 @@ const StudyGroupMember = () => {
                   >
                     <div css={num}>1</div>
                     <div css={nickname}>
-                      {/* <button
-                        css={memberInfoBtn}
-                        }
-                      > */}
-                      <span>&nbsp;👑&nbsp;</span>
+                      <span>
+                        &nbsp;
+                        <Emoji label="crown" symbol="👑" />
+                        &nbsp;
+                      </span>
                       {m.user.nickname}
-                      {/* </button> */}
                     </div>
-                    {/* <div css={attendance}>{m.user.id}</div> */}
-                    {/* <div css={evaluation}>{m.user.evaluation}</div>
-                    <div css={state}>{m.state === 1 ? '가입' : '요청중'}</div> */}
                   </div>
                 )}
               </div>
@@ -289,9 +252,6 @@ const StudyGroupMember = () => {
                           {m.user.nickname}
                         </button>
                       </div>
-                      {/* <div css={attendance}>{m.user.id}</div> */}
-                      {/* <div css={evaluation}>{m.user.evaluation}</div>
-                      <div css={state}>{m.state === 1 ? '가입' : '요청중'}</div> */}
                     </div>
                   )}
               </div>
@@ -304,7 +264,7 @@ const StudyGroupMember = () => {
           description={
             <h3>
               <br />
-              멤버가 아직 없네요 😢
+              멤버가 아직 없네요 <Emoji label="sigh" symbol="😢" />
             </h3>
           }
         />
@@ -357,7 +317,9 @@ const StudyGroupMember = () => {
               <div css={comment}>
                 <div>
                   <b>
-                    <u>관심사</u>✍️&nbsp;&nbsp;&nbsp;
+                    <u>관심사</u>
+                    <Emoji label="interest" symbol="✍️" />
+                    &nbsp;&nbsp;&nbsp;
                   </b>
                 </div>
                 <div>
@@ -373,7 +335,8 @@ const StudyGroupMember = () => {
               <span css={comment}>
                 <div>
                   <b>
-                    <u>한마디</u>💬
+                    <u>한마디</u>
+                    <Emoji label="comment" symbol="💬" />
                   </b>
                 </div>
                 &nbsp;&nbsp;&nbsp;

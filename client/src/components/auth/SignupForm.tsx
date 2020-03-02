@@ -13,8 +13,7 @@ import {
   FlexBetween,
   Guide,
   PlusButton,
-  DeleteButton,
-  StyledRadio
+  DeleteButton
 } from './AuthStyled'
 import { SignupState, Interest, AuthFormProps, UpdateData } from './AuthTypes'
 import { RouteComponentProps, withRouter } from 'react-router'
@@ -206,15 +205,6 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
     } else {
       message.error('로그인에 실패하였습니다.', 2)
       history.push('/login')
-      // const { email, nickname, socialLogin } = res.data.value
-      // if (email) {
-      //   state.email = email
-      // }
-      // if (nickname) {
-      //   state.nickname = nickname
-      // }
-      // if (socialLogin) {
-      // }
     }
   }
 
@@ -264,7 +254,6 @@ function SignupForm({ type, location }: RouteComponentProps & AuthFormProps) {
         state.emailState &&
         state.nicknameState &&
         state.emailValidationCode === state.emailValidationInput
-        // && state.interestList.length !== 0
       ) {
         const dataToSend = {
           email: state.email,

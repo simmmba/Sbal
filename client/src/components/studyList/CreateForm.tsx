@@ -100,9 +100,7 @@ function CreateForm({ form }: FormComponentProps) {
       this.interestDisabled = !this.interestDisabled
     },
     onChangeIsOnline(e: RadioChangeEvent) {
-      // this.isOnlineChecked = !this.isOnlineChecked
       this.io = e.target.value
-      // this.isOnlineDisabled = !this.isOnlineDisabled
     }
   }))
 
@@ -309,12 +307,6 @@ function CreateForm({ form }: FormComponentProps) {
               </Radio.Group>
             )}
           </Form.Item>
-          {/* <Checkbox
-            checked={state.isOnlineChecked}
-            onChange={state.onChangeIsOnline}
-          >
-            적용 안함
-          </Checkbox> */}
         </Row>
 
         {state.io === false ? (
@@ -395,7 +387,6 @@ function CreateForm({ form }: FormComponentProps) {
               })(
                 <InputNumber
                   css={css`
-                    /* margin-left: 15px; */
                     width: 60px;
                   `}
                   min={freqMinMax[`${state.monthOrWeek}`].min}

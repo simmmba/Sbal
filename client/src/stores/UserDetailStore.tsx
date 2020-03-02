@@ -1,13 +1,11 @@
 import { observable } from 'mobx'
 import * as userDetail from '../lib/api/userDetail'
 import { UserDetailStoreType } from '../components/userDetail/UserDetailTypes'
-import * as studyAPI from '../lib/api/study'
 import * as H from 'history'
 import { message } from 'antd'
 import UserStore from './UserStore'
 
 const UserDetailStore: UserDetailStoreType = observable({
-  // isLoggingIn : false,
   joinCount: 0,
   data: {
     id: 0,
@@ -25,12 +23,9 @@ const UserDetailStore: UserDetailStoreType = observable({
     joinedStudyList: [],
     socialLogin: ''
   },
-  //{id, pw, email, phoneNum, nickname, gender, introduction,
-  //city, town, evaluation, profilePhotoDir, socialLogin, interestDTOList, ledStudyList, joinedStudyList}
-  async deleteStudyMember(studyId: number, idx: number) {
+  async deleteStudyMember(idx: number) {
     try {
       if (window.confirm('목록에서 삭제 하시겠습니까?')) {
-        const res = await studyAPI.studyDelete(studyId)
         this.data.joinedStudyList.splice(idx, 1)
       } else return
     } catch (error) {}
@@ -42,7 +37,7 @@ const UserDetailStore: UserDetailStoreType = observable({
       this.data = res.data.value
       if (this.data.joinedStudyList !== null) {
         for (let i = 0; i < this.data.joinedStudyList.length; i++) {
-          if (this.data.joinedStudyList[i]['state'] == 1) {
+          if (this.data.joinedStudyList[i]['state'] === 1) {
             this.joinCount++
           }
         }
@@ -105,7 +100,7 @@ const UserDetailStore: UserDetailStoreType = observable({
       this.data = res.data.value
       if (this.data.joinedStudyList !== null) {
         for (let i = 0; i < this.data.joinedStudyList.length; i++) {
-          if (this.data.joinedStudyList[i]['state'] == 1) {
+          if (this.data.joinedStudyList[i]['state'] === 1) {
             this.joinCount++
           }
         }

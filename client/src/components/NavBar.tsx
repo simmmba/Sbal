@@ -1,5 +1,5 @@
-/**@jsx jsx */
 import React, { useCallback } from 'react'
+/**@jsx jsx */
 import styled from '@emotion/styled'
 import Button from './common/Button'
 import { Link, NavLink } from 'react-router-dom'
@@ -137,7 +137,11 @@ const NavBar = () => {
           <StyledLink to="/study/create">스터디 개설</StyledLink>
           <StyledLink to="/study">스터디 목록</StyledLink>
           <StyledLink to="/map">나와 가까운 장소</StyledLink>
-          <a href="http://i02a302.p.ssafy.io/" target="_blank">
+          <a
+            href="http://i02a302.p.ssafy.io/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img
               css={statu}
               src="http://i02a306.p.ssafy.io/images/index/statu.png"

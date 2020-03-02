@@ -1,16 +1,14 @@
 import React from 'react'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
-import { Icon } from 'antd'
 import TextArea from 'antd/lib/input/TextArea'
 import { useParams, useHistory } from 'react-router'
-import StudyStore from "../../stores/StudyStore";
-import {useLocalStore} from "mobx-react";
-import {CreatedNotice, StudyNotice} from "./StudyGroupType";
-import palette from "../../lib/styles/palette";
+import StudyStore from '../../stores/StudyStore'
+import { useLocalStore } from 'mobx-react'
+import { CreatedNotice, StudyNotice } from './StudyGroupType'
+import palette from '../../lib/styles/palette'
 
 const StudyGroupBoardEdit = () => {
-
   const upper = css`
     display: flex;
     padding: 8px 0px 10px 20px;
@@ -30,12 +28,6 @@ const StudyGroupBoardEdit = () => {
     background: ${palette.violet[0]};
     border-radius: 5px;
     margin-bottom: 2px;
-  `
-
-  const icon = css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
   `
 
   const top = css`
@@ -79,7 +71,7 @@ const StudyGroupBoardEdit = () => {
     }
   `
 
-    const ok = css`
+  const ok = css`
     border: none;
     cursor: pointer;
     display: flex;
@@ -100,39 +92,51 @@ const StudyGroupBoardEdit = () => {
     }
   `
 
-  const {index} = useParams();
-  const history = useHistory();
-  const editNotice: StudyNotice = StudyStore.studyGroup.noticeDTOList[Number(index)];
+const Emoji = (props: { label: string | undefined; symbol: React.ReactNode }) => (
+  <span
+      className="emoji"
+      role="img"
+      aria-label={props.label ? props.label : ""}
+      aria-hidden={props.label ? "false" : "true"}
+  >
+      {props.symbol}
+  </span>
+);
 
+
+  const { index } = useParams()
+  const history = useHistory()
+  const editNotice: StudyNotice =
+    StudyStore.studyGroup.noticeDTOList[Number(index)]
 
   const state = useLocalStore<CreatedNotice>(() => ({
-        title: editNotice.title,
-        contents: editNotice.content,
-        onChangeTextarea(e: React.ChangeEvent<HTMLTextAreaElement>) {
-          state[e.target.name] = e.target.value;
-        },
-      }
-  ))
+    title: editNotice.title,
+    contents: editNotice.content,
+    onChangeTextarea(e: React.ChangeEvent<HTMLTextAreaElement>) {
+      state[e.target.name] = e.target.value
+    }
+  }))
 
   const clickCancelBtn = () => {
-    if(window.confirm("게시물 수정을 취소하시겠습니까?")) {
-      history.goBack();
+    if (window.confirm('게시물 수정을 취소하시겠습니까?')) {
+      history.goBack()
     }
   }
 
   const clickEditBtn = () => {
-    editNotice.title = state.title;
-    editNotice.content = state.contents;
-    StudyStore.editNotice(editNotice);
-    history.goBack();
+    editNotice.title = state.title
+    editNotice.content = state.contents
+    StudyStore.editNotice(editNotice)
+    history.goBack()
   }
 
-  console.log(editNotice);
+  console.log(editNotice)
   return (
     <div>
       <div css={upper}>
         <div css={title}>
-        ✏️&nbsp;게시글 수정
+          <Emoji label="edit" symbol="✏️" />
+          &nbsp;게시글 수정
         </div>
       </div>
       <div css={content}>
@@ -156,8 +160,12 @@ const StudyGroupBoardEdit = () => {
         </div>
       </div>
       <div css={btnGroup}>
-        <button css={cancel} onClick={clickCancelBtn}>취소</button>
-        <button css={ok} onClick={clickEditBtn}>등록</button>
+        <button css={cancel} onClick={clickCancelBtn}>
+          취소
+        </button>
+        <button css={ok} onClick={clickEditBtn}>
+          등록
+        </button>
       </div>
     </div>
   )

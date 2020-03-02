@@ -1,25 +1,38 @@
-import React, { useState, useEffect } from 'react'
-import { useObserver } from 'mobx-react'
-import StudyMember from './StudyMember'
-import StudyRequest from './StudyRequest'
+import React, { useState } from 'react'
+// import React, { useState, useEffect } from 'react'
+// import { useObserver } from 'mobx-react'
+// import StudyMember from './StudyMember'
+// import StudyRequest from './StudyRequest'
 /**@jsx jsx */
 import { css, jsx } from '@emotion/core'
-// import styled from '@emotion/styled'
-import { Display } from '../Display'
+// import { Display } from '../Display'
 import StudyDetailStore from '../../stores/StudyDetailStore'
-import { Descriptions, Modal, Progress, Avatar } from 'antd'
-import { useHistory } from 'react-router'
-import CreateForm from '../studyList/CreateForm'
+import { Modal, Progress, Avatar } from 'antd'
+// import { useHistory } from 'react-router'
+// import CreateForm from '../studyList/CreateForm'
 import palette from '../../lib/styles/palette'
 import UserDetailStore from '../../stores/UserDetailStore'
-import { studyMember } from './StudyDetailTypes'
+// import { studyMember } from './StudyDetailTypes'
 import { Interest } from '../userDetail/UserDetailTypes'
 
 const StudyInfo = () => {
+  const Emoji = (props: {
+    label: string | undefined
+    symbol: React.ReactNode
+  }) => (
+    <span
+      className="emoji"
+      role="img"
+      aria-label={props.label ? props.label : ''}
+      aria-hidden={props.label ? 'false' : 'true'}
+    >
+      {props.symbol}
+    </span>
+  )
+
   const total = css`
     display: flex;
     flex-wrap: wrap;
-    /* align-items: center; */
     justify-content: center;
 
     @media screen and (max-width: 500px) {
@@ -36,7 +49,6 @@ const StudyInfo = () => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: center; */
     justify-content: space-between;
 
     @media screen and (max-width: 500px) {
@@ -64,7 +76,6 @@ const StudyInfo = () => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: center; */
     justify-content: space-between;
     cursor: pointer;
     transition: 0.3s;
@@ -169,20 +180,29 @@ const StudyInfo = () => {
     <div>
       <div css={total}>
         <div css={modal} onClick={() => showModal()}>
-          <div css={title}>&nbsp;&nbsp;👑 리더&nbsp;&nbsp;</div>
+          <div css={title}>
+            &nbsp;&nbsp;
+            <Emoji label="crown" symbol="👑" /> 리더&nbsp;&nbsp;
+          </div>
           <div>
             &nbsp;&nbsp;{StudyDetailStore.data.leader.nickname}&nbsp;&nbsp;
           </div>
         </div>
         <div css={block}>
-          <div css={title}>&nbsp;&nbsp;👨‍👩‍👧‍👦 인원&nbsp;&nbsp;</div>
+          <div css={title}>
+            &nbsp;&nbsp;
+            <Emoji label="people" symbol="👨‍👩‍👧‍👦" /> 인원&nbsp;&nbsp;
+          </div>
           <div>
             {StudyDetailStore.data.joinedMemberCount} /{' '}
             {StudyDetailStore.data.maxParticipants}
           </div>
         </div>
         <div css={block}>
-          <div css={title}>&nbsp;&nbsp;🏆 성실도&nbsp;&nbsp;</div>
+          <div css={title}>
+            &nbsp;&nbsp;
+            <Emoji label="score" symbol="🏆" /> 성실도&nbsp;&nbsp;
+          </div>
           <div>
             {StudyDetailStore.data.evaluationLimit === 0 ||
             StudyDetailStore.data.evaluationLimit === null ? (
@@ -196,14 +216,19 @@ const StudyInfo = () => {
           </div>
         </div>
         <div css={block}>
-          <div css={title}>📖 분야</div>
+          <div css={title}>
+            <Emoji label="category" symbol="📖" /> 분야
+          </div>
           <div>
             &nbsp;&nbsp;{StudyDetailStore.data.lcategory} >{' '}
             {StudyDetailStore.data.scategory}&nbsp;&nbsp;
           </div>
         </div>
         <div css={block}>
-          <div css={title}>&nbsp;&nbsp;🌏 진행 장소(방식)&nbsp;&nbsp;</div>
+          <div css={title}>
+            &nbsp;&nbsp;
+            <Emoji label="location" symbol="🌏" /> 진행 장소(방식)&nbsp;&nbsp;
+          </div>
           <div>
             {!StudyDetailStore.data.isOnline
               ? StudyDetailStore.data.city + ' ' + StudyDetailStore.data.town
@@ -211,7 +236,9 @@ const StudyInfo = () => {
           </div>
         </div>
         <div css={block}>
-          <div css={title}>📅 진행 기간</div>
+          <div css={title}>
+            <Emoji label="schedule" symbol="📅" /> 진행 기간
+          </div>
           <div>
             &nbsp;&nbsp;{StudyDetailStore.data.startDate} ~{' '}
             {StudyDetailStore.data.endDate}&nbsp;&nbsp;
@@ -219,7 +246,10 @@ const StudyInfo = () => {
         </div>
 
         <div css={block}>
-          <div css={title}>&nbsp;&nbsp;⌛️ 일정&nbsp;&nbsp;</div>
+          <div css={title}>
+            &nbsp;&nbsp;
+            <Emoji label="schedule2" symbol="⌛️" /> 일정&nbsp;&nbsp;
+          </div>
           <div>
             &nbsp;&nbsp;
             {StudyDetailStore.data.monthOrWeek === 0
@@ -231,7 +261,9 @@ const StudyInfo = () => {
           </div>
         </div>
         <div css={block}>
-          <div css={title}>⏰ 시간</div>
+          <div css={title}>
+            <Emoji label="time" symbol="⏰" /> 시간
+          </div>
           <div>
             &nbsp;&nbsp;
             {StudyDetailStore.data.weekdayOrWeekend === 0
@@ -254,7 +286,9 @@ const StudyInfo = () => {
       </div>
 
       <div css={block}>
-        <div css={title}>📢 스터디 소개</div>
+        <div css={title}>
+          <Emoji label="introduce" symbol="📢" /> 스터디 소개
+        </div>
         <div>{StudyDetailStore.data.contents}</div>
       </div>
 
@@ -305,7 +339,9 @@ const StudyInfo = () => {
               <div css={comment}>
                 <div>
                   <b>
-                    <u>관심사</u>✍️&nbsp;&nbsp;&nbsp;
+                    <u>관심사</u>
+                    <Emoji label="interest" symbol="✍️" />
+                    &nbsp;&nbsp;&nbsp;
                   </b>
                 </div>
                 <div>
@@ -321,7 +357,8 @@ const StudyInfo = () => {
               <span css={comment}>
                 <div>
                   <b>
-                    <u>한마디</u>💬
+                    <u>한마디</u>
+                    <Emoji label="comment" symbol="💬" />
                   </b>
                 </div>
                 &nbsp;&nbsp;&nbsp;

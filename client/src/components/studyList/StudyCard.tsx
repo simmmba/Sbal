@@ -12,12 +12,10 @@ moment.locale('ko')
 const cardStyle = css`
   width: 280px;
   min-width: 250px;
-  /* border: 1px solid ${palette.violet[3]}; */
-  /* border: none; */
   border-radius: 30px;
   padding: 15px;
   color: white;
-  
+
   background: ${palette.violet[3]};
   margin: 10px;
   cursor: pointer;
