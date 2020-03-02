@@ -1,4 +1,4 @@
-<img align="left" src="http://i02a306.p.ssafy.io/images/index/name.png" alt="Sbal Logo" style="zoom:20%;" /> <br />
+![wireframe](http://i02a306.p.ssafy.io/images/index/name.png){: width="200"} 
 
    **스터디의 발견  http://i02a306.p.ssafy.io**
 
@@ -34,7 +34,7 @@
 
 ## 3. 기술 스택
 
-<img align="left" src="http://i02a306.p.ssafy.io/images/index/stack1.png" alt="system" />
+![wireframe](http://i02a306.p.ssafy.io/images/index/stack1.png)
 
 <br />
 
@@ -42,7 +42,7 @@
 
 <br />
 
-<img align="left" src="http://i02a306.p.ssafy.io/images/index/stack2.png" alt="system" />
+![wireframe](http://i02a306.p.ssafy.io/images/index/stack2.png)
 
 <br />
 
@@ -50,7 +50,7 @@
 
 <br />
 
-<img align="left" src="http://i02a306.p.ssafy.io/images/index/stack3.png" alt="system" />
+![wireframe](http://i02a306.p.ssafy.io/images/index/stack3.png)
 
 <br />
 
@@ -58,7 +58,7 @@
 
 <br />
 
-<img align="left" src="http://i02a306.p.ssafy.io/images/index/stack4.png" alt="system" />
+![wireframe](http://i02a306.p.ssafy.io/images/index/stack4.png)
 
 - **협업 툴** : Gitlab, Jira, Slack, Hangouts
 
@@ -66,13 +66,13 @@
 
 ## 4. 개발 기간
 
-<img align="left" src="http://i02a306.p.ssafy.io/images/index/process.png" alt="system" />
+![wireframe](http://i02a306.p.ssafy.io/images/index/process.png)
 
 <br /><br />
 
 ## 5. 시스템 구성도
 
-<img align="left" src="http://i02a306.p.ssafy.io/images/index/system.png" alt="system" />
+![wireframe](http://i02a306.p.ssafy.io/images/index/system.png)
 
 <br /><br />
 
@@ -89,19 +89,19 @@
 
 ## 7. Wireframe
 
-<img align="left" src="http://i02a306.p.ssafy.io/images/index/wireframe.png" alt="wireframe" />
+![wireframe](http://i02a306.p.ssafy.io/images/index/wireframe.png)
 
 <br /><br />
 
 ## 8. Web 화면
 
-<img align="left" src="http://i02a306.p.ssafy.io/images/index/screen_web.png" alt="웹" />
+![웹](http://i02a306.p.ssafy.io/images/index/screen_web.png)
 
 <br /><br />
 
 ## 9. Mobile 화면
 
-<img align="left" src="http://i02a306.p.ssafy.io/images/index/screen_mobile.png" alt="모바일" />
+![모바일](http://i02a306.p.ssafy.io/images/index/screen_mobile.png)
 
 <br /><br />
 
