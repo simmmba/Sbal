@@ -381,7 +381,8 @@ function CreateForm({ form }: FormComponentProps) {
                   )}
                 </Radio.Group>
               )}
-              <br />
+            </Form.Item>
+            <Form.Item label={'스터디 횟수'}>
               {getFieldDecorator('frequency', {
                 initialValue: initialValues.frequency
               })(
