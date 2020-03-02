@@ -1,4 +1,4 @@
-![wireframe](http://i02a306.p.ssafy.io/images/index/name.png){: width="200"} 
+![스터디의발견](http://i02a306.p.ssafy.io/images/index/name.png) 
 
    **스터디의 발견  http://i02a306.p.ssafy.io**
 
@@ -6,13 +6,28 @@
 
 ------
 
-​            **[목차]**
+**[목차]**
 
-[TOC]
+1. [기획 의도](#기획-의도)
+
+2. [기대 효과](#기대-효과)
+
+3. [기술 스택](#기술-스택)
+
+4. [개발 과정](#개발-과정)
+
+5. [시스템 구성도](#시스템-구성도)
+6. [기술 상세](#기술-상세)
+7. [Wireframe](#Wireframe)
+8. [Web 화면](#Web-화면)
+9. [Mobile 화면](#Mobile-화면)
+10. [시연 영상](#시연-영상)
+11. [향후 계획](#향후-계획)
+12. [팀원별 담당 파트, 느낀점](#팀원별-담당-파트,-느낀점)
 
 <br /><br />
 
-## 1. 기획 의도
+## 기획 의도
 
 - 혼자 취업 준비를 하면서 스터디를 구하고 싶지만 스터디원을 구하기 **막막함** 
 - 스터디를 구하기 위해 살펴봐야 하는 **커뮤니티가 너무 많음**
@@ -22,7 +37,7 @@
 
 <br /><br />
 
-## 2. 기대 효과
+## 기대 효과
 
 - **세분화**된 검색 기능
 - **신뢰도 높은** 스터디원을 구할 수 있음
@@ -32,51 +47,45 @@
 
 <br /><br />
 
-## 3. 기술 스택
+## 기술 스택
 
-![wireframe](http://i02a306.p.ssafy.io/images/index/stack1.png)
-
-<br />
+![front](http://i02a306.p.ssafy.io/images/index/stack1.png)
 
 - **Front** : React, TypeScript, MobX, Emotion, Babel, webpack
 
 <br />
 
-![wireframe](http://i02a306.p.ssafy.io/images/index/stack2.png)
-
-<br />
+![back](http://i02a306.p.ssafy.io/images/index/stack2.png)
 
 - **Back** : SpringBoot, Java, JPA, MariaDB, NGINX, AWS
 
 <br />
 
-![wireframe](http://i02a306.p.ssafy.io/images/index/stack3.png)
-
-<br />
+![tool1](http://i02a306.p.ssafy.io/images/index/stack3.png)
 
 - **활용 툴** : IntelliJ, VS Code, putty, WinSCP
 
 <br />
 
-![wireframe](http://i02a306.p.ssafy.io/images/index/stack4.png)
+![tool2](http://i02a306.p.ssafy.io/images/index/stack4.png)
 
 - **협업 툴** : Gitlab, Jira, Slack, Hangouts
 
 <br /><br />
 
-## 4. 개발 기간
+## 개발 과정
 
-![wireframe](http://i02a306.p.ssafy.io/images/index/process.png)
-
-<br /><br />
-
-## 5. 시스템 구성도
-
-![wireframe](http://i02a306.p.ssafy.io/images/index/system.png)
+![process](http://i02a306.p.ssafy.io/images/index/process.png)
 
 <br /><br />
 
-## 6. 기술 상세
+## 시스템 구성도
+
+![system](http://i02a306.p.ssafy.io/images/index/system.png)
+
+<br /><br />
+
+## 기술 상세
 
 - 함수형 프로그래밍을 기반으로 한 **FC, Hooks** 사용 
 - **MobX**를 통한 중앙 집중형 상태 관리
@@ -87,31 +96,31 @@
 
 <br /><br />
 
-## 7. Wireframe
+## Wireframe
 
 ![wireframe](http://i02a306.p.ssafy.io/images/index/wireframe.png)
 
 <br /><br />
 
-## 8. Web 화면
+## Web 화면
 
 ![웹](http://i02a306.p.ssafy.io/images/index/screen_web.png)
 
 <br /><br />
 
-## 9. Mobile 화면
+## Mobile 화면
 
 ![모바일](http://i02a306.p.ssafy.io/images/index/screen_mobile.png)
 
 <br /><br />
 
-## 10. 시연 영상
+## 시연 영상
 
 [![Video Label](http://img.youtube.com/vi/RmDsPISfS18/0.jpg)](https://youtu.be/uLR1RNqJ1Mw?t=0s)
 
 <br /><br />
 
-## 11. 향후 계획
+## 향후 계획
 
 - 공모전, 멘토링 등의 맴버 모집 **도메인 확대** 
 
@@ -125,7 +134,7 @@
 
 <br /><br />
 
-## 12. 팀원 담당 분야, 느낀점
+## 팀원별 담당 파트, 느낀점
 
 - **박준성(Back, Front)**
   - 프로젝트를 진행하며 피로가 쌓이고 힘들 때도 많았을 텐데 짜증 한번 내지 않고 서로 다독여주던 좋은 팀원들 덕분에 중간에 포기하지 않고 여기까지 올 수 있었습니다. 고생한 우리 팀원들, 늘 진중하게 조언해 주신 컨설턴트님, 코치님 그리고 프로젝트에만 집중할 수 있도록 성심성의껏 지원해 주신 운영 프로님께 감사드립니다.
