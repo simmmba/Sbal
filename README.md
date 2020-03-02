@@ -1,4 +1,4 @@
-<img align="left" src="http://i02a306.p.ssafy.io/images/index/name.png" alt="Sbal Logo" style="zoom:50%;" />
+<img align="left" src="http://i02a306.p.ssafy.io/images/index/name.png" alt="Sbal Logo" style="zoom:20%;" /> <br />
 
    **스터디의 발견  http://i02a306.p.ssafy.io**
 
@@ -10,6 +10,8 @@
 
 [TOC]
 
+<br /><br />
+
 ## 1. 기획 의도
 
 - 혼자 취업 준비를 하면서 스터디를 구하고 싶지만 스터디원을 구하기 **막막함** 
@@ -18,7 +20,7 @@
 - 스터디 분야가 **세분화** 되어있지 않음
 - 어디서 모여야 할지 **장소**를 정하기 어려움
 
-
+<br /><br />
 
 ## 2. 기대 효과
 
@@ -28,45 +30,51 @@
 - 스터디 진행 **장소** 정보를 제공받을 수 있음
 - 분야별 스터디 **현황** 데이터, **수요** 파악 가능
 
-
+<br /><br />
 
 ## 3. 기술 스택
 
 <img align="left" src="http://i02a306.p.ssafy.io/images/index/stack1.png" alt="system" />
 
+<br />
+
 - **Front** : React, TypeScript, MobX, Emotion, Babel, webpack
 
-
+<br />
 
 <img align="left" src="http://i02a306.p.ssafy.io/images/index/stack2.png" alt="system" />
 
+<br />
+
 - **Back** : SpringBoot, Java, JPA, MariaDB, NGINX, AWS
 
-
+<br />
 
 <img align="left" src="http://i02a306.p.ssafy.io/images/index/stack3.png" alt="system" />
 
+<br />
+
 - **활용 툴** : IntelliJ, VS Code, putty, WinSCP
 
-
+<br />
 
 <img align="left" src="http://i02a306.p.ssafy.io/images/index/stack4.png" alt="system" />
 
 - **협업 툴** : Gitlab, Jira, Slack, Hangouts
 
-
+<br /><br />
 
 ## 4. 개발 기간
 
 <img align="left" src="http://i02a306.p.ssafy.io/images/index/process.png" alt="system" />
 
-
+<br /><br />
 
 ## 5. 시스템 구성도
 
 <img align="left" src="http://i02a306.p.ssafy.io/images/index/system.png" alt="system" />
 
-
+<br /><br />
 
 ## 6. 기술 상세
 
@@ -77,31 +85,31 @@
 - **Typescript** 의 Compile-time check와 Type Guard 적극 활용
 - **JPA** 라이브러리를 통해 생산성 향상, 동적 쿼리로 검색 필터링 구현
 
-
+<br /><br />
 
 ## 7. Wireframe
 
 <img align="left" src="http://i02a306.p.ssafy.io/images/index/wireframe.png" alt="wireframe" />
 
-
+<br /><br />
 
 ## 8. Web 화면
 
 <img align="left" src="http://i02a306.p.ssafy.io/images/index/screen_web.png" alt="웹" />
 
-
+<br /><br />
 
 ## 9. Mobile 화면
 
 <img align="left" src="http://i02a306.p.ssafy.io/images/index/screen_mobile.png" alt="모바일" />
 
-
+<br /><br />
 
 ## 10. 시연 영상
 
 [![Video Label](http://img.youtube.com/vi/RmDsPISfS18/0.jpg)](https://youtu.be/uLR1RNqJ1Mw?t=0s)
 
-
+<br /><br />
 
 ## 11. 향후 계획
 
@@ -115,7 +123,7 @@
 
 - **STATU** 와 같은 **제휴 사이트 확대**
 
-
+<br /><br />
 
 ## 12. 팀원 담당 분야, 느낀점
 
