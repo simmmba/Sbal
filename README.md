@@ -1,12 +1,25 @@
+# 스터디의 발견 
+
 ![스터디의발견](http://i02a306.p.ssafy.io/images/index/name.png) 
 
-   **스터디의 발견  http://i02a306.p.ssafy.io**
+<p align="center">
+  <img src="https://img.shields.io/badge/platform-Web-green.svg"/>
+  <img src="http://img.shields.io/badge/library-React-blue.svg"/>
+  <img src="https://img.shields.io/badge/framework-Spring boot-brightgreen.svg"/>
+  <img src="https://img.shields.io/badge/database-MariaDB-skyblue.svg"/>
+  <img src="https://img.shields.io/badge/server-AWS-yellow.svg"/>
+  <img src="https://img.shields.io/badge/language-Java, JavaScript-orange.svg"/>
+</p>
 
-   반응형 웹(Responsive Web) by. <a href="https://github.com/JunSeongA" target="_blank">박준성</a>, <a href="https://github.com/hackthegist" target="_blank">배성호</a>, <a href="https://github.com/Imsunwoo-hub" target="_blank">임선우</a>, <a href="https://github.com/simmmba" target="_blank">조서원</a>
+&nbsp;&nbsp;&nbsp;반응형 웹(Responsive Web) &nbsp;&nbsp;&nbsp;by. <a href="https://github.com/JunSeongA" target="_blank">박준성</a>, <a href="https://github.com/hackthegist" target="_blank">배성호</a>, <a href="https://github.com/Imsunwoo-hub" target="_blank">임선우</a>, <a href="https://github.com/simmmba" target="_blank">조서원</a>
+
+&nbsp;&nbsp;&nbsp;**http://i02a306.p.ssafy.io**
 
 ------
 
-**[목차]**
+<br />
+
+## [목차]
 
 1. [기획 의도](#기획-의도)
 
@@ -23,9 +36,9 @@
 9. [Mobile 화면](#Mobile-화면)
 10. [시연 영상](#시연-영상)
 11. [향후 계획](#향후-계획)
-12. [팀원별 담당 파트, 느낀점](#팀원별-담당-파트,-느낀점)
+12. [개발 후기](#개발-후기)
 
-<br /><br />
+<br /><br /><br />
 
 ## 기획 의도
 
@@ -134,7 +147,7 @@
 
 <br /><br />
 
-## 팀원별 담당 파트, 느낀점
+## 개발 후기
 
 - **박준성(Back, Front)**
   - 프로젝트를 진행하며 피로가 쌓이고 힘들 때도 많았을 텐데 짜증 한번 내지 않고 서로 다독여주던 좋은 팀원들 덕분에 중간에 포기하지 않고 여기까지 올 수 있었습니다. 고생한 우리 팀원들, 늘 진중하게 조언해 주신 컨설턴트님, 코치님 그리고 프로젝트에만 집중할 수 있도록 성심성의껏 지원해 주신 운영 프로님께 감사드립니다.
