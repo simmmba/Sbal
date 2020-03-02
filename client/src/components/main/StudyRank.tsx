@@ -1,10 +1,9 @@
-// import React from 'react'
-/**@jsx jsx */
+/** @jsx jsx */
 import { css, jsx } from '@emotion/core'
 import { NavLink } from 'react-router-dom'
 import { StudyRankprops, Study } from './MainTypes'
 import LoadingSpin from '../common/LoadingSpin'
-import React from 'react'
+import { memo } from 'react'
 
 const listBox = css`
   margin: 10px;
@@ -152,4 +151,4 @@ const StudyRank = ({ title, list }: StudyRankprops) => {
   )
 }
 
-export default StudyRank
+export default memo(StudyRank)

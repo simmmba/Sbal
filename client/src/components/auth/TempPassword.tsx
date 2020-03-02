@@ -13,7 +13,6 @@ import {
   StyledButton,
   Guide
 } from './AuthStyled'
-import { message } from 'antd'
 
 function TempPassword() {
   const history = useHistory()
