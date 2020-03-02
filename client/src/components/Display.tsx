@@ -1,5 +1,4 @@
-import React from 'react'
-/**@jsx jsx */
+/** @jsx jsx */
 import styled from '@emotion/styled'
 
 export const Display = styled.div`

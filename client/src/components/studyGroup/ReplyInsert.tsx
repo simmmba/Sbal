@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from 'react'
-/**@jsx jsx */
+/** @jsx jsx */
+import { useState, useCallback } from 'react'
 import { css, jsx } from '@emotion/core'
 import TextArea from 'antd/lib/input/TextArea'
 import StudyStore from '../../stores/StudyStore'

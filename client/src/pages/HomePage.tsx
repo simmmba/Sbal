@@ -1,5 +1,4 @@
-import React from 'react'
-/***@jsx jsx */
+/** @jsx jsx */
 import { css, jsx } from '@emotion/core'
 import MainStudylist from '../components/main/MainStudyList'
 import { useObserver } from 'mobx-react'

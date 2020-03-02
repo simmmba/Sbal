@@ -1,5 +1,4 @@
-import React from 'react'
-/**@jsx jsx */
+/** @jsx jsx */
 import { css, jsx } from '@emotion/core'
 import { Icon, Empty, Rate, message } from 'antd'
 import { StudyMember } from './StudyGroupType'

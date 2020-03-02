@@ -1,5 +1,5 @@
-import React, { useCallback } from 'react'
-/**@jsx jsx */
+/** @jsx jsx */
+import { useCallback } from 'react'
 import styled from '@emotion/styled'
 import Button from './common/Button'
 import { Link, NavLink } from 'react-router-dom'

@@ -1,6 +1,5 @@
-import React from 'react'
+/** @jsx jsx */
 import { Spin, Icon } from 'antd'
-/**@jsx jsx */
 import { css, jsx } from '@emotion/core'
 
 function LoadingSpin({ tip }: { tip?: string }) {

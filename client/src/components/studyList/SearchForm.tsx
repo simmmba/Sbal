@@ -123,6 +123,8 @@ const SearchForm = () => {
                   `}
                 >{`${filterMap[filterKey]}: ${value}`}</Button>
               )
+            } else {
+              return
             }
           }
         )}

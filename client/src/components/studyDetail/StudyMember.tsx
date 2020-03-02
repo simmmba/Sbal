@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-/**@jsx jsx */
+/** @jsx jsx */
+import { useState } from 'react'
 import { css, jsx } from '@emotion/core'
 import { Modal, Progress, Avatar } from 'antd'
 import StudyDetailStore from '../../stores/StudyDetailStore'
