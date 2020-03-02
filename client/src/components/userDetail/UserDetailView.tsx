@@ -82,6 +82,7 @@ const img = css`
   width: 180px;
   height: 180px;
   border-radius: 50%;
+  cursor: pointer;
 
   @media (max-width: 815px) {
     width: 100px;
@@ -425,7 +426,7 @@ const UserDetail = () => {
                           <td
                             css={hover}
                             onClick={() => {
-                              history.push(`study/${ledStudy.id}`)
+                              history.push(`study/details/${ledStudy.id}`)
                             }}
                           >
                             {' '}
@@ -470,7 +471,9 @@ const UserDetail = () => {
                             <td
                               css={hover}
                               onClick={() => {
-                                history.push(`study/${joinedStudy.study.id}`)
+                                history.push(
+                                  `study/details/${joinedStudy.study.id}`
+                                )
                               }}
                             >
                               {' '}
