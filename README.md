@@ -13,7 +13,6 @@
 
 &nbsp;&nbsp;&nbsp;반응형 웹(Responsive Web) &nbsp;&nbsp;&nbsp;by. <a href="https://github.com/JunSeongA" target="_blank">박준성</a>, <a href="https://github.com/hackthegist" target="_blank">배성호</a>, <a href="https://github.com/Imsunwoo-hub" target="_blank">임선우</a>, <a href="https://github.com/simmmba" target="_blank">조서원</a>
 
-&nbsp;&nbsp;&nbsp;**http://i02a306.p.ssafy.io**
 
 ------
 
